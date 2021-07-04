@@ -14,8 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SymbolAPIService {
-    public List<String>symbols = new ArrayList<>();
     static private SymbolAPIService instance;
+
+    public List<String>symbols = new ArrayList<>();
 
     private SymbolAPIService() throws IOException {
         // source file: https://api.nasdaq.com/api/screener/stocks?tableonly=true&limit=2&exchange=NASDAQ

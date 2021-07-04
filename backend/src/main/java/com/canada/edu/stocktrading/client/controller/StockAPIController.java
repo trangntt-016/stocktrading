@@ -29,20 +29,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-@RestController
-@RequestMapping("/api/quotes")
+
 public class StockAPIController {
-    final private SymbolAPIService symbolAPIService = SymbolAPIService.getInstance();
+
 
     public StockAPIController() throws IOException { }
 
-    @Autowired
-    private StockAPIService stockAPIService;
 
-
-    @GetMapping()
-    public ResponseEntity<List<StockAPI>>getTopHistoricalData() throws IOException {
-
-        return ResponseEntity.ok(null);
-    }
 }
