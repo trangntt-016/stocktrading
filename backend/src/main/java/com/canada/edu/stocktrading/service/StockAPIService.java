@@ -38,13 +38,18 @@ public class StockAPIService {
         String[] stocksStr = threeStocks.toArray(new String[0]);
         // loop through these stocks to get closing price within 30 days
         for (int i = 0; i <stocksStr.length; i++) {
-            Stock stock = YahooFinance.get(stocksStr[i], ConvertCalendarUtils.getXDaysAgo(30),Interval.DAILY);
+            Stock stock = YahooFinance.get(stocksStr[i], ConvertCalendarUtils.getXDaysAgo(180),Interval.DAILY);
             this.topThreeStocks.add(stock);
         }
     }
 
     public static StockAPIService getInstance() throws IOException {
-        if(instance==null) instance = new StockAPIService();
+        if(instance==null) {
+            synchronized (StockAPIService.class){
+                instance = new StockAPIService();
+            }
+        }
+
         return instance;
     }
 }

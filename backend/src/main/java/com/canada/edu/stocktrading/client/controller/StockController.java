@@ -4,7 +4,9 @@ import com.canada.edu.stocktrading.model.StockAPI;
 import com.canada.edu.stocktrading.service.StockAPIService;
 import com.canada.edu.stocktrading.service.StockService;
 import com.canada.edu.stocktrading.service.SymbolAPIService;
+import com.canada.edu.stocktrading.service.dto.ChartDto;
 import com.canada.edu.stocktrading.service.dto.HistoricalQuoteDto;
+import com.canada.edu.stocktrading.service.dto.SummaryStockDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +23,20 @@ public class StockController {
     private StockService stockService;
 
     @GetMapping("/charts-mainpage")
-    public ResponseEntity<List<List<HistoricalQuoteDto>>> getHistoricalQuotes() throws IOException {
-        List<List<HistoricalQuoteDto>>dtos = stockService.getHistoricalQuotesForTopThreeCharts();
+    public ResponseEntity<List<ChartDto>> getHistoricalQuotes() throws IOException {
+        List<ChartDto>dtos = stockService.getHistoricalQuotesForTopThreeCharts();
         return ResponseEntity.ok(dtos);
     }
+
+    @GetMapping("/topthree")
+    public ResponseEntity<List<SummaryStockDto>> getSummaryTopStocks() throws IOException {
+        List<SummaryStockDto>dtos = stockService.getSummaryTopThreeStocks();
+        return ResponseEntity.ok(dtos);
+    }
+
+//    @GetMapping("/topthree")
+//    public ResponseEntity<List<String>> getSummaryTopStocks() throws IOException {
+//        List<String>dtos = stockService.getSummaryTopThreeStocks();
+//        return ResponseEntity.ok(dtos);
+//    }
 }

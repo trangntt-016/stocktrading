@@ -1,13 +1,29 @@
-<ngx-charts-line-chart
-  [view]="view"
-  [scheme]="colorScheme"
-  [results]="single"
-  [gradient]="gradient"
-  [xAxis]="showXAxis"
-  [yAxis]="showYAxis"
-  [legend]="showLegend"
-  [showXAxisLabel]="showXAxisLabel"
-  [showYAxisLabel]="showYAxisLabel"
-  [xAxisLabel]="xAxisLabel"
-  [yAxisLabel]="yAxisLabel">
-</ngx-charts-line-chart>
+<div  class="wrapper-chart">
+  <div class="wrapper">
+    <div *ngFor="let stock of (summaryStocks$ | async); index as i">
+      <h3 class="stock-name">{{stock.symbol}}</h3>
+      <h4 class="positive">{{stock.currentPrice}}</h4>
+      <div class="change">
+        <h5>{{stock.change}}</h5>
+        <h5>{{stock.changePercent}}</h5>
+      </div>
+    </div>
+  </div>
+
+    <div *ngFor="let single of singles">
+      <ngx-charts-line-chart
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="single"
+        [showGridLines]=true
+        [gradient]=true
+        [yAxis]=true
+        [showXAxisLabel]=true
+        [showYAxisLabel]=true
+      >
+      </ngx-charts-line-chart>
+    </div>
+
+
+</div>
+
