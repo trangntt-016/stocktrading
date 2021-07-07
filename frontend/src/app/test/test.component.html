@@ -1,16 +1,19 @@
-<div  class="wrapper-chart">
-  <div class="wrapper">
-    <div *ngFor="let stock of (summaryStocks$ | async); index as i">
-      <h3 class="stock-name">{{stock.symbol}}</h3>
-      <h4 class="positive">{{stock.currentPrice}}</h4>
-      <div class="change">
-        <h5>{{stock.change}}</h5>
-        <h5>{{stock.changePercent}}</h5>
+<div  class="wrapper">
+  <div class="wrapper-summary">
+    <div *ngFor="let stock of summaryStocks" class="summary-container">
+      <div class="summary">
+        <h2 class="stock-name">{{stock.symbol}}</h2>
+        <h3 class="positive">{{stock.currentPrice | currency}}</h3>
+        <div class="change">
+          <h4>{{stock.change}}</h4>
+          <h4 style="margin-left: 5px;">{{stock.changePercent | number : '1.2-2'}}%</h4>
+        </div>
       </div>
     </div>
   </div>
 
-    <div *ngFor="let single of singles">
+  <div class="wrapper-chart">
+    <div *ngFor="let single of singles | convertStocksToChart" class="chart">
       <ngx-charts-line-chart
         [view]="view"
         [scheme]="colorScheme"
@@ -23,6 +26,8 @@
       >
       </ngx-charts-line-chart>
     </div>
+  </div>
+
 
 
 </div>

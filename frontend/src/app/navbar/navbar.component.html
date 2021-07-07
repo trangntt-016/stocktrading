@@ -1,0 +1,66 @@
+<mat-toolbar>
+
+  <div style="display: flex;flex-direction: row">
+    <a href="#" id="logo">
+      <img src="assets/logo.jpg" class="image">
+    </a>
+    <button mat-flat-button [routerLink]="['/home']"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true}"
+    >
+      Home
+    </button>
+    <button mat-flat-button [routerLink]="['/quote']"
+            routerLinkActive="mat-accent"
+            [routerLinkActiveOptions]="{ exact: true}"
+    >
+      Market
+    </button>
+  </div>
+
+<div style="display: flex;flex-direction: row">
+  <div class="wrap-search">
+    <div class="search">
+      <mat-icon class="search-icon">search</mat-icon>
+      <input matInput type="text" placeholder="Symbol/Name"
+             [matAutocomplete]="auto"
+             [(ngModel)]="searchSymbol"
+             (ngModelChange)="doFilter()"
+      >
+      <mat-autocomplete #auto="matAutocomplete" [panelWidth]="300" class="autocomplete">
+        <mat-option *ngFor="let symbol of (symbols$ | async)" [value]="symbol.symbol">
+          <div class="symbols">
+            <h4>{{symbol.symbol}}</h4>
+            <h5>{{symbol.name | uppercase}}</h5>
+          </div>
+        </mat-option>
+      </mat-autocomplete>
+    </div>
+  </div>
+
+  <div class="wrap-avatar">
+    <div class="avatar"[matMenuTriggerFor]="userMenu" >
+      <mat-icon class="person-icon">person</mat-icon>
+    </div>
+    <h4>U_klxF6</h4>
+  </div>
+  <mat-menu #userMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">
+    <div style="width: 180px;">
+      <p mat-menu-item class="p-matmenu-item">Hi, U_klxF6</p>
+      <hr>
+      <a mat-menu-item>
+        <mat-icon>person_outline</mat-icon>
+        <span>My account</span>
+      </a>
+      <a mat-menu-item>
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Log out</span>
+      </a>
+
+    </div>
+
+  </mat-menu>
+</div>
+
+
+</mat-toolbar>

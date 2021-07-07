@@ -1,0 +1,127 @@
+:host ::ng-deep mat-toolbar{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  position: fixed;
+  top:0;
+  z-index: 1;
+  min-height:70px;
+  box-shadow: 0 3px 2px -2px lightgray;
+}
+#logo{
+  padding-top: 10px;
+}
+.image{
+  height: 50px;
+}
+
+:host ::ng-deep mat-toolbar{
+  background-color: #fff;
+}
+
+.mat-flat-button{
+  font-size: 18px;
+}
+.mat-flat-button:hover{
+  color: #2196F3;
+}
+
+.wrap-search{
+  border-radius: 25px;
+  height:35px;
+  width: 210px;
+  background-color: #e3e0e0;
+}
+
+.search{
+  display:flex;
+  margin: 7px;
+}
+input{
+  border:none;
+  background-color: #e3e0e0;
+  font-size:12px;
+  color: gray
+}
+
+input:focus{
+  outline: none;
+}
+input::placeholder{
+  color: gray;
+}
+
+.search-icon{
+  color: gray;
+}
+
+.wrap-avatar{
+  display:flex;
+  flex-direction: row;
+  margin-left: 25px;
+}
+
+.avatar{
+  height:35px;
+  width: 35px;
+  border-radius: 100%;
+  background-color: #90CAF9;
+}
+
+.avatar:hover{
+  cursor: pointer
+}
+
+.person-icon{
+  color: #1565C0;
+  font-size: 25px;
+  margin-top:4px;
+  margin-left:4px;
+}
+.wrap-avatar h4{
+  font-size: 16px;
+  font-weight: normal;
+  margin-left: 10px;
+}
+
+.mat-menu{
+  width: 200px;
+}
+
+.p-matmenu-item{
+  margin-bottom: 0px;
+}
+
+hr{
+  background-color: lightgray;
+  border-top: none;
+}
+
+::ng-deep .mat-autocomplete-panel {
+  max-height: 280px !important;
+}
+
+::ng-deep .mat-card-header-text{
+  margin: 0px !important;
+}
+.symbols{
+  display: flex;
+  flex-direction: column;
+}
+
+.symbols h4{
+  margin-bottom: 0px;
+}
+mat-option {
+  height: 60px !important;
+  margin-top:10px;
+  border-botom: 1px solid lightgray;
+}
+
+mat-option:hover{
+  background-color: #d5e7fc !important;
+}
+
+.active{
+  color: #2196F3;
+}

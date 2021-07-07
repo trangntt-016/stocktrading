@@ -1,0 +1,161 @@
+.feature{
+  overflow-y: hidden;
+  margin-top: 50px;
+  height: 500px;
+}
+
+section{
+  height: 100%;
+}
+
+.animation{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 150px;
+  margin-right: 150px;
+  height: 100%;
+}
+.text{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h2{
+  font-size: 35px;
+  letter-spacing: .5px;
+  line-height: 42px;
+}
+.visual {
+  display: block;
+  overflow: hidden;
+  height: 100%;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/*stay connected*/
+
+.featureConnected{
+  overflow-y: hidden;
+  height: 400px;
+}
+.featureConnected img{
+  width: 100%;
+  height: 100%;
+}
+
+.featureConnected.paragraph{
+  max-width: 400px;
+}
+
+/*analysis */
+.featureAnalysis{
+  overflow-y: hidden;
+  height: 400px;
+
+}
+
+/*privileges*/
+.privileges{
+  margin-top: 50px;
+}
+.privilege-blocks{
+  text-align: center;
+  margin-top:30px;
+}
+.privileges-wrapper{
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+:host ::ng-deep mat-card-header{
+}
+.texts{
+  text-align: center;
+}
+
+.stocks {
+  background-image: url('src/assets/stocks.jpg');
+  background-size: cover;
+}
+
+.options{
+  background-image: url('src/assets/options.png');
+  background-size: cover;
+}
+
+.ETFs{
+  background-image: url('src/assets/ETFs.jpg');
+  background-size: cover;
+}
+
+.ADRs{
+  background-image: url('src/assets/ADRs.jpg');
+  background-size: cover;
+}
+
+:host ::ng-deep .mat-card-avatar{
+  height: 45px;
+  width: 45px;
+}
+
+.heading-p{
+  font-size: 25px;
+  font-weight: 450;
+  margin-top: 15px;
+}
+.texts.paragraph{
+  font-size: 16px;
+}
+.content-p{
+  max-width: 200px;
+  text-align: left;
+  font-size: 18px;
+  letter-spacing: .5px;
+  line-height: 35px;
+}
+
+/*OPEN ACCOUNT*/
+.open-account{
+  z-index: 1;
+  margin-top: 100px;
+  padding-top: 100px;
+  height: 500px;
+}
+
+.account-wrapper{
+  margin-left:150px;
+  margin-right: 150px;
+}
+
+.image-wrapper{
+  height: auto;
+  width: 70%;
+  background:url("src/assets/open-account.jpg")no-repeat ;
+
+}
+
+.open-account img{
+  width: 100%;
+  height: 100%;
+}
+
+.text-wrapper h2{
+  margin-left: 35px;
+}
+
+.text-wrapper h3{
+  font-size: 18px;
+  max-width: 350px;
+  text-align: justify;
+}
+
+:host ::ng-deep .mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary{
+  font-size: 16px !important;
+
+}

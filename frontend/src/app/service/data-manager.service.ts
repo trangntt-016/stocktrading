@@ -3,12 +3,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ChartDto } from '../model/HistoricalQuoteDto';
 import { SummaryStock } from '../model/SummaryStock';
+import { SymbolDto } from '../model/SymbolDto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataManagerService {
-
   constructor(
     private http: HttpClient
   ) { }
@@ -21,7 +21,8 @@ export class DataManagerService {
     return this.http.get<SummaryStock[]>(`http://localhost:3000/api/quotes/topthree`);
   }
 
-  findSymbol(symbol: string): Observable<any>{
-    return this.http.get<any>(`https://query1.finance.yahoo.com/v7/finance/quote?symbols=GOOG`);
+  getAllSymbols(): Observable<SymbolDto[]>{
+    return this.http.get<SymbolDto[]>(`http://localhost:3000/api/symbols`);
   }
+
 }

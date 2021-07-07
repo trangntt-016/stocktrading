@@ -1,8 +1,8 @@
 // https://stackblitz.com/edit/line-chart-issue?file=app%2Fdata.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { single } from './data';
 import { DataManagerService } from '../service/data-manager.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ChartDto } from '../model/HistoricalQuoteDto';
 import { SummaryStock } from '../model/SummaryStock';
 
@@ -11,10 +11,12 @@ import { SummaryStock } from '../model/SummaryStock';
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.css']
 })
-export class TestComponent implements OnInit {
-  singles: ChartDto[];
-  summaryStocks$: Observable<SummaryStock[]>;
-  public view: any[] = [400, 200];
+export class TestComponent implements OnInit, OnDestroy {
+  singles: any;
+  summaryStocks: SummaryStock[];
+  summaryStocksSub: Subscription;
+
+  public view: any[] = [400, 150];
 
   public colorScheme = {
     domain: ['#5AA454']
@@ -26,40 +28,23 @@ export class TestComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataService.getHistoricalQuotesFrom().subscribe(charts =>{
-      let converted = charts.map(
-        chart => {
-          const series = chart.series.map(s => {
-            const date = new Date(s.date);
-            const newDate = date.getUTCDate() + " " + date.toLocaleDateString('default',{month: 'long'});
-            const seriesObj = Object.assign({
-              name: newDate,
-              value: s.close
-            });
-            return seriesObj;
-          });
-          const name = chart.name;
-          const chartObj = Object.assign({
-            name: chart.name,
-            series: series
-          });
-          return chartObj;
-        }
-      )
-      converted = converted.map(c=>{
-        return new Array(c);
-      })
-      this.singles = converted;
+    this.getSummaryStocks();
+    setInterval(() => {this.getSummaryStocks()}, 5000);
+
+     this.dataService.getHistoricalQuotesFrom().subscribe(charts =>{
+      this.singles = charts;
+     });
+
+  }
+
+  ngOnDestroy() {
+    this.summaryStocksSub.unsubscribe();
+  }
+
+  public getSummaryStocks(){
+    this.summaryStocksSub = this.dataService.getTopStocksSummary().subscribe(s =>{
+      this.summaryStocks = s;
     });
-
-    this.dataService.findSymbol("GOOG").subscribe(t=>{
-      console.log(t);
-    })
-    setInterval(() => {
-      console.log("hi");
-      this.summaryStocks$ = this.dataService.getTopStocksSummary();
-
-    }, 5000);
   }
 
 
