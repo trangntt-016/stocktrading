@@ -17,7 +17,7 @@ public class ConvertCalendarUtils {
     public static Calendar getToday(){
         Date in = new Date();
         LocalDateTime ldt = LocalDateTime.ofInstant(in.toInstant(), ZoneId.systemDefault());
-        Date out = Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant());
+        Date out = Date.from(ldt.atZone(ZoneId.of("America/Toronto")).toInstant());
         Calendar today = new Calendar.Builder().setInstant(out).build();
         return today;
     }

@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Builder
 @Data
-public class SymbolNameDto {
+public class SymbolDto {
     String symbol;
     String name;
 }

@@ -1,5 +1,6 @@
 package com.canada.edu.stocktrading.service;
 
+import com.canada.edu.stocktrading.service.dto.SymbolDto;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -16,7 +17,8 @@ import java.util.List;
 public class SymbolAPIService {
     static private SymbolAPIService instance;
 
-    public List<String>symbols = new ArrayList<>();
+
+    public List<SymbolDto>symbols = new ArrayList<>();
 
     private SymbolAPIService() throws IOException {
         // source file: https://api.nasdaq.com/api/screener/stocks?tableonly=true&limit=2&exchange=NASDAQ
@@ -46,7 +48,11 @@ public class SymbolAPIService {
         }
         // extract symbols from stocks and add to list
         for(JsonElement s: jArray){
-            symbols.add(s.getAsJsonObject().get("symbol").getAsString());
+            SymbolDto sn = SymbolDto.builder()
+                    .symbol(s.getAsJsonObject().get("symbol").getAsString())
+                    .name(s.getAsJsonObject().get("name").getAsString())
+                    .build();
+            symbols.add(sn);
         }
     }
 
