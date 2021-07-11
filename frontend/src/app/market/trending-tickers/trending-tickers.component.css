@@ -1,0 +1,41 @@
+.wrapper{
+  display:flex;
+  flex-direction: column;
+  width: 100%;
+}
+.ticker-wrapper{
+  margin-left:150px;
+  margin-right:150px;
+}
+.ticker{
+  border-left: 5px solid #5AA454;
+  padding-left: 15px;
+  margin-left:20px
+}
+
+.chart-wrapper{
+  height: 200px;
+  margin-left:150px;
+  margin-right:150px;
+}
+.chart{
+  overflow: hidden;
+}
+
+h2{
+  font-size: 25px;
+  font-weight: normal;
+  margin-bottom: 0;
+  color: black;
+}
+
+h3{
+  font-size: 20px;
+  margin-bottom: 0;
+  color:#5AA454;
+}
+
+h4{
+  font-size: 18px;
+  color: #5AA454;
+}

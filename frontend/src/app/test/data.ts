@@ -1,4 +1,4 @@
-export var single = [
+export let single = [
   {
     name: "",
     series: [
@@ -33,3 +33,24 @@ export var single = [
     ]
   }
 ];
+
+export let trendingTicker = [
+  {
+    symbol: "AMZN",
+    regularMarketPrice: 55.2,
+    regularMarketChange: 44,
+    regularMarketChangePercent: 0.6
+  },
+  {
+    symbol: "AMZN",
+    regularMarketPrice: 55.2,
+    regularMarketChange: 44,
+    regularMarketChangePercent: 0.6
+  },
+  {
+    symbol: "AMZN",
+    regularMarketPrice: 55.2,
+    regularMarketChange: 44,
+    regularMarketChangePercent: 0.6
+  }
+]

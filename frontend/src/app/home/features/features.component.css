@@ -1,6 +1,6 @@
 .feature{
   overflow-y: hidden;
-  margin-top: 50px;
+  margin-top: 90px;
   height: 500px;
 }
 
@@ -124,7 +124,7 @@ img {
 .open-account{
   z-index: 1;
   margin-top: 100px;
-  padding-top: 100px;
+  padding-bottom: 100px;
   height: 500px;
 }
 

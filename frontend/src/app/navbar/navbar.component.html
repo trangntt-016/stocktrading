@@ -1,5 +1,4 @@
 <mat-toolbar>
-
   <div style="display: flex;flex-direction: row">
     <a href="#" id="logo">
       <img src="assets/logo.jpg" class="image">
@@ -10,7 +9,7 @@
     >
       Home
     </button>
-    <button mat-flat-button [routerLink]="['/quote']"
+    <button mat-flat-button [routerLink]="['/market']"
             routerLinkActive="mat-accent"
             [routerLinkActiveOptions]="{ exact: true}"
     >
@@ -38,29 +37,35 @@
     </div>
   </div>
 
-  <div class="wrap-avatar">
-    <div class="avatar"[matMenuTriggerFor]="userMenu" >
-      <mat-icon class="person-icon">person</mat-icon>
+  <div *ngIf="user!=null">
+    <div class="wrap-avatar">
+      <div class="avatar"[matMenuTriggerFor]="userMenu" >
+        <mat-icon class="person-icon">person</mat-icon>
+      </div>
+      <h4>U_klxF6</h4>
     </div>
-    <h4>U_klxF6</h4>
+    <mat-menu #userMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">
+      <div style="width: 180px;">
+        <p mat-menu-item class="p-matmenu-item">Hi, U_klxF6</p>
+        <hr>
+        <a mat-menu-item>
+          <mat-icon>person_outline</mat-icon>
+          <span>My account</span>
+        </a>
+        <a mat-menu-item>
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Log out</span>
+        </a>
+      </div>
+    </mat-menu>
   </div>
-  <mat-menu #userMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">
-    <div style="width: 180px;">
-      <p mat-menu-item class="p-matmenu-item">Hi, U_klxF6</p>
-      <hr>
-      <a mat-menu-item>
-        <mat-icon>person_outline</mat-icon>
-        <span>My account</span>
-      </a>
-      <a mat-menu-item>
-        <mat-icon>exit_to_app</mat-icon>
-        <span>Log out</span>
-      </a>
 
-    </div>
+  <div *ngIf="user==null">
+    <button mat-flat-button [routerLink]="['/auth']">Register</button>
+    <button mat-raised-button color="primary">Log In</button>
+  </div>
+  </div>
 
-  </mat-menu>
-</div>
 
 
 </mat-toolbar>

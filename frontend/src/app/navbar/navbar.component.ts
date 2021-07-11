@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  user: any = null;
   symbols$: Observable<SymbolDto[]>;
   searchSymbol: string;
 
@@ -18,7 +19,7 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.symbols$ = this.dataService.getAllSymbols();
+    //this.symbols$ = this.dataService.getAllSymbols();
   }
 
   doFilter(): void{

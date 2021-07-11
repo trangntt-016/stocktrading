@@ -18,22 +18,17 @@ gsap.registerPlugin(ScrollTrigger);
   styleUrls: ['./features.component.css']
 })
 export class FeaturesComponent implements OnInit {
-  @ViewChild('feature', { static: true }) feature: ElementRef<
-    HTMLDivElement>;
+  @ViewChild('feature', { static: true }) feature: ElementRef<HTMLDivElement>;
 
-  @ViewChild('featureConnected', { static: true }) featureConnected: ElementRef<
-    HTMLDivElement>;
+  @ViewChild('featureConnected', { static: true }) featureConnected: ElementRef<HTMLDivElement>;
 
-  @ViewChild('featureAnalysis', { static: true }) featureAnalysis: ElementRef<
-    HTMLDivElement>;
+  @ViewChild('featureAnalysis', { static: true }) featureAnalysis: ElementRef<HTMLDivElement>;
 
-  @ViewChild('privilege', { static: true }) privilege: ElementRef<
-    HTMLDivElement>;
+  @ViewChild('privilege', { static: true }) privilege: ElementRef<HTMLDivElement>;
 
   constructor(@Inject(DOCUMENT) private document: Document) {};
 
   ngOnInit() {
-    this.initialAnimations();
     this.initScrollAnimations();
   }
 
@@ -148,36 +143,5 @@ export class FeaturesComponent implements OnInit {
       y: 40,
       opacity: 0,
     });
-
-
-
   }
-
-  initialAnimations(): void {
-    gsap.from(this.feature.nativeElement.childNodes, {
-      duration: 0.5,
-      opacity: 0,
-      y: -20,
-      stagger: 0.2,
-      delay: 0.3,
-    });
-
-    gsap.from(this.featureConnected.nativeElement.childNodes, {
-      duration: 0.5,
-      opacity: 0,
-      y: -20,
-      stagger: 0.2,
-      delay: 0.3,
-    });
-
-    gsap.from(this.featureAnalysis.nativeElement.childNodes, {
-      duration: 0.5,
-      opacity: 0,
-      y: -20,
-      stagger: 0.2,
-      delay: 0.1,
-    });
-
-  }
-
 }

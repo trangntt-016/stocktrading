@@ -19,10 +19,8 @@
   background-color: #fff;
 }
 
-.mat-flat-button{
-  font-size: 18px;
-}
-.mat-flat-button:hover{
+
+::ng-deep .mat-flat-button:hover{
   color: #2196F3;
 }
 
@@ -122,6 +120,23 @@ mat-option:hover{
   background-color: #d5e7fc !important;
 }
 
-.active{
+:host ::ng-deep .active{
+  color: #2196F3 !important;
+}
+
+::ng-deep .mat-flat-button{
+  font-size: 18px;
+}
+
+::ng-deep .mat-flat-button.mat-accent{
+  background-color: white;
   color: #2196F3;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+:host ::ng-deep .mat-raised-button{
+  border-radius: 25px;
+  background-color: #2196F3;
+  font-size: 17px;
 }

@@ -1,34 +1,19 @@
-<div  class="wrapper">
-  <div class="wrapper-summary">
-    <div *ngFor="let stock of summaryStocks" class="summary-container">
-      <div class="summary">
-        <h2 class="stock-name">{{stock.symbol}}</h2>
-        <h3 class="positive">{{stock.currentPrice | currency}}</h3>
-        <div class="change">
-          <h4>{{stock.change}}</h4>
-          <h4 style="margin-left: 5px;">{{stock.changePercent | number : '1.2-2'}}%</h4>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="wrapper-chart">
-    <div *ngFor="let single of singles | convertStocksToChart" class="chart">
-      <ngx-charts-line-chart
-        [view]="view"
-        [scheme]="colorScheme"
-        [results]="single"
-        [showGridLines]=true
-        [gradient]=true
-        [yAxis]=true
-        [showXAxisLabel]=true
-        [showYAxisLabel]=true
-      >
-      </ngx-charts-line-chart>
-    </div>
-  </div>
+<!--<br>-->
+<!--<br>-->
+<!--<br><br>-->
+<!--<br>-->
 
 
+<!--<input matInput type="text"-->
+<!--[(ngModel)]="message"-->
+<!--&gt;-->
+<!--<div>{{message}}</div>-->
 
-</div>
+<!--<button mat-button (click)="AMZN(message)">Click me!</button>-->
+<!--<button mat-button (click)="GOOGL(message)">Click me!</button>-->
+<!--<button mat-button (click)="TESLA(message)">Click me!</button>-->
 
+
+<a href="#" (click)="signInWithGoogle()">
+  <img src="../../../assets/facebooklogo.png" class="social-icon">
+</a>

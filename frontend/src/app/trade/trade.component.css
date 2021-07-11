@@ -1,0 +1,46 @@
+.navbar{
+  background-color: #e5e3e3;
+  position: fixed;
+  width: 100%;
+  height: 6vh;
+  z-index: 1;
+  border-botom: 1px solid lightgray;
+}
+
+.wrap-avatar{
+  display:flex;
+  flex-direction: row;
+  margin-left: 15px;
+}
+
+.wrap-avatar h4{
+  font-size: 16px;
+  font-weight: normal;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+.avatar{
+  height:30px;
+  width: 30px;
+  border-radius: 100%;
+  background-color: #90CAF9;
+}
+
+.avatar:hover{
+  cursor: pointer
+}
+
+.person-icon{
+  color: #1565C0;
+  font-size: 25px;
+  margin-top:3px;
+  margin-left:3px;
+}
+
+
+.wrapper{
+  background-color: pink;
+  width: 100%;
+  height: 100%;
+}

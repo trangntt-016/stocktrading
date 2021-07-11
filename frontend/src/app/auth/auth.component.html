@@ -1,0 +1,19 @@
+<div class="wrapper">
+  <div class="form-wrapper">
+    <div class="form-container">
+      <div class="form-text" fxLayout="column" fxLayoutAlign="center center">
+        <h2>Welcome to Fidcoin</h2>
+        <h4 style="margin-bottom: 0px; margin-top: 0px; color: red">{{error}}</h4>
+        <mat-tab-group>
+          <mat-tab label="Register">
+            <app-register (errorEvt)="handleError($event)"></app-register>
+          </mat-tab>
+          <mat-tab label="Log In">
+            <app-login></app-login>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+  </div>
+</div>
+
