@@ -11,7 +11,6 @@ import java.util.List;
 @AllArgsConstructor
 public class StockAPI {
     private static final String[] stocks = new String[]{
-
     };
     private final Stock stock;
 }

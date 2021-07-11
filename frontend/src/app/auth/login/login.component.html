@@ -1,0 +1,42 @@
+<form #f="ngForm" (submit)="onSubmit(f)" fxLayout="column" fxLayoutGap="10px">
+  <mat-form-field>
+    <input matInput
+           placeholder="Email Address"
+           [(ngModel)]="registerUser.email"
+           name="email"
+           minlength="8"
+           maxlength="30"
+           required
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput id="mysecretpassword"
+           name="password"
+           [(ngModel)]="registerUser.password"
+           type="password"
+           placeholder="Password"
+           showHideInput
+           required
+           minlength="8"
+           maxlength="15"
+    >
+    <i matSuffix
+       class="material-icons"
+       showHideTrigger="mysecretpassword"
+       [showHideStatus]="{ materialIcon: true, id: 'mysecretpassword' }"
+    ></i>
+  </mat-form-field>
+  <button mat-raised-button color="primary">Log In</button>
+  <div class="h3-wrapper">
+    <h3 style="margin:0; padding: 0">or</h3>
+  </div>
+  <div fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="center center" style="width: 100%">
+    <div (click)="signInWithFB()">
+      <img src="../../../assets/facebooklogo.png" class="social-icon">
+    </div>
+    <div href="#">
+      <img src="../../../assets/gmaillogo.png" class="social-icon gg">
+    </div>
+  </div>
+</form>
+

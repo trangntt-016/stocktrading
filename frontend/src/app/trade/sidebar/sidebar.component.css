@@ -1,0 +1,28 @@
+.wrapper{
+  width: 4vw;
+  height: 100vh;
+  background-color: #1A237E;
+  position: fixed;
+  padding-top:60px;
+}
+
+
+:host ::ng-deep .mat-icon{
+  color: #c4c3c3;
+}
+
+:host ::ng-deep .mat-icon:hover{
+  cursor: pointer;
+  color: white;
+}
+
+.active .mat-icon{
+  color: #fff !important;
+}
+
+.active{
+  background-color: #2196F3;
+  opacity: 1;
+}
+
+

@@ -1,0 +1,41 @@
+.wrapper{
+  width:100vw;
+  height: 100vh;
+  background: url("src/assets/background.jpg");
+  background-size: cover;
+  position: fixed;
+}
+
+h2{
+  margin-top: 20px;
+  font-size: 25px;
+}
+
+.img-wrapper{
+  width: 100%;
+  position: absolute;
+  left:5px;
+}
+
+.logofidcoin{
+  border-radius: 80px;
+  width: 7%;
+  height: 7%;
+}
+
+.form-wrapper{
+  margin-top: 165px;
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.form-container{
+  width: 50%;
+}
+
+.form-text{
+  border-radius: 5px;
+  background-color: #fff;
+  width: 50%;
+}

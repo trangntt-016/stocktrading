@@ -1,0 +1,14 @@
+
+.wrapper{
+  margin:115px 0;
+}
+
+.wrap-avatar{
+  display:flex;
+  flex-direction: row;
+  margin-left: 25px;
+}
+
+
+
+

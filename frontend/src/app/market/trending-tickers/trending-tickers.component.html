@@ -1,0 +1,53 @@
+<div class="wrapper">
+  <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="30px" class="ticker-wrapper">
+<!--    <div *ngFor="let ticker of (trendingTickers$ | async)">-->
+    <div *ngFor="let ticker of trendingTicker">
+      <div class="ticker">
+        <h2 class="stock-name">{{ticker.symbol}}</h2>
+        <h3 class="positive">{{ticker.regularMarketPrice | currency}}</h3>
+        <div fxLayout="row">
+          <h4>+{{ticker.regularMarketChange | number : '1.2-2'}}</h4>
+          <h4 style="margin-left: 5px;">+{{ticker.regularMarketChangePercent | number : '1.2-2'}}%</h4>
+        </div>
+      </div>
+        <div class="chart">
+          <ngx-charts-line-chart
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="test"
+            [showGridLines]=true
+            [gradient]=true
+            [yAxis]=true
+            [showXAxisLabel]=true
+            [showYAxisLabel]=true
+          >
+          </ngx-charts-line-chart>
+        </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!--<div class="wrapper">-->
+<!--  <div class="wrapper-summary">-->
+<!--    <div *ngFor="let ticker of (trendingTickers$ | async)" class="summary-container">-->
+<!--      <div class="summary">-->
+<!--        <h2 class="stock-name">{{ticker.symbol}}</h2>-->
+<!--        <h3 class="positive">{{ticker.regularMarketPrice | currency}}</h3>-->
+<!--        <div class="change">-->
+<!--          <h4>{{ticker.regularMarketChange | number : '1.2-2'}}</h4>-->
+<!--          <h4 style="margin-left: 5px;">{{ticker.regularMarketChangePercent | number : '1.2-2'}}%</h4>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+  <div class="wrapper-chart">
+
+  </div>
+
+
+
+<!--</div>-->
+

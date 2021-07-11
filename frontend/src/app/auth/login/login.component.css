@@ -1,0 +1,21 @@
+form{
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.social-icon {
+  width: 25px;
+  height: 25px;
+}
+
+.gg{
+  width: 35px;
+  height: 35px;
+}
+
+.h3-wrapper{
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}

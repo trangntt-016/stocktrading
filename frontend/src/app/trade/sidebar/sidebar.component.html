@@ -1,0 +1,21 @@
+<div class="wrapper" fxLayout="column" fxLayoutGap="15px" fxLayoutAlign="start center">
+  <button mat-button
+          [routerLink]="['watchlist']"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true}"
+          matTooltip="Watchlist"
+          matTooltipPosition="right"
+  >
+    <mat-icon>visibility</mat-icon>
+  </button>
+  <button mat-button
+          [routerLink]="['stocks']"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true}"
+          matTooltip="Stocks"
+          matTooltipPosition="right"
+  >
+    <mat-icon> bar_chart</mat-icon>
+  </button>
+
+</div>

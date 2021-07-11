@@ -1,0 +1,112 @@
+
+.banner{
+  height: 90vh;
+  background-color: #2b2bb0;
+  position: relative;
+  overflow-y: hidden;
+}
+
+.row{
+  display: flex;
+  flex-direction: row;
+  margin-left: 150px;
+  margin-right: 150px;
+}
+.col-md-6{
+  width: 50%;
+}
+.content{
+  color: #fff;
+}
+.content h6{
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: #fff;
+}
+.content h1{
+  color: #fff;
+  font-size: 48px;
+}
+.content a{
+  display: inline-block;
+  width: 250px;
+  height: 60px;
+  border: 1px solid #ffffff80;
+  text-decoration: none;
+  line-height: 58px;
+  text-align: center;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: .5px;
+  margin-top: 60px;
+  transition: all ease 0.4s;
+}
+.content a:hover{
+  background-color: #fff;
+  color: #2b2bb0;
+}
+.content-text{
+  padding-top: 140px;
+}
+.content-img{
+  padding-top: 60px;
+}
+
+.banner:before{
+  position: absolute;
+  content: '';
+  background: url('src/assets/wave-img.png') no-repeat;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  background-size: cover;
+  width: 100%;
+  height: 57px;
+  opacity: .2;
+  animation: waveone 10s linear infinite;
+}
+@keyframes waveone {
+  0%{
+    background-position: 1366px;
+  }
+  100%{
+    background-position: 0;
+  }
+}
+
+.banner:after{
+  position: absolute;
+  content: '';
+  background: url('src/assets/wave-img.png') no-repeat;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  background-size: cover;
+  width: 100%;
+  height: 57px;
+  opacity: .2;
+  animation: wavetwo 10s linear infinite;
+}
+@keyframes wavetwo {
+  0%{
+    background-position: 0;
+  }
+  100%{
+    background-position: 1366px;
+  }
+}
+
+.wave{
+  position: absolute;
+  content: '';
+  background: url('src/assets/wave-img.png') no-repeat;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  background-size: cover;
+  width: 100%;
+  height: 57px;
+  opacity: .2;
+}
+

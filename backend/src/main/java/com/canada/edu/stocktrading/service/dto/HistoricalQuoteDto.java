@@ -8,7 +8,7 @@ import java.util.Calendar;
 
 @Data
 @NoArgsConstructor
-public class HistoricalQuoteDto {
+public class HistoricalQuoteDto{
     private String symbol;
     private Calendar date;
     private BigDecimal close;
