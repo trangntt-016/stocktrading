@@ -8,18 +8,20 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "stocks")
-public class Stock {
+@Table(name = "dailies")
+public class Daily {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "stock_id")
-    private Integer stockId;
+    @Column(name = "daily_id")
+    private Integer dailyId;
 
     @Column(name = "timestamp",nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -40,6 +42,10 @@ public class Stock {
     @Column(name = "volume",nullable = false)
     private BigDecimal volume;
 
-    @Column(name = "symbol",nullable = false)
-    private String symbol;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
+            name="symbol_id",
+            foreignKey=@ForeignKey(name = "FK_SYMBOL_DAILY"))
+    private Symbol symbol;
+
 }

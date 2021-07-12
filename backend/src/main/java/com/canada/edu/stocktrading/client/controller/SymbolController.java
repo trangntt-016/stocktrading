@@ -13,15 +13,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/symbols")
 public class SymbolController {
-    public SymbolAPIService symbolAPIService = SymbolAPIService.getInstance();
+    //public SymbolAPIService symbolAPIService = SymbolAPIService.getInstance();
 
-    public SymbolController() throws IOException {
-    }
-
-    @GetMapping()
-    public ResponseEntity<List<SymbolDto>> getAllSymbols(){
-        List<SymbolDto>symbolsName = symbolAPIService.symbols;
-        return ResponseEntity.ok(symbolsName);
-    }
+//    public SymbolController() throws IOException {
+//    }
+//
+//    @GetMapping()
+//    public ResponseEntity<List<SymbolDto>> getAllSymbols(){
+//        List<SymbolDto>symbolsName = symbolAPIService.symbols;
+//        return ResponseEntity.ok(symbolsName);
+//    }
 }
 
