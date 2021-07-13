@@ -7,10 +7,12 @@ import com.canada.edu.stocktrading.repository.SymbolRepository;
 import com.canada.edu.stocktrading.repository.WatchlistRepository;
 
 import com.canada.edu.stocktrading.utils.EntityUtils;
+import org.apache.catalina.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -71,6 +73,14 @@ public class TestWatchlistRepository {
         randomWL.getSymbols().remove(symbol);
         System.out.println(randomWL.getWatchlistId());
         watchlistRepository.save(randomWL);
+    }
+
+    @Test
+    public void testFindAllWatchlistsFromUserId(){
+        UserEntity randomUsr = entityUtils.generateRandomUser();
+
+        watchlistRepository.findAllByUserId(randomUsr.getUserId());
+
     }
 
 

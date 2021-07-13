@@ -21,4 +21,10 @@ public class ExceptionHandling extends ResponseEntityExceptionHandler {
         String bodyOfResponse = "Cannot save the user to the database!";
         return handleExceptionInternal(ex,bodyOfResponse,new HttpHeaders(), HttpStatus.CONFLICT,req);
     }
+
+    @ExceptionHandler(value = {BadRequestException.class})
+    private ResponseEntity<Object>handleBadRequestException(RuntimeException ex, WebRequest req){
+        String bodyOfResponse = "Bad Request";
+        return handleExceptionInternal(ex,bodyOfResponse,new HttpHeaders(), HttpStatus.BAD_REQUEST,req);
+    }
 }
