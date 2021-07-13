@@ -1,5 +1,6 @@
 package com.canada.edu.stocktrading.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,6 +31,7 @@ public class Symbol {
     private String name;
 
     @ManyToMany(mappedBy = "symbols")
+    @JsonIgnore
     private Set<Watchlist> watchlists = new HashSet<>();
 
     @Override

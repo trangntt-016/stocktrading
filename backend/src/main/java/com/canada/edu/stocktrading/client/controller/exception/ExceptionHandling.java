@@ -12,19 +12,19 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class ExceptionHandling extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value={DuplicateEmailException.class})
     private ResponseEntity<Object>handleDuplicateEmailException(RuntimeException ex, WebRequest req){
-        String bodyOfResponse = "This email already exists!";
+        String bodyOfResponse = ex.getMessage();
         return handleExceptionInternal(ex,bodyOfResponse,new HttpHeaders(), HttpStatus.CONFLICT,req);
     }
 
     @ExceptionHandler(value={InternalServerException.class})
     private ResponseEntity<Object>handleInternalServerException(RuntimeException ex, WebRequest req){
-        String bodyOfResponse = "Cannot save the user to the database!";
+        String bodyOfResponse = ex.getMessage();
         return handleExceptionInternal(ex,bodyOfResponse,new HttpHeaders(), HttpStatus.CONFLICT,req);
     }
 
     @ExceptionHandler(value = {BadRequestException.class})
     private ResponseEntity<Object>handleBadRequestException(RuntimeException ex, WebRequest req){
-        String bodyOfResponse = "Bad Request";
+        String bodyOfResponse = ex.getMessage();
         return handleExceptionInternal(ex,bodyOfResponse,new HttpHeaders(), HttpStatus.BAD_REQUEST,req);
     }
 }

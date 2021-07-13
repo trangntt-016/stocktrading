@@ -1,0 +1,46 @@
+<div class="dialog-wrapper" fxLayout="column">
+  <h4>Edit Watchlists</h4>
+  <div class="watchlist-wrapper">
+    <div class="watchlist-container" fxLayout="column" fxLayoutAlign="space-between" fxFlexFill>
+      <div class="watchlist-list">
+        <div class="watchlist" fxLayout="row" fxLayoutAlign="space-between" *ngFor="let wl of myWL; let i=index">
+          <p *ngIf="wl.editable===false">{{wl.watchlist}}</p>
+          <div
+            class="edit-wrapper"
+            *ngIf="wl.editable===true"
+          >
+            <input
+              style="width: 200px; border: 1px solid lightgray;"
+              value={{wl.watchlist}}
+              [(ngModel)]="wl.watchlist"
+            >
+            <div fxLayout="row" fxLayoutGap="10px" style="margin-top: 10px;">
+              <button mat-raised-button (click)="update(i)">Update</button>
+              <button mat-raised-button color="primary" (click)="cancel(i)">Cancel</button>
+            </div>
+          </div>
+          <div fxLayout="row" style="margin-bottom: 10px;">
+            <mat-icon
+              class="edit-icon"
+              matTooltip="Edit"
+              matTooltipPosition="below"
+              (click)="edit(i)"
+            >edit</mat-icon>
+            <mat-icon
+              class="delete-icon"
+              matTooltip="Delete"
+              matTooltipPosition="below"
+              (click)="delete(i)"
+            >delete</mat-icon>
+          </div>
+        </div>
+      </div>
+      <div class="add-wrapper" (click)="addWatchlist()">
+        <div fxLayout="row">
+          <mat-icon>add</mat-icon>
+          <p>Add Watchlist</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

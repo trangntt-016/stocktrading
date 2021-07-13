@@ -35,6 +35,7 @@ public class TestWatchlistRepository {
         int before = watchlistRepository.findAll().size();
         Watchlist newWL = Watchlist.builder()
                 .user(randomUsr)
+                .name("test")
                 .build();
         watchlistRepository.save(newWL);
 
@@ -78,9 +79,19 @@ public class TestWatchlistRepository {
     @Test
     public void testFindAllWatchlistsFromUserId(){
         UserEntity randomUsr = entityUtils.generateRandomUser();
-
         watchlistRepository.findAllByUserId(randomUsr.getUserId());
+    }
 
+    @Test
+    public void testUpdateAWatchlist(){
+        Watchlist randomWL = entityUtils.generateRandomEntity(watchlistRepository,watchlistRepository.findAll().get(0).getWatchlistId());
+        int before = watchlistRepository.findAll().size();
+        String testName = "sometest";
+        randomWL.setName(testName);
+        watchlistRepository.save(randomWL);
+        int after = watchlistRepository.findAll().size();
+        assertThat(before).isEqualTo(after);
+        assertThat(watchlistRepository.findById(randomWL.getWatchlistId()).get().getName()).isEqualTo(testName);
     }
 
 

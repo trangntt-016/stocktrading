@@ -1,0 +1,22 @@
+<div class="wrapper">
+  <div class="watchlist-name-wrapper" fxLayout="row" fxLayoutAlign="space-between">
+    <div class="watchlist-config"fxLayout="row" fxLayoutGap="30px">
+      <div class="watchlist" *ngFor="let watchlist of watchlists; let i=index">
+        <h4 (click)="updClick(i)">{{watchlist.name}}</h4>
+        <div class="wrapper-underline" *ngIf="i==clickIdx">
+          <div class="underline"></div>
+        </div>
+      </div>
+    </div>
+    <div class="config">
+      <button mat-mini-fab
+              color = "primary"
+              matTooltip="Edit Watchlists"
+              matTooltipPosition="left"
+      (click)="openDialog()"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

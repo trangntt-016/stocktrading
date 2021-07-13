@@ -41,6 +41,9 @@ public class Watchlist {
     )
     private Set<Symbol> symbols = new HashSet<>();
 
+    @Column(nullable = false)
+    private String name;
+
     public void addSymbols(Symbol symbol){
         this.symbols.add(symbol);
     }

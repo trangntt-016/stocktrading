@@ -12,6 +12,7 @@ import {MatInputModule} from '@angular/material/input';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { MatTabsModule } from '@angular/material/tabs';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatInputModule,
     FlexLayoutModule,
     MatTooltipModule,
-    MatTabsModule
+    MatTabsModule,
+    MatDialogModule
   ],
   exports: [
     MatToolbarModule,
@@ -42,7 +44,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatInputModule,
     FlexLayoutModule,
     MatTooltipModule,
-    MatTabsModule
+    MatTabsModule,
+    MatDialogModule
   ]
 })
 export class MaterialModule{}

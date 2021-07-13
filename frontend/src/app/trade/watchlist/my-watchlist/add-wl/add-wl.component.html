@@ -1,0 +1,15 @@
+<div class="dialog-wrapper" fxLayout="column">
+  <h4>Add Watchlist</h4>
+  <div class="input-wrapper">
+    <div class="input-container" fxLayout="column" fxLayoutGap="30px">
+      <div>
+        <h5>Name</h5>
+        <input [value]="newName" [(ngModel)]="newName">
+      </div>
+      <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="end end">
+        <button mat-raised-button (click)="cancel()">Cancel</button>
+        <button mat-raised-button color="primary" (click)="save()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

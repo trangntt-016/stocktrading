@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataManagerService } from '../service/data-manager.service';
-import { SymbolDto } from '../model/SymbolDto';
+import { Symbol } from '../model/Symbol';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
 })
 export class NavbarComponent implements OnInit {
   user: any = null;
-  symbols$: Observable<SymbolDto[]>;
+  symbols$: Observable<Symbol[]>;
   searchSymbol: string;
 
   constructor(

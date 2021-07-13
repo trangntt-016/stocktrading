@@ -1,0 +1,34 @@
+.wrapper{
+  background-color: pink;
+  height: 60%;
+}
+
+.watchlist{
+  width: fit-content;
+
+}
+
+.watchlist h4{
+  margin: 0;
+  font-size: 14px;
+}
+
+.watchlist h4:hover{
+  cursor: pointer;
+}
+.watchlist-name-wrapper{
+  margin-left: 15px;
+  margin-right: 15px;
+  padding: 10px;
+}
+.wrapper-underline{
+  width: 100%;
+  height: 2px;
+}
+
+.underline{
+  width: 40%;
+  background-color: #1A237E;
+  height: 2px;
+  margin: auto;
+}

@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -49,6 +50,14 @@ public class UserEntityService {
     public boolean isUserIdValid(String userId){
         Optional<UserEntity> found = userEntityRepository.findById(userId);
         return found.isPresent();
+    }
+
+    public UserEntity findByUserId(String userId){
+        Optional<UserEntity> user = userEntityRepository.findById(userId);
+        if(user.isEmpty()){
+            throw new RuntimeException("Unable to find user with id "+ userId);
+        }
+        return user.get();
     }
 
 

@@ -28,6 +28,10 @@ import {
   FacebookLoginProvider
 } from 'angularx-social-login';
 import { TradeComponent } from './trade/trade.component';
+import { WatchlistComponent } from './trade/watchlist/watchlist.component';
+import { MyWatchlistComponent } from './trade/watchlist/my-watchlist/my-watchlist.component';
+import { EditWlComponent } from './trade/watchlist/my-watchlist/edit-wl/edit-wl.component';
+import { AddWlComponent } from './trade/watchlist/my-watchlist/add-wl/add-wl.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +49,11 @@ import { TradeComponent } from './trade/trade.component';
     RegisterComponent,
     AuthComponent,
     LoginComponent,
-    TradeComponent
+    TradeComponent,
+    WatchlistComponent,
+    MyWatchlistComponent,
+    EditWlComponent,
+    AddWlComponent
 
   ],
   imports: [
