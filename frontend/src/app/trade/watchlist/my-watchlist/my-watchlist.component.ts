@@ -20,7 +20,6 @@ export class MyWatchlistComponent implements OnInit {
   ngOnInit(): void {
     this.watchlistService.watchlistEvt.subscribe(wl => {
       this.watchlists = wl;
-      this.dialog.closeAll();
     });
   }
 

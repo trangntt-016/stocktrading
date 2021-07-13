@@ -24,9 +24,17 @@ export class AddWlComponent implements OnInit {
 
   save(): void{
     this.watchlistService.createAWatchlist("U_004", this.newName).subscribe((wl) => {
+      // send new array of watchlists to my-watchlist component
       this.data.watchlists.push(wl);
       this.watchlistService.sendWatchlists(this.data.watchlists);
-      this.dialogRef.close();
+
+      // send new watchlist object to edit dialog
+      const newWatchlist = Object.assign({
+        watchlist: wl.name,
+        editable: false
+      });
+      this.dialogRef.close({data: newWatchlist});
+
     }, (err) => {
       console.log(err);
     });

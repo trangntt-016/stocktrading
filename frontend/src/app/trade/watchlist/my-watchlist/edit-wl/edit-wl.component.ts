@@ -54,8 +54,10 @@ export class EditWlComponent implements OnInit {
   delete(index): void{
     this.watchlistService.deleteAWatchlist(this.data.watchlists[index].watchlistId).subscribe(
       () => {
-        this.data.watchlists.filter(wl => wl.watchlistId != this.data.watchlists[index].watchlistId);
-        this.myWL = this.myWL.filter(wl => wl.watchlist!=this.data.watchlists[index].name);
+        // update in the edit dialog
+        this.myWL = this.myWL.filter(wl => wl.watchlist != this.data.watchlists[index].name);
+        // update in the watchlist component
+        this.data.watchlists = this.data.watchlists.filter(wl => wl.watchlistId != this.data.watchlists[index].watchlistId);
         this.watchlistService.sendWatchlists(this.data.watchlists);
       },
       (error) => {
@@ -69,6 +71,9 @@ export class EditWlComponent implements OnInit {
       data: {
         watchlists: this.data.watchlists
       }
+    }).afterClosed().subscribe(result => {
+      // receive watchlist object from add dialog and push to the current array
+      this.myWL.push(result.data);
     });
   }
 
