@@ -1,6 +1,5 @@
 .wrapper{
-  background-color: pink;
-  height: 60%;
+  height: 93%;
 }
 
 .watchlist{
@@ -20,6 +19,7 @@
   margin-left: 15px;
   margin-right: 15px;
   padding: 10px;
+  background-color: green;
 }
 .wrapper-underline{
   width: 100%;

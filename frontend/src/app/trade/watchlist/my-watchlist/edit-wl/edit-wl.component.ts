@@ -1,16 +1,18 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { WatchlistService } from '../../watchlist.service';
+import { WatchlistService } from '../../../../service/watchlist.service';
 import { Watchlist } from '../../../../model/Watchlist';
 import { AddWlComponent } from '../add-wl/add-wl.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit-wl',
   templateUrl: './edit-wl.component.html',
   styleUrls: ['./edit-wl.component.css']
 })
-export class EditWlComponent implements OnInit {
+export class EditWlComponent implements OnInit, OnDestroy {
   myWL: any[] = new Array();
+  subscription: Subscription;
 
   constructor(
     public dialog: MatDialog,
@@ -39,7 +41,7 @@ export class EditWlComponent implements OnInit {
 
   update(index): void{
     this.data.watchlists[index].name = this.myWL[index].watchlist;
-    this.watchlistService.updateAWatchlist(this.data.watchlists[index]).subscribe(
+    this.subscription = this.watchlistService.updateAWatchlist(this.data.watchlists[index]).subscribe(
       () => {
         this.watchlistService.sendWatchlists(this.data.watchlists);
         this.data.watchlists[index].name = this.myWL[index].watchlist;
@@ -52,12 +54,12 @@ export class EditWlComponent implements OnInit {
   }
 
   delete(index): void{
-    this.watchlistService.deleteAWatchlist(this.data.watchlists[index].watchlistId).subscribe(
+    this.subscription = this.watchlistService.deleteAWatchlist(this.data.watchlists[index].watchlistId).subscribe(
       () => {
         // update in the edit dialog
-        this.myWL = this.myWL.filter(wl => wl.watchlist != this.data.watchlists[index].name);
+        this.myWL = this.myWL.filter(wl => wl.watchlist !== this.data.watchlists[index].name);
         // update in the watchlist component
-        this.data.watchlists = this.data.watchlists.filter(wl => wl.watchlistId != this.data.watchlists[index].watchlistId);
+        this.data.watchlists = this.data.watchlists.filter(wl => wl.watchlistId !== this.data.watchlists[index].watchlistId);
         this.watchlistService.sendWatchlists(this.data.watchlists);
       },
       (error) => {
@@ -67,7 +69,7 @@ export class EditWlComponent implements OnInit {
   }
 
   addWatchlist(): void{
-    this.dialog.open(AddWlComponent, {
+    this.subscription = this.dialog.open(AddWlComponent, {
       data: {
         watchlists: this.data.watchlists
       }
@@ -75,6 +77,10 @@ export class EditWlComponent implements OnInit {
       // receive watchlist object from add dialog and push to the current array
       this.myWL.push(result.data);
     });
+  }
+
+  ngOnDestroy():void{
+    this.subscription.unsubscribe();
   }
 
 }

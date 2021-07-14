@@ -1,0 +1,67 @@
+<div class="wrapper-dailies">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element"><mat-icon>delete</mat-icon></td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="symbol">
+      <th mat-header-cell *matHeaderCellDef>Symbol</th>
+      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="change">
+      <th mat-header-cell *matHeaderCellDef>Change</th>
+      <td mat-cell *matCellDef="let element">{{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="percentChange">
+      <th mat-header-cell *matHeaderCellDef>% Change</th>
+      <td mat-cell *matCellDef="let element">{{element.percentChange}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="open">
+      <th mat-header-cell *matHeaderCellDef> Open </th>
+      <td mat-cell *matCellDef="let element"> {{element.open}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="prevclose">
+      <th mat-header-cell *matHeaderCellDef>Prev Close</th>
+      <td mat-cell *matCellDef="let element"> {{element.prevclose}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="high">
+      <th mat-header-cell *matHeaderCellDef>High</th>
+      <td mat-cell *matCellDef="let element"> {{element.high}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="volume">
+      <th mat-header-cell *matHeaderCellDef>Volume</th>
+      <td mat-cell *matCellDef="let element"> {{element.volume}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="exchange">
+      <th mat-header-cell *matHeaderCellDef>Exchange</th>
+      <td mat-cell *matCellDef="let element"> {{element.exchange}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="low">
+      <th mat-header-cell *matHeaderCellDef>Low</th>
+      <td mat-cell *matCellDef="let element"> {{element.low}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+</div>

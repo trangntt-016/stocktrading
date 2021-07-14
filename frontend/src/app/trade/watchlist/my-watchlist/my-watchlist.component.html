@@ -2,7 +2,7 @@
   <div class="watchlist-name-wrapper" fxLayout="row" fxLayoutAlign="space-between">
     <div class="watchlist-config"fxLayout="row" fxLayoutGap="30px">
       <div class="watchlist" *ngFor="let watchlist of watchlists; let i=index">
-        <h4 (click)="updClick(i)">{{watchlist.name}}</h4>
+        <h4 (click)="updateIdxMyWL(i)">{{watchlist.name}}</h4>
         <div class="wrapper-underline" *ngIf="i==clickIdx">
           <div class="underline"></div>
         </div>
@@ -19,4 +19,5 @@
       </button>
     </div>
   </div>
+  <app-dailies></app-dailies>
 </div>

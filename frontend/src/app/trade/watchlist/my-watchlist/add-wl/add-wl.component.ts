@@ -1,14 +1,16 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { WatchlistService } from '../../watchlist.service';
+import { WatchlistService } from '../../../../service/watchlist.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-wl',
   templateUrl: './add-wl.component.html',
   styleUrls: ['./add-wl.component.css']
 })
-export class AddWlComponent implements OnInit {
+export class AddWlComponent implements OnInit, OnDestroy {
   newName: string = "";
+  subscription: Subscription;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<AddWlComponent>,
@@ -23,7 +25,7 @@ export class AddWlComponent implements OnInit {
   }
 
   save(): void{
-    this.watchlistService.createAWatchlist("U_004", this.newName).subscribe((wl) => {
+    this.subscription = this.watchlistService.createAWatchlist("U_004", this.newName).subscribe((wl) => {
       // send new array of watchlists to my-watchlist component
       this.data.watchlists.push(wl);
       this.watchlistService.sendWatchlists(this.data.watchlists);
@@ -38,6 +40,10 @@ export class AddWlComponent implements OnInit {
     }, (err) => {
       console.log(err);
     });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

@@ -62,9 +62,6 @@ input:focus{
 }
 
 
-.edit-wrapper{
-}
-
 :host ::ng-deep .mat-raised-button{
   line-height: 25px;
   font-size: 13px;

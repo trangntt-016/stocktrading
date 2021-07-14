@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { EditWlComponent } from './edit-wl/edit-wl.component';
 import { Watchlist } from '../../../model/Watchlist';
-import { WatchlistService } from '../watchlist.service';
+import { WatchlistService } from '../../../service/watchlist.service';
 
 @Component({
   selector: 'app-my-watchlist',
@@ -10,6 +10,7 @@ import { WatchlistService } from '../watchlist.service';
   styleUrls: ['./my-watchlist.component.css']
 })
 export class MyWatchlistComponent implements OnInit {
+  @Output()myWatchlistEvt: EventEmitter<Watchlist> = new EventEmitter<Watchlist>();
   watchlists: Watchlist[];
   clickIdx: number = 0;
   constructor(
@@ -31,9 +32,9 @@ export class MyWatchlistComponent implements OnInit {
     });
   }
 
-  updClick(index): void{
+  updateIdxMyWL(index): void{
     this.clickIdx = index;
-    console.log(this.clickIdx);
+    this.myWatchlistEvt.emit(this.watchlists[index]);
   }
 
 }

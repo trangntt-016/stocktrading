@@ -1,6 +1,81 @@
 .wrapper{
-  background-color: purple;
-  height: 100vh;
+  height: 65vh;
   padding-top:50px;
   padding-left: 4vw;
+}
+
+.add-symbol-wrapper{
+  margin-top: 3px;
+  margin-left: 25px;
+  position: relative;
+}
+
+.add-symbol-wrapper:hover{
+  cursor: pointer;
+  color: #1565C0;
+}
+
+.add-symbol-wrapper p:hover{
+  color: #1565C0;
+}
+
+p{
+  font-size: 13px;
+  margin: 0px;
+}
+
+mat-icon{
+  font-size: 18px;
+  color: gray;
+  padding-top: 3px;
+}
+
+input{
+  width: 250px;
+  border:none
+}
+
+input:focus{
+  outline-color: #1565C0;
+}
+
+::ng-deep .mat-autocomplete-panel {
+  max-height: 280px !important;
+  margin-top: 5px;
+}
+::ng-deep .mat-card-header-text{
+  margin: 0px !important;
+}
+.symbols{
+  display: flex;
+  flex-direction: column;
+}
+
+.symbols h4{
+  margin-bottom: 0px;
+}
+mat-option {
+  height: 60px !important;
+  margin-top:10px;
+  border-botom: 1px solid lightgray;
+}
+
+mat-option:hover{
+  background-color: #d5e7fc !important;
+}
+
+.searchbar-wrapper{
+  position: absolute;
+  margin-top: -35px;
+  margin-left: 25px;
+  background-color: #d8eafa;
+  padding: 5px 0px 5px 5px;
+}
+
+.mat-icon:hover{
+  cursor: pointer;
+  color: #d0cccc;
+}
+::ng-deep input.mat-input-element{
+  margin-top: 0!important;
 }
