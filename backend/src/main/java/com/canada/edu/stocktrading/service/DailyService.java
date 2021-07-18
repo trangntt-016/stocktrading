@@ -35,7 +35,7 @@ public class DailyService {
 
         // convert to DailyDto
         dailies.stream().forEach(daily->{
-           BigDecimal regularPrice = daily.getHigh().add(daily.getLow()).divide(new BigDecimal(2));
+           BigDecimal regularPrice = daily.getPrice();
            BigDecimal change = regularPrice.subtract(daily.getPrevClose());
            BigDecimal changeInPercent = change.multiply(new BigDecimal(100)).divide(regularPrice, RoundingMode.HALF_UP);
 

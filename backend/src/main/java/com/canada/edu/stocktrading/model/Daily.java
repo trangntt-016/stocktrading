@@ -26,6 +26,9 @@ public class Daily {
     @Temporal(TemporalType.TIMESTAMP)
     private Date timestamp;
 
+    @Column(name = "price",nullable = false)
+    private BigDecimal price;
+
     @Column(name = "open",nullable = false)
     private BigDecimal open;
 
@@ -41,6 +44,9 @@ public class Daily {
     @Column(name = "volume",nullable = false)
     private BigDecimal volume;
 
+    @Column(name = "avg_vol_3_months",nullable = false)
+    private BigDecimal avg_vol_3_months;
+
     @Column(name = "bid",nullable = false)
     private BigDecimal bid;
 
@@ -49,6 +55,12 @@ public class Daily {
 
     @Column(name = "prev_close",nullable = false)
     private BigDecimal prevClose;
+
+    @Column(name = "52_week_high",nullable = false)
+    private BigDecimal week_high_52;
+
+    @Column(name = "52_week_low",nullable = false)
+    private BigDecimal week_low_52;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
