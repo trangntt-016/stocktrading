@@ -2,14 +2,14 @@
   <div class="watchlist-name-wrapper" fxLayout="row" fxLayoutAlign="space-between">
     <div class="watchlist-config"fxLayout="row" fxLayoutGap="30px">
       <div class="watchlist" *ngFor="let watchlist of watchlists; let i=index">
-        <h4 (click)="updateIdxMyWL(i)">{{watchlist.name}}</h4>
+        <h4 (click)="updateIdxSelectedWL(i)">{{watchlist.name}}</h4>
         <div class="wrapper-underline" *ngIf="i==clickIdx">
           <div class="underline"></div>
         </div>
       </div>
     </div>
     <div class="config">
-      <button mat-mini-fab
+      <button mat-icon-button
               color = "primary"
               matTooltip="Edit Watchlists"
               matTooltipPosition="left"
@@ -19,5 +19,5 @@
       </button>
     </div>
   </div>
-  <app-dailies></app-dailies>
+  <app-dailies [watchlists]="watchlists" *ngIf="watchlists"></app-dailies>
 </div>

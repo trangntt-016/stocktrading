@@ -1,9 +1,87 @@
 .wrapper-dailies{
   margin-right: 15px;
+  margin-left: 15px;
   padding: 10px;
-  background-color: yellow;
+  height: 320px;
 }
 
-table{
+.mat-table {
+  overflow-y: overlay;
   width: 100%;
+  max-height: 250px;
+}
+.mat-column-delete{
+  flex: 0 0 7%;
+}
+
+.mat-column-name{
+  flex: 0 0 20%;
+}
+
+.mat-column-changeInPercent{
+  flex: 0 0 10%;
+}
+
+.increasing{
+  color: #25b625;
+  font-weight: 500;
+}
+
+.decreasing{
+  color:red;
+  font-weight: 500;
+}
+
+.stable{
+  font-weight: 500
+}
+
+.mat-header-cell{
+  font-size: 14px;
+}
+
+.mat-header-row{
+  min-height: 40px;
+}
+
+.mat-row{
+  min-height: 40px;
+}
+
+.mat-cell:hover{
+  cursor: pointer;
+}
+
+.mat-row:hover{
+  background-color: #d4ecff;
+}
+.mat-row:last-child{
+  border-bottom-width: 0;
+}
+.row-header{
+  border-bottom-width: 0px;
+}
+.mat-icon{
+  color:#c6c3c3;
+}
+
+.mat-icon:hover{
+  color: gray;
+}
+.mat-table::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #F5F5F5;
+}
+
+.mat-table::-webkit-scrollbar
+{
+  width: 10px;
+  background-color: #fff;
+}
+
+.mat-table::-webkit-scrollbar-thumb
+{
+  background-color: #c6c3c3;
+  border: 2px solid #c6c3c3;
 }

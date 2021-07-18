@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { WatchlistService } from '../../../../service/watchlist.service';
+import { Daily } from '../../../../model/Daily';
+import { Watchlist } from '../../../../model/Watchlist';
+import { Observable } from 'rxjs';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-dailies',
@@ -6,16 +11,44 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dailies.component.css']
 })
 export class DailiesComponent implements OnInit {
-  // displayedColumns: string[] = [' ', 'Symbol', 'Name', 'Price','Change', '% Change', 'Open', 'PrevClose', 'High', 'Low','Volumne','Exchange'];
-  displayedColumns: string[] = ['delete', 'symbol', 'name', 'change', 'percentChange','open','prevclose', 'high','low','volume','exchange'];
-  ELEMENT_DATA: any[] = [
-    {remove:'', symbol: 'Hydrogen', name: 1.0079, change: 'fr', percentChange:'22',open: 'H',prevclose: '23.3', high: '99.3', low: '22', volume: '22', exchange: 'NASDAQ'}
-  ];
+  @Input()watchlists: Watchlist[];
+  private selectedWatchlist: Watchlist;
+  displayedColumns: string[] = ['delete', 'symbol', 'name', 'change', 'changeInPercent', 'open', 'prevClose', 'high', 'low', 'volume'];
 
-  dataSource = this.ELEMENT_DATA;
-  constructor() { }
+   dataSource$: Observable<Daily[]>;
+  bogusDataSource = new MatTableDataSource<Daily>(null);
+
+  constructor(
+    private watchlistService: WatchlistService
+  ) { }
 
   ngOnInit(): void {
+    // first initialize, cannot subscribe to a watchlists[] cuz cannot set selected = watchlists[0]
+    this.selectedWatchlist = this.watchlists[0];
+    this.dataSource$ = this.watchlistService.findAllDailiesByWatchlistId(this.watchlists[0].watchlistId);
+    // subscribe to selected Watchlist if there are any changes to it (add new symbol, delete symbol, etc) to render a table
+    this.watchlistService.selectedWatchlistEvt.subscribe(selected => {
+      this.selectedWatchlist = selected;
+      this.dataSource$ = this.watchlistService.findAllDailiesByWatchlistId(selected.watchlistId);
+    });
   }
+
+  deleteSymbol(element: Daily){
+    this.watchlistService.deleteASymbolFromWatchlistId(this.selectedWatchlist.watchlistId, element.symbol.symbolId).subscribe(wl=>{
+      // update selected watchlist in the table
+      this.watchlistService.sendSelectedWatchlist(wl);
+      // find index of selectedWatchlist in watchlists
+      const idx = this.watchlists.findIndex(value => value.watchlistId === this.selectedWatchlist.watchlistId);
+      // replace old selected watchlist with new one
+      this.watchlists[idx] = this.selectedWatchlist;
+      // update the watchlists
+      this.watchlistService.sendWatchlists(this.watchlists);
+    })
+  }
+
+  sendADaily(daily: Daily){
+    this.watchlistService.sendSelectedDaily(daily);
+  }
+
 
 }

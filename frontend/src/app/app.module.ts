@@ -6,12 +6,14 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 import { AppRoutingModule } from './app-routing.module';
+import { ConvertStocksToChartPipe } from './utils/convert-stocks-to-chart.pipe';
+import { FormatVolumePipe } from './utils/format-volume.pipe';
+import { FormatDatePipe } from './utils/format-date.pipe';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
 import { PackagesModule } from './packages.module';
 import { TestComponent } from './test/test.component';
 import { SummaryComponent } from './test/summary/summary.component';
-import { ConvertStocksToChartPipe } from './utils/convert-stocks-to-chart.pipe';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { BannerComponent } from './home/banner/banner.component';
@@ -32,6 +34,9 @@ import { WatchlistComponent } from './trade/watchlist/watchlist.component';
 import { MyWatchlistComponent } from './trade/watchlist/my-watchlist/my-watchlist.component';
 import { EditWlComponent } from './trade/watchlist/my-watchlist/edit-wl/edit-wl.component';
 import { AddWlComponent } from './trade/watchlist/my-watchlist/add-wl/add-wl.component';
+import { DailiesComponent } from './trade/watchlist/my-watchlist/dailies/dailies.component';
+import { NewsComponent } from './trade/news/news.component';
+import { KeyStatsComponent } from './trade/key-stats/key-stats.component';
 
 @NgModule({
   declarations: [
@@ -53,8 +58,12 @@ import { AddWlComponent } from './trade/watchlist/my-watchlist/add-wl/add-wl.com
     WatchlistComponent,
     MyWatchlistComponent,
     EditWlComponent,
-    AddWlComponent
-
+    AddWlComponent,
+    DailiesComponent,
+    FormatVolumePipe,
+    NewsComponent,
+    KeyStatsComponent,
+    FormatDatePipe
   ],
   imports: [
     BrowserModule,

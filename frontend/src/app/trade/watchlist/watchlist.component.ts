@@ -6,6 +6,7 @@ import { Observable, Subscription } from 'rxjs';
 import { SymbolService } from '../../service/symbol.service';
 import { Symbol } from '../../model/Symbol';
 import { map } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-watchlist',
@@ -15,7 +16,7 @@ import { map } from 'rxjs/operators';
 export class WatchlistComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   isDisplaySymbols: boolean = false;
-  watchlists: Watchlist[];
+  watchlists: Watchlist[] = new Array();
   selectedWatchlist: Watchlist;
   searchSymbol: string;
   symbols$: Observable<Symbol[]>;
@@ -27,10 +28,11 @@ export class WatchlistComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription = this.watchlistService.getAllWatchlistsByUserId("U_004").subscribe(wl => {
-      this.watchlistService.sendWatchlists(wl);
-      this.selectedWatchlist = wl[0];
+      this.watchlists = wl;
+      this.watchlistService.sendWatchlists(this.watchlists);
+      this.watchlistService.sendSelectedWatchlist(this.watchlists[0]);
+      this.selectedWatchlist = this.watchlists[0];
     });
-
 
   this.symbols$ = this.symbolService.getAllSymbols();
 
@@ -65,12 +67,24 @@ export class WatchlistComponent implements OnInit, OnDestroy {
 
   add(symbol: Symbol): void{
     // add new symbol to a watchlist
+    if(this.selectedWatchlist.symbols.length === 0){
+      this.selectedWatchlist.symbols = new Array();
+    }
     this.selectedWatchlist.symbols.push(symbol);
+    // find index of selectedWatchlist in watchlists
+    const idx = this.watchlists.findIndex(value => value.watchlistId === this.selectedWatchlist.watchlistId);
+    // replace old selected watchlist with new one
+    this.watchlists[idx] = this.selectedWatchlist;
+    // update selected watchlist with new symbol in the database
     this.watchlistService.updateAWatchlist(this.selectedWatchlist).subscribe(wl => {
-      this.watchlistService.sendWatchlists(wl);
-    },(error => {
+      // update successfully will return null
+      this.watchlistService.sendWatchlists(this.watchlists);
+      this.watchlistService.sendSelectedWatchlist(this.selectedWatchlist);
+    }, (error => {
       console.log(error);
     }));
+
+
   }
 
 }

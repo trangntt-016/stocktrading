@@ -11,8 +11,14 @@ spring:
         database-platform: org.hibernate.dialect.MySQL8Dialect
         hibernate:
             ddl-auto: update
-        naming:
-            physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-            implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+            naming:
+                physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+                implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
         properties:
-            format_sql: true
+            hibernate:
+                format_sql: true
+                enable_lazy_load_no_trans: true
+    jackson:
+        serialization:
+            fail-on-empty-beans: false
+

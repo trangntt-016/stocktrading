@@ -7,9 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,7 +27,7 @@ public class Symbol {
     private String symbol;
 
     @Column(nullable = false)
-    private String name;
+    private String name; // fullname
 
     @ManyToMany(mappedBy = "symbols")
     @JsonIgnore
@@ -57,6 +56,11 @@ public class Symbol {
         } else if (!symbolId.equals(other.symbolId))
             return false;
         return true;
+    }
+
+    @Override
+    public String toString(){
+        return symbolId+" symbol - "+name;
     }
 
 

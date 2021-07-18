@@ -1,5 +1,6 @@
 package com.canada.edu.stocktrading.service;
 
+import com.canada.edu.stocktrading.model.Symbol;
 import com.canada.edu.stocktrading.model.UserEntity;
 import com.canada.edu.stocktrading.model.Watchlist;
 import com.canada.edu.stocktrading.repository.WatchlistRepository;
@@ -16,6 +17,7 @@ import java.util.Optional;
 public class WatchlistService {
     @Autowired
     private WatchlistRepository watchlistRepository;
+
 
     public List<WatchlistDto>findAllByUserId(String userId){
         List<Watchlist>wl = watchlistRepository.findAllByUserId(userId);
@@ -42,5 +44,24 @@ public class WatchlistService {
                 .build();
         watchlistRepository.save(wl);
         return MapperUtils.mapperObject(wl, WatchlistDto.class);
+    }
+
+    public WatchlistDto findByWatchlistId(Integer watchlistId) throws Exception {
+        Optional<Watchlist> wl = watchlistRepository.findById(watchlistId);
+        if(wl.isEmpty()){
+            throw new Exception("Found nothing with this watchlist Id "+watchlistId);
+        }
+        return MapperUtils.mapperObject(wl.get(),WatchlistDto.class);
+    }
+
+    public WatchlistDto deleteASymbolFromWatchlistId(int watchlistId, Symbol symbol) throws Exception {
+        Optional<Watchlist> wl = watchlistRepository.findById(watchlistId);
+        if(wl.isEmpty()){
+            throw new Exception("Found nothing with this watchlist Id "+watchlistId);
+        }
+        wl.get().getSymbols().remove(symbol);
+        watchlistRepository.save(wl.get());
+        WatchlistDto dto = MapperUtils.mapperObject(wl.get(),WatchlistDto.class);
+        return dto;
     }
 }

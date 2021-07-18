@@ -1,0 +1,63 @@
+.wrapper{
+  height: 100%;
+  width: 60vw;
+  padding: 5px;
+}
+
+.container{
+  padding: 0 25px 0 0;
+}
+.news{
+  margin-top: 5px;
+}
+a{
+  text-decoration: none;
+}
+a h5:hover{
+  cursor: pointer;
+  color: #6ba3e3;
+}
+
+.news:hover{
+  color: #1565C0;
+  cursor: pointer;
+}
+.h4-container{
+  padding-left: 15px;
+  border-bottom: 1px solid lightgray;
+}
+
+.h4-container h4{
+  margin: 0;
+  padding: 0;
+}
+
+.news-container{
+  overflow-y: scroll;
+  height: 230px;
+}
+
+.time-symbol .date-h5{
+  width: 150px;
+  margin: 0;
+}
+
+.time-symbol .symbol-h5{
+  width: 70px;
+  margin: 0px;
+}
+
+.time-symbol h5{
+  padding-left: 15px
+}
+
+.title{
+  margin: 0;
+  font-weight: 500;
+}
+
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
+}

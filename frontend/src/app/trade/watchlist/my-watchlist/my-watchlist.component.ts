@@ -32,9 +32,10 @@ export class MyWatchlistComponent implements OnInit {
     });
   }
 
-  updateIdxMyWL(index): void{
+  updateIdxSelectedWL(index): void{
     this.clickIdx = index;
     this.myWatchlistEvt.emit(this.watchlists[index]);
+    this.watchlistService.sendSelectedWatchlist(this.watchlists[index]);
   }
 
 }

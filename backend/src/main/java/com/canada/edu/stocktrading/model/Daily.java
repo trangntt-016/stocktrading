@@ -6,10 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Builder
@@ -30,17 +29,26 @@ public class Daily {
     @Column(name = "open",nullable = false)
     private BigDecimal open;
 
-    @Column(name = "close",nullable = false)
-    private BigDecimal close;
-
     @Column(name = "high",nullable = false)
     private BigDecimal high;
 
     @Column(name = "low",nullable = false)
     private BigDecimal low;
 
+    @Column(name = "close",nullable = false)
+    private BigDecimal close;
+
     @Column(name = "volume",nullable = false)
     private BigDecimal volume;
+
+    @Column(name = "bid",nullable = false)
+    private BigDecimal bid;
+
+    @Column(name = "ask",nullable = false)
+    private BigDecimal ask;
+
+    @Column(name = "prev_close",nullable = false)
+    private BigDecimal prevClose;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(

@@ -1,17 +1,23 @@
 package com.canada.edu.stocktrading.client.controller;
 
 import com.canada.edu.stocktrading.client.controller.exception.BadRequestException;
+import com.canada.edu.stocktrading.model.Daily;
+import com.canada.edu.stocktrading.model.Symbol;
 import com.canada.edu.stocktrading.model.UserEntity;
+import com.canada.edu.stocktrading.repository.DailyRepository;
+import com.canada.edu.stocktrading.service.DailyService;
+import com.canada.edu.stocktrading.service.SymbolService;
 import com.canada.edu.stocktrading.service.UserEntityService;
 import com.canada.edu.stocktrading.service.WatchlistService;
+import com.canada.edu.stocktrading.service.dto.DailyDto;
 import com.canada.edu.stocktrading.service.dto.WatchlistDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.http.HttpResponse;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/watchlists")
@@ -21,6 +27,12 @@ public class WatchlistController {
 
     @Autowired
     WatchlistService watchlistService;
+
+    @Autowired
+    DailyService dailyService;
+
+    @Autowired
+    SymbolService symbolService;
 
     @GetMapping
     public ResponseEntity<List<WatchlistDto>>getAllWatchlists(
@@ -70,6 +82,46 @@ public class WatchlistController {
             throw new BadRequestException(ex.getMessage());
         }
         return new ResponseEntity<WatchlistDto>(watchlistDto,HttpStatus.OK);
+    }
+
+    @GetMapping("/{watchlistId}/dailies")
+    public ResponseEntity<List<DailyDto>> getAllDailiesFromWatchlistId(@PathVariable Integer watchlistId)
+    {
+        // check if watchlistId exists
+        WatchlistDto wl = null;
+        try{
+            wl = watchlistService.findByWatchlistId(watchlistId);
+        }
+        catch(Exception ex){
+            throw new BadRequestException(ex.getMessage());
+        }
+        if(wl.getSymbols().size()==0){
+            return ResponseEntity.ok(null);
+        }
+        List<Integer>symbolIds = wl.getSymbols().stream().map(Symbol::getSymbolId).collect(Collectors.toList());
+        List<DailyDto>dailies = dailyService.findAllDailiesBySymbolIds(symbolIds);
+        return ResponseEntity.ok(dailies);
+    }
+
+    @DeleteMapping("/{watchlistId}/symbols/{symbolId}")
+    public ResponseEntity<WatchlistDto> deleteASymbolFromWatchlistId(
+            @PathVariable("watchlistId")  int watchlistId,
+            @PathVariable("symbolId") int symbolId){
+        Symbol symbol = null;
+        WatchlistDto watchlistDto = null;
+        try{
+            symbol = symbolService.findBySymbolId(symbolId);
+        }
+        catch(Exception ex){
+            throw new BadRequestException(ex.getMessage());
+        }
+        try{
+            watchlistDto = watchlistService.deleteASymbolFromWatchlistId(watchlistId,symbol);
+        }
+        catch(Exception ex){
+            throw new BadRequestException(ex.getMessage());
+        }
+        return ResponseEntity.ok(watchlistDto);
     }
 
 }
