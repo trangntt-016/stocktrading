@@ -32,9 +32,10 @@ a h5:hover{
   padding: 0;
 }
 
-.news-container{
+.new-container{
   overflow-y: scroll;
   height: 230px;
+  margin-top: 10px;
 }
 
 .time-symbol .date-h5{

@@ -11,7 +11,7 @@ import { News } from '../model/News';
 })
 export class WatchlistService {
   header = new HttpHeaders({
-    'X-RapidAPI-Key': '46e933289emshcefa6f248988445p172b80jsn0a322687ee93',
+    'X-RapidAPI-Key': 'cc9949f803msh353c32ef5d787efp14bdb8jsn98e795594911',
     'X-RapidAPI-Host': 'yahoo-finance15.p.rapidapi.com'
   });
 

@@ -41,8 +41,9 @@ export class KeyStatsComponent implements OnInit {
       console.log(daily);
       this.selectedSymbolId = daily.symbol.symbolId;
       // subscribe to the selected symbol
-      this.stompClient.subscribe(`/topic/${this.selectedSymbolId}`, (newMes) => {
-        console.log(newMes);
+      this.stompClient.subscribe(`/topic/${this.selectedSymbolId}`, (daily) => {
+        console.log(daily.body);
+        this.daily = convertToDaily(daily.body);
       });
       // get updated from new selected symbol id;
       this.stompClient.send(`/app/${this.selectedSymbolId}`, {}, (""));
@@ -65,6 +66,7 @@ export class KeyStatsComponent implements OnInit {
     this.stompClient.connect({}, function(frame) {
         copyStompClient.subscribe(`/topic/${symbolId}`, (daily) => {
           that.daily = convertToDaily(daily.body);
+          console.log(that.daily);
         });
       copyStompClient.send(`/app/${symbolId}`, {}, (""));
     }, (err) => {
@@ -122,6 +124,12 @@ function convertToDaily(newMes): DailyDetails {
         break;
       case 'symbol':
         daily.symbol = value;
+        break;
+      case 'change':
+        daily.change = value;
+        break;
+      case 'changeInPercent':
+        daily.changeInPercent = value;
         break;
       default:
         null;

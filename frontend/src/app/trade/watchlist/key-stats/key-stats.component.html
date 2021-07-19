@@ -3,10 +3,10 @@
     <div class="key-wrapper" fxLayout="column">
       <h4>{{daily.symbol | uppercase}} NASDAQ</h4>
       <div class="key-container" fxLayout="row" fxLayoutGap="10px">
-        <h1>{{daily.price}}</h1>
+        <h1 [ngClass]="(daily.change >0)?'increasing':'decreasing'">{{daily.price | currency:'':''}}</h1>
         <div class="change-container" fxLayout="column" fxLayoutAlign="space-between center">
-          <h5>{{daily.change}}</h5>
-          <h5>{{daily.changeInPercent}}%</h5>
+          <h5 [ngClass]="(daily.change >0)?'increasing':'decreasing'">{{daily.change}}</h5>
+          <h5 [ngClass]="(daily.changeInPercent >0)?'increasing':'decreasing'">{{daily.changeInPercent}}%</h5>
         </div>
       </div>
     </div>
@@ -16,37 +16,37 @@
       <div class="first-wrapper">
         <div fxLayout="row" fxLayoutAlign="space-between">
           <p>Open</p>
-          <p>{{daily.open}}</p>
+          <p [ngClass]="(daily.open >daily.prevClose)?'increasing':'decreasing'">{{daily.open}}</p>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between">
           <p>High</p>
-          <p>{{daily.high}}</p>
+          <p [ngClass]="(daily.open >daily.prevClose)?'increasing':'decreasing'">{{daily.high}}</p>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between">
           <p>52 Wk High</p>
-          <p>350.72</p>
+          <p [ngClass]="'stable'">350.72</p>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between">
           <p>Volume</p>
-          <p>{{daily.week_high_52}}</p>
+          <p [ngClass]="'stable'">{{daily.week_high_52}}</p>
         </div>
       </div>
       <div class="second-wrapper">
         <div fxLayout="row" fxLayoutAlign="space-between">
           <p>Prev Close</p>
-          <p>{{daily.prevClose}}</p>
+          <p [ngClass]="'stable'">{{daily.prevClose}}</p>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between">
           <p>Low</p>
-          <p>{{daily.low}}</p>
+          <p [ngClass]="(daily.open >daily.prevClose)?'increasing':'decreasing'">{{daily.low}}</p>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between">
           <p>52 Wk Low</p>
-          <p>{{daily.week_low_52}}</p>
+          <p [ngClass]="'stable'">{{daily.week_low_52}}</p>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between">
-          <p>Avg Vol(3M)</p>
-          <p>{{daily.avg_vol_3_months}}</p>
+          <p>Avg Vol (3M)</p>
+          <p [ngClass]="'stable'">{{daily.avg_vol_3_months | formatVolume}}</p>
         </div>
 
       </div>

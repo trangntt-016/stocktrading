@@ -121,7 +121,7 @@
     <!-- High Column -->
     <ng-container matColumnDef="high">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
-      <mat-cell *matCellDef="let element"[ngClass]="(element.open >element.prevClose)?'increasing':'decreasing'"> {{element.high | currency}}</mat-cell>
+      <mat-cell *matCellDef="let element" [ngClass]="(element.open >element.prevClose)?'increasing':'decreasing'"> {{element.high | currency}}</mat-cell>
     </ng-container>
 
     <!-- Volume Column -->
