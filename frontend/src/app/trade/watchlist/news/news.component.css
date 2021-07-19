@@ -1,11 +1,12 @@
 .wrapper{
   height: 100%;
-  width: 60vw;
   padding: 5px;
+  background-color: #fff;
+  width: 55.5vw;
 }
 
-.container{
-  padding: 0 25px 0 0;
+.news-container{
+  padding: 0 30px 0 30px;
 }
 .news{
   margin-top: 5px;
@@ -23,12 +24,11 @@ a h5:hover{
   cursor: pointer;
 }
 .h4-container{
-  padding-left: 15px;
   border-bottom: 1px solid lightgray;
 }
 
 .h4-container h4{
-  margin: 0;
+  margin: 10px 0 0 0;
   padding: 0;
 }
 

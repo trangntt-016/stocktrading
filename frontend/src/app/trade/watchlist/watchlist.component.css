@@ -1,13 +1,15 @@
-.wrapper{
-  height: 65vh;
+.wrapper-watchlist{
+  height: 100%;
+}
+.wrapper-my-watchlist{
+  height: 63%;
   padding-top:50px;
   padding-left: 4vw;
-  background-color: yellow;
+  background-color: #fff;
 }
 
 .add-symbol-wrapper{
-  margin-top: 3px;
-  margin-left: 25px;
+  margin: 22px 0 0 25px;
   position: relative;
 }
 
@@ -55,6 +57,7 @@ input:focus{
 .symbols h4{
   margin-bottom: 0px;
 }
+
 mat-option {
   height: 60px !important;
   margin-top:10px;
@@ -67,9 +70,9 @@ mat-option:hover{
 
 .searchbar-wrapper{
   position: absolute;
-  margin-top: -35px;
+  margin-top: -30px;
   margin-left: 25px;
-  background-color: #d8eafa;
+  background-color: #f1f0f0;
   padding: 5px 0px 5px 5px;
 }
 
@@ -77,6 +80,17 @@ mat-option:hover{
   cursor: pointer;
   color: #d0cccc;
 }
+
 ::ng-deep input.mat-input-element{
   margin-top: 0!important;
+}
+
+.bottom-wrapper{
+  height: 62%;
+  margin-top: 10px;
+}
+
+.wrapper-footer{
+  height:35vh;
+  background-color: lightgray;
 }

@@ -31,6 +31,9 @@ export class DailiesComponent implements OnInit {
       this.selectedWatchlist = selected;
       this.dataSource$ = this.watchlistService.findAllDailiesByWatchlistId(selected.watchlistId);
     });
+    setInterval(()=>{
+      this.dataSource$ = this.watchlistService.findAllDailiesByWatchlistId(this.selectedWatchlist.watchlistId);
+    },30000);
   }
 
   deleteSymbol(element: Daily){

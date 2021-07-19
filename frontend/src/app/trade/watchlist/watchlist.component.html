@@ -1,31 +1,40 @@
-<div class="wrapper">
-  <app-my-watchlist (myWatchlistEvt)="handleMyWatchlist($event)"></app-my-watchlist>
-  <div fxLayout="row"
-       fxLayoutAlign="space-between"
-       fxLayoutGap="5px"
-       *ngIf="isDisplaySymbols"
-       class="searchbar-wrapper mat-elevation-z8">
-    <input matInput type="text"
-           [value]="searchSymbol"
-           [matAutocomplete]="auto"
-           [(ngModel)]="searchSymbol"
-           (ngModelChange)="doFilter()"
-    >
-    <mat-icon (click)="displaySearchSymbol()">close</mat-icon>
-  </div>
+<div class="wrapper-watchlist" fxLayout="column">
+  <div class="wrapper-my-watchlist">
+    <app-my-watchlist (myWatchlistEvt)="handleMyWatchlist($event)"></app-my-watchlist>
+    <div fxLayout="row"
+         fxLayoutAlign="space-between"
+         fxLayoutGap="5px"
+         *ngIf="isDisplaySymbols"
+         class="searchbar-wrapper mat-elevation-z8">
+      <input matInput type="text"
+             [value]="searchSymbol"
+             [matAutocomplete]="auto"
+             [(ngModel)]="searchSymbol"
+             (ngModelChange)="doFilter()"
+      >
+      <mat-icon (click)="displaySearchSymbol()">close</mat-icon>
+    </div>
 
-  <mat-autocomplete #auto="matAutocomplete" [panelWidth]="350" class="autocomplete">
-    <mat-option *ngFor="let symbol of (symbols$ | async)" [value]="symbol.symbol" (click)="add(symbol)">
-      <div class="symbols">
-        <h4>{{symbol.symbol}}</h4>
-        <h5>{{symbol.name | uppercase}}</h5>
+    <mat-autocomplete #auto="matAutocomplete" [panelWidth]="350" class="autocomplete">
+      <mat-option *ngFor="let symbol of (symbols$ | async)" [value]="symbol.symbol" (click)="add(symbol)">
+        <div class="symbols">
+          <h4>{{symbol.symbol}}</h4>
+          <h5>{{symbol.name | uppercase}}</h5>
+        </div>
+      </mat-option>
+    </mat-autocomplete>
+    <div class="add-symbol-wrapper" (click)="displaySearchSymbol()">
+      <div fxLayout="row">
+        <mat-icon>add</mat-icon>
+        <p>Add Symbol</p>
       </div>
-    </mat-option>
-  </mat-autocomplete>
-  <div class="add-symbol-wrapper" (click)="displaySearchSymbol()">
-    <div fxLayout="row">
-      <mat-icon>add</mat-icon>
-      <p>Add Symbol</p>
+    </div>
+    <div class="bottom-wrapper" fxLayout="row" fxLayoutAlign="space-between">
+      <app-key-stats></app-key-stats>
+      <app-news></app-news>
     </div>
   </div>
 </div>
+
+
+

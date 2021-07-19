@@ -39,4 +39,3 @@ export class MyWatchlistComponent implements OnInit {
   }
 
 }
-

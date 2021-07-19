@@ -1,7 +1,7 @@
 .wrapper-dailies{
   margin-right: 15px;
   margin-left: 15px;
-  padding: 10px;
+  padding: 10px 10px 0 10px;
   height: 320px;
 }
 
@@ -38,6 +38,7 @@
 
 .mat-header-cell{
   font-size: 14px;
+  background-color: #f1efef;
 }
 
 .mat-header-row{

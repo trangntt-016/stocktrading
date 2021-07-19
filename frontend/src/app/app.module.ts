@@ -35,8 +35,9 @@ import { MyWatchlistComponent } from './trade/watchlist/my-watchlist/my-watchlis
 import { EditWlComponent } from './trade/watchlist/my-watchlist/edit-wl/edit-wl.component';
 import { AddWlComponent } from './trade/watchlist/my-watchlist/add-wl/add-wl.component';
 import { DailiesComponent } from './trade/watchlist/my-watchlist/dailies/dailies.component';
-import { NewsComponent } from './trade/news/news.component';
-import { KeyStatsComponent } from './trade/key-stats/key-stats.component';
+import { NewsComponent } from './trade/watchlist/news/news.component';
+import { KeyStatsComponent } from './trade/watchlist/key-stats/key-stats.component';
+import { PaperComponent } from './trade/paper/paper.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { KeyStatsComponent } from './trade/key-stats/key-stats.component';
     FormatVolumePipe,
     NewsComponent,
     KeyStatsComponent,
-    FormatDatePipe
+    FormatDatePipe,
+    PaperComponent
   ],
   imports: [
     BrowserModule,

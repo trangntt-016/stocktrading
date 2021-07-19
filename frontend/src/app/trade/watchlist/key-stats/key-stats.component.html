@@ -1,27 +1,26 @@
 <div class="wrapper">
   <div class="container-key-stats">
     <div class="key-wrapper" fxLayout="column">
-      <h4>AMZN NYSEARCA</h4>
+      <h4>{{daily.symbol | uppercase}} NASDAQ</h4>
       <div class="key-container" fxLayout="row" fxLayoutGap="10px">
-        <h1>346.74</h1>
+        <h1>{{daily.price}}</h1>
         <div class="change-container" fxLayout="column" fxLayoutAlign="space-between center">
-          <h5>-2.99</h5>
-          <h5>-0.86%</h5>
+          <h5>{{daily.change}}</h5>
+          <h5>{{daily.changeInPercent}}%</h5>
         </div>
       </div>
     </div>
     <div class="h5-wrapper">
-      <h5>Key Statistics</h5>
     </div>
     <div class="key-stats" fxLayout="row" fxLayoutGap="15px">
       <div class="first-wrapper">
         <div fxLayout="row" fxLayoutAlign="space-between">
           <p>Open</p>
-          <p>350.72</p>
+          <p>{{daily.open}}</p>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between">
           <p>High</p>
-          <p>350.72</p>
+          <p>{{daily.high}}</p>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between">
           <p>52 Wk High</p>
@@ -29,25 +28,25 @@
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between">
           <p>Volume</p>
-          <p>350.72</p>
+          <p>{{daily.week_high_52}}</p>
         </div>
       </div>
       <div class="second-wrapper">
         <div fxLayout="row" fxLayoutAlign="space-between">
           <p>Prev Close</p>
-          <p>350.72</p>
+          <p>{{daily.prevClose}}</p>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between">
           <p>Low</p>
-          <p>350.72</p>
+          <p>{{daily.low}}</p>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between">
           <p>52 Wk Low</p>
-          <p>350.72</p>
+          <p>{{daily.week_low_52}}</p>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between">
           <p>Avg Vol(3M)</p>
-          <p>350.72</p>
+          <p>{{daily.avg_vol_3_months}}</p>
         </div>
 
       </div>

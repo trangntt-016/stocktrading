@@ -85,8 +85,7 @@ export class TestComponent implements OnInit{
   ) {
   }
   ngOnInit(): void {
-    this.watchlistService.findAllDailiesByWatchlistId(37).subscribe(dailies=>{
-      console.log(dailies);
+    this.watchlistService.findAllDailiesByWatchlistId(37).subscribe(dailies => {
       this.dataSource = new MatTableDataSource<Daily>(dailies);
     });
   }

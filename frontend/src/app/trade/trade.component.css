@@ -1,5 +1,4 @@
-
-.navbar{
+.navbar-trade{
   background-color: #f1f9fd;
   position: fixed;
   width: 100%;
@@ -12,6 +11,7 @@
   display:flex;
   flex-direction: row;
   margin-left: 15px;
+  margin-top: 7px;
 }
 
 .wrap-avatar h4{
@@ -43,9 +43,8 @@
 .wrapper{
   width: 100%;
   height: 100%;
+  background-color: lightgray;
+  overflow: hidden;
 }
 
-.bottom-wrapper{
-  /*watchlist is 65vh*/
-  height: 35vh;
-}
+

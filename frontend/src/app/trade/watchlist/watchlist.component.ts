@@ -34,7 +34,7 @@ export class WatchlistComponent implements OnInit, OnDestroy {
       this.selectedWatchlist = this.watchlists[0];
     });
 
-  this.symbols$ = this.symbolService.getAllSymbols();
+    this.symbols$ = this.symbolService.getAllSymbols();
 
   }
 
@@ -49,10 +49,10 @@ export class WatchlistComponent implements OnInit, OnDestroy {
   doFilter(): void{
     this.symbols$ = this.symbols$
       .pipe(map(symbols => {
-        const filteredSymbols = this.filter(symbols);
-        return filteredSymbols;
-      }
-    ));
+          const filteredSymbols = this.filter(symbols);
+          return filteredSymbols;
+        }
+      ));
   }
 
   filter(values): any{
