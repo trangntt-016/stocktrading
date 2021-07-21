@@ -38,7 +38,6 @@ export class KeyStatsComponent implements OnInit {
 
     // listen to any changes when there's new daily selected
     this.watchlistService.selectedDailyEvt.subscribe(daily => {
-      console.log(daily);
       this.selectedSymbolId = daily.symbol.symbolId;
       // subscribe to the selected symbol
       this.stompClient.subscribe(`/topic/${this.selectedSymbolId}`, (daily) => {
