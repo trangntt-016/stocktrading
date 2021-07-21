@@ -38,6 +38,11 @@ import { DailiesComponent } from './trade/watchlist/my-watchlist/dailies/dailies
 import { NewsComponent } from './trade/watchlist/news/news.component';
 import { KeyStatsComponent } from './trade/watchlist/key-stats/key-stats.component';
 import { PaperComponent } from './trade/paper/paper.component';
+import { AccountComponent } from './trade/paper/account/account.component';
+import { PaperWatchlistComponent } from './trade/paper/paper-watchlist/paper-watchlist.component';
+import { BuysellComponent } from './trade/paper/buysell/buysell.component';
+import { ChartComponent } from './trade/paper/chart/chart.component';
+import { OrderComponent } from './trade/paper/order/order.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +70,12 @@ import { PaperComponent } from './trade/paper/paper.component';
     NewsComponent,
     KeyStatsComponent,
     FormatDatePipe,
-    PaperComponent
+    PaperComponent,
+    AccountComponent,
+    PaperWatchlistComponent,
+    BuysellComponent,
+    ChartComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,

@@ -40,7 +40,7 @@ export class DailiesComponent implements OnInit {
     this.watchlistService.deleteASymbolFromWatchlistId(this.selectedWatchlist.watchlistId, element.symbol.symbolId).subscribe(wl=>{
       // update selected watchlist in the table
       this.watchlistService.sendSelectedWatchlist(wl);
-      // find index of selectedWatchlist in watchlists
+      // find index of selectedWatchlist in watchlist
       const idx = this.watchlists.findIndex(value => value.watchlistId === this.selectedWatchlist.watchlistId);
       // replace old selected watchlist with new one
       this.watchlists[idx] = this.selectedWatchlist;

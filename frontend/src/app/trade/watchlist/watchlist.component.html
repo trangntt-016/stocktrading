@@ -16,8 +16,8 @@
     </div>
 
     <mat-autocomplete #auto="matAutocomplete" [panelWidth]="350" class="autocomplete">
-      <mat-option *ngFor="let symbol of (symbols$ | async)" [value]="symbol.symbol" (click)="add(symbol)">
-        <div class="symbols">
+      <mat-option *ngFor="let symbol of (symbols$ | async)" [value]="symbol.symbol">
+        <div class="symbols" (click)="add(symbol)">
           <h4>{{symbol.symbol}}</h4>
           <h5>{{symbol.name | uppercase}}</h5>
         </div>

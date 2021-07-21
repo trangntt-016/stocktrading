@@ -5,26 +5,27 @@
     <ng-container matColumnDef="delete">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <button mat-icon-button><mat-icon>delete</mat-icon></button>
+        <button mat-icon-button>
+          <mat-icon>delete</mat-icon>
+        </button>
       </mat-cell>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="symbol">
-      <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Symbol</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.symbol.symbol}} </mat-cell>
     </ng-container>
 
-
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
       <mat-cell *matCellDef="let element">{{element.symbol.name}}  </mat-cell>
     </ng-container>
 
     <!-- Change Column -->
     <ng-container matColumnDef="change">
-      <mat-header-cell *matHeaderCellDef> Change </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Change</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.change}}</mat-cell>
     </ng-container>
 
@@ -67,17 +68,16 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
+
+  <!--  layered table-->
   <mat-table #table [dataSource]="dataSource$">
-
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-
-
     <!-- Delete Column -->
     <ng-container matColumnDef="delete">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <button mat-icon-button (click)="deleteSymbol(element)"><mat-icon>delete</mat-icon></button>
+        <button mat-icon-button (click)="deleteSymbol(element)">
+          <mat-icon>delete</mat-icon>
+        </button>
       </mat-cell>
     </ng-container>
 
@@ -97,19 +97,23 @@
     <!-- Change Column -->
     <ng-container matColumnDef="change">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
-      <mat-cell *matCellDef="let element" [ngClass]="(element.change >0)?'increasing':'decreasing'"> {{element.change}}</mat-cell>
+      <mat-cell *matCellDef="let element"
+                [ngClass]="(element.change >0)?'increasing':'decreasing'"> {{element.change}}</mat-cell>
     </ng-container>
 
     <!-- Change In Percent Column -->
     <ng-container matColumnDef="changeInPercent">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
-      <mat-cell *matCellDef="let element"[ngClass]="(element.change >0)?'increasing':'decreasing'"> {{element.changeInPercent}}%</mat-cell>
+      <mat-cell *matCellDef="let element"
+                [ngClass]="(element.change >0)?'increasing':'decreasing'"> {{element.changeInPercent}}%
+      </mat-cell>
     </ng-container>
 
     <!-- Open Column -->
     <ng-container matColumnDef="open">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
-      <mat-cell *matCellDef="let element" [ngClass]="(element.open >element.prevClose)?'increasing':'decreasing'"> {{element.open | currency}}</mat-cell>
+      <mat-cell *matCellDef="let element"
+                [ngClass]="(element.open >element.prevClose)?'increasing':'decreasing'"> {{element.open | currency}}</mat-cell>
     </ng-container>
 
     <!-- Prev Close Column -->
@@ -121,7 +125,8 @@
     <!-- High Column -->
     <ng-container matColumnDef="high">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
-      <mat-cell *matCellDef="let element" [ngClass]="(element.open >element.prevClose)?'increasing':'decreasing'"> {{element.high | currency}}</mat-cell>
+      <mat-cell *matCellDef="let element"
+                [ngClass]="(element.open >element.prevClose)?'increasing':'decreasing'"> {{element.high | currency}}</mat-cell>
     </ng-container>
 
     <!-- Volume Column -->
@@ -133,7 +138,8 @@
     <!-- Low Column -->
     <ng-container matColumnDef="low">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
-      <mat-cell *matCellDef="let element"[ngClass]="(element.open >element.prevClose)?'increasing':'decreasing'"> {{element.high | currency}}</mat-cell>
+      <mat-cell *matCellDef="let element"
+                [ngClass]="(element.open >element.prevClose)?'increasing':'decreasing'"> {{element.high | currency}}</mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns" [style.min-height]="0" class="row-header"></mat-header-row>

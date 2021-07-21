@@ -37,27 +37,27 @@ export class WatchlistService {
   ) { }
 
   getAllWatchlistsByUserId(userId: string): Observable<Watchlist[]>{
-    return this.http.get<any>(`http://localhost:3000/api/watchlists?userId=${userId}`);
+    return this.http.get<any>(`http://localhost:3000/api/watchlist?userId=${userId}`);
   }
 
   updateAWatchlist(watchlist: Watchlist): Observable<any>{
-    return this.http.put<any>('http://localhost:3000/api/watchlists', watchlist);
+    return this.http.put<any>('http://localhost:3000/api/watchlist', watchlist);
   }
 
   deleteAWatchlist(watchlistId: number): Observable<any>{
-    return this.http.delete<any>(`http://localhost:3000/api/watchlists/${watchlistId}`);
+    return this.http.delete<any>(`http://localhost:3000/api/watchlist/${watchlistId}`);
   }
 
   createAWatchlist(userId: string, watchlistName: string): Observable<any>{
-    return this.http.post<string>(`http://localhost:3000/api/watchlists?userId=${userId}`,watchlistName);
+    return this.http.post<string>(`http://localhost:3000/api/watchlist?userId=${userId}`,watchlistName);
   }
 
   findAllDailiesByWatchlistId(watchlistId: number): Observable<any>{
-    return this.http.get<Daily>(`http://localhost:3000/api/watchlists/${watchlistId}/dailies`);
+    return this.http.get<Daily>(`http://localhost:3000/api/watchlist/${watchlistId}/dailies`);
   }
 
   deleteASymbolFromWatchlistId(watchlistId: number, symbolId: number): Observable<any>{
-    return this.http.delete<Daily>(`http://localhost:3000/api/watchlists/${watchlistId}/symbols/${symbolId}`);
+    return this.http.delete<Daily>(`http://localhost:3000/api/watchlist/${watchlistId}/symbols/${symbolId}`);
   }
 
   getNewsBySymbol(symbol: Symbol): Observable<News[]>{
