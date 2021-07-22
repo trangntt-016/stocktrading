@@ -1,10 +1,13 @@
-package com.canada.edu.stocktrading.service;
+package com.canada.edu.stocktrading.service.impl;
 
 import com.canada.edu.stocktrading.model.Symbol;
-import com.canada.edu.stocktrading.model.UserEntity;
+import com.canada.edu.stocktrading.model.User;
 import com.canada.edu.stocktrading.model.WatchList;
 import com.canada.edu.stocktrading.repository.WatchlistRepository;
-import com.canada.edu.stocktrading.service.dto.DailyDto;
+import com.canada.edu.stocktrading.service.DailyService;
+import com.canada.edu.stocktrading.service.SymbolService;
+import com.canada.edu.stocktrading.service.WatchListService;
+import com.canada.edu.stocktrading.service.dto.DailyDetailsDto;
 import com.canada.edu.stocktrading.service.dto.WatchListDto;
 import com.canada.edu.stocktrading.service.utils.MapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +18,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class WatchListServiceImpl implements IWatchListService {
+public class WatchListServiceImpl implements WatchListService {
 
     @Autowired
     private WatchlistRepository watchlistRepository;
 
     @Autowired
-    private UserEntityService userEntityService;
+    private UserServiceImpl userEntityService;
 
     @Autowired
     private DailyService dailyService;
@@ -72,7 +75,7 @@ public class WatchListServiceImpl implements IWatchListService {
     @Override
     public WatchListDto create(String userId, String watchListName){
         try{
-            UserEntity user = userEntityService.findByUserId(userId);
+            User user = userEntityService.findByUserId(userId);
 
             WatchList wl = WatchList.builder()
                     .name(watchListName)
@@ -89,7 +92,7 @@ public class WatchListServiceImpl implements IWatchListService {
     }
 
     @Override
-    public List<DailyDto> getAllDailiesByWatchListId(Integer watchlistId) {
+    public List<DailyDetailsDto> getAllDailiesByWatchListId(Integer watchlistId) {
         Optional<WatchList> watchlist = watchlistRepository.findById(watchlistId);
 
         if(watchlist.isEmpty()){

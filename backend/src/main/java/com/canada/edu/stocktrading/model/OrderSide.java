@@ -1,2 +1,6 @@
-package com.canada.edu.stocktrading.model;public class OrderSide {
+package com.canada.edu.stocktrading.model;
+
+public enum OrderSide {
+    BUY,
+    SELL
 }

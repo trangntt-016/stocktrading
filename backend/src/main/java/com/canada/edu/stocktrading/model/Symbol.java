@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,7 +30,7 @@ public class Symbol {
 
     @ManyToMany(mappedBy = "symbols")
     @JsonIgnore
-    private Set<Watchlist> watchlists = new HashSet<>();
+    private Set<WatchList> watchlists = new HashSet<>();
 
     @Override
     public int hashCode() {

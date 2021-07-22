@@ -1,9 +1,7 @@
 package com.canada.edu.stocktrading.repository;
 
 import com.canada.edu.stocktrading.model.Daily;
-import com.canada.edu.stocktrading.model.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;

@@ -1,6 +1,6 @@
 package com.canada.edu.stocktrading.utils;
 
-import com.canada.edu.stocktrading.model.UserEntity;
+import com.canada.edu.stocktrading.model.User;
 import com.canada.edu.stocktrading.repository.UserEntityRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +15,9 @@ public class EntityUtils {
     private UserEntityRepository userEntityRepository;
 
     // because UserEntity doesn't have a primary key of Integer type
-    public UserEntity generateRandomUser() {
+    public User generateRandomUser() {
         int randomNum = generateRandomNumber(0, userEntityRepository.findAll().size());
-        List<UserEntity> users = userEntityRepository.findAll();
+        List<User> users = userEntityRepository.findAll();
         return users.get(randomNum);
     }
 

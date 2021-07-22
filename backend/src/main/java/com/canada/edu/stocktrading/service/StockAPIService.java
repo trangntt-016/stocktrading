@@ -1,17 +1,5 @@
 package com.canada.edu.stocktrading.service;
 
-import com.canada.edu.stocktrading.service.dto.SymbolDto;
-import com.canada.edu.stocktrading.service.utils.ConvertCalendarUtils;
-import com.canada.edu.stocktrading.service.utils.QuickSortUtils;
-import yahoofinance.Stock;
-import yahoofinance.YahooFinance;
-import yahoofinance.histquotes.Interval;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.*;
-import java.util.stream.Collectors;
-
 
 public class StockAPIService {
 //    static private StockAPIService instance;

@@ -1,11 +1,11 @@
 package com.canada.edu.stocktrading.service;
 
-import com.canada.edu.stocktrading.service.dto.DailyDto;
+import com.canada.edu.stocktrading.service.dto.DailyDetailsDto;
 import com.canada.edu.stocktrading.service.dto.WatchListDto;
 
 import java.util.List;
 
-public interface IWatchListService {
+public interface WatchListService {
 
     List<WatchListDto> getAllByUserId(String userId);
 
@@ -15,7 +15,7 @@ public interface IWatchListService {
 
     WatchListDto create(String userId, String watchListName);
 
-    List<DailyDto> getAllDailiesByWatchListId(Integer watchlistId);
+    List<DailyDetailsDto> getAllDailiesByWatchListId(Integer watchlistId);
 
     WatchListDto deleteSymbolFromWatchList(int watchlistId, int symbolId);
 

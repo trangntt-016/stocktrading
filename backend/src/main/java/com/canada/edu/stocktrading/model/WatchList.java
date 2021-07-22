@@ -6,9 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,7 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="watchlists")
-public class Watchlist {
+public class WatchList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "watchlist_id")
@@ -28,7 +26,7 @@ public class Watchlist {
     @JoinColumn(
             name="user_id",
             foreignKey=@ForeignKey(name = "FK_USER_WATCHLIST"))
-    private UserEntity user;
+    private User user;
 
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(name="watchlist_symbol",
@@ -64,7 +62,7 @@ public class Watchlist {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Watchlist other = (Watchlist) obj;
+        WatchList other = (WatchList) obj;
         if (watchlistId == null) {
             if (other.watchlistId != null)
                 return false;

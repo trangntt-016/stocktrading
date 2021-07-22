@@ -2,7 +2,7 @@ package com.canada.edu.stocktrading.repo;
 
 import com.canada.edu.stocktrading.model.Daily;
 import com.canada.edu.stocktrading.model.Symbol;
-import com.canada.edu.stocktrading.model.Watchlist;
+import com.canada.edu.stocktrading.model.WatchList;
 import com.canada.edu.stocktrading.repository.DailyRepository;
 import com.canada.edu.stocktrading.repository.WatchlistRepository;
 import com.canada.edu.stocktrading.utils.EntityUtils;
@@ -31,7 +31,7 @@ public class TestDailyRepository {
 
     @Test
     public void testFindAllBySymbolIds(){
-        Watchlist randomWL = utils.generateRandomEntity(watchlistRepository,watchlistRepository.findAll().get(0).getWatchlistId());
+        WatchList randomWL = utils.generateRandomEntity(watchlistRepository,watchlistRepository.findAll().get(0).getWatchlistId());
         List<Integer>symbolIds = randomWL.getSymbols().stream().map(Symbol::getSymbolId).collect(Collectors.toList());
 
         LocalDateTime now = LocalDateTime.now();

@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Date;
 
-public abstract class DLDto {
+public abstract class DailyDto {
     protected Integer dailyId;
 
     protected Date timestamp;
@@ -30,7 +30,7 @@ public abstract class DLDto {
     protected BigDecimal changeInPercent;
 
 
-    public DLDto(Daily daily){
+    public DailyDto(Daily daily){
         this.dailyId = daily.getDailyId();
 
         this.timestamp = daily.getTimestamp();

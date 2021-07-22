@@ -1,34 +1,32 @@
-package com.canada.edu.stocktrading.service;
+package com.canada.edu.stocktrading.service.impl;
 
+import com.canada.edu.stocktrading.client.controller.exception.DuplicateEmailException;
 import com.canada.edu.stocktrading.model.AuthenticationType;
-import com.canada.edu.stocktrading.model.UserEntity;
+import com.canada.edu.stocktrading.model.User;
 import com.canada.edu.stocktrading.repository.UserEntityRepository;
-import com.canada.edu.stocktrading.service.dto.RegisteredUserDto;
-import com.canada.edu.stocktrading.service.dto.UserEntityDto;
+import com.canada.edu.stocktrading.service.UserService;
+import com.canada.edu.stocktrading.service.dto.UserRegisteredDto;
+import com.canada.edu.stocktrading.service.dto.UserDto;
 import com.canada.edu.stocktrading.service.utils.MapperUtils;
-import org.apache.catalina.User;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
 import java.util.Optional;
 
 @Service
-public class UserEntityService {
+public class UserServiceImpl implements UserService {
     @Autowired
     private UserEntityRepository userEntityRepository;
 
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public boolean isEmailUnique(String email){
-        int noOfFound = userEntityRepository.findByEmail(email).size();
-        return noOfFound==0;
-    }
+    public UserDto save(UserRegisteredDto user) {
+        if(!isEmailUnique(user.getEmail())) {
+            throw new DuplicateEmailException("Email " + user.getEmail() + " has already existed in the database.");
+        }
 
-    public UserEntityDto save(RegisteredUserDto user){
         String encodedPassword = "";
         if(user.getAuthenticationType().equals("DATABASE")){
             encodedPassword = passwordEncoder.encode((user.getPassword()));
@@ -38,28 +36,31 @@ public class UserEntityService {
                 :(user.getAuthenticationType().equals("FACEBOOK")
                 ?AuthenticationType.FACEBOOK
                 :AuthenticationType.DATABASE);
-        UserEntity savedUsr = UserEntity.builder()
+        User savedUsr = User.builder()
                 .email(user.getEmail())
                 .password(encodedPassword)
                 .authenticationType(type)
                 .build();
         userEntityRepository.save(savedUsr);
-        return MapperUtils.mapperObject(savedUsr, UserEntityDto.class);
+        return MapperUtils.mapperObject(savedUsr, UserDto.class);
     }
 
     public boolean isUserIdValid(String userId){
-        Optional<UserEntity> found = userEntityRepository.findById(userId);
+        Optional<User> found = userEntityRepository.findById(userId);
         return found.isPresent();
     }
 
-    public UserEntity findByUserId(String userId){
-        Optional<UserEntity> user = userEntityRepository.findById(userId);
+    public User findByUserId(String userId){
+        Optional<User> user = userEntityRepository.findById(userId);
         if(user.isEmpty()){
             throw new IllegalArgumentException("Unable to find user with id "+ userId);
         }
         return user.get();
     }
 
-
+    private boolean isEmailUnique(String email) {
+        int noOfFound = userEntityRepository.findByEmail(email).size();
+        return noOfFound==0;
+    }
 
 }

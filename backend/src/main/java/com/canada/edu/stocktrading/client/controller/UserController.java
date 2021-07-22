@@ -1,36 +1,38 @@
 package com.canada.edu.stocktrading.client.controller;
 
+import com.canada.edu.stocktrading.client.api.UserApi;
+import com.canada.edu.stocktrading.client.controller.exception.BadRequestException;
 import com.canada.edu.stocktrading.client.controller.exception.DuplicateEmailException;
 import com.canada.edu.stocktrading.client.controller.exception.InternalServerException;
-import com.canada.edu.stocktrading.model.UserEntity;
-import com.canada.edu.stocktrading.service.UserEntityService;
-import com.canada.edu.stocktrading.service.dto.RegisteredUserDto;
-import com.canada.edu.stocktrading.service.dto.UserEntityDto;
+import com.canada.edu.stocktrading.factory.ResponseFactory;
+import com.canada.edu.stocktrading.service.impl.UserServiceImpl;
+import com.canada.edu.stocktrading.service.dto.UserRegisteredDto;
+import com.canada.edu.stocktrading.service.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.http.HttpResponse;
 
 @RestController
-@RequestMapping("/api/users")
-public class UserEntityController {
+@RequestMapping("/user")
+public class UserController implements UserApi {
     @Autowired
-    private UserEntityService userEntityService;
+    private ResponseFactory responseFactory;
+
+    @Autowired
+    private UserServiceImpl userService;
 
     @PostMapping
-    public ResponseEntity<UserEntityDto>register(@RequestBody RegisteredUserDto userEntity){
-        if(!userEntityService.isEmailUnique(userEntity.getEmail())){
-            throw new DuplicateEmailException("This email already exists!");
-        }
-        UserEntityDto newUsr = null;
+    public ResponseEntity<?>register(UserRegisteredDto userEntity) {
         try{
-            newUsr = userEntityService.save(userEntity);
+            UserDto newUsr  = userService.save(userEntity);
+            return this.responseFactory.created(newUsr);
+        }
+        catch(DuplicateEmailException ex){
+            throw new BadRequestException(ex.getMessage());
         }
         catch(Exception ex){
             throw new InternalServerException("Cannot save user to the database!");
         }
-        return new ResponseEntity<UserEntityDto>(newUsr,HttpStatus.ACCEPTED);
     }
 }

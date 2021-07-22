@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -67,5 +66,26 @@ public class Daily {
             name="symbol_id",
             foreignKey=@ForeignKey(name = "FK_SYMBOL_DAILY"))
     private Symbol symbol;
+
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("dailyId:").append(this.dailyId)
+                .append(",timestamp:").append(this.timestamp)
+                .append(",price:").append(this.price)
+                .append(",open:").append(this.open)
+                .append(",high:").append(this.high)
+                .append(",low:").append(this.low)
+                .append(",close:").append(this.close)
+                .append(",volume:").append(this.volume)
+                .append(",avg_vol_3_months:").append(this.avg_vol_3_months)
+                .append(",bid:").append(this.bid)
+                .append(",ask:").append(this.ask)
+                .append(",prev_close:").append(this.prevClose)
+                .append(",week_high_52:").append(this.week_high_52)
+                .append(",week_low_52:").append(this.week_low_52)
+                .append(",symbol:").append(this.symbol.getSymbol());
+        return sb.toString();
+    }
 
 }

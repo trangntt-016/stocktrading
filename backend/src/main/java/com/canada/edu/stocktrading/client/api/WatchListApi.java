@@ -1,31 +1,28 @@
 package com.canada.edu.stocktrading.client.api;
 
-import com.canada.edu.stocktrading.service.dto.DailyDto;
 import com.canada.edu.stocktrading.service.dto.WatchListDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
-@RequestMapping("/api/watchlist")
-public interface IWatchListApi {
-
+@RequestMapping("/watchlist")
+public interface WatchListApi {
     @GetMapping
-    ResponseEntity<List<WatchListDto>> getAllWatchLists (@RequestParam (required = true) String userId);
+    ResponseEntity<?> getAllWatchLists(@RequestParam(required = true) String userId);
 
     @PutMapping
-    void update (@RequestBody WatchListDto watchListDto);
+    ResponseEntity<?> update(@RequestBody WatchListDto watchListDto);
 
     @DeleteMapping("/{watchlistId}")
-    void delete (@PathVariable ("watchlistId") int watchlistId);
+    ResponseEntity<?> delete(@PathVariable("watchlistId") int watchlistId);
 
     @PostMapping
-    ResponseEntity<?> create (@RequestParam String userId, @RequestBody String watchlistName);
+    ResponseEntity<?> create(@RequestParam String userId, @RequestBody String watchlistName);
 
     @GetMapping("/{watchlistId}/dailies")
-    ResponseEntity<List<DailyDto>> getAllDailiesByWatchListId (@PathVariable Integer watchlistId);
+    ResponseEntity<?> getAllDailiesByWatchListId(@PathVariable Integer watchlistId);
 
     @DeleteMapping("/{watchlistId}/symbols/{symbolId}")
-    ResponseEntity<?> deleteASymbolFromWatchlistId (@PathVariable("watchlistId") int watchlistId, @PathVariable("symbolId") int symbolId);
+    ResponseEntity<?> deleteASymbolFromWatchlistId(@PathVariable("watchlistId") int watchlistId, @PathVariable("symbolId") int symbolId);
 
 }

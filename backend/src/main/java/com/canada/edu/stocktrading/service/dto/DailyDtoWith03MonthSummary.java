@@ -5,7 +5,7 @@ import com.canada.edu.stocktrading.model.Daily;
 import java.math.BigDecimal;
 
 
-public class DailyDetailsDto extends DLDto{
+public class DailyDtoWith03MonthSummary extends DailyDto {
     private BigDecimal avg_vol_3_months;
 
     private BigDecimal week_high_52;
@@ -15,7 +15,7 @@ public class DailyDetailsDto extends DLDto{
     private String symbol;
 
 
-    public DailyDetailsDto(Daily daily) {
+    public DailyDtoWith03MonthSummary(Daily daily) {
         super(daily);
         this.avg_vol_3_months = daily.getAvg_vol_3_months();
         this.week_high_52 = daily.getWeek_high_52();

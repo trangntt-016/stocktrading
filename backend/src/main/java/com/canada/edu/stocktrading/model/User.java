@@ -16,7 +16,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name="users")
-public class UserEntity {
+public class User {
     @Id
     @Column(name = "user_id",updatable = false,nullable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "user_gen")

@@ -1,7 +1,7 @@
 package com.canada.edu.stocktrading.client.controller.exception;
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
+import com.canada.edu.stocktrading.factory.ResponseFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -10,21 +10,25 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class ExceptionHandling extends ResponseEntityExceptionHandler {
+    private final ResponseFactory responseFactory;
+
+    @Autowired
+    public ExceptionHandling(ResponseFactory responseFactory) {
+        this.responseFactory = responseFactory;
+    }
+
     @ExceptionHandler(value={DuplicateEmailException.class})
-    private ResponseEntity<Object>handleDuplicateEmailException(RuntimeException ex, WebRequest req){
-        String bodyOfResponse = ex.getMessage();
-        return handleExceptionInternal(ex,bodyOfResponse,new HttpHeaders(), HttpStatus.CONFLICT,req);
+    private ResponseEntity<?>handleDuplicateEmailException(RuntimeException ex, WebRequest req) {
+        return this.responseFactory.duplicateData(ex.getMessage());
     }
 
     @ExceptionHandler(value={InternalServerException.class})
-    private ResponseEntity<Object>handleInternalServerException(RuntimeException ex, WebRequest req){
-        String bodyOfResponse = ex.getMessage();
-        return handleExceptionInternal(ex,bodyOfResponse,new HttpHeaders(), HttpStatus.CONFLICT,req);
+    private ResponseEntity<?>handleInternalServerException(RuntimeException ex, WebRequest req) {
+        return this.responseFactory.internalServerError(ex.getMessage());
     }
 
     @ExceptionHandler(value = {BadRequestException.class})
-    private ResponseEntity<Object>handleBadRequestException(RuntimeException ex, WebRequest req){
-        String bodyOfResponse = ex.getMessage();
-        return handleExceptionInternal(ex,bodyOfResponse,new HttpHeaders(), HttpStatus.BAD_REQUEST,req);
+    private ResponseEntity<?>handleBadRequestException(RuntimeException ex, WebRequest req) {
+        return this.responseFactory.badRequest(ex.getMessage());
     }
 }

@@ -13,7 +13,7 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class WatchlistDto {
+public class WatchListDto {
     private Integer watchlistId;
     private String name;
     private Set<Symbol> symbols;

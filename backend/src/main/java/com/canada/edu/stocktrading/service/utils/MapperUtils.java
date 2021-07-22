@@ -1,14 +1,8 @@
 package com.canada.edu.stocktrading.service.utils;
 
-import com.canada.edu.stocktrading.model.Watchlist;
-import com.canada.edu.stocktrading.service.dto.WatchlistDto;
-import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
-import org.modelmapper.spi.MappingContext;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class MapperUtils{
@@ -24,5 +18,13 @@ public class MapperUtils{
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(source, targetObject);
     }
+
+
+//    public static DL mapperInheritance(){
+//        ModelMapper mapper = new ModelMapper();
+//        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+//        mapper.typeMap(Daily.class, DailyDetailsDto.class)
+//                .addMappings(m -> m.map(src -> src., TagVolumeDTO::setIdTag))
+//    }
 
 }
