@@ -111,7 +111,7 @@ public class WatchListServiceImpl implements WatchListService {
     @Override
     public WatchListDto deleteSymbolFromWatchList(int watchlistId, int symbolId) {
         try{
-            Symbol symbol = symbolService.findBySymbolId(symbolId);
+            Symbol symbol = symbolService.getOneBySymbolId(symbolId);
 
             Optional<WatchList> watchlist = watchlistRepository.findById(watchlistId);
 

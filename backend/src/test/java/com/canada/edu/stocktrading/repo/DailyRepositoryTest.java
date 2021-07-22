@@ -5,6 +5,7 @@ import com.canada.edu.stocktrading.model.Symbol;
 import com.canada.edu.stocktrading.model.WatchList;
 import com.canada.edu.stocktrading.repository.DailyRepository;
 import com.canada.edu.stocktrading.repository.WatchlistRepository;
+import com.canada.edu.stocktrading.service.utils.ConvertTimeUtils;
 import com.canada.edu.stocktrading.utils.EntityUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
-public class TestDailyRepository {
+public class DailyRepositoryTest {
     @Autowired
     private DailyRepository dailyRepository;
 
@@ -32,16 +33,13 @@ public class TestDailyRepository {
     @Test
     public void testFindAllBySymbolIds(){
         WatchList randomWL = utils.generateRandomEntity(watchlistRepository,watchlistRepository.findAll().get(0).getWatchlistId());
+
         List<Integer>symbolIds = randomWL.getSymbols().stream().map(Symbol::getSymbolId).collect(Collectors.toList());
 
-        LocalDateTime now = LocalDateTime.now();
-        int hours = now.getHour();
-        int minutes = now.getMinute();
-        int seconds = now.getSecond();
-        LocalDateTime converted = LocalDateTime.of(2021, Month.JULY,14,hours,minutes,seconds);
-        Timestamp ts = Timestamp.valueOf(converted);
+        Timestamp ts = ConvertTimeUtils.convertCurrentTimeTo14July();
 
         List<Daily>dailies = dailyRepository.findDailiesBySymbolIds(ts, symbolIds);
+
         assertThat(dailies.size()).isEqualTo(symbolIds.size());
     }
 }

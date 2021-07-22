@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
-public class TestUserEntityRepository {
+public class UserRepositoryTest {
     @Autowired
     private UserEntityRepository userEntityRepository;
 
@@ -22,6 +22,7 @@ public class TestUserEntityRepository {
         User randomUsr = utils.generateRandomUser();
 
         int noOfFound = userEntityRepository.findByEmail(randomUsr.getEmail()).size();
+
         assertThat(noOfFound).isEqualTo(1);
     }
 
@@ -30,6 +31,7 @@ public class TestUserEntityRepository {
         User randomUsr = utils.generateRandomUser();
 
         User found = userEntityRepository.findById(randomUsr.getUserId()).get();
+
         assertThat(found).isEqualTo(randomUsr);
     }
 

@@ -14,10 +14,9 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.Set;
 
 @SpringBootTest
-public class TestOrderRepository {
+public class OrderRepositoryTest {
     @Autowired
     private OrderRepository orderRepository;
 

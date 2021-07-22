@@ -4,7 +4,6 @@ import com.canada.edu.stocktrading.client.ws.DailyWS;
 import com.canada.edu.stocktrading.service.DailyService;
 import com.canada.edu.stocktrading.service.dto.DailyDtoWith03MonthSummary;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
