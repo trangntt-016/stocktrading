@@ -6,6 +6,9 @@ import { Daily } from '../model/Daily';
 import {Symbol} from '../model/Symbol';
 import { map } from 'rxjs/operators';
 import { News } from '../model/News';
+
+import { environment } from 'src/environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -37,27 +40,27 @@ export class WatchlistService {
   ) { }
 
   getAllWatchlistsByUserId(userId: string): Observable<Watchlist[]>{
-    return this.http.get<any>(`http://localhost:3000/api/watchlist?userId=${userId}`);
+    return this.http.get<any>(`${environment.watchlistAPI}?userId=${userId}`);
   }
 
   updateAWatchlist(watchlist: Watchlist): Observable<any>{
-    return this.http.put<any>('http://localhost:3000/api/watchlist', watchlist);
+    return this.http.put<any>(`${environment.watchlistAPI}`, watchlist);
   }
 
   deleteAWatchlist(watchlistId: number): Observable<any>{
-    return this.http.delete<any>(`http://localhost:3000/api/watchlist/${watchlistId}`);
+    return this.http.delete<any>(`${environment.watchlistAPI}/${watchlistId}`);
   }
 
   createAWatchlist(userId: string, watchlistName: string): Observable<any>{
-    return this.http.post<string>(`http://localhost:3000/api/watchlist?userId=${userId}`,watchlistName);
+    return this.http.post<string>(`${environment.watchlistAPI}?userId=${userId}`,watchlistName);
   }
 
   findAllDailiesByWatchlistId(watchlistId: number): Observable<any>{
-    return this.http.get<Daily>(`http://localhost:3000/api/watchlist/${watchlistId}/dailies`);
+    return this.http.get<Daily>(`${environment.watchlistAPI}/${watchlistId}/dailies`);
   }
 
   deleteASymbolFromWatchlistId(watchlistId: number, symbolId: number): Observable<any>{
-    return this.http.delete<Daily>(`http://localhost:3000/api/watchlist/${watchlistId}/symbols/${symbolId}`);
+    return this.http.delete<Daily>(`${environment.watchlistAPI}/${watchlistId}/symbols/${symbolId}`);
   }
 
   getNewsBySymbol(symbol: Symbol): Observable<News[]>{

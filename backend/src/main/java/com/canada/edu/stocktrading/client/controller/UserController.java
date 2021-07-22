@@ -19,7 +19,7 @@ public class UserEntityController {
     @Autowired
     private UserEntityService userEntityService;
 
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<UserEntityDto>register(@RequestBody RegisteredUserDto userEntity){
         if(!userEntityService.isEmailUnique(userEntity.getEmail())){
             throw new DuplicateEmailException("This email already exists!");

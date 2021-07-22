@@ -1,43 +1,62 @@
 package com.canada.edu.stocktrading.service.dto;
 
-import com.canada.edu.stocktrading.model.Symbol;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.canada.edu.stocktrading.model.Daily;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class DailyDto {
-    private Integer dailyId;
+public abstract class DLDto {
+    protected Integer dailyId;
 
-    private Date timestamp;
+    protected Date timestamp;
 
-    private BigDecimal open;
+    protected BigDecimal price;
 
-    private BigDecimal high;
+    protected BigDecimal open;
 
-    private BigDecimal low;
+    protected BigDecimal high;
 
-    private BigDecimal close;
+    protected BigDecimal low;
 
-    private BigDecimal volume;
+    protected BigDecimal close;
 
-    private BigDecimal bid;
+    protected BigDecimal volume;
 
-    private BigDecimal ask;
+    protected BigDecimal prevClose;
 
-    private BigDecimal prevClose;
+    protected BigDecimal change;
 
-    private Symbol symbol;
+    protected BigDecimal changeInPercent;
 
-    private BigDecimal change;
 
-    private BigDecimal changeInPercent;
+    public DLDto(Daily daily){
+        this.dailyId = daily.getDailyId();
+
+        this.timestamp = daily.getTimestamp();
+
+        this.price = daily.getPrice();
+
+        this.open = daily.getOpen();
+
+        this.high = daily.getHigh();
+
+        this.low = daily.getLow();
+
+        this.close = daily.getClose();
+
+        this.volume = daily.getVolume();
+
+        this.prevClose = daily.getPrevClose();
+
+    }
+
+    public void setChange() {
+        BigDecimal regularPrice = this.price;
+        this.change = regularPrice.subtract(this.prevClose);
+    };
+
+    public void setChangeInPercent() {
+        this.changeInPercent = change.multiply(new BigDecimal(100)).divide(this.price, RoundingMode.HALF_UP);
+    };
 }

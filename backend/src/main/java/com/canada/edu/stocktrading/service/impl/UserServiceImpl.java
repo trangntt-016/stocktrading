@@ -55,7 +55,7 @@ public class UserEntityService {
     public UserEntity findByUserId(String userId){
         Optional<UserEntity> user = userEntityRepository.findById(userId);
         if(user.isEmpty()){
-            throw new RuntimeException("Unable to find user with id "+ userId);
+            throw new IllegalArgumentException("Unable to find user with id "+ userId);
         }
         return user.get();
     }
