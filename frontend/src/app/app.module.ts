@@ -44,6 +44,7 @@ import { BuysellComponent } from './trade/paper/buysell/buysell.component';
 import { ChartComponent } from './trade/paper/chart/chart.component';
 import { OrderComponent } from './trade/paper/order/order.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,16 +78,16 @@ import { OrderComponent } from './trade/paper/order/order.component';
     ChartComponent,
     OrderComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    HttpClientModule,
-    NgxChartsModule,
-    MaterialModule,
-    PackagesModule,
-    SocialLoginModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        HttpClientModule,
+        NgxChartsModule,
+        MaterialModule,
+        PackagesModule,
+        SocialLoginModule
+    ],
   providers: [
     {
       provide: 'SocialAuthServiceConfig',

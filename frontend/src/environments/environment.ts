@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  watchlistAPI: 'http://localhost:3000/watchlist'
+  watchlistAPI: 'http://localhost:3000/watchlist',
+  symbolAPI: 'http://localhost:3000/symbol',
+  userAPI: 'http://localhost:3000/user'
 };
 
 /*

@@ -1,0 +1,17 @@
+.wrapper{
+  background-color: blueviolet;
+  height: 100%;
+  width: 100%;
+}
+.title-wrapper{
+  background-color: pink;
+  height: 18%;
+  width: 100%;
+  padding: 50px 135px 5px 10px;
+  border-bottom: 1px solid red;
+}
+.title{
+  background-color: green;
+  width: 100%;
+  height: 100%;
+}

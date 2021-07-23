@@ -1,1 +1,42 @@
-<p>buysell works!</p>
+<div class="wrapper" fxLayout="column">
+    <div class="title-wrapper">
+      <div class="title" fxLayout="row" fxLayoutGap="5px">
+        <input matInput placeholder="Symbol">
+        <p>0.580</p>
+        <p>0.000</p>
+        <p>0.00%</p>
+      </div>
+    </div>
+    <div class="body-wrapper">
+      <div class="body">
+        <div class="side">
+          <h6>Side</h6>
+          <div class="buy-sell-button" fxLayout="row" fxLayoutGap="3px">
+            <div class="buy" (click)="selectBuy()" [ngClass]="(order.orderSide==='BUY')?'selected-buy':'buy'">
+              BUY
+            </div>
+            <div class="sell" (click)="selectSell()" [ngClass]="(order.orderSide==='SELL')?'selected-sell':'sell'">
+              SELL
+            </div>
+          </div>
+        </div>
+        <div class="type-quantity-wrapper">
+          <div class="type">
+            <h6>Order Type</h6>
+            <mat-select [(ngModel)]="order.orderType">
+              <mat-option value="LIMIT">LIMIT</mat-option>
+              <mat-option value="MARKET">MARKET</mat-option>
+            </mat-select>
+          </div>
+          <div class="quantity">
+            <h6>Quantity</h6>
+            <input>
+          </div>
+        </div>
+
+        <div class="limit-price">
+
+        </div>
+      </div>
+    </div>
+</div>

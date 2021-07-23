@@ -40,11 +40,11 @@ export class WatchlistService {
   ) { }
 
   getAllWatchlistsByUserId(userId: string): Observable<Watchlist[]>{
-    return this.http.get<any>(`${environment.watchlistAPI}?userId=${userId}`);
+    return this.http.get<any>(`${environment.watchlistAPI}?userId=${userId}`).pipe(map(res => res.data));
   }
 
   updateAWatchlist(watchlist: Watchlist): Observable<any>{
-    return this.http.put<any>(`${environment.watchlistAPI}`, watchlist);
+    return this.http.put<any>(`${environment.watchlistAPI}`, watchlist).pipe(map(res => res.data));
   }
 
   deleteAWatchlist(watchlistId: number): Observable<any>{
@@ -52,15 +52,15 @@ export class WatchlistService {
   }
 
   createAWatchlist(userId: string, watchlistName: string): Observable<any>{
-    return this.http.post<string>(`${environment.watchlistAPI}?userId=${userId}`,watchlistName);
+    return this.http.post<any>(`${environment.watchlistAPI}?userId=${userId}`, watchlistName).pipe(map(res => res.data));
   }
 
   findAllDailiesByWatchlistId(watchlistId: number): Observable<any>{
-    return this.http.get<Daily>(`${environment.watchlistAPI}/${watchlistId}/dailies`);
+    return this.http.get<any>(`${environment.watchlistAPI}/${watchlistId}/dailies`).pipe(map(res => res.data));
   }
 
   deleteASymbolFromWatchlistId(watchlistId: number, symbolId: number): Observable<any>{
-    return this.http.delete<Daily>(`${environment.watchlistAPI}/${watchlistId}/symbols/${symbolId}`);
+    return this.http.delete<any>(`${environment.watchlistAPI}/${watchlistId}/symbols/${symbolId}`).pipe(map(res => {console.log(res); return res.data}));
   }
 
   getNewsBySymbol(symbol: Symbol): Observable<News[]>{

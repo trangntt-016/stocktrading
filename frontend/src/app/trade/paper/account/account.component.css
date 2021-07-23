@@ -3,3 +3,23 @@
   background-color: orange;
   width: 100%
 }
+
+.title-wrapper{
+  background-color: pink;
+  height: 29%;
+  width: 100%;
+  padding: 50px 10px 5px 70px;
+  border-bottom: 1px solid red;
+}
+
+.title{
+  background-color: green;
+  width: 100%;
+  height: 100%;
+  padding-top: 5px;
+}
+
+p{
+  font-size: 12px;
+  font-weight: 500;
+}

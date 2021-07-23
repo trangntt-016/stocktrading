@@ -1,7 +1,7 @@
-package com.canada.edu.stocktrading.repository.dao;
+package com.canada.edu.stocktrading.repository.custom;
 
-import com.canada.edu.stocktrading.model.Daily;
 import com.canada.edu.stocktrading.repository.CustomDailyRepository;
+import com.canada.edu.stocktrading.model.Daily;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -11,16 +11,16 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
-public class DailyRepositoryImpl implements CustomDailyRepository {
+public class DailyDaoImpl implements CustomDailyRepository {
     private final EntityManager entityManager;
 
     @Autowired
-    public DailyRepositoryImpl(EntityManager entityManager) {
+    public DailyDaoImpl(EntityManager entityManager) {
         this.entityManager = entityManager.getEntityManagerFactory().createEntityManager();
     }
 
     @Override
-    public List findDailiesBySymbolIds(Timestamp ts, List<Integer> symbolIds) {
+    public List<Daily> findDailiesBySymbolIds(Timestamp ts, List<Integer>symbolIds) {
         StringBuilder sql = new StringBuilder();
         if(symbolIds.size()==1){
             sql.append("SELECT * FROM (SELECT * FROM dailies WHERE timestamp <= :ts AND symbol_id = :id ORDER BY timestamp DESC LIMIT 1) AS aliasOne");
