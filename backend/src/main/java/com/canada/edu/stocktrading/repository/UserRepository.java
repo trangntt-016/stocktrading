@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Repository
-public interface UserEntityRepository extends JpaRepository<User, String> {
+public interface UserRepository extends JpaRepository<User, String> {
     @Query("SELECT u FROM User u WHERE u.email =:email")
     List<User> findByEmail(String email);
 

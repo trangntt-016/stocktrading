@@ -1,6 +1,5 @@
 package com.canada.edu.stocktrading.service.impl;
 
-import com.canada.edu.stocktrading.client.api.SymbolApi;
 import com.canada.edu.stocktrading.model.Symbol;
 import com.canada.edu.stocktrading.repository.SymbolRepository;
 import com.canada.edu.stocktrading.service.SymbolService;

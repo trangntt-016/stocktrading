@@ -1,6 +1,6 @@
-package com.canada.edu.stocktrading.client.api;
+package com.canada.edu.stocktrading.api;
 
-import com.canada.edu.stocktrading.service.dto.WatchListDto;
+import com.canada.edu.stocktrading.dto.WatchListDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

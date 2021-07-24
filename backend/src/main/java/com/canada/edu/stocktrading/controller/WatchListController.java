@@ -1,15 +1,15 @@
-package com.canada.edu.stocktrading.client.controller;
+package com.canada.edu.stocktrading.controller;
 
-import com.canada.edu.stocktrading.client.api.WatchListApi;
-import com.canada.edu.stocktrading.client.controller.exception.BadRequestException;
-import com.canada.edu.stocktrading.client.controller.exception.InternalServerException;
+import com.canada.edu.stocktrading.api.WatchListApi;
+import com.canada.edu.stocktrading.controller.exception.BadRequestException;
+import com.canada.edu.stocktrading.controller.exception.InternalServerException;
 import com.canada.edu.stocktrading.factory.ResponseFactory;
 import com.canada.edu.stocktrading.service.DailyService;
 import com.canada.edu.stocktrading.service.SymbolService;
 import com.canada.edu.stocktrading.service.impl.UserServiceImpl;
 import com.canada.edu.stocktrading.service.WatchListService;
-import com.canada.edu.stocktrading.service.dto.DailyDetailsDto;
-import com.canada.edu.stocktrading.service.dto.WatchListDto;
+import com.canada.edu.stocktrading.dto.DailyDetailsDto;
+import com.canada.edu.stocktrading.dto.WatchListDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;

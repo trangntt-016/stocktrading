@@ -1,11 +1,11 @@
-package com.canada.edu.stocktrading.client.controller;
+package com.canada.edu.stocktrading.controller;
 
-import com.canada.edu.stocktrading.client.controller.exception.BadRequestException;
-import com.canada.edu.stocktrading.client.controller.exception.InternalServerException;
+import com.canada.edu.stocktrading.controller.exception.BadRequestException;
+import com.canada.edu.stocktrading.controller.exception.InternalServerException;
 import com.canada.edu.stocktrading.factory.ResponseFactory;
 import com.canada.edu.stocktrading.model.Order;
 import com.canada.edu.stocktrading.service.OrderService;
-import com.canada.edu.stocktrading.service.dto.OrderDto;
+import com.canada.edu.stocktrading.dto.OrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

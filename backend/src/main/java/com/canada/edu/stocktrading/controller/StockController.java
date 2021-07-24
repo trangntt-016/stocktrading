@@ -1,18 +1,7 @@
-package com.canada.edu.stocktrading.client.controller;
+package com.canada.edu.stocktrading.controller;
 
-import com.canada.edu.stocktrading.service.StockService;
-import com.canada.edu.stocktrading.service.SymbolAPIService;
-import com.canada.edu.stocktrading.service.dto.ChartDto;
-import com.canada.edu.stocktrading.service.dto.SymbolDto;
-import com.canada.edu.stocktrading.service.dto.SummaryStockDto;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.io.IOException;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/quotes")

@@ -1,7 +1,7 @@
 package com.canada.edu.stocktrading.repo;
 
 import com.canada.edu.stocktrading.model.User;
-import com.canada.edu.stocktrading.repository.UserEntityRepository;
+import com.canada.edu.stocktrading.repository.UserRepository;
 import com.canada.edu.stocktrading.utils.EntityUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @SpringBootTest
 public class UserRepositoryTest {
     @Autowired
-    private UserEntityRepository userEntityRepository;
+    private UserRepository userEntityRepository;
 
     @Autowired
     private EntityUtils utils;

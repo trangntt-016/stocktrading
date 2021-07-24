@@ -1,13 +1,13 @@
-package com.canada.edu.stocktrading.client.api;
+package com.canada.edu.stocktrading.api;
 
-import com.canada.edu.stocktrading.service.dto.OrderDto;
+import com.canada.edu.stocktrading.dto.UserRegisteredDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/order")
-public interface OrderApi {
+@RequestMapping("/user")
+public interface UserApi {
     @PostMapping
-    ResponseEntity<?> order(@RequestBody OrderDto order);
+    ResponseEntity<?> register(@RequestBody UserRegisteredDto userEntity);
 }

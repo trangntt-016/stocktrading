@@ -1,13 +1,13 @@
-package com.canada.edu.stocktrading.client.controller;
+package com.canada.edu.stocktrading.controller;
 
-import com.canada.edu.stocktrading.client.api.UserApi;
-import com.canada.edu.stocktrading.client.controller.exception.BadRequestException;
-import com.canada.edu.stocktrading.client.controller.exception.DuplicateEmailException;
-import com.canada.edu.stocktrading.client.controller.exception.InternalServerException;
+import com.canada.edu.stocktrading.api.UserApi;
+import com.canada.edu.stocktrading.controller.exception.BadRequestException;
+import com.canada.edu.stocktrading.controller.exception.DuplicateEmailException;
+import com.canada.edu.stocktrading.controller.exception.InternalServerException;
 import com.canada.edu.stocktrading.factory.ResponseFactory;
 import com.canada.edu.stocktrading.service.impl.UserServiceImpl;
-import com.canada.edu.stocktrading.service.dto.UserRegisteredDto;
-import com.canada.edu.stocktrading.service.dto.UserDto;
+import com.canada.edu.stocktrading.dto.UserRegisteredDto;
+import com.canada.edu.stocktrading.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,19 +1,5 @@
 package com.canada.edu.stocktrading.service;
 
-import com.canada.edu.stocktrading.service.dto.SymbolDto;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 public class SymbolAPIService {
 //    static private SymbolAPIService instance;
 //

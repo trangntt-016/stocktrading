@@ -1,4 +1,4 @@
-package com.canada.edu.stocktrading.client.controller.exception;
+package com.canada.edu.stocktrading.controller.exception;
 
 public class InternalServerException extends RuntimeException {
     public InternalServerException(String message){

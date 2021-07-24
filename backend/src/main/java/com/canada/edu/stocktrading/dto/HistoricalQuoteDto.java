@@ -1,4 +1,4 @@
-package com.canada.edu.stocktrading.service.dto;
+package com.canada.edu.stocktrading.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

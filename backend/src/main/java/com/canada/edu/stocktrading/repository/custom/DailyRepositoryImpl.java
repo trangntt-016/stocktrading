@@ -11,11 +11,11 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
-public class DailyDaoImpl implements CustomDailyRepository {
-    private final EntityManager entityManager;
+public class DailyRepositoryImpl implements CustomDailyRepository {
+    private EntityManager entityManager;
 
     @Autowired
-    public DailyDaoImpl(EntityManager entityManager) {
+    public DailyRepositoryImpl(EntityManager entityManager) {
         this.entityManager = entityManager.getEntityManagerFactory().createEntityManager();
     }
 

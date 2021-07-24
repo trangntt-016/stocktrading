@@ -1,12 +1,12 @@
 package com.canada.edu.stocktrading.service.impl;
 
-import com.canada.edu.stocktrading.client.controller.exception.DuplicateEmailException;
+import com.canada.edu.stocktrading.controller.exception.DuplicateEmailException;
 import com.canada.edu.stocktrading.model.AuthenticationType;
 import com.canada.edu.stocktrading.model.User;
-import com.canada.edu.stocktrading.repository.UserEntityRepository;
+import com.canada.edu.stocktrading.repository.UserRepository;
 import com.canada.edu.stocktrading.service.UserService;
-import com.canada.edu.stocktrading.service.dto.UserRegisteredDto;
-import com.canada.edu.stocktrading.service.dto.UserDto;
+import com.canada.edu.stocktrading.dto.UserRegisteredDto;
+import com.canada.edu.stocktrading.dto.UserDto;
 import com.canada.edu.stocktrading.service.utils.MapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,7 +18,7 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
-    private UserEntityRepository userEntityRepository;
+    private UserRepository userEntityRepository;
 
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 

@@ -1,16 +1,6 @@
 package com.canada.edu.stocktrading.service;
 
-import com.canada.edu.stocktrading.service.dto.ChartDto;
-import com.canada.edu.stocktrading.service.dto.HistoricalQuoteDto;
-import com.canada.edu.stocktrading.service.dto.SummaryStockDto;
-import com.canada.edu.stocktrading.service.utils.MapperUtils;
 import org.springframework.stereotype.Service;
-import yahoofinance.Stock;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class StockService {

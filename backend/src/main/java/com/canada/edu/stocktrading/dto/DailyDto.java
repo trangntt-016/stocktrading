@@ -1,11 +1,15 @@
-package com.canada.edu.stocktrading.service.dto;
+package com.canada.edu.stocktrading.dto;
 
 import com.canada.edu.stocktrading.model.Daily;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Date;
 
+@Data
+@NoArgsConstructor
 public abstract class DailyDto {
     protected Integer dailyId;
 

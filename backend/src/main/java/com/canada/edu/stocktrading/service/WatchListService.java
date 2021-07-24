@@ -1,7 +1,7 @@
 package com.canada.edu.stocktrading.service;
 
-import com.canada.edu.stocktrading.service.dto.DailyDetailsDto;
-import com.canada.edu.stocktrading.service.dto.WatchListDto;
+import com.canada.edu.stocktrading.dto.DailyDetailsDto;
+import com.canada.edu.stocktrading.dto.WatchListDto;
 
 import java.util.List;
 

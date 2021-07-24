@@ -1,4 +1,4 @@
-package com.canada.edu.stocktrading.service.dto;
+package com.canada.edu.stocktrading.dto;
 
 import com.canada.edu.stocktrading.model.Daily;
 import com.canada.edu.stocktrading.model.Symbol;

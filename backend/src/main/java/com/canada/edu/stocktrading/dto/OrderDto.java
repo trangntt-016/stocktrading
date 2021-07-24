@@ -1,4 +1,4 @@
-package com.canada.edu.stocktrading.service.dto;
+package com.canada.edu.stocktrading.dto;
 
 import com.canada.edu.stocktrading.model.Symbol;
 import lombok.AllArgsConstructor;
@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
 @Builder

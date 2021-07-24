@@ -1,6 +1,6 @@
-package com.canada.edu.stocktrading.client.controller;
+package com.canada.edu.stocktrading.controller;
 
-import com.canada.edu.stocktrading.client.api.SymbolApi;
+import com.canada.edu.stocktrading.api.SymbolApi;
 import com.canada.edu.stocktrading.factory.ResponseFactory;
 import com.canada.edu.stocktrading.model.Symbol;
 import com.canada.edu.stocktrading.service.SymbolService;

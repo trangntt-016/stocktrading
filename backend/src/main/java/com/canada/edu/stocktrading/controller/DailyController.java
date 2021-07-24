@@ -1,8 +1,8 @@
-package com.canada.edu.stocktrading.client.controller;
+package com.canada.edu.stocktrading.controller;
 
-import com.canada.edu.stocktrading.client.ws.DailyWS;
+import com.canada.edu.stocktrading.ws.DailyWS;
 import com.canada.edu.stocktrading.service.DailyService;
-import com.canada.edu.stocktrading.service.dto.DailyDtoWith03MonthSummary;
+import com.canada.edu.stocktrading.dto.DailyDtoWith03MonthSummary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;

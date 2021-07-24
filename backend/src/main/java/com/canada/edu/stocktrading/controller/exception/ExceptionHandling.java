@@ -1,4 +1,4 @@
-package com.canada.edu.stocktrading.client.controller.exception;
+package com.canada.edu.stocktrading.controller.exception;
 
 import com.canada.edu.stocktrading.factory.ResponseFactory;
 import org.springframework.beans.factory.annotation.Autowired;

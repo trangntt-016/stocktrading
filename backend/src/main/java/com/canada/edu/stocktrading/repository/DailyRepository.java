@@ -8,6 +8,6 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
-public interface DailyRepository extends JpaRepository<Daily, Integer>,CustomDailyRepository {
+public interface DailyRepository extends JpaRepository<Daily, Integer> {
     List<Daily>findDailiesBySymbolIds(Timestamp ts, List<Integer>symbolIds);
 }

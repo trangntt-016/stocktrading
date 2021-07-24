@@ -1,85 +1,83 @@
 package com.canada.edu.stocktrading.factory;
 
 import com.canada.edu.stocktrading.constant.ResponseStatusCodeEnum;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
+
 
 import java.io.Serializable;
 
-@Controller
+
+@Component
 public class ResponseFactory implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private GeneralResponse responseObject;
-
-    private ResponseStatus status;
-
-    public ResponseFactory(){
-        this.responseObject = new GeneralResponse();
-        this.status = new ResponseStatus();
-    }
-
     public ResponseEntity<?>success(Object data) {
-        reset();
-        this.status.setCode(ResponseStatusCodeEnum.SUCCESS.getCode());
-        this.status.setMessage(ResponseStatusCodeEnum.SUCCESS.getMessage());
-        this.responseObject.setStatus(this.status);
-        this.responseObject.setData(data);
-        return ResponseEntity.ok(this.responseObject);
+        GeneralResponse responseObject = new GeneralResponse();
+        ResponseStatus status = new ResponseStatus();
+
+        status.setCode(ResponseStatusCodeEnum.SUCCESS.getCode());
+        status.setMessage(ResponseStatusCodeEnum.SUCCESS.getMessage());
+        responseObject.setStatus(status);
+        responseObject.setData(data);
+        return ResponseEntity.ok(responseObject);
     }
 
     public ResponseEntity<?>created(Object data){
-        reset();
-        this.status.setCode(ResponseStatusCodeEnum.CREATED.getCode());
-        this.status.setMessage(ResponseStatusCodeEnum.CREATED.getMessage());
-        this.responseObject.setStatus(this.status);
-        this.responseObject.setData(data);
-        return new ResponseEntity<Object>(this.responseObject, HttpStatus.CREATED);
+        GeneralResponse responseObject = new GeneralResponse();
+        ResponseStatus status = new ResponseStatus();
+
+        status.setCode(ResponseStatusCodeEnum.CREATED.getCode());
+        status.setMessage(ResponseStatusCodeEnum.CREATED.getMessage());
+        responseObject.setStatus(status);
+        responseObject.setData(data);
+        return new ResponseEntity<Object>(responseObject, HttpStatus.CREATED);
     }
 
     public ResponseEntity<?>updated() {
-        reset();
-        this.status.setCode(ResponseStatusCodeEnum.UPDATED.getCode());
-        this.status.setMessage(ResponseStatusCodeEnum.UPDATED.getMessage());
-        this.responseObject.setStatus(this.status);
-        return new ResponseEntity<Object>(this.responseObject, HttpStatus.OK);
+        GeneralResponse responseObject = new GeneralResponse();
+        ResponseStatus status = new ResponseStatus();
+
+        status.setCode(ResponseStatusCodeEnum.UPDATED.getCode());
+        status.setMessage(ResponseStatusCodeEnum.UPDATED.getMessage());
+        responseObject.setStatus(status);
+        return new ResponseEntity<Object>(responseObject, HttpStatus.OK);
     }
 
     public ResponseEntity<?>deleted() {
-        reset();
-        return new ResponseEntity(this.responseObject, HttpStatus.NO_CONTENT);
+        return new ResponseEntity(null, HttpStatus.NO_CONTENT);
     }
 
     public ResponseEntity<?>badRequest(String message) {
-        reset();
-        this.status.setCode(ResponseStatusCodeEnum.INVALID_PARAMETER.getCode());
-        this.status.setMessage(message);
-        this.responseObject.setStatus(this.status);
-        return new ResponseEntity<Object>(this.responseObject, HttpStatus.BAD_REQUEST);
+        GeneralResponse responseObject = new GeneralResponse();
+        ResponseStatus status = new ResponseStatus();
+
+        status.setCode(ResponseStatusCodeEnum.INVALID_PARAMETER.getCode());
+        status.setMessage(message);
+        responseObject.setStatus(status);
+        return new ResponseEntity<Object>(responseObject, HttpStatus.BAD_REQUEST);
     }
 
     public ResponseEntity<?>internalServerError(String message) {
-        reset();
-        this.status.setCode(ResponseStatusCodeEnum.INTERNAL_SERVER_ERROR.getCode());
-        this.status.setMessage(message);
-        this.responseObject.setStatus(this.status);
-        return new ResponseEntity<Object>(this.responseObject, HttpStatus.INTERNAL_SERVER_ERROR);
+        GeneralResponse responseObject = new GeneralResponse();
+        ResponseStatus status = new ResponseStatus();
+
+        status.setCode(ResponseStatusCodeEnum.INTERNAL_SERVER_ERROR.getCode());
+        status.setMessage(message);
+        responseObject.setStatus(status);
+        return new ResponseEntity<Object>(responseObject, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     public ResponseEntity<?>duplicateData(String message) {
-        reset();
-        this.status.setCode(ResponseStatusCodeEnum.DUPLICATE_RECORD.getCode());
-        this.status.setMessage(message);
-        this.responseObject.setStatus(this.status);
-        return new ResponseEntity<Object>(this.responseObject, HttpStatus.CONFLICT);
+        GeneralResponse responseObject = new GeneralResponse();
+        ResponseStatus status = new ResponseStatus();
+
+        status.setCode(ResponseStatusCodeEnum.DUPLICATE_RECORD.getCode());
+        status.setMessage(message);
+        responseObject.setStatus(status);
+        return new ResponseEntity<Object>(responseObject, HttpStatus.CONFLICT);
     }
 
-    private void reset(){
-        this.responseObject.setData(null);
-        this.status.setCode(null);
-        this.status.setMessage(null);
-    }
 
 }

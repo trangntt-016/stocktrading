@@ -4,7 +4,7 @@ import com.canada.edu.stocktrading.model.*;
 import com.canada.edu.stocktrading.repository.OrderRepository;
 import com.canada.edu.stocktrading.service.OrderService;
 import com.canada.edu.stocktrading.service.SymbolService;
-import com.canada.edu.stocktrading.service.dto.OrderDto;
+import com.canada.edu.stocktrading.dto.OrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

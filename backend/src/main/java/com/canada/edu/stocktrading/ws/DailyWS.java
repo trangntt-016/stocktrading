@@ -1,4 +1,4 @@
-package com.canada.edu.stocktrading.client.ws;
+package com.canada.edu.stocktrading.ws;
 
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 

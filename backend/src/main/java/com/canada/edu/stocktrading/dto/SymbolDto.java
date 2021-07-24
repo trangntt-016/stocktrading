@@ -1,8 +1,7 @@
-package com.canada.edu.stocktrading.service.dto;
+package com.canada.edu.stocktrading.dto;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Builder
 @Data
