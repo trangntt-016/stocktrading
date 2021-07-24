@@ -1,42 +1,81 @@
 <div class="wrapper" fxLayout="column">
-    <div class="title-wrapper">
-      <div class="title" fxLayout="row" fxLayoutGap="5px">
-        <input matInput placeholder="Symbol">
-        <p>0.580</p>
-        <p>0.000</p>
-        <p>0.00%</p>
-      </div>
+  <div class="title-wrapper">
+    <div class="title" fxLayout="row" fxLayoutGap="5px">
+      <input matInput placeholder="Symbol">
+      <p>0.580</p>
+      <p>0.000</p>
+      <p>0.00%</p>
     </div>
-    <div class="body-wrapper">
-      <div class="body">
-        <div class="side">
-          <h6>Side</h6>
-          <div class="buy-sell-button" fxLayout="row" fxLayoutGap="3px">
-            <div class="buy" (click)="selectBuy()" [ngClass]="(order.orderSide==='BUY')?'selected-buy':'buy'">
-              BUY
-            </div>
-            <div class="sell" (click)="selectSell()" [ngClass]="(order.orderSide==='SELL')?'selected-sell':'sell'">
-              SELL
-            </div>
+  </div>
+  <div class="body-wrapper">
+    <div class="body">
+      <div class="bid-ask">
+        <div class="bid-ask-wrapper" fxLayout="row">
+          <div class="bid">Bid 638.05</div>
+          <div class="diff" fxLayout="row">
+            <div class="half-bid"></div>
+            <div class="half-ask"></div>
+            <div class="diff-price">303.13</div>
           </div>
-        </div>
-        <div class="type-quantity-wrapper">
-          <div class="type">
-            <h6>Order Type</h6>
-            <mat-select [(ngModel)]="order.orderType">
-              <mat-option value="LIMIT">LIMIT</mat-option>
-              <mat-option value="MARKET">MARKET</mat-option>
-            </mat-select>
-          </div>
-          <div class="quantity">
-            <h6>Quantity</h6>
-            <input>
-          </div>
-        </div>
-
-        <div class="limit-price">
-
+          <div class="ask">Ask 638.05</div>
         </div>
       </div>
+
+      <div class="side">
+        <h6>Side</h6>
+        <div class="buy-sell-button" fxLayout="row" fxLayoutGap="3px">
+          <div class="buy" (click)="selectBuy()" [ngClass]="[order.orderSide==='BUY'?'selected-buy':'buy',order.orderSide==='SELL'?'buy-when-sell-selected':'buy']">
+            BUY
+          </div>
+          <div class="sell" (click)="selectSell()"  [ngClass]="[order.orderSide==='SELL'?'selected-sell':'sell',order.orderSide==='BUY'?'sell-when-buy-selected':'sell']">
+            SELL
+          </div>
+        </div>
+      </div>
+
+      <div class="type-quantity-wrapper" fxLayout="row">
+        <div class="type">
+          <h6>Order Type</h6>
+          <mat-select [(ngModel)]="order.orderType">
+            <mat-option value="LIMIT">LIMIT</mat-option>
+            <mat-option value="MARKET">MARKET</mat-option>
+          </mat-select>
+        </div>
+        <div class="quantity">
+          <h6>Quantity</h6>
+          <input matInput placeholder="0" [(ngModel)]="order.filledQuantity">
+        </div>
+      </div>
+
+      <div class="limit-price">
+        <h6>Limit price</h6>
+        <input matInput [(ngModel)]="order.limitPrice">
+      </div>
+
+      <div class="time-hour-wrapper" fxLayout="row">
+        <div class="time">
+          <h6>Time-in-Force</h6>
+          <div class="day-input">Day</div>
+        </div>
+        <div class="hours">
+          <h6>Extended Hours</h6>
+          <div class="hours-input">No</div>
+        </div>
+      </div>
+      <div class="paper-trade" (click)="submit()">
+        <button mat-raised-button color="primary" [ngClass]="{sellBtn: order.orderSide==='SELL',buyBtn: order.orderSide==='BUY'}">Paper Trade</button>
+      </div>
+      <div class="summary">
+        <div class="amount" fxLayout="row" fxLayoutAlign="space-between">
+          <h6>Amount(est.)</h6>
+          <h6>$0.00</h6>
+        </div>
+        <div class="buying-power" fxLayout="row" fxLayoutAlign="space-between">
+          <h6>Buying Power</h6>
+          <h6>$0.00</h6>
+        </div>
+
+      </div>
     </div>
+  </div>
 </div>

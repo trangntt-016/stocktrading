@@ -11,16 +11,19 @@ export class BuysellComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.order.orderType = 'LIMIT';
-    this.order.filledQuantity = 0;
+    this.order = new Order();
   }
 
-  selectBuy(){
-    this.order.orderSide = "BUY"
+  selectBuy() {
+    this.order.orderSide = "BUY";
   }
 
-  selectSell(){
+  selectSell() {
     this.order.orderSide = "SELL";
+  }
+
+  submit(): void{
+    console.log(this.order);
   }
 
 
