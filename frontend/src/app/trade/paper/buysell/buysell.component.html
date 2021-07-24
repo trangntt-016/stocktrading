@@ -1,7 +1,19 @@
 <div class="wrapper" fxLayout="column">
   <div class="title-wrapper">
     <div class="title" fxLayout="row" fxLayoutGap="5px">
-      <input matInput placeholder="Symbol">
+      <input matInput placeholder="Symbol"
+             [matAutocomplete]="auto"
+             [(ngModel)]="searchSymbol"
+             (ngModelChange)="doFilter()"
+      >
+      <mat-autocomplete #auto="matAutocomplete" [panelWidth]="300" class="autocomplete">
+        <mat-option *ngFor="let symbol of symbols" [value]="symbol.symbol">
+          <div class="symbols">
+            <h4>{{symbol.symbol}}</h4>
+            <h5>{{symbol.name | uppercase}}</h5>
+          </div>
+        </mat-option>
+      </mat-autocomplete>
       <p>0.580</p>
       <p>0.000</p>
       <p>0.00%</p>

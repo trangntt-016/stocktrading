@@ -3,6 +3,7 @@ import { DataManagerService } from '../service/data-manager.service';
 import { Symbol } from '../model/Symbol';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { SymbolService } from '../service/symbol.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,11 +16,11 @@ export class NavbarComponent implements OnInit {
   searchSymbol: string;
 
   constructor(
-    private dataService: DataManagerService
+    private symbolService: SymbolService
   ) { }
 
   ngOnInit(): void {
-    //this.symbols$ = this.dataService.getAllSymbols();
+    this.symbols$ = this.symbolService.getAllSymbols();
   }
 
   doFilter(): void{

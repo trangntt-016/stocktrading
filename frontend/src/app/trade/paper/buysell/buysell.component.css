@@ -272,3 +272,65 @@ h6{
 .summary h6{
   margin: 0;
 }
+
+::ng-deep .mat-autocomplete-panel {
+  max-height: 280px !important;
+}
+
+::ng-deep .mat-card-header-text{
+  margin: 0px !important;
+}
+.symbols{
+  display: flex;
+  flex-direction: column;
+}
+
+.symbols h4{
+  margin-bottom: 0px;
+}
+mat-option {
+  height: 60px !important;
+  margin-top:10px;
+  border-botom: 1px solid lightgray;
+}
+
+mat-option:hover{
+  background-color: #d5e7fc !important;
+}
+
+:host ::ng-deep .active{
+  color: #2196F3 !important;
+}
+
+
+::-webkit-scrollbar {
+   width: 8px;
+ }
+
+::-webkit-scrollbar-track {
+   border-radius: 4px;
+   background-color: green;
+ }
+
+mat-autocomplete::-webkit-scrollbar-thumb {
+   border-radius: 4px;
+   background-color: blue;
+}
+
+::ng-deep.autocomplete::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #F5F5F5;
+}
+
+::ng-deep.autocomplete::-webkit-scrollbar
+{
+  width: 10px;
+  background-color: #fff;
+}
+
+::ng-deep.autocomplete::-webkit-scrollbar-thumb
+{
+  background-color: #c6c3c3;
+  border: 2px solid #c6c3c3;
+}
