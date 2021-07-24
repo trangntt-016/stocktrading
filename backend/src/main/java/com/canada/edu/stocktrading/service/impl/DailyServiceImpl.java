@@ -4,7 +4,7 @@ import com.canada.edu.stocktrading.model.Daily;
 import com.canada.edu.stocktrading.repository.DailyRepository;
 import com.canada.edu.stocktrading.service.DailyService;
 import com.canada.edu.stocktrading.dto.DailyDetailsDto;
-import com.canada.edu.stocktrading.dto.DailyDtoWith03MonthSummary;
+import com.canada.edu.stocktrading.dto.DailyDto03MSummary;
 import com.canada.edu.stocktrading.service.utils.ConvertTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,12 +34,12 @@ public class DailyServiceImpl implements DailyService {
         return dailyDtos;
     }
 
-    public DailyDtoWith03MonthSummary findDailyBySymbolId(Integer symbolId){
+    public DailyDto03MSummary findDailyBySymbolId(Integer symbolId){
         Timestamp ts = ConvertTimeUtils.convertCurrentTimeTo14July();
         // returns 1 result => get the first result
         List<Daily> dailies= dailyRepository.findDailiesBySymbolIds(ts, new ArrayList<Integer>(List.of(symbolId)));
         if(dailies.size()>0){
-            return new DailyDtoWith03MonthSummary(dailies.get(0));
+            return new DailyDto03MSummary(dailies.get(0));
         }
         return null;
     }

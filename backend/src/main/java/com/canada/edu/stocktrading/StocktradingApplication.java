@@ -20,7 +20,7 @@ public class StocktradingApplication {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/**")
+                registry.addMapping("/**")
                         .allowedOriginPatterns("*")
                         .allowedMethods("GET","POST","PUT","DELETE");
             }

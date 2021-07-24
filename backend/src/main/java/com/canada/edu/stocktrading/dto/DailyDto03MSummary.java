@@ -1,11 +1,12 @@
 package com.canada.edu.stocktrading.dto;
 
 import com.canada.edu.stocktrading.model.Daily;
+import lombok.Data;
 
 import java.math.BigDecimal;
 
-
-public class DailyDtoWith03MonthSummary extends DailyDto {
+@Data
+public class DailyDto03MSummary extends DailyDto {
     private BigDecimal avg_vol_3_months;
 
     private BigDecimal week_high_52;
@@ -15,7 +16,7 @@ public class DailyDtoWith03MonthSummary extends DailyDto {
     private String symbol;
 
 
-    public DailyDtoWith03MonthSummary(Daily daily) {
+    public DailyDto03MSummary(Daily daily) {
         super(daily);
         this.avg_vol_3_months = daily.getAvg_vol_3_months();
         this.week_high_52 = daily.getWeek_high_52();

@@ -2,10 +2,11 @@ package com.canada.edu.stocktrading.dto;
 
 import com.canada.edu.stocktrading.model.Daily;
 import com.canada.edu.stocktrading.model.Symbol;
+import lombok.Data;
 
 import java.math.BigDecimal;
 
-
+@Data
 public class DailyDetailsDto extends DailyDto {
     private BigDecimal bid;
 

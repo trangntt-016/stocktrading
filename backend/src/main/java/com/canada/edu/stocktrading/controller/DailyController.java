@@ -1,16 +1,16 @@
 package com.canada.edu.stocktrading.controller;
 
-import com.canada.edu.stocktrading.ws.DailyWS;
 import com.canada.edu.stocktrading.service.DailyService;
-import com.canada.edu.stocktrading.dto.DailyDtoWith03MonthSummary;
+import com.canada.edu.stocktrading.dto.DailyDto03MSummary;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class DailyController implements DailyWS {
+public class DailyController {
     private Integer selectedSymbolId;
 
     private final SimpMessagingTemplate simpMessagingTemplate;
@@ -23,10 +23,10 @@ public class DailyController implements DailyWS {
     }
 
     @MessageMapping("/{symbolId}")
-    public String getDaily(Integer symbolId) {
+    public String getDaily(@DestinationVariable Integer symbolId) {
         //update selected symbolId to send schedule
         this.selectedSymbolId = symbolId;
-        DailyDtoWith03MonthSummary daily = dailyService.findDailyBySymbolId(symbolId);
+        DailyDto03MSummary daily = dailyService.findDailyBySymbolId(symbolId);
         if(daily == null){
             return null;
         }
@@ -36,7 +36,7 @@ public class DailyController implements DailyWS {
     @Scheduled(fixedDelay = 10000)
     public void sendScheduledMessage() {
         if(this.selectedSymbolId!=null) {
-            DailyDtoWith03MonthSummary dailies = dailyService.findDailyBySymbolId(this.selectedSymbolId);
+            DailyDto03MSummary dailies = dailyService.findDailyBySymbolId(this.selectedSymbolId);
             if(dailies!=null){
                 this.simpMessagingTemplate.convertAndSend("/topic/"+this.selectedSymbolId,dailies.toString());
             }
