@@ -7,7 +7,7 @@
   width: 20%;
   height: 100%;
   background-color: pink;
-
+  overflow: hidden;
 }
 
 .buysell-order-chart-wrapper{
