@@ -1,0 +1,78 @@
+.wrapper{
+  width: 100%;
+  height: 225px;
+  background-color: blueviolet;
+  overflow: scroll;
+}
+div {
+  max-width: 100em;
+  max-height: 100em;
+  overflow: scroll;
+  position: relative;
+}
+
+table {
+  position: relative;
+  border-collapse: collapse;
+  background-color: #fff;
+}
+
+td,
+th {
+  padding: 0.25em;
+  border-bottom: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+}
+
+p{
+  width: calc(7em);
+  margin: 5px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.name{
+  width: max-content;
+}
+thead th {
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  top: 0;
+  background-color: #f3f1f1;
+  font-size: 12px;
+}
+thead th p{
+  font-weight: 400;
+}
+
+thead th:first-child {
+  left: 0;
+  z-index: 1;
+  border-bottom: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+}
+
+
+tbody th {
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  left: 0;
+  padding-left: 10px;
+  background: #FFF;
+  font-weight: 500;
+  font-size: 13px;
+
+}
+
+tr:hover{
+  background-color: #e1effc;
+  cursor: pointer;
+}
+
+.buy{
+  color: #25b625;
+}
+::-webkit-scrollbar {
+  width: 0px;
+  height: 2px;
+  background: transparent; /* make scrollbar transparent */
+}

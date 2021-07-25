@@ -22,6 +22,9 @@
         <div *ngIf="shouldShowOrder===true" class="op-wrapper">
           <app-order></app-order>
         </div>
+        <div *ngIf="shouldShowOrder===false" class="op-wrapper">
+          <app-position></app-position>
+        </div>
       </div>
     </div>
 
