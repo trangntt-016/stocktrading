@@ -22,12 +22,6 @@
   height: 65%;
 }
 
-.order-wrapper{
-  width: 100%;
-  background-color: red;
-  height: 40%;
-  margin-top: 5px;
-}
 
 .buysell-wrapper{
   width: 35%;
@@ -40,3 +34,40 @@
   height: 100%;
   background-color: aqua;
 }
+
+.order-position-wrapper{
+  width: 100%;
+  height: 40%;
+  margin-top: 5px;
+  padding: 5px 5px 50px 5px;
+  background-color: #fff;
+}
+
+.inner-wrapper{
+  width: 100%;
+  height: 100%;
+}
+
+.position-orders-title{
+  height: 10%;
+  width: 100%;
+  padding: 5px;
+}
+
+.position-orders-title p{
+  line-height: 1;
+}
+
+.position-orders-title p:hover{
+  cursor: pointer;
+}
+
+.op-wrapper{
+  height: 100%;
+  width: 100%;
+}
+.active{
+  color: #2196F3;
+  font-weight: 500;
+}
+

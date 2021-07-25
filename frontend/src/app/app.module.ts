@@ -45,6 +45,7 @@ import { ChartComponent } from './trade/paper/chart/chart.component';
 import { OrderComponent } from './trade/paper/order/order.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
