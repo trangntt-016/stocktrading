@@ -1,15 +1,13 @@
 package com.canada.edu.stocktrading.dto;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
+import java.util.Date;
 
-@Data
-@NoArgsConstructor
-public class HistoricalQuoteDto{
-    private String symbol;
-    private Calendar date;
-    private BigDecimal close;
+public class DailyHistoryDto {
+    Date date;
+    BigDecimal open;
+    BigDecimal close;
+    BigDecimal high;
+    BigDecimal low;
 }
