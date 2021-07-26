@@ -1,4 +1,4 @@
-package com.canada.edu.stocktrading.constant;
+package com.canada.edu.stocktrading.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

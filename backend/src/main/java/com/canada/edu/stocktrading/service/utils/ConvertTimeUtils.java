@@ -9,16 +9,14 @@ import java.util.Date;
 
 public class ConvertTimeUtils {
     public static Calendar getXDaysAgo(int days){
-        Date in = new Date();
-        LocalDateTime ldt = LocalDateTime.ofInstant(in.toInstant(), ZoneId.systemDefault()).minusDays(days);
+        LocalDateTime ldt = convertCurrentTimeTo14July().toLocalDateTime().minusDays(days);
         Date out = Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant());
         Calendar calc = new Calendar.Builder().setInstant(out).build();
         return calc;
     }
 
     public static Calendar getToday(){
-        Date in = new Date();
-        LocalDateTime ldt = LocalDateTime.ofInstant(in.toInstant(), ZoneId.systemDefault());
+        LocalDateTime ldt = convertCurrentTimeTo14July().toLocalDateTime();
         Date out = Date.from(ldt.atZone(ZoneId.of("America/Toronto")).toInstant());
         Calendar today = new Calendar.Builder().setInstant(out).build();
         return today;

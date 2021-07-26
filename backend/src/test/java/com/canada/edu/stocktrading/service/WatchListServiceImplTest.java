@@ -1,5 +1,6 @@
 package com.canada.edu.stocktrading.service;
 
+
 import com.canada.edu.stocktrading.model.AuthenticationType;
 import com.canada.edu.stocktrading.model.Symbol;
 import com.canada.edu.stocktrading.model.User;
@@ -15,10 +16,18 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import yahoofinance.Stock;
+import yahoofinance.YahooFinance;
+import yahoofinance.histquotes.Interval;
 
+import java.io.IOException;
+import java.util.Calendar;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -26,7 +35,6 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class WatchListServiceImplTest {
-
     private static final String USER_ID = "1001";
 
     private static final String WATCH_LIST_NAME = "test";
@@ -43,12 +51,8 @@ public class WatchListServiceImplTest {
     @Mock
     private UserRepository userRepository;
 
-    /**
-     * TEST CASES for create watch list
-     */
-
     @Test
-    public void whenCreateWatchList_byValidUserId_thenReturnData() throws Exception {
+    public void whenCreateWatchList_byValidUserId_thenReturnData() throws IOException {
         User user = buildUser();
         Optional<User> optUser = Optional.of(user);
         when(userRepository.findById(USER_ID)).thenReturn(optUser);

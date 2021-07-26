@@ -12,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.List;
 import java.util.stream.Collectors;
 

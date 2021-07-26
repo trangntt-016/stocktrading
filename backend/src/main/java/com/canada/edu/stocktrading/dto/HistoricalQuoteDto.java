@@ -1,10 +1,13 @@
 package com.canada.edu.stocktrading.dto;
 
 
+import lombok.Data;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class DailyHistoryDto {
+@Data
+public class HistoricalQuoteDto {
     Date date;
     BigDecimal open;
     BigDecimal close;

@@ -1,6 +1,6 @@
 package com.canada.edu.stocktrading.factory;
 
-import com.canada.edu.stocktrading.constant.ResponseStatusCodeEnum;
+import com.canada.edu.stocktrading.enums.ResponseStatusCodeEnum;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
