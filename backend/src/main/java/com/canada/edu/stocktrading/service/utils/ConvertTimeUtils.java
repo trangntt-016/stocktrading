@@ -27,7 +27,7 @@ public class ConvertTimeUtils {
         int hours = now.getHour();
         int minutes = now.getMinute();
         int seconds = now.getSecond();
-        LocalDateTime converted = LocalDateTime.of(2021, Month.JULY,14,hours,minutes,seconds);
+        LocalDateTime converted = LocalDateTime.of(2021, Month.JULY,14,10,minutes,seconds);
         Timestamp ts = Timestamp.valueOf(converted);
         return ts;
     }

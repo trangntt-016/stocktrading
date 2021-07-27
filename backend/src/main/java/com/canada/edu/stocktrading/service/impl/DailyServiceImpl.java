@@ -1,11 +1,13 @@
 package com.canada.edu.stocktrading.service.impl;
 
+import com.canada.edu.stocktrading.dto.DailyBidAskDto;
 import com.canada.edu.stocktrading.model.Daily;
 import com.canada.edu.stocktrading.repository.DailyRepository;
 import com.canada.edu.stocktrading.service.DailyService;
 import com.canada.edu.stocktrading.dto.DailyDetailsDto;
 import com.canada.edu.stocktrading.dto.DailyDto03MSummary;
 import com.canada.edu.stocktrading.service.utils.ConvertTimeUtils;
+import com.canada.edu.stocktrading.service.utils.MapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,5 +44,17 @@ public class DailyServiceImpl implements DailyService {
             return new DailyDto03MSummary(dailies.get(0));
         }
         return null;
+    }
+
+    public DailyBidAskDto getDailyBidAskBySymbolId(Integer symbolId){
+        Timestamp ts = ConvertTimeUtils.convertCurrentTimeTo14July();
+
+        Daily daily = dailyRepository.findCurrentDailyBySymbolId(ts, symbolId);
+
+        DailyBidAskDto dto = MapperUtils.mapperObject(daily, DailyBidAskDto.class);
+
+        dto.setSpread();
+
+        return dto;
     }
 }

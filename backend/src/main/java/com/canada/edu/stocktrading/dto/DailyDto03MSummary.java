@@ -27,7 +27,7 @@ public class DailyDto03MSummary extends DailyDto {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("dailyId:").append(this.dailyId)
                 .append(",timestamp:").append(this.timestamp)

@@ -9,11 +9,12 @@ import com.canada.edu.stocktrading.dto.OrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/orders")
+@RequestMapping("/order")
 public class OrderController {
     @Autowired
     private OrderService orderService;
@@ -22,7 +23,7 @@ public class OrderController {
     private ResponseFactory responseFactory;
 
     @PostMapping
-    public ResponseEntity<?> order(OrderDto order) {
+    public ResponseEntity<?> order(@RequestBody OrderDto order) {
         try{
             Order saved = orderService.save(order);
             return responseFactory.success(saved);

@@ -4,6 +4,7 @@ import com.canada.edu.stocktrading.model.Daily;
 import com.canada.edu.stocktrading.model.Symbol;
 import com.canada.edu.stocktrading.model.WatchList;
 import com.canada.edu.stocktrading.repository.DailyRepository;
+import com.canada.edu.stocktrading.repository.SymbolRepository;
 import com.canada.edu.stocktrading.repository.WatchlistRepository;
 import com.canada.edu.stocktrading.service.utils.ConvertTimeUtils;
 import com.canada.edu.stocktrading.utils.EntityUtils;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,7 +28,11 @@ public class DailyRepositoryTest {
     private WatchlistRepository watchlistRepository;
 
     @Autowired
+    private SymbolRepository symbolRepository;
+
+    @Autowired
     private EntityUtils utils;
+
 
     @Test
     public void testFindAllBySymbolIds(){
@@ -39,5 +45,13 @@ public class DailyRepositoryTest {
         List<Daily>dailies = dailyRepository.findDailiesBySymbolIds(ts, symbolIds);
 
         assertThat(dailies.size()).isEqualTo(symbolIds.size());
+    }
+
+    @Test
+    public void testGetPriceBySymbolId(){
+        Timestamp ts = ConvertTimeUtils.convertCurrentTimeTo14July();
+        Symbol randomSymbol = utils.generateRandomEntity(symbolRepository, symbolRepository.findAll().get(0).getSymbolId());
+        BigDecimal price = dailyRepository.findCurrentPriceBySymbolId(ts, randomSymbol.getSymbolId());
+        assertThat(price).isGreaterThan(new BigDecimal(0));
     }
 }

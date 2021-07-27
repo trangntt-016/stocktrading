@@ -1,13 +1,17 @@
 package com.canada.edu.stocktrading.service.impl;
 
 import com.canada.edu.stocktrading.model.*;
+import com.canada.edu.stocktrading.repository.DailyRepository;
 import com.canada.edu.stocktrading.repository.OrderRepository;
 import com.canada.edu.stocktrading.service.OrderService;
 import com.canada.edu.stocktrading.service.SymbolService;
 import com.canada.edu.stocktrading.dto.OrderDto;
+import com.canada.edu.stocktrading.service.utils.ConvertTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Service
@@ -18,28 +22,35 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     SymbolService symbolService;
 
+    @Autowired
+    DailyRepository dailyRepository;
+
     public Order save(OrderDto order) {
-        Symbol symbol = symbolService.getOneBySymbolId(order.getSymbol().getSymbolId());
+        Timestamp ts = ConvertTimeUtils.convertCurrentTimeTo14July();
 
-        order.setSymbol(symbol);
+        BigDecimal currentPrice = dailyRepository.findCurrentPriceBySymbolId(ts, order.getSymbol().getSymbolId());
 
-        OrderSide orderSide = order.getOrderSide().equals("BUY")?OrderSide.BUY:OrderSide.SELL;
+        OrderType orderType = order.getOrderType().equals("LIMIT") ? OrderType.LIMIT : OrderType.MARKET;
 
-        OrderType orderType = order.getOrderType().equals("LIMIT")?OrderType.LIMIT:OrderType.MARKET;
+        BigDecimal limitPrice = (orderType.name().equals("LIMIT")) ? order.getLimitPrice() : currentPrice;
+
+        OrderStatus status = (currentPrice == limitPrice) ? OrderStatus.FILLED : OrderStatus.WORKING;
+
+        OrderSide orderSide = order.getOrderSide().equals("BUY") ? OrderSide.BUY : OrderSide.SELL;
 
         Order newOrder = Order.builder()
-                .orderPlaced(new Date())
+                .orderPlaced(ConvertTimeUtils.convertCurrentTimeTo14July())
                 .orderSide(orderSide)
                 .orderType(orderType)
-                .orderStatus(OrderStatus.WORKING)
+                .orderStatus(status)
                 .symbol(order.getSymbol())
                 .filledQuantity(order.getFilledQuantity())
+                .limitPrice(limitPrice)
                 .build();
 
-        if (order.getOrderType().equals("LIMIT")) {
-            newOrder.setLimitPrice(order.getLimitPrice());
-        } else {
-            newOrder.setAvgPrice(order.getAvgPrice());
+        if(newOrder.getOrderStatus().equals("FILLED")){
+            // supposing that commission = 0
+            newOrder.setAvgPrice(limitPrice);
         }
 
         return orderRepository.save(newOrder);
