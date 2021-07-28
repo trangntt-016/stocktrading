@@ -13,7 +13,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void configureMessageBroker(MessageBrokerRegistry config) {
         // any application that starts with the word app
         config.setApplicationDestinationPrefixes("/app")
-        .enableSimpleBroker("/topic","/queue");
+        .enableSimpleBroker("/topic","/queue","/user");
+        config.setUserDestinationPrefix("/user");
     }
 
     @Override

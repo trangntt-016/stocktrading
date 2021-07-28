@@ -3,9 +3,11 @@ package com.canada.edu.stocktrading.service.impl;
 import com.canada.edu.stocktrading.model.*;
 import com.canada.edu.stocktrading.repository.DailyRepository;
 import com.canada.edu.stocktrading.repository.OrderRepository;
+import com.canada.edu.stocktrading.repository.UserRepository;
 import com.canada.edu.stocktrading.service.OrderService;
 import com.canada.edu.stocktrading.service.SymbolService;
 import com.canada.edu.stocktrading.dto.OrderDto;
+import com.canada.edu.stocktrading.service.UserService;
 import com.canada.edu.stocktrading.service.utils.ConvertTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -25,7 +29,19 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     DailyRepository dailyRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    UserService userService;
+
     public Order save(OrderDto order) {
+        Optional<User> user = userRepository.findById(order.getUserId());
+
+        if(user.isEmpty()) {
+            throw new IllegalArgumentException("Unable to find user with id " + order.getUserId());
+        }
+
         Timestamp ts = ConvertTimeUtils.convertCurrentTimeTo14July();
 
         BigDecimal currentPrice = dailyRepository.findCurrentPriceBySymbolId(ts, order.getSymbol().getSymbolId());
@@ -46,13 +62,25 @@ public class OrderServiceImpl implements OrderService {
                 .symbol(order.getSymbol())
                 .filledQuantity(order.getFilledQuantity())
                 .limitPrice(limitPrice)
+                .user(user.get())
                 .build();
 
         if(newOrder.getOrderStatus().equals("FILLED")){
             // supposing that commission = 0
             newOrder.setAvgPrice(limitPrice);
         }
+        else{
+            newOrder.setAvgPrice(new BigDecimal(0));
+        }
 
         return orderRepository.save(newOrder);
     }
+
+    public List<Order> getAllOrdersByUserId (String userId) {
+        if (!userService.isUserIdValid(userId)){
+            throw new IllegalArgumentException("Unable to find user with id " + userId);
+        }
+        return orderRepository.getAllOrdersByUserId(userId);
+    }
+
 }

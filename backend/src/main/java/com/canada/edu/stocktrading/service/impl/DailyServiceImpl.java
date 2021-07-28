@@ -49,6 +49,8 @@ public class DailyServiceImpl implements DailyService {
     public DailyBidAskDto getDailyBidAskBySymbolId(Integer symbolId){
         Timestamp ts = ConvertTimeUtils.convertCurrentTimeTo14July();
 
+        System.out.println(ts);
+
         Daily daily = dailyRepository.findCurrentDailyBySymbolId(ts, symbolId);
 
         DailyBidAskDto dto = MapperUtils.mapperObject(daily, DailyBidAskDto.class);

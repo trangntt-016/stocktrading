@@ -6,13 +6,12 @@ import com.canada.edu.stocktrading.dto.DailyDto03MSummary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class DailyController {
+public class DailyWSController {
     private Integer selectedSymbolId;
 
     private final SimpMessagingTemplate simpMessagingTemplate;
@@ -20,7 +19,7 @@ public class DailyController {
     @Autowired
     DailyService dailyService;
 
-    public DailyController(SimpMessagingTemplate simpMessagingTemplate) {
+    public DailyWSController(SimpMessagingTemplate simpMessagingTemplate) {
         this.simpMessagingTemplate = simpMessagingTemplate;
     }
 

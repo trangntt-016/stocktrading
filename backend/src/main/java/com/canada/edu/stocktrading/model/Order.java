@@ -24,6 +24,11 @@ public class Order {
     @Column(name = "order_id")
     private Integer orderId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id",
+            foreignKey=@ForeignKey(name = "FK_USER_ORDER"))
+    private User user;
+
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "symbol_id",
            foreignKey=@ForeignKey(name = "FK_SYMBOL_ORDER"))

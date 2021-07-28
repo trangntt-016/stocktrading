@@ -8,10 +8,9 @@ import com.canada.edu.stocktrading.service.OrderService;
 import com.canada.edu.stocktrading.dto.OrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/order")
@@ -23,7 +22,7 @@ public class OrderController {
     private ResponseFactory responseFactory;
 
     @PostMapping
-    public ResponseEntity<?> order(@RequestBody OrderDto order) {
+    public ResponseEntity<?> createNewOrder(@RequestBody OrderDto order) {
         try{
             Order saved = orderService.save(order);
             return responseFactory.success(saved);
@@ -34,5 +33,20 @@ public class OrderController {
         catch(Exception ex){
             throw new InternalServerException("Unable to create new order.");
         }
+    }
+
+    @GetMapping
+    public ResponseEntity<?> findAllOrdersByUserId(String userId) {
+        try {
+            List<Order> orders = orderService.getAllOrdersByUserId(userId);
+            return this.responseFactory.success(orders);
+        }
+        catch (IllegalArgumentException ex) {
+            throw new BadRequestException(ex.getMessage());
+        }
+        catch (Exception ex) {
+            throw new InternalServerException(ex.getMessage());
+        }
+
     }
 }

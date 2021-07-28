@@ -2,12 +2,13 @@ package com.canada.edu.stocktrading.api;
 
 import com.canada.edu.stocktrading.dto.OrderDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/order")
 public interface OrderApi {
     @PostMapping
-    ResponseEntity<?> order(@RequestBody OrderDto order);
+    ResponseEntity<?> createNewOrder(@RequestBody OrderDto order);
+
+    @GetMapping
+    ResponseEntity<?> findAllOrdersByUserId(@RequestParam String userId);
 }

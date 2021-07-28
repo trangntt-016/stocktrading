@@ -3,6 +3,7 @@ package com.canada.edu.stocktrading.repo;
 import com.canada.edu.stocktrading.model.*;
 import com.canada.edu.stocktrading.repository.OrderRepository;
 import com.canada.edu.stocktrading.repository.SymbolRepository;
+import com.canada.edu.stocktrading.repository.UserRepository;
 import com.canada.edu.stocktrading.service.utils.ConvertTimeUtils;
 import com.canada.edu.stocktrading.utils.EntityUtils;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @SpringBootTest
 public class OrderRepositoryTest {
@@ -24,11 +27,16 @@ public class OrderRepositoryTest {
     private SymbolRepository symbolRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     EntityUtils entityUtils;
 
     @Test
     public void testSaveOrder(){
         Symbol randomSymbol = entityUtils.generateRandomEntity(symbolRepository,symbolRepository.findAll().get(0).getSymbolId());
+
+        User randomUser = entityUtils.generateRandomUser();
 
         Order order = Order.builder()
                 .limitPrice(new BigDecimal(55.5))
@@ -38,6 +46,7 @@ public class OrderRepositoryTest {
                 .filledQuantity(5)
                 .orderPlaced(new Date())
                 .orderStatus(OrderStatus.WORKING)
+                .user(randomUser)
                 .build();
 
         int before = orderRepository.findAll().size();
@@ -61,4 +70,33 @@ public class OrderRepositoryTest {
         orderRepository.updateFilledTime(randomOrder.getOrderId(),ts);
         assertThat(orderRepository.findById(randomOrder.getOrderId()).get().getFilledTime()).isEqualTo(ts);
     }
+
+    @Test
+    public void testGetAllOrdersByUserId(){
+        User randomUsr = this.entityUtils.generateRandomUser();
+
+        List<Order> orders = orderRepository.getAllOrdersByUserId(randomUsr.getUserId());
+
+        if(orders.size() > 0){
+            assertThat(orders.stream().filter(order -> order.getUser().getUserId().equals(randomUsr.getUserId())).collect(Collectors.toList()).size()).isGreaterThan(0);
+        }
+    }
+
+    @Test
+    public void testGetAllByStatus(){
+        List<Order>orders = orderRepository.findAllByStatus(OrderStatus.WORKING);
+
+        if(orders.size()>0){
+            assertThat(orders.stream().filter(o-> o.getOrderStatus().name().equals("WORKING")).collect(Collectors.toList()).size()).isGreaterThan(0);
+        }
+    }
+
+    @Test
+    public void testUpdateAveragePrice(){
+        List<Order>orders = orderRepository.findAllByStatus(OrderStatus.FILLED);
+
+        orderRepository.updateAveragePrice(orders.get(0).getOrderId(), orders.get(0).getLimitPrice());
+    }
+
+
 }

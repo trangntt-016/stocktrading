@@ -16,6 +16,8 @@ import java.util.Date;
 public class OrderDto {
     private Integer orderId;
 
+    private String userId;
+
     private Symbol symbol;
 
     private String orderSide;
@@ -29,5 +31,4 @@ public class OrderDto {
     private BigDecimal avgPrice;
 
     private String orderType;
-
 }
