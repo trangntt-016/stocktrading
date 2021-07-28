@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
 
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 
 @NgModule({
   imports: [
-    ShowHidePasswordModule
+    ShowHidePasswordModule,
+    NgApexchartsModule
   ],
   exports: [
-    ShowHidePasswordModule
+    ShowHidePasswordModule,
+    NgApexchartsModule
   ]
 })
 export class PackagesModule{}

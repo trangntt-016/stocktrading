@@ -7,7 +7,6 @@
           <th><p>Side</p></th>
           <th><p>Filled Orders/Total</p></th>
           <th><p>Limit Price</p></th>
-          <th><p>Stop Price</p></th>
           <th><p>Filled Qty</p></th>
           <th><p>Filled Time</p></th>
           <th><p>Average Price</p></th>
@@ -19,21 +18,20 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <th>GOOGL</th>
-          <td><p>GOOGL LKJHL HJKLKJHLKJ HJKLKJ</p></td>
-          <td><p class="buy">BUY</p></td>
-          <td><p>2</p></td>
-          <td><p>2655.57</p></td>
-          <td><p>0</p></td>
-          <td><p>2</p></td>
-          <td><p>07/23/2021 19:20:20 EST</p></td>
-          <td><p>2662.52</p></td>
-          <td><p>LIMIT</p></td>
+        <tr *ngFor = "let order of orders">
+          <th>{{order.symbol.symbol}}</th>
+          <td><p>{{order.symbol.name}}</p></td>
+          <td><p class="buy">{{order.orderSide}}</p></td>
+          <td><p>{{(order.orderStatus=='WORKING'?0:order.filledQuantity)}}/{{order.filledQuantity}}</p></td>
+          <td><p>{{order.limitPrice}}</p></td>
+          <td><p>{{order.filledQuantity}}</p></td>
+          <td><p>{{(order.filledTime == null)?'-': (order.filledTime | date:'yyyy-MM-dd hh:mm:ss')}}</p></td>
+          <td><p>{{order.avgPrice}}</p></td>
+          <td><p>{{order.orderType}}</p></td>
           <td><p>Day</p></td>
           <td><p>No</p></td>
-          <td><p>07/23/2021 19:20:20 EST</p></td>
-          <td><p>Cancelled</p></td>
+          <td><p>{{order.orderPlaced | date:'yyyy-MM-dd hh:mm:ss'}}</p></td>
+          <td><p>{{order.orderStatus}}</p></td>
         </tr>
         </tbody>
       </table>

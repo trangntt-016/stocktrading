@@ -1,10 +1,12 @@
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
+import { environment } from '../../../../environments/environment';
 
 import { WatchlistService } from '../../../service/watchlist.service';
 import { Watchlist } from '../../../model/Watchlist';
 import { DailyDetails } from '../../../model/DailyDetails';
+import { StockUtils } from '../../../utils/StockUtils';
 
 
 
@@ -19,7 +21,8 @@ export class KeyStatsComponent implements OnInit {
   selectedWatchlist: Watchlist;
   private stompClient;
   private stompClientSub;
-  private serverUrl = "http://localhost:3000/stocks";
+  private serverUrl = environment.stockWS;
+  private utils: StockUtils;
 
   constructor(
     private watchlistService: WatchlistService
@@ -27,7 +30,10 @@ export class KeyStatsComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.utils = new StockUtils();
+
     this.daily = new DailyDetails();
+
     // subscribe to any changes/initialization in the selected watchlist
     this.watchlistService.selectedWatchlistEvt.subscribe(selected => {
       if (selected.symbols.length > 0){
@@ -41,7 +47,7 @@ export class KeyStatsComponent implements OnInit {
       this.selectedSymbolId = daily.symbol.symbolId;
       // subscribe to the selected symbol
       this.stompClient.subscribe(`/topic/${this.selectedSymbolId}`, (daily) => {
-        this.daily = convertToDaily(daily.body);
+        this.daily = this.utils.convertToDaily(daily.body);
       });
       // get updated from new selected symbol id;
       this.stompClient.send(`/app/${this.selectedSymbolId}`, {}, (""));
@@ -63,7 +69,7 @@ export class KeyStatsComponent implements OnInit {
 
     this.stompClient.connect({}, function(frame) {
         copyStompClient.subscribe(`/topic/${symbolId}`, (daily) => {
-          that.daily = convertToDaily(daily.body);
+          that.daily = that.utils.convertToDaily(daily.body);
         });
       copyStompClient.send(`/app/${symbolId}`, {}, (""));
     }, (err) => {
@@ -71,66 +77,4 @@ export class KeyStatsComponent implements OnInit {
     });
   }
 
-
-}
-
-function convertToDaily(newMes): DailyDetails {
-  let daily = new DailyDetails();
-  newMes = newMes.replace("[","").replace("]","");
-  let processed = newMes.split(",");
-  processed.forEach(val => {
-    const array = val.split(":");
-    const key = array[0].replace(",","");
-    const value = array[1].replace(",","");
-    switch(key){
-      case 'dailyId':
-        daily.dailyId = +value;
-        break;
-      case 'timestamp':
-        daily.timestamp = value;
-        break;
-      case 'price':
-        daily.price = +value;
-        break;
-      case 'open':
-        daily.open = +value;
-        break;
-      case 'high':
-        daily.high = +value;
-        break;
-      case 'low':
-        daily.low = +value;
-        break;
-      case 'close':
-        daily.close = +value;
-        break;
-      case 'volume':
-        daily.volume = +value;
-        break;
-      case 'avg_vol_3_months':
-        daily.avg_vol_3_months = +value;
-        break;
-      case 'prev_close':
-        daily.prevClose = +value;
-        break;
-      case 'week_high_52':
-        daily.week_high_52 = +value;
-        break;
-      case 'week_low_52':
-        daily.week_low_52 = +value;
-        break;
-      case 'symbol':
-        daily.symbol = value;
-        break;
-      case 'change':
-        daily.change = value;
-        break;
-      case 'changeInPercent':
-        daily.changeInPercent = value;
-        break;
-      default:
-        null;
-    }
-  });
-  return daily;
 }

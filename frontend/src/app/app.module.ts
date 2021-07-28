@@ -43,6 +43,7 @@ import { PaperWatchlistComponent } from './trade/paper/paper-watchlist/paper-wat
 import { BuysellComponent } from './trade/paper/buysell/buysell.component';
 import { ChartComponent } from './trade/paper/chart/chart.component';
 import { OrderComponent } from './trade/paper/order/order.component';
+import { PositionComponent } from './trade/paper/position/position.component';
 
 
 
@@ -77,7 +78,8 @@ import { OrderComponent } from './trade/paper/order/order.component';
     PaperWatchlistComponent,
     BuysellComponent,
     ChartComponent,
-    OrderComponent
+    OrderComponent,
+    PositionComponent
   ],
     imports: [
         BrowserModule,

@@ -6,7 +6,10 @@ export const environment = {
   production: false,
   watchlistAPI: 'http://localhost:3000/watchlist',
   symbolAPI: 'http://localhost:3000/symbol',
-  userAPI: 'http://localhost:3000/user'
+  userAPI: 'http://localhost:3000/user',
+  yahooAPI: 'http://localhost:3000/yahoo-finance',
+  orderAPI: 'http://localhost:3000/order',
+  stockWS: 'http://localhost:3000/ws'
 };
 
 /*

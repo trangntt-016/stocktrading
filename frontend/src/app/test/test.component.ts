@@ -71,23 +71,9 @@ export class TestComponent implements OnInit{
 //   TESLA(message: string){
 //     this.stompClient.send("/topic/questions",{},(message));
 //   }
-
-   displayedColumns: string[] = ['delete', 'symbol', 'name', 'change', 'changeInPercent', 'open', 'prevClose', 'high', 'low', 'volume'];
-  //dataSource = new MatTableDataSource<Daily>();
-  //bogusDataSource = new MatTableDataSource<Daily>(null);
-  dataSource: any;
-//  displayedColumns = ['position', 'name', 'weight', 'symbol'];
-
-  bogusDataSource = new MatTableDataSource<Daily>(null);
-
-  constructor(
-    private watchlistService: WatchlistService
-  ) {
-  }
-  ngOnInit(): void {
-    this.watchlistService.findAllDailiesByWatchlistId(37).subscribe(dailies => {
-      this.dataSource = new MatTableDataSource<Daily>(dailies);
-    });
+  date: number;
+  ngOnInit() {
+    this.date = new Date(1623729600000).getDate();
   }
 }
 

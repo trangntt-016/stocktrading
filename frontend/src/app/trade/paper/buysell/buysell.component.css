@@ -12,7 +12,7 @@ p{
 
 .title-wrapper{
   background-color: pink;
-  height: 18%;
+  height: 19%;
   width: 100%;
   padding: 50px 10px 5px 10px;
   border-bottom: 1px solid red;
@@ -21,13 +21,17 @@ p{
   width: 100%;
   height: 100%;
 }
+.title p{
+  margin-bottom: 0px;
+}
 input{
   width: 120px;
   border-radius: 3px;
   border: 1px solid lightgray;
   padding-left: 10px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
+  height: 80%;
 }
 input:focus {
   outline-color: transparent;
@@ -53,7 +57,7 @@ input:focus {
 .bid-ask-wrapper{
   height: 100%;
   background-color: green;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
 }
 .bid{
@@ -312,10 +316,6 @@ mat-option:hover{
    background-color: green;
  }
 
-mat-autocomplete::-webkit-scrollbar-thumb {
-   border-radius: 4px;
-   background-color: blue;
-}
 
 ::ng-deep.autocomplete::-webkit-scrollbar-track
 {

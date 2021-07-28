@@ -3,15 +3,89 @@
   height: 100%;
   width: 100%;
 }
+p{
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 0;
+}
 .title-wrapper{
   background-color: pink;
   height: 18%;
   width: 100%;
-  padding: 50px 135px 5px 10px;
+  padding: 50px 10px 5px 10px;
   border-bottom: 1px solid red;
 }
 .title{
-  background-color: green;
   width: 100%;
   height: 100%;
+}
+.title p{
+  margin-bottom: 0px;
+}
+input{
+  width: 120px;
+  border-radius: 3px;
+  border: 1px solid lightgray;
+  padding-left: 10px;
+  font-size: 12px;
+  font-weight: 500;
+  height: 80%;
+}
+input:focus {
+  outline-color: transparent;
+  padding-left: 10px;
+}
+::ng-deep .mat-autocomplete-panel {
+  max-height: 280px !important;
+}
+
+::ng-deep .mat-card-header-text{
+  margin: 0px !important;
+}
+.symbols{
+  display: flex;
+  flex-direction: column;
+}
+
+.symbols h4{
+  margin-bottom: 0px;
+}
+mat-option {
+  height: 60px !important;
+  margin-top:10px;
+  border-botom: 1px solid lightgray;
+}
+
+mat-option:hover{
+  background-color: #d5e7fc !important;
+}
+
+
+.body-wrapper{
+  height: 82%;
+  width: 100%;
+  background-color: #fff;
+  padding:10px
+}
+.title-chart{
+  height: 6%;
+  width: 100%;
+  padding-top: 2px;
+}
+.body{
+  width: 100%;
+  height: 90%;
+}
+
+
+#chart {
+  margin-top: 16px
+}
+.mat-flat-button{
+  line-height: 0;
+  color:#1A237E;
+  font-weight: 400;
+}
+.active{
+  color: #2196F3;
 }

@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Order } from '../../../model/Order';
+import { OrderService } from '../../../service/order.service';
+
+import * as Stomp from 'stompjs';
+import * as SockJS from 'sockjs-client';
+import { environment } from '../../../../environments/environment';
 
 
 @Component({
@@ -7,44 +13,54 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
-  countries = COUNTRIES;
-  constructor() { }
+  order: Order;
+  orders: Order[];
+  private stompClient;
+  private serverUrl = environment.stockWS;
+
+  constructor(
+    private orderService: OrderService
+  ) {
+  }
 
   ngOnInit(): void {
+    this.orderService.selectedOrderEvt.subscribe(order => {
+      this.orders.unshift(order);
+      this.stompClient.subscribe(`/topic/trade/`, (orders) => {
+        console.log(orders);
+      });
+    });
+
+    this.orderService.getAllOrdersByUserId("U_004").subscribe(orders => {
+      this.orders = orders;
+      this.stompClient.subscribe(`/user/U_004/queue/order`, (orders) => {
+        console.log(orders);
+      });
+    });
+
+    this.initializeWebSocketConnection();
   }
+
+  initializeWebSocketConnection(): void {
+
+    console.log('connected to chat ...');
+
+    const ws = new SockJS(this.serverUrl);
+    this.stompClient = Stomp.over(ws);
+    const copyStompClient = this.stompClient;
+
+    const that = this;
+
+    this.stompClient.connect({userId:"U_004"}, function(frame) {
+      copyStompClient.subscribe(`/user/U_004/queue/order`, (daily) => {
+        console.log(daily);
+      });
+
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
 
 }
 
-interface Country {
-  name: string;
-  flag: string;
-  area: number;
-  population: number;
-}
-
-const COUNTRIES: Country[] = [
-  {
-    name: 'Russia',
-    flag: 'f/f3/Flag_of_Russia.svg',
-    area: 17075200,
-    population: 146989754
-  },
-  {
-    name: 'Canada',
-    flag: 'c/cf/Flag_of_Canada.svg',
-    area: 9976140,
-    population: 36624199
-  },
-  {
-    name: 'United States',
-    flag: 'a/a4/Flag_of_the_United_States.svg',
-    area: 9629091,
-    population: 324459463
-  },
-  {
-    name: 'China',
-    flag: 'f/fa/Flag_of_the_People%27s_Republic_of_China.svg',
-    area: 9596960,
-    population: 1409517397
-  }
-];

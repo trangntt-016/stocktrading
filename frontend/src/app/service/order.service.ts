@@ -5,20 +5,28 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
 import { Order } from '../model/Order';
+import { Symbol } from '../model/Symbol';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-
+  @Output()selectedOrderEvt: EventEmitter<Order> = new EventEmitter<Order>();
 
   constructor(
     private http: HttpClient
   ) { }
 
   buysell(order: Order): Observable<any>{
-    console.log(order);
     return this.http.post<any>(`${environment.orderAPI}`, order).pipe(map(res => res.data));
+  }
+
+  sendSelectedOrder(selected: Order): any{
+    this.selectedOrderEvt.emit(selected);
+  }
+
+  getAllOrdersByUserId(userId: string): Observable<any>{
+    return this.http.get<any>(`${environment.orderAPI}?userId=${userId}`).pipe(map(res => res.data));
   }
 }

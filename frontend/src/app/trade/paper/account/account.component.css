@@ -9,15 +9,15 @@
   background-color: pink;
   height: 29%;
   width: 100%;
-  padding: 50px 10px 5px 70px;
-  border-bottom: 1px solid red;
+  padding: 45px 0px 0px 0px;
+  border-bottom: 1px solid lightgray;
 }
 
 .title{
-  background-color: green;
+  background-color: #f3f1f1;
   width: 100%;
   height: 100%;
-  padding-top: 5px;
+  padding: 10px 5px 5px 80px;
 }
 
 p{

@@ -36,7 +36,7 @@ export class YahooFinanceService {
         })],
         chart: {
           type: "candlestick",
-          height: 340,
+          height: 310,
           width: 770
         },
         xaxis: {

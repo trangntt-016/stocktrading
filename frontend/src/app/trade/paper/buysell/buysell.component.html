@@ -1,35 +1,32 @@
 <div class="wrapper" fxLayout="column">
   <div class="title-wrapper">
-    <div class="title" fxLayout="row" fxLayoutGap="5px">
+    <div class="title" fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="left center">
       <input matInput placeholder="Symbol"
              [matAutocomplete]="auto"
              [(ngModel)]="searchSymbol"
              (ngModelChange)="doFilter()"
       >
       <mat-autocomplete #auto="matAutocomplete" [panelWidth]="300" class="autocomplete">
-        <mat-option *ngFor="let symbol of symbols" [value]="symbol.symbol">
+        <mat-option *ngFor="let symbol of autoSymbols" [value]="symbol.symbol">
           <div class="symbols">
             <h4>{{symbol.symbol}}</h4>
             <h5>{{symbol.name | uppercase}}</h5>
           </div>
         </mat-option>
       </mat-autocomplete>
-      <p>0.580</p>
-      <p>0.000</p>
-      <p>0.00%</p>
     </div>
   </div>
   <div class="body-wrapper">
     <div class="body">
-      <div class="bid-ask">
+      <div class="bid-ask" *ngIf="daily != null">
         <div class="bid-ask-wrapper" fxLayout="row">
-          <div class="bid">Bid 638.05</div>
+          <div class="bid">Bid {{daily.bid}}</div>
           <div class="diff" fxLayout="row">
             <div class="half-bid"></div>
             <div class="half-ask"></div>
-            <div class="diff-price">303.13</div>
+            <div class="diff-price">{{daily.spread}}</div>
           </div>
-          <div class="ask">Ask 638.05</div>
+          <div class="ask">Ask {{daily.ask}}</div>
         </div>
       </div>
 
