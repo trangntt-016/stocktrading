@@ -1,5 +1,6 @@
 package com.canada.edu.stocktrading.service.impl;
 
+import com.canada.edu.stocktrading.dto.OrderFilledDto;
 import com.canada.edu.stocktrading.model.*;
 import com.canada.edu.stocktrading.repository.DailyRepository;
 import com.canada.edu.stocktrading.repository.OrderRepository;
@@ -9,11 +10,13 @@ import com.canada.edu.stocktrading.service.SymbolService;
 import com.canada.edu.stocktrading.dto.OrderDto;
 import com.canada.edu.stocktrading.service.UserService;
 import com.canada.edu.stocktrading.service.utils.ConvertTimeUtils;
+import com.canada.edu.stocktrading.service.utils.MapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -81,6 +84,31 @@ public class OrderServiceImpl implements OrderService {
             throw new IllegalArgumentException("Unable to find user with id " + userId);
         }
         return orderRepository.getAllOrdersByUserId(userId);
+    }
+
+    public List<OrderFilledDto> getAllOrdersAfterFilled (Order o) {
+        Timestamp ts = ConvertTimeUtils.convertCurrentTimeTo14July();
+
+        Daily matched = dailyRepository.findMatchedByLimitPriceAndSymbolId(ts.toLocalDateTime().getHour(),ts.toLocalDateTime().getMinute(),ts.toLocalDateTime().getSecond(),o.getLimitPrice() ,o.getSymbol().getSymbolId());
+
+        if(matched!=null){
+            orderRepository.updateOrderStatus(o.getOrderId(),OrderStatus.FILLED);
+
+            orderRepository.updateFilledTime(o.getOrderId(),ts);
+
+            orderRepository.updateAveragePrice(o.getOrderId(), o.getLimitPrice());
+
+            List<Order>updatedOrders = orderRepository.getAllOrdersByUserId(o.getUser().getUserId());
+
+            List<OrderFilledDto> dtos = MapperUtils.mapperList(updatedOrders, OrderFilledDto.class);
+
+            return dtos;
+        }
+        return null;
+    }
+
+    public List<Order> getAllOrdersByStatus (OrderStatus status) {
+        return orderRepository.findAllByStatus(status);
     }
 
 }

@@ -30,7 +30,7 @@ public interface OrderRepository extends JpaRepository<Order,Integer> {
     @Query("UPDATE Order o SET o.avgPrice =:avgPrice WHERE o.orderId =:orderId")
     void updateAveragePrice(Integer orderId, BigDecimal avgPrice);
 
-    @Query("SELECT o FROM Order o WHERE o.user.userId =:userId")
+    @Query("SELECT o FROM Order o WHERE o.user.userId =:userId ORDER BY o.orderPlaced DESC")
     List<Order> getAllOrdersByUserId(String userId);
 
     @Query("SELECT o FROM Order o WHERE o.orderStatus =:status")

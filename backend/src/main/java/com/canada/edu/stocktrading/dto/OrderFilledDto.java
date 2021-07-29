@@ -35,18 +35,22 @@ public class OrderFilledDto {
     private OrderStatus orderStatus;
 
     @Override
-    public String toString() {
+    public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("orderId:").append(this.orderId)
-                .append(",").append(this.symbol.toString())
-                .append(",").append(this.orderSide.toString())
-                .append(",").append(this.filledQuantity)
-                .append(",").append(this.filledTime)
-                .append(",").append(this.limitPrice)
-                .append(",").append(this.avgPrice)
-                .append(",").append(this.orderType.toString())
-                .append(",").append(this.orderPlaced)
-                .append(",").append(this.orderStatus.toString());
+
+        sb.append("OrderFilledDto(orderId=").append(this.orderId)
+                .append(",symbol=").append(this.symbol.getSymbol())
+                .append(",name=").append(this.symbol.getName())
+                .append(",orderSide=").append(this.orderSide.name())
+                .append(",filledQuantity=").append(this.filledQuantity)
+                .append(",filledTime=").append(this.filledTime)
+                .append(",limitPrice=").append(this.limitPrice)
+                .append(",avgPrice=").append(this.avgPrice)
+                .append(",orderType=").append(this.orderType.name())
+                .append(",orderPlaced=").append(this.orderPlaced)
+                .append(",orderStatus=").append(this.orderStatus.name());
+
         return sb.toString();
     }
+
 }

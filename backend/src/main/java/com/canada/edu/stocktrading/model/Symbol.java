@@ -59,7 +59,13 @@ public class Symbol {
 
     @Override
     public String toString(){
-        return symbolId+" symbol - "+name;
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("symbolId:").append(this.symbolId)
+                .append(",symbol:").append(this.symbol)
+                .append(",name:").append(this.name);
+
+        return sb.toString();
     }
 
 

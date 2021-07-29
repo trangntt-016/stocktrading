@@ -20,9 +20,7 @@ public interface DailyRepository extends JpaRepository<Daily, Integer>, CustomDa
     @Query(value = "SELECT * FROM dailies WHERE hour(timestamp) <=:ts AND symbol_id =:symbolId ORDER BY timestamp DESC LIMIT 1", nativeQuery = true)
     Daily findCurrentDailyBySymbolId(Timestamp ts, Integer symbolId);
 
-    @Query(value = "SELECT * FROM dailies WHERE hour(timestamp) =:hour and minute(timestamp) =:minutes and second(timestamp) <=:seconds AND symbol_id =:symbolId AND price =:limitPrice ORDER BY timestamp DESC LIMIT 1", nativeQuery = true)
+    @Query(value = "SELECT * FROM dailies WHERE hour(timestamp) =:hour and minute(timestamp) =:minutes and second(timestamp) <=:seconds AND price =:limitPrice AND symbol_id =:symbolId  ORDER BY timestamp DESC LIMIT 1", nativeQuery = true)
     Daily findMatchedByLimitPriceAndSymbolId(Integer hour, Integer minutes, Integer seconds, BigDecimal limitPrice, Integer symbolId);
 
-    @Query(value="SELECT hour(timestamp) FROM dailies where daily_id = 2",nativeQuery = true)
-    Integer test();
 }

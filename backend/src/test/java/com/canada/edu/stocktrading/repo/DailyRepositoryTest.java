@@ -68,15 +68,11 @@ public class DailyRepositoryTest {
 
             Timestamp ts = ConvertTimeUtils.convertCurrentTimeTo14July();
 
-            Daily d = dailyRepository.findMatchedByLimitPriceAndSymbolId(11,2,3, new BigDecimal(298.06), randomSymbol.getSymbolId());
+            Daily d = dailyRepository.findMatchedByLimitPriceAndSymbolId(ts.toLocalDateTime().getHour(),ts.toLocalDateTime().getMinute(),ts.toLocalDateTime().getSecond(), randomOrder.getLimitPrice(), randomSymbol.getSymbolId());
 
             System.out.println(d);
     }
 
-    @Test
-    public void test(){
-        System.out.println(dailyRepository.test());
-    }
 }
 
 
