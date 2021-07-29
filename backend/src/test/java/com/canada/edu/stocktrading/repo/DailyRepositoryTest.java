@@ -92,6 +92,19 @@ public class DailyRepositoryTest {
         assertThat(found).isGreaterThan(new BigDecimal(0));
     }
 
+    @Test
+    public void testGetAllByTimestampAndSymbolId(){
+        Symbol randomSymbol = this.utils.generateRandomEntity(symbolRepository,symbolRepository.findAll().get(0).getSymbolId());
+
+        Timestamp ts = ConvertTimeUtils.convertCurrentTimeTo14July();
+
+        List<Daily> dailies = dailyRepository.findAllUntilPresentByTimestampAndSymbolId(ts.toLocalDateTime().getHour(), ts.toLocalDateTime().getMinute(), randomSymbol.getSymbolId());
+
+        List<Daily> daliesAfter = dailies.stream().filter(d -> d.getDate().after(ts)).collect(Collectors.toList());
+
+        assertThat(daliesAfter.size()).isEqualTo(0);
+    }
+
 
 }
 

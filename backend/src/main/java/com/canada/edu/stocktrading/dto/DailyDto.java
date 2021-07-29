@@ -37,7 +37,7 @@ public abstract class DailyDto {
     public DailyDto(Daily daily){
         this.dailyId = daily.getDailyId();
 
-        this.timestamp = daily.getTimestamp();
+        this.timestamp = daily.getDate();
 
         this.price = daily.getPrice();
 

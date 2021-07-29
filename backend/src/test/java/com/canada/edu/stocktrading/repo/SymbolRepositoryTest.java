@@ -34,4 +34,13 @@ public class SymbolRepositoryTest {
 
         symbolRepository.delete(randomSymbol);
     }
+
+    @Test
+    public void testGetSymbolIdBySymbol(){
+        Symbol randomSymbol = entityUtils.generateRandomEntity(symbolRepository, symbolRepository.findAll().get(0).getSymbolId());
+
+        Integer id = symbolRepository.findSymbolIdBySymbol(randomSymbol.getSymbol());
+
+        assertThat(id).isEqualTo(randomSymbol.getSymbolId());
+    }
 }

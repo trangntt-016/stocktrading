@@ -23,7 +23,7 @@ public class Daily {
 
     @Column(name = "timestamp",nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date timestamp;
+    private Date date;
 
     @Column(name = "price",nullable = false)
     private BigDecimal price;
@@ -71,7 +71,7 @@ public class Daily {
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("dailyId:").append(this.dailyId)
-                .append(",timestamp:").append(this.timestamp)
+                .append(",timestamp:").append(this.date)
                 .append(",price:").append(this.price)
                 .append(",open:").append(this.open)
                 .append(",high:").append(this.high)
