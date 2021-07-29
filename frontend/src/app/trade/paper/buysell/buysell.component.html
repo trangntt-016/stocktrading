@@ -1,5 +1,5 @@
 <div class="wrapper" fxLayout="column">
-  <div class="title-wrapper">
+  <div class="title-wrapper" fxLayout="row" fxLayoutAlign="space-between">
     <div class="title" fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="left center">
       <input matInput placeholder="Symbol"
              [matAutocomplete]="auto"
@@ -15,6 +15,14 @@
         </mat-option>
       </mat-autocomplete>
     </div>
+    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="showMatched">
+      <p style="width: max-content; margin: 0 20px 0 0">Price in the next 15s: </p>
+      <p  style="width: max-content; margin: 0">{{matchedPrice | currency}}</p>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" *ngIf = "!showMatched">
+      <button mat-button color = accent (click) = "showMatchedPrice()">Show matched price</button>
+    </div>
+
   </div>
   <div class="body-wrapper">
     <div class="body">
