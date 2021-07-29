@@ -10,6 +10,8 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 
+import java.math.BigDecimal;
+
 @Controller
 public class DailyWSController {
     private Integer selectedSymbolId;
@@ -59,6 +61,14 @@ public class DailyWSController {
             if(dailyBidAskDto!=null){
                 this.simpMessagingTemplate.convertAndSend("/topic/trade/"+this.selectedSymbolId,dailyBidAskDto.toString());
             }
+        }
+    }
+
+    @Scheduled(fixedDelay = 15000)
+    public void sendScheduledFuturePrice() {
+        if(this.selectedSymbolId!=null) {
+            BigDecimal matchedPrice = dailyService.getMatchedPriceInNext15sBySymbolId(this.selectedSymbolId);
+            this.simpMessagingTemplate.convertAndSend("/topic/trade/"+this.selectedSymbolId+"/future",matchedPrice);
         }
     }
 }

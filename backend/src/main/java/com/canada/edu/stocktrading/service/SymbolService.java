@@ -9,4 +9,6 @@ public interface SymbolService {
     List<Symbol> getAll();
 
     Symbol getOneBySymbolId(Integer symbolId);
+
+    boolean isSymbolValid(Integer symbolId);
 }

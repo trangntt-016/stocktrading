@@ -27,4 +27,15 @@ public class SymbolServiceIml implements SymbolService {
 
         return found.get();
     }
+
+    @Override
+    public boolean isSymbolValid(Integer symbolId) {
+        try{
+            getOneBySymbolId(symbolId);
+            return true;
+        }
+        catch(IllegalArgumentException ex){
+            return false;
+        }
+    }
 }

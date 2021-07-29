@@ -60,18 +60,38 @@ public class DailyRepositoryTest {
         assertThat(price).isGreaterThan(new BigDecimal(0));
     }
 
-        @Test
-        public void testGetMatchedByLimitPriceAndSymbolId(){
-            Order randomOrder = this.utils.generateRandomEntity(orderRepository, orderRepository.findAll().get(0).getOrderId());
+    @Test
+    public void testGetMatchedByLimitPriceAndSymbolId(){
+        Order randomOrder = this.utils.generateRandomEntity(orderRepository, orderRepository.findAll().get(0).getOrderId());
 
-            Symbol randomSymbol = this.utils.generateRandomEntity(symbolRepository,symbolRepository.findAll().get(0).getSymbolId());
+        Symbol randomSymbol = this.utils.generateRandomEntity(symbolRepository,symbolRepository.findAll().get(0).getSymbolId());
 
-            Timestamp ts = ConvertTimeUtils.convertCurrentTimeTo14July();
+        Timestamp ts = ConvertTimeUtils.convertCurrentTimeTo14July();
 
-            Daily d = dailyRepository.findMatchedByLimitPriceAndSymbolId(ts.toLocalDateTime().getHour(),ts.toLocalDateTime().getMinute(),ts.toLocalDateTime().getSecond(), randomOrder.getLimitPrice(), randomSymbol.getSymbolId());
-
-            System.out.println(d);
+        Daily d = dailyRepository.findMatchedByLimitPriceAndSymbolId(
+                ts.toLocalDateTime().getHour()
+                ,ts.toLocalDateTime().getMinute()
+                ,ts.toLocalDateTime().getSecond()
+                ,randomOrder.getLimitPrice()
+                ,randomSymbol.getSymbolId());
     }
+
+    @Test
+    public void testGetMatchedPriceBySymbolId() {
+        Symbol randomSymbol = this.utils.generateRandomEntity(symbolRepository,symbolRepository.findAll().get(0).getSymbolId());
+
+        Timestamp ts = ConvertTimeUtils.convertCurrentTimeTo14July();
+
+        BigDecimal found = dailyRepository.findMatchedPriceNext15sBySymbolId(
+                ts.toLocalDateTime().getHour()
+                ,ts.toLocalDateTime().getMinute()
+                ,ts.toLocalDateTime().getSecond() + 15
+                ,randomSymbol.getSymbolId()
+        );
+
+        assertThat(found).isGreaterThan(new BigDecimal(0));
+    }
+
 
 }
 

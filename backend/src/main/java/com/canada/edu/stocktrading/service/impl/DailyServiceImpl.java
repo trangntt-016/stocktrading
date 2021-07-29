@@ -6,11 +6,13 @@ import com.canada.edu.stocktrading.repository.DailyRepository;
 import com.canada.edu.stocktrading.service.DailyService;
 import com.canada.edu.stocktrading.dto.DailyDetailsDto;
 import com.canada.edu.stocktrading.dto.DailyDto03MSummary;
+import com.canada.edu.stocktrading.service.SymbolService;
 import com.canada.edu.stocktrading.service.utils.ConvertTimeUtils;
 import com.canada.edu.stocktrading.service.utils.MapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,9 @@ import java.util.List;
 public class DailyServiceImpl implements DailyService {
     @Autowired
     private DailyRepository dailyRepository;
+
+    @Autowired
+    private SymbolService symbolService;
 
     public List<DailyDetailsDto> findAllDailiesBySymbolIds(List<Integer> symbolIds){
         // convert current time to match with the dailies in database 14/7
@@ -49,8 +54,6 @@ public class DailyServiceImpl implements DailyService {
     public DailyBidAskDto getDailyBidAskBySymbolId(Integer symbolId){
         Timestamp ts = ConvertTimeUtils.convertCurrentTimeTo14July();
 
-        System.out.println(ts);
-
         Daily daily = dailyRepository.findCurrentDailyBySymbolId(ts, symbolId);
 
         DailyBidAskDto dto = MapperUtils.mapperObject(daily, DailyBidAskDto.class);
@@ -58,5 +61,18 @@ public class DailyServiceImpl implements DailyService {
         dto.setSpread();
 
         return dto;
+    }
+
+    public BigDecimal getMatchedPriceInNext15sBySymbolId(Integer symbolId) {
+        if(!symbolService.isSymbolValid(symbolId)){
+            throw new IllegalArgumentException("Unable to find symbol with id " + symbolId);
+        }
+        Timestamp ts = ConvertTimeUtils.convertCurrentTimeTo14July();
+
+        return dailyRepository.findMatchedPriceNext15sBySymbolId(
+                ts.toLocalDateTime().getHour()
+                ,ts.toLocalDateTime().getMinute()
+                ,ts.toLocalDateTime().getSecond() + 15
+                ,symbolId);
     }
 }
