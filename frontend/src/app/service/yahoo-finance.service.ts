@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Watchlist } from '../model/Watchlist';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
-import { HistoricalQuoteDto } from '../model/HistoricalQuoteDto';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +20,9 @@ export class YahooFinanceService {
       let data = new Array();
 
       rawData.forEach(raw => {
+        console.log(raw.date);
         const object = Object.assign({
-          x: new Date(raw.date),
+          x: new Date(raw.date).getTime(),
           y: Array.of(raw.open.toFixed(2), raw.high.toFixed(2), raw.low.toFixed(2), raw.close.toFixed(2))
         });
         data.push(object);

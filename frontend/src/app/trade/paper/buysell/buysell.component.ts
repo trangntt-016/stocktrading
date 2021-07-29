@@ -42,6 +42,7 @@ export class BuysellComponent implements OnInit {
       this.symbols = s;
       this.autoSymbols = s;
       this.searchSymbol = s[0].symbol;
+      this.symbolService.sendSelectedSymbol(s[0]);
       this.initializeWebSocketConnection(s[0].symbolId);
     });
 

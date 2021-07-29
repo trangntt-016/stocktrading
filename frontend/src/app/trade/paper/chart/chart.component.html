@@ -7,24 +7,21 @@
                (ngModelChange)="doFilter()"
         >
         <mat-autocomplete #auto="matAutocomplete" [panelWidth]="300" class="autocomplete">
-          <mat-option *ngFor="let symbol of (symbols$ | async) " [value]="symbol.symbol">
+          <mat-option *ngFor="let symbol of symbols" [value]="symbol.symbol">
             <div class="symbols">
               <h4>{{symbol.symbol}}</h4>
               <h5>{{symbol.name | uppercase}}</h5>
             </div>
           </mat-option>
         </mat-autocomplete>
-        <p>0.580</p>
-        <p>0.000</p>
-        <p>0.00%</p>
     </div>
   </div>
   <div class="body-wrapper">
     <div class="title-chart" fxLayout="row" fxLayoutGap="20px">
-      <button mat-flat-button (click)="setInterval(30)" [ngClass]="interval===30?'active':''">01 Month</button>
       <button mat-flat-button (click)="setInterval(90)" [ngClass]="interval===90?'active':''">03 Months</button>
       <button mat-flat-button (click)="setInterval(180)" [ngClass]="interval===180?'active':''">06 Months</button>
       <button mat-flat-button (click)="setInterval(365)" [ngClass]="interval===365?'active':''">01 Year</button>
+      <button mat-flat-button (click)="setInterval(1)" [ngClass]="interval===1?'active':''">Today</button>
     </div>
     <div class="body">
       <div id="chart" *ngIf="chartOptions!=null">

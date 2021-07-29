@@ -2,7 +2,7 @@ import {Symbol} from './Symbol';
 
 export interface Daily{
   dailyId: number;
-  timestamp: Date;
+  date: Date;
   open: number;
   high: number;
   low: number;

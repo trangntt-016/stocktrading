@@ -21,7 +21,9 @@ export type ChartOptions = {
   styleUrls: ['./chart.component.css']
 })
 export class ChartComponent implements OnInit {
-  symbols$: Observable<Symbol[]>;
+  symbols: Symbol[];
+
+  autoSymbols: Symbol[];
 
   interval: number;
 
@@ -38,18 +40,26 @@ export class ChartComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.interval = 30;
-    this.yahooService.getHistoricalQuotes("AMZN",this.interval).subscribe(res=>{
-      this.chartOptions = res;
+    this.interval = 90;
+
+    this.symbolService.selectedSymbolEvt.subscribe(symbol => {
+      this.searchSymbol = symbol.symbol;
+      this.yahooService.getHistoricalQuotes(symbol.symbol,this.interval).subscribe(res=>{
+        this.chartOptions = res;
+      })
     })
 
-    this.symbols$ = this.symbolService.getAllSymbols();
+    this.symbolService.getAllSymbols().subscribe(symbols => {
+      this.symbols = symbols;
+    });
   }
 
   doFilter(): void{
-    this.symbols$ = this.symbols$
-      .pipe(map(symbols => this.filter(symbols)),
-      );
+    this.autoSymbols = this.filter(this.symbols);
+    const symbol = this.symbols.filter(s => s.symbol === this.searchSymbol)[0];
+    if (symbol !== undefined) {
+      this.symbolService.sendSelectedSymbol(symbol);
+    }
   }
 
   filter(values): any{

@@ -23,8 +23,8 @@ export class StockUtils {
         case 'dailyId':
           daily.dailyId = +value;
           break;
-        case 'timestamp':
-          daily.timestamp = value;
+        case 'date':
+          daily.date = value;
           break;
         case 'price':
           daily.price = +value;

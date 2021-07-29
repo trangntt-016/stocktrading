@@ -1,6 +1,6 @@
 export class DailyDetails {
   dailyId: number;
-  timestamp: Date;
+  date: Date;
   price: number;
   open: number;
   high: number;
