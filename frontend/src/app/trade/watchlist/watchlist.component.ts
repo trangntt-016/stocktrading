@@ -36,7 +36,7 @@ export class WatchlistComponent implements OnInit, OnDestroy {
     });
     this.watchlistService.selectedWatchlistEvt.subscribe(selectedWatchList => {
       this.selectedWatchlist = selectedWatchList;
-    })
+    });
 
     this.symbols$ = this.symbolService.getAllSymbols();
 

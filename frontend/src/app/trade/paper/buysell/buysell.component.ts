@@ -108,7 +108,7 @@ export class BuysellComponent implements OnInit {
     const that = this;
 
     this.stompClient.connect({}, function(frame) {
-      copyStompClient.subscribe(`/topic/trade/${symbolId}`, (daily) => {
+      copyStompClient.subscribe(`/user/U_004/topic/trade/${symbolId}`, (daily) => {
         that.daily = that.utils.convertToDailyBidAsk(daily.body);
         console.log(that.daily);
       });

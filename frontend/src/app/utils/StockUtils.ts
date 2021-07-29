@@ -2,6 +2,7 @@ import { DailyDetails } from '../model/DailyDetails';
 import { DailyBidAsk } from '../model/DailyBidAsk';
 import { Order } from '../model/Order';
 import { OrderFilled } from '../model/OrderFilled';
+import { DailyPriceChange } from '../model/DailyPriceChange';
 
 export class StockUtils {
   public setIntervalImmediately(func, interval: number) {
@@ -122,7 +123,7 @@ export class StockUtils {
 
       orderArr[orderArr.length - 1] = orderArr[orderArr.length - 1].replace(')','');
 
-      let orderFilled = new OrderFilled();
+      const orderFilled = new OrderFilled();
 
       let order = new Order();
       orderArr.forEach(data => {
@@ -169,11 +170,59 @@ export class StockUtils {
             null;
         }
       });
-      console.log(orderFilled);
       order = order.convertToOrder(orderFilled);
       returnedOrder.push(order);
     });
     return returnedOrder;
+  }
+
+  convertToDailyPriceChange(dailies: String): DailyPriceChange[]{
+    const dailiesPriceChange = new Array();
+
+    dailies = dailies.replace('[', '').replace(']', '');
+
+    const processed = dailies.split('DailyDtoPriceChange(');
+
+    processed.shift();
+
+    processed.forEach(d => {
+      const dailyPriceChage = new DailyPriceChange();
+
+      const dailiesArr = d.split(',');
+
+      dailiesArr.pop();
+
+      dailiesArr[dailiesArr.length - 1] = dailiesArr[dailiesArr.length - 1].replace(')','');
+
+      dailiesArr.forEach(data => {
+        data = data.trim();
+
+        const keyvalue = data.split('=');
+        const key = keyvalue[0];
+        const value = keyvalue[1];
+        switch (key) {
+          case 'symbol':
+            dailyPriceChage.symbol = value;
+            break;
+          case 'price':
+            dailyPriceChage.price = +value;
+            break;
+          case 'change':
+            dailyPriceChage.change = +value;
+            break;
+          case 'changeInPercent':
+            dailyPriceChage.changeInPercent = +value;
+            break;
+          case 'prevClose':
+            dailyPriceChage.prevClose = +value;
+            break;
+          default:
+            null;
+        }
+      })
+      dailiesPriceChange.push(dailyPriceChage);
+    })
+    return dailiesPriceChange;
   }
 
 }

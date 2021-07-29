@@ -1,4 +1,3 @@
-
 export class DailyDetails {
   dailyId: number;
   timestamp: Date;
