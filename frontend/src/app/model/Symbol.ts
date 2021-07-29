@@ -1,5 +1,7 @@
-export interface Symbol {
+export class Symbol {
   symbolId: number;
   symbol: string;
   name: string;
+  constructor() {
+  }
 }

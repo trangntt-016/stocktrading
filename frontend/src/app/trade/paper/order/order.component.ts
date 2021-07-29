@@ -5,6 +5,7 @@ import { OrderService } from '../../../service/order.service';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import { environment } from '../../../../environments/environment';
+import { StockUtils } from '../../../utils/StockUtils';
 
 
 @Component({
@@ -15,6 +16,7 @@ import { environment } from '../../../../environments/environment';
 export class OrderComponent implements OnInit {
   order: Order;
   orders: Order[];
+  private utils: StockUtils;
   private stompClient;
   private serverUrl = environment.stockWS;
 
@@ -24,17 +26,20 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.utils = new StockUtils();
+
     this.orderService.selectedOrderEvt.subscribe(order => {
       this.orders.unshift(order);
       this.stompClient.subscribe(`/topic/trade/`, (orders) => {
-        console.log(orders);
+        console.log(orders.data);
       });
     });
 
     this.orderService.getAllOrdersByUserId("U_004").subscribe(orders => {
       this.orders = orders;
       this.stompClient.subscribe(`/user/U_004/queue/order`, (orders) => {
-        console.log(orders);
+        this.orders = this.utils.convertToOrders(orders.body);
+        console.log(this.orders);
       });
     });
 
@@ -52,8 +57,9 @@ export class OrderComponent implements OnInit {
     const that = this;
 
     this.stompClient.connect({userId:"U_004"}, function(frame) {
-      copyStompClient.subscribe(`/user/U_004/queue/order`, (daily) => {
-        console.log(daily);
+      copyStompClient.subscribe(`/user/U_004/queue/order`, (orders) => {
+        that.orders = that.utils.convertToOrders(orders.body);
+        console.log(that.orders);
       });
 
     }, (err) => {

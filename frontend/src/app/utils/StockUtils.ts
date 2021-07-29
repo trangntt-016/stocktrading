@@ -1,8 +1,10 @@
 import { DailyDetails } from '../model/DailyDetails';
 import { DailyBidAsk } from '../model/DailyBidAsk';
+import { Order } from '../model/Order';
+import { OrderFilled } from '../model/OrderFilled';
 
-export class StockUtils{
-  public setIntervalImmediately(func, interval: number){
+export class StockUtils {
+  public setIntervalImmediately(func, interval: number) {
     func;
     console.log(interval);
     return setInterval(func, interval);
@@ -10,13 +12,13 @@ export class StockUtils{
 
   public convertToDaily(newMes): DailyDetails {
     let daily = new DailyDetails();
-    newMes = newMes.replace("[","").replace("]","");
-    let processed = newMes.split(",");
+    newMes = newMes.replace('[', '').replace(']', '');
+    let processed = newMes.split(',');
     processed.forEach(val => {
-      const array = val.split(":");
-      const key = array[0].replace(",","");
-      const value = array[1].replace(",","");
-      switch(key){
+      const array = val.split(':');
+      const key = array[0].replace(',', '');
+      const value = array[1].replace(',', '');
+      switch (key) {
         case 'dailyId':
           daily.dailyId = +value;
           break;
@@ -70,7 +72,7 @@ export class StockUtils{
   }
 
   public convertToDailyBidAsk(newMes): DailyBidAsk {
-    let daily = new DailyBidAsk();
+    const daily = new DailyBidAsk();
 
     newMes = newMes.replace('[', '').replace(']', '');
 
@@ -97,6 +99,81 @@ export class StockUtils{
       }
     });
     return daily;
+  }
+
+  public convertToOrders(order): Order[] {
+    const returnedOrder = new Array();
+
+    order = order.replace('[', '').replace(']', '');
+
+    const processed = order.split('OrderFilledDto(');
+
+    processed.shift();
+
+    processed.forEach(o => {
+      const orderArr = o.split(',');
+
+      orderArr.pop();
+
+      if (!orderArr[3].includes('=')) {
+        orderArr[2] = orderArr[2] + ',' + orderArr[3];
+      }
+      orderArr.splice(3, 1);
+
+      orderArr[orderArr.length - 1] = orderArr[orderArr.length - 1].replace(')','');
+
+      let orderFilled = new OrderFilled();
+
+      let order = new Order();
+      orderArr.forEach(data => {
+        data = data.trim();
+
+        const keyvalue = data.split('=');
+        const key = keyvalue[0];
+        const value = keyvalue[1];
+        switch (key) {
+          case 'orderId':
+            orderFilled.orderId = +value;
+            break;
+          case 'symbol':
+            orderFilled.symbol = value;
+            break;
+          case 'name':
+            orderFilled.name = value;
+            break;
+          case 'orderSide':
+            orderFilled.orderSide = value;
+            break;
+          case 'filledQuantity':
+            orderFilled.filledQuantity = +value;
+            break;
+          case 'filledTime':
+            orderFilled.filledTime = value;
+            break;
+          case 'limitPrice':
+            orderFilled.limitPrice = +value;
+            break;
+          case 'avgPrice':
+            orderFilled.avgPrice = +value;
+            break;
+          case 'orderType':
+            orderFilled.orderType = value;
+            break;
+          case 'orderPlaced':
+            orderFilled.orderPlaced = value;
+            break;
+          case 'orderStatus':
+            orderFilled.orderStatus = value;
+            break;
+          default:
+            null;
+        }
+      });
+      console.log(orderFilled);
+      order = order.convertToOrder(orderFilled);
+      returnedOrder.push(order);
+    });
+    return returnedOrder;
   }
 
 }

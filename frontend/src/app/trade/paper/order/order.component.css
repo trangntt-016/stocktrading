@@ -67,6 +67,10 @@ tr:hover{
 .buy{
   color: #25b625;
 }
+
+.sell{
+  color: #E91E63;
+}
 ::-webkit-scrollbar {
   width: 0px;
   height: 2px;

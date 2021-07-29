@@ -1,4 +1,5 @@
 import {Symbol} from './Symbol';
+import { OrderFilled } from './OrderFilled';
 
 export class Order{
   orderId: number;
@@ -6,7 +7,7 @@ export class Order{
   symbol: Symbol;
   orderSide: string;
   filledQuantity: number;
-  filledTime: Date;
+  filledTime: string;
   limitPrice: number;
   avgPrice: number;
   orderType: string;
@@ -23,5 +24,25 @@ export class Order{
     this.orderType = 'LIMIT';
     this.orderPlaced = null;
     this.orderStatus = null;
+  }
+
+  convertToOrder(o: OrderFilled):Order{
+    this.symbol = new Symbol();
+
+    this.orderId = o.orderId;
+    this.symbol.symbol = o.symbol;
+    this.symbol.name = o.name;
+    this.symbol = this.symbol;
+    this.symbol.name = o.name;
+    this.orderSide = o.orderSide;
+    this.filledQuantity = o.filledQuantity;
+
+    this.filledTime = (o.filledTime=="null")?null:o.filledTime;
+    this.limitPrice = o.limitPrice;
+    this.avgPrice = o.limitPrice;
+    this.orderType = o.orderType;
+    this.orderPlaced = (o.orderPlaced=="null")?null:o.orderPlaced;
+    this.orderStatus = o.orderStatus;
+    return this;
   }
 }
