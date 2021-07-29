@@ -7,14 +7,14 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-public class DailyDetailsDto extends DailyDto {
+public class DailyDtoDetails extends DailyDto {
     private BigDecimal bid;
 
     private BigDecimal ask;
 
     private Symbol symbol;
 
-    public DailyDetailsDto(Daily daily) {
+    public DailyDtoDetails(Daily daily) {
         super(daily);
         this.bid = daily.getBid();
         this.ask = daily.getAsk();

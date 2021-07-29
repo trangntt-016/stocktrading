@@ -8,7 +8,7 @@ import com.canada.edu.stocktrading.service.DailyService;
 import com.canada.edu.stocktrading.service.SymbolService;
 import com.canada.edu.stocktrading.service.impl.UserServiceImpl;
 import com.canada.edu.stocktrading.service.WatchListService;
-import com.canada.edu.stocktrading.dto.DailyDetailsDto;
+import com.canada.edu.stocktrading.dto.DailyDtoDetails;
 import com.canada.edu.stocktrading.dto.WatchListDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -101,7 +101,7 @@ public class WatchListController implements WatchListApi {
     @Override
     public ResponseEntity<?> getAllDailiesByWatchListId(Integer watchlistId) {
         try{
-            List<DailyDetailsDto> dailies = watchlistService.getAllDailiesByWatchListId(watchlistId);
+            List<DailyDtoDetails> dailies = watchlistService.getAllDailiesByWatchListId(watchlistId);
 
             return responseFactory.success(dailies);
         }

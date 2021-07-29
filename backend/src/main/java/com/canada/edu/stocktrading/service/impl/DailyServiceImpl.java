@@ -1,10 +1,10 @@
 package com.canada.edu.stocktrading.service.impl;
 
-import com.canada.edu.stocktrading.dto.DailyBidAskDto;
+import com.canada.edu.stocktrading.dto.DailyDtoBidAsk;
 import com.canada.edu.stocktrading.model.Daily;
 import com.canada.edu.stocktrading.repository.DailyRepository;
 import com.canada.edu.stocktrading.service.DailyService;
-import com.canada.edu.stocktrading.dto.DailyDetailsDto;
+import com.canada.edu.stocktrading.dto.DailyDtoDetails;
 import com.canada.edu.stocktrading.dto.DailyDto03MSummary;
 import com.canada.edu.stocktrading.service.SymbolService;
 import com.canada.edu.stocktrading.service.utils.ConvertTimeUtils;
@@ -25,17 +25,17 @@ public class DailyServiceImpl implements DailyService {
     @Autowired
     private SymbolService symbolService;
 
-    public List<DailyDetailsDto> findAllDailiesBySymbolIds(List<Integer> symbolIds){
+    public List<DailyDtoDetails> findAllDailiesBySymbolIds(List<Integer> symbolIds){
         // convert current time to match with the dailies in database 14/7
         Timestamp ts = ConvertTimeUtils.convertCurrentTimeTo14July();
 
         List<Daily>dailies = dailyRepository.findDailiesBySymbolIds(ts, symbolIds);
 
-        List<DailyDetailsDto>dailyDtos = new ArrayList<>();
+        List<DailyDtoDetails>dailyDtos = new ArrayList<>();
 
-        // convert to DailyDto
+        // convert to DailyDtoDetails
         dailies.stream().forEach(daily->{
-            DailyDetailsDto dailyDto = new DailyDetailsDto(daily);
+            DailyDtoDetails dailyDto = new DailyDtoDetails(daily);
             dailyDtos.add(dailyDto);
         });
         return dailyDtos;
@@ -51,12 +51,12 @@ public class DailyServiceImpl implements DailyService {
         return null;
     }
 
-    public DailyBidAskDto getDailyBidAskBySymbolId(Integer symbolId){
+    public DailyDtoBidAsk getDailyBidAskBySymbolId(Integer symbolId){
         Timestamp ts = ConvertTimeUtils.convertCurrentTimeTo14July();
 
         Daily daily = dailyRepository.findCurrentDailyBySymbolId(ts, symbolId);
 
-        DailyBidAskDto dto = MapperUtils.mapperObject(daily, DailyBidAskDto.class);
+        DailyDtoBidAsk dto = MapperUtils.mapperObject(daily, DailyDtoBidAsk.class);
 
         dto.setSpread();
 
@@ -75,4 +75,6 @@ public class DailyServiceImpl implements DailyService {
                 ,ts.toLocalDateTime().getSecond() + 15
                 ,symbolId);
     }
+
+
 }

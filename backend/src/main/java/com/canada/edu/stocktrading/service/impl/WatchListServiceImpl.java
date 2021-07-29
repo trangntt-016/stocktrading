@@ -1,18 +1,25 @@
 package com.canada.edu.stocktrading.service.impl;
 
+import com.canada.edu.stocktrading.dto.DailyDtoPriceChange;
+import com.canada.edu.stocktrading.model.Daily;
 import com.canada.edu.stocktrading.model.Symbol;
 import com.canada.edu.stocktrading.model.User;
 import com.canada.edu.stocktrading.model.WatchList;
+import com.canada.edu.stocktrading.repository.DailyRepository;
 import com.canada.edu.stocktrading.repository.WatchlistRepository;
 import com.canada.edu.stocktrading.service.DailyService;
 import com.canada.edu.stocktrading.service.SymbolService;
 import com.canada.edu.stocktrading.service.WatchListService;
-import com.canada.edu.stocktrading.dto.DailyDetailsDto;
+import com.canada.edu.stocktrading.dto.DailyDtoDetails;
 import com.canada.edu.stocktrading.dto.WatchListDto;
+import com.canada.edu.stocktrading.service.utils.ConvertTimeUtils;
 import com.canada.edu.stocktrading.service.utils.MapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -22,6 +29,9 @@ public class WatchListServiceImpl implements WatchListService {
 
     @Autowired
     private WatchlistRepository watchlistRepository;
+
+    @Autowired
+    private DailyRepository dailyRepository;
 
     @Autowired
     private UserServiceImpl userEntityService;
@@ -92,7 +102,7 @@ public class WatchListServiceImpl implements WatchListService {
     }
 
     @Override
-    public List<DailyDetailsDto> getAllDailiesByWatchListId(Integer watchlistId) {
+    public List<DailyDtoDetails> getAllDailiesByWatchListId(Integer watchlistId) {
         Optional<WatchList> watchlist = watchlistRepository.findById(watchlistId);
 
         if(watchlist.isEmpty()){
@@ -106,6 +116,31 @@ public class WatchListServiceImpl implements WatchListService {
         List<Integer>symbolIds = watchlist.get().getSymbols().stream().map(Symbol::getSymbolId).collect(Collectors.toList());
 
         return dailyService.findAllDailiesBySymbolIds(symbolIds);
+    }
+
+    @Override
+    public List<DailyDtoPriceChange> getAllDailyDtoPriceChangeByWatchListId(Integer watchlistId){
+        if(!isWatchlistValid(watchlistId)) throw new IllegalArgumentException("Unable to find watchlist with id " + watchlistId);
+
+        Optional<WatchList> watchlist = watchlistRepository.findById(watchlistId);
+
+        if(watchlist.get().getSymbols().size() == 0) return null;
+
+        Timestamp ts = ConvertTimeUtils.convertCurrentTimeTo14July();
+
+        List<Integer>symbolIds = watchlist.get().getSymbols().stream().map(Symbol::getSymbolId).collect(Collectors.toList());
+
+        List<Daily> dailies = dailyRepository.findDailiesBySymbolIds(ts, symbolIds);
+
+        List<DailyDtoPriceChange> dtos = new ArrayList<>();
+
+        for (Daily daily : dailies) {
+            DailyDtoPriceChange dto = new DailyDtoPriceChange(daily);
+
+            dtos.add(dto);
+        }
+
+        return dtos;
     }
 
     @Override
@@ -128,5 +163,23 @@ public class WatchListServiceImpl implements WatchListService {
         catch(IllegalArgumentException ex){
             throw new IllegalStateException(ex.getMessage());
         }
+    }
+
+    @Override
+    public Boolean isWatchlistValid(Integer watchlistId) {
+        Optional<WatchList> watchlist = watchlistRepository.findById(watchlistId);
+
+        if(watchlist.isEmpty()){
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String getUserIdByWatchlistId(Integer watchlistId) {
+        if(!isWatchlistValid(watchlistId)){
+            throw new IllegalArgumentException("Unable to find a watchlist with id " + watchlistId);
+        }
+        return watchlistRepository.findById(watchlistId).get().getUser().getUserId();
     }
 }

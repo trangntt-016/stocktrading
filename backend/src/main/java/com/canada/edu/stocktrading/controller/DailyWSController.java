@@ -1,6 +1,6 @@
 package com.canada.edu.stocktrading.controller;
 
-import com.canada.edu.stocktrading.dto.DailyBidAskDto;
+import com.canada.edu.stocktrading.dto.DailyDtoBidAsk;
 import com.canada.edu.stocktrading.service.DailyService;
 import com.canada.edu.stocktrading.dto.DailyDto03MSummary;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,14 +50,14 @@ public class DailyWSController {
     public String getDailyWithBidAsk(@DestinationVariable Integer symbolId) {
         //update selected symbolId to send schedule
         this.selectedSymbolId = symbolId;
-        DailyBidAskDto dailyBidAskDto = dailyService.getDailyBidAskBySymbolId(symbolId);
+        DailyDtoBidAsk dailyBidAskDto = dailyService.getDailyBidAskBySymbolId(symbolId);
         return dailyBidAskDto.toString();
     }
 
     @Scheduled(fixedDelay = 3000)
     public void sendScheduledDailyBidAsk() {
         if(this.selectedSymbolId!=null) {
-            DailyBidAskDto dailyBidAskDto = dailyService.getDailyBidAskBySymbolId(this.selectedSymbolId);
+            DailyDtoBidAsk dailyBidAskDto = dailyService.getDailyBidAskBySymbolId(this.selectedSymbolId);
             if(dailyBidAskDto!=null){
                 this.simpMessagingTemplate.convertAndSend("/topic/trade/"+this.selectedSymbolId,dailyBidAskDto.toString());
             }

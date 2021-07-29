@@ -6,7 +6,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-public class DailyBidAskDto {
+public class DailyDtoBidAsk {
     private BigDecimal bid;
 
     private BigDecimal ask;
