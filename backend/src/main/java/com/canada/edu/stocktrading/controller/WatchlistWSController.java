@@ -15,6 +15,7 @@ import java.util.List;
 @Controller
 public class WatchlistWSController {
     private Integer selectedWatchlistId;
+
     private String watchlistUserId;
 
     private final SimpMessagingTemplate simpMessagingTemplate;

@@ -15,11 +15,10 @@ import java.util.List;
 
 @Controller
 public class OrderWSController {
+    private final SimpMessagingTemplate simpMessagingTemplate;
 
     @Autowired
     WebSocketEventListener webSocketEventListener;
-
-    private final SimpMessagingTemplate simpMessagingTemplate;
 
     @Autowired
     DailyService dailyService;

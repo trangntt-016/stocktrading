@@ -98,5 +98,38 @@ public class OrderRepositoryTest {
         orderRepository.updateAveragePrice(orders.get(0).getOrderId(), orders.get(0).getLimitPrice());
     }
 
+    @Test
+    public void testCalculateNumberOfBuyOrders(){
+        Order randomOrder = entityUtils.generateRandomEntity(orderRepository,orderRepository.findAll().get(0).getOrderId());
+
+        Integer symbolId = randomOrder.getSymbol().getSymbolId();
+
+        String userId = randomOrder.getUser().getUserId();
+
+        Integer noOfBuyOrders = orderRepository.calcNumberOfOrders(OrderStatus.FILLED,OrderSide.BUY,symbolId,userId);
+
+        Integer noOfSellOrders = orderRepository.calcNumberOfOrders(OrderStatus.FILLED,OrderSide.SELL,symbolId,userId);
+
+        Integer noOfOrders = noOfBuyOrders - noOfSellOrders;
+    }
+
+    @Test
+    public void testCalcTotalAmountOfOrdersBySymbolUserSide() {
+        Order randomOrder = entityUtils.generateRandomEntity(orderRepository,orderRepository.findAll().get(0).getOrderId());
+
+        BigDecimal total = orderRepository.calcTotalAmountOfOrdersBySymbolUserSide("BUY",randomOrder.getSymbol().getSymbolId(),randomOrder.getUser().getUserId());
+
+        assertThat(total).isGreaterThan(new BigDecimal(0));
+    }
+
+    @Test
+    public void testGetAllOrderedSymbolsByUserId(){
+        User randomUser = entityUtils.generateRandomUser();
+
+        List<Symbol> symbols = orderRepository.getAllOrderedSymbolsByUserId(randomUser.getUserId());
+
+        assertThat(symbols.size()).isGreaterThanOrEqualTo(0);
+    }
+
 
 }

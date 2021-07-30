@@ -28,4 +28,6 @@ public interface DailyRepository extends JpaRepository<Daily, Integer>, CustomDa
 
     @Query(value = "SELECT * FROM dailies WHERE HOUR(timestamp) <=:hour and MINUTE(timestamp) <=:minutes and SECOND(timestamp) = 0 AND symbol_id =:symbolId", nativeQuery = true)
     List<Daily> findAllUntilPresentByTimestampAndSymbolId(Integer hour, Integer minutes, Integer symbolId);
+
+
 }
