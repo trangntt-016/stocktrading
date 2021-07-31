@@ -31,7 +31,7 @@ export class PaperWatchlistComponent implements OnInit {
     this.watchlistService.getAllWatchlistsByUserId('U_004').subscribe(wl => {
       this.watchlists = wl;
       this.selectedWatchlist = wl[0];
-      this.initializeWebSocketConnection(this.selectedWatchlist.watchlistId);
+      //this.initializeWebSocketConnection(this.selectedWatchlist.watchlistId);
     });
   }
 
@@ -49,7 +49,6 @@ export class PaperWatchlistComponent implements OnInit {
     this.stompClient.connect({}, function(frame) {
       copyStompClient.subscribe(`/user/U_004/queue/watchlist/${watchlistId}`, (dailies) => {
         that.dailies = that.utils.convertToDailyPriceChange(dailies.body);
-        console.log(that.dailies);
       });
       copyStompClient.send(`/app/watchlist/${watchlistId}`, {}, (""));
     }, (err) => {

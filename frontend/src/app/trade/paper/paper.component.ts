@@ -14,10 +14,10 @@ export class PaperComponent implements OnInit {
   }
 
   showOrders(type: string): void{
-    if (type === 'order'){
+    if (type === 'order') {
       this.shouldShowOrder = true;
     }
-    else{
+    else {
       this.shouldShowOrder = false;
     }
   }

@@ -9,23 +9,23 @@
       <th><p>Last Price</p></th>
       <th><p>Avg Price</p></th>
       <th><p>Total Cost</p></th>
-      <th><p>Unrealized P&L</p></th>
-      <th><p>Unrealized P&L%</p></th>
+      <th><p class="PL">Unrealized P&L</p></th>
+      <th><p class="PL">Unrealized P&L%</p></th>
       <th><p>Long/Short</p></th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <th>GOOGL</th>
-      <td><p class="name">GOOGL LKJHL HJKLKJHLKJ HJKLKJ</p></td>
-      <td><p class="buy">2655.57</p></td>
-      <td><p>2655.57</p></td>
-      <td><p>2655.57</p></td>
-      <td><p>2655.57</p></td>
-      <td><p>2655.57</p></td>
-      <td><p>2655.57</p></td>
-      <td><p>2662.52</p></td>
-      <td><p>Long</p></td>
+    <tr *ngFor="let pos of positions">
+      <th>{{pos.symbol}}</th>
+      <td><p class="name">{{pos.name}}</p></td>
+      <td><p class="buy">{{pos.filledQuantity}}</p></td>
+      <td><p>{{pos.marketValue}}</p></td>
+      <td><p>{{pos.lastPrice}}</p></td>
+      <td><p>{{pos.avgPrice}}</p></td>
+      <td><p>{{pos.totalCost}}</p></td>
+      <td><p>{{pos.unrealizedPL}}</p></td>
+      <td><p>{{pos.unrealizedPLPercent}}</p></td>
+      <td><p>{{pos.type}}</p></td>
     </tr>
     </tbody>
   </table>

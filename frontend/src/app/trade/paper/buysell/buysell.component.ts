@@ -48,6 +48,7 @@ export class BuysellComponent implements OnInit {
 
 
     this.symbolService.selectedSymbolEvt.subscribe(symbol => {
+      console.log("hihiiiiiiiiii");
       this.stompClient.subscribe(`/topic/trade/${symbol.symbolId}`, (daily) => {
         this.daily = this.utils.convertToDailyBidAsk(daily.body);
       });
@@ -72,7 +73,6 @@ export class BuysellComponent implements OnInit {
     this.order.symbol = symbol;
 
     this.order.userId = "U_004";
-    console.log(this.order);
 
     this.orderService.buysell(this.order).subscribe(order => {
       this.orderService.sendSelectedOrder(order);
@@ -84,6 +84,20 @@ export class BuysellComponent implements OnInit {
     const symbol = this.symbols.filter(s => s.symbol === this.searchSymbol)[0];
     if (symbol !== undefined) {
       this.symbolService.sendSelectedSymbol(symbol);
+
+      this.matchedPrice = null;
+
+      this.showMatched =! this.showMatched;
+
+      this.stompClient.subscribe(`/topic/trade/${symbol.symbolId}`, (daily) => {
+        this.daily = this.utils.convertToDailyBidAsk(daily.body);
+      });
+
+      this.stompClient.subscribe(`/topic/trade/${symbol.symbolId}/future`, (matched) => {
+        this.matchedPrice = matched.body;
+      });
+
+      this.stompClient.send(`/app/trade/${symbol.symbolId}`, {}, (""));
     }
   }
 
@@ -101,17 +115,18 @@ export class BuysellComponent implements OnInit {
     console.log('connected to ws ...');
 
     const ws = new SockJS(this.serverUrl);
+
     this.stompClient = Stomp.over(ws);
+
     this.stompClientSub = Stomp.over(ws);
 
     const copyStompClient = this.stompClient;
-    // it helps to render data on html
+
     const that = this;
 
     this.stompClient.connect({}, function(frame) {
       copyStompClient.subscribe(`/user/U_004/topic/trade/${symbolId}`, (daily) => {
         that.daily = that.utils.convertToDailyBidAsk(daily.body);
-        console.log(that.daily);
       });
       copyStompClient.subscribe(`/topic/trade/${symbolId}/future`, (matched) => {
         that.matchedPrice = matched.body;

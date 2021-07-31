@@ -22,6 +22,7 @@ th {
   padding: 0.25em;
   border-bottom: 1px solid lightgray;
   border-right: 1px solid lightgray;
+  width: max-content;
 }
 
 p{
@@ -29,6 +30,10 @@ p{
   margin: 5px;
   font-size: 13px;
   font-weight: 500;
+}
+
+.PL{
+  width: calc(8.5em);
 }
 .name{
   width: max-content;

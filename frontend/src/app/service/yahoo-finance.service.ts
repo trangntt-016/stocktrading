@@ -20,7 +20,6 @@ export class YahooFinanceService {
       let data = new Array();
 
       rawData.forEach(raw => {
-        console.log(raw.date);
         const object = Object.assign({
           x: new Date(raw.date).getTime(),
           y: Array.of(raw.open.toFixed(2), raw.high.toFixed(2), raw.low.toFixed(2), raw.close.toFixed(2))

@@ -3,6 +3,7 @@ import { DailyBidAsk } from '../model/DailyBidAsk';
 import { Order } from '../model/Order';
 import { OrderFilled } from '../model/OrderFilled';
 import { DailyPriceChange } from '../model/DailyPriceChange';
+import { Position } from '../model/Position';
 
 export class StockUtils {
   public setIntervalImmediately(func, interval: number) {
@@ -13,8 +14,11 @@ export class StockUtils {
 
   public convertToDaily(newMes): DailyDetails {
     let daily = new DailyDetails();
+
     newMes = newMes.replace('[', '').replace(']', '');
+
     let processed = newMes.split(',');
+
     processed.forEach(val => {
       const array = val.split(':');
       const key = array[0].replace(',', '');
@@ -103,7 +107,7 @@ export class StockUtils {
   }
 
   public convertToOrders(order): Order[] {
-    const returnedOrder = new Array();
+    const returnedOrder = [];
 
     order = order.replace('[', '').replace(']', '');
 
@@ -114,24 +118,28 @@ export class StockUtils {
     processed.forEach(o => {
       const orderArr = o.split(',');
 
-      orderArr.pop();
+      if (orderArr[orderArr.length - 1] == ' ') orderArr.pop();
 
       if (!orderArr[3].includes('=')) {
         orderArr[2] = orderArr[2] + ',' + orderArr[3];
+        orderArr.splice(3, 1);
       }
-      orderArr.splice(3, 1);
 
-      orderArr[orderArr.length - 1] = orderArr[orderArr.length - 1].replace(')','');
+      orderArr[orderArr.length - 1] = orderArr[orderArr.length - 1].replace(')', '');
 
       const orderFilled = new OrderFilled();
 
       let order = new Order();
+
       orderArr.forEach(data => {
         data = data.trim();
 
         const keyvalue = data.split('=');
+
         const key = keyvalue[0];
+
         const value = keyvalue[1];
+
         switch (key) {
           case 'orderId':
             orderFilled.orderId = +value;
@@ -176,8 +184,8 @@ export class StockUtils {
     return returnedOrder;
   }
 
-  convertToDailyPriceChange(dailies: String): DailyPriceChange[]{
-    const dailiesPriceChange = new Array();
+  convertToDailyPriceChange(dailies: String): DailyPriceChange[] {
+    const dailiesPriceChange = [];
 
     dailies = dailies.replace('[', '').replace(']', '');
 
@@ -190,16 +198,19 @@ export class StockUtils {
 
       const dailiesArr = d.split(',');
 
-      dailiesArr.pop();
+      if (dailiesArr[dailiesArr.length - 1] == ' ') dailiesArr.pop();
 
-      dailiesArr[dailiesArr.length - 1] = dailiesArr[dailiesArr.length - 1].replace(')','');
+      dailiesArr[dailiesArr.length - 1] = dailiesArr[dailiesArr.length - 1].replace(')', '');
 
       dailiesArr.forEach(data => {
         data = data.trim();
 
         const keyvalue = data.split('=');
+
         const key = keyvalue[0];
+
         const value = keyvalue[1];
+
         switch (key) {
           case 'symbol':
             dailyPriceChage.symbol = value;
@@ -219,10 +230,86 @@ export class StockUtils {
           default:
             null;
         }
-      })
+      });
+
       dailiesPriceChange.push(dailyPriceChage);
-    })
+    });
     return dailiesPriceChange;
+  }
+
+  convertToPositions(positions: String): Position[] {
+    const positionsArr = [];
+
+    positions = positions.replace('[', '').replace(']', '');
+
+    const processed = positions.split('PositionDto(');
+
+    processed.shift();
+
+    processed.forEach(p => {
+      const position = new Position();
+
+      const posArr = p.split(',');
+
+      if(posArr[posArr.length - 1] == ' ') posArr.pop();
+
+      if (!posArr[3].includes('=')) {
+        posArr[2] = posArr[2] + ',' + posArr[3];
+        posArr.splice(3, 1);
+      }
+
+      posArr[posArr.length - 1] = posArr[posArr.length - 1].replace(')', '');
+
+      posArr.forEach(data => {
+        data = data.trim();
+
+        const keyvalue = data.split('=');
+
+        const key = keyvalue[0];
+
+        const value = keyvalue[1];
+
+        switch (key) {
+          case 'symbolId':
+            position.symbolId = +value;
+            break;
+          case 'symbol':
+            position.symbol = value;
+            break;
+          case 'name':
+            position.name = value;
+            break;
+          case 'filledQuantity':
+            position.filledQuantity = +value;
+            break;
+          case 'lastPrice':
+            position.lastPrice = +value;
+            break;
+          case 'marketValue':
+            position.marketValue = +value;
+            break;
+          case 'avgPrice':
+            position.avgPrice = +value;
+            break;
+          case 'totalCost':
+            position.totalCost = +value;
+            break;
+          case 'unrealizedPL':
+            position.unrealizedPL = +value;
+            break;
+          case 'unrealizedPLPercent':
+            position.unrealizedPLPercent = +value;
+            break;
+          case 'type':
+            position.type = value;
+            break;
+          default:
+            null;
+        }
+      });
+      positionsArr.push(position);
+    });
+    return positionsArr;
   }
 
 }
