@@ -48,7 +48,6 @@ export class BuysellComponent implements OnInit {
 
 
     this.symbolService.selectedSymbolEvt.subscribe(symbol => {
-      console.log("hihiiiiiiiiii");
       this.stompClient.subscribe(`/topic/trade/${symbol.symbolId}`, (daily) => {
         this.daily = this.utils.convertToDailyBidAsk(daily.body);
       });

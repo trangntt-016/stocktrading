@@ -31,7 +31,7 @@ export class PaperWatchlistComponent implements OnInit {
     this.watchlistService.getAllWatchlistsByUserId('U_004').subscribe(wl => {
       this.watchlists = wl;
       this.selectedWatchlist = wl[0];
-      //this.initializeWebSocketConnection(this.selectedWatchlist.watchlistId);
+      this.initializeWebSocketConnection(this.selectedWatchlist.watchlistId);
     });
   }
 

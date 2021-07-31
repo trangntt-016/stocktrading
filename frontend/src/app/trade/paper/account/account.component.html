@@ -9,26 +9,24 @@
       <div class="text-wrapper" fxLayout="column">
         <div fxLayout="row" fxLayoutAlign="space-between">
           <p class="title-p">Net Account Value</p>
-          <p>1,006,100.43</p>
+          <p>{{account.netAccountValue | currency}}</p>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between">
           <p class="title-p">Overall P&L</p>
           <div fxLayout="row" fxLayoutGap="10px">
-            <p>+4,643.53</p>
-            <p>+0.46%</p>
+            <p *ngIf="account.overallPL > 0">+{{account.overallPL  | number : '1.2-2'}}</p>
+            <p *ngIf="account.overallPL > 0">+{{account.PLChange}}%</p>
+            <p *ngIf="account.overallPL < 0">-{{account.overallPL  | number : '1.2-2'}}</p>
+            <p *ngIf="account.overallPL < 0">-{{account.PLChange}}%</p>
           </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between">
           <p class="title-p">Market Value</p>
-          <p>109,523.50</p>
+          <p>{{account.marketValue | number : '1.2-2'}}</p>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between">
           <p class="title-p">Buying Power</p>
-          <p>895,120.03</p>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="space-between">
-          <p class="title-p">Day's P&L</p>
-          <p>0.00</p>
+          <p>{{account.buyingPower | number : '1.2-2'}}</p>
         </div>
       </div>
     </div>

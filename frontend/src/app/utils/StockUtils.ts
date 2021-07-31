@@ -4,6 +4,7 @@ import { Order } from '../model/Order';
 import { OrderFilled } from '../model/OrderFilled';
 import { DailyPriceChange } from '../model/DailyPriceChange';
 import { Position } from '../model/Position';
+import { Account } from '../model/Account';
 
 export class StockUtils {
   public setIntervalImmediately(func, interval: number) {
@@ -244,7 +245,7 @@ export class StockUtils {
 
     const processed = positions.split('PositionDto(');
 
-    processed.shift();
+      processed.shift();
 
     processed.forEach(p => {
       const position = new Position();
@@ -310,6 +311,57 @@ export class StockUtils {
       positionsArr.push(position);
     });
     return positionsArr;
+  }
+
+  convertToAccount(acc: String): Account {
+    const processed = acc.split('Account(');
+
+    processed.shift();
+
+    const processedAcc = processed[0];
+
+    const account = new Account();
+
+    const accArr = processedAcc.split(',');
+
+    accArr[accArr.length - 1] = accArr[accArr.length - 1].replace(')', '');
+
+    accArr.forEach(data => {
+      data = data.trim();
+
+      const keyvalue = data.split('=');
+
+      const key = keyvalue[0];
+
+      const value = keyvalue[1];
+
+      switch (key) {
+        case 'userId':
+          account.userId = value;
+          break;
+        case 'initialValue':
+          account.initialValue = +value;
+          break;
+        case 'netAccountValue':
+          account.netAccountValue =+value;
+          break;
+        case 'overallPL':
+          account.overallPL =+value;
+          break;
+        case 'PLChange':
+          account.PLChange =+value;
+          break;
+        case 'marketValue':
+          account.marketValue =+value;
+          break;
+        case 'buyingPower':
+          account.buyingPower =+value;
+          break;
+        default:
+          null;
+      }
+    });
+    return account;
   }
 
 }
