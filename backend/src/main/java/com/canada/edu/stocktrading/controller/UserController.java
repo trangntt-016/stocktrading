@@ -44,17 +44,4 @@ public class UserController implements UserApi {
         }
     }
 
-    @GetMapping("/{userId}/position")
-    public ResponseEntity<?> getPositionByUserIdAndSymbolId(String userId){
-        try{
-            List<PositionDto> positionDtos = positionService.getOrderedPositions(userId);
-            return responseFactory.success(positionDtos);
-        }
-        catch (IllegalArgumentException ex){
-            throw new BadRequestException(ex.getMessage());
-        }
-        catch (RuntimeException ex) {
-            throw new InternalServerException(ex.getMessage());
-        }
-    };
 }

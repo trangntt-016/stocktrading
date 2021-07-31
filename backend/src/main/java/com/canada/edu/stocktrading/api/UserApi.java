@@ -8,7 +8,4 @@ import org.springframework.web.bind.annotation.*;
 public interface UserApi {
     @PostMapping
     ResponseEntity<?> register(@RequestBody UserRegisteredDto userEntity);
-
-    @GetMapping("/{userId}/position")
-    ResponseEntity<?> getPositionByUserIdAndSymbolId(@PathVariable("userId") String userId);
 }
