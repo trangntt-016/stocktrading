@@ -1,12 +1,12 @@
 <div class="papertrade-wrapper" fxLayout="row" fxLayoutGap="5px">
   <div class="account-watchlist-wrapper">
-    <app-account></app-account>
+    <app-account (buyingPower)="handleBuyingPower($event)"></app-account>
     <app-paper-watchlist></app-paper-watchlist>
   </div>
   <div class="buysell-order-chart-wrapper">
     <div class="buysell-chart-wrapper" fxLayout="row" fxLayoutGap="5px">
       <div class="buysell-wrapper">
-        <app-buysell></app-buysell>
+        <app-buysell [buyingPower]="buyingPower"></app-buysell>
       </div>
       <div class="chart-wrapper">
         <app-chart></app-chart>

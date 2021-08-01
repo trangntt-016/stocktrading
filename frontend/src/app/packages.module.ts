@@ -11,7 +11,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
   ],
   exports: [
     ShowHidePasswordModule,
-    NgApexchartsModule
+    NgApexchartsModule,
   ]
 })
 export class PackagesModule{}

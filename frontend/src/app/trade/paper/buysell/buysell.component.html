@@ -20,21 +20,20 @@
       <p  style="width: max-content; margin: 0">{{matchedPrice | currency}}</p>
     </div>
     <div fxLayout="row" fxLayoutAlign="center center" *ngIf = "!showMatched">
-      <button mat-button color = accent (click) = "showMatchedPrice()">Show matched price</button>
+      <button mat-button (click) = "showMatchedPrice()">Show matched price</button>
     </div>
-
   </div>
   <div class="body-wrapper">
     <div class="body">
-      <div class="bid-ask" *ngIf="daily != null">
+      <div class="bid-ask" *ngIf="dailyBidAsk != null">
         <div class="bid-ask-wrapper" fxLayout="row">
-          <div class="bid">Bid {{daily.bid}}</div>
+          <div class="bid">Bid {{dailyBidAsk.bid}}</div>
           <div class="diff" fxLayout="row">
             <div class="half-bid"></div>
             <div class="half-ask"></div>
-            <div class="diff-price">{{daily.spread}}</div>
+            <div class="diff-price">{{dailyBidAsk.spread}}</div>
           </div>
-          <div class="ask">Ask {{daily.ask}}</div>
+          <div class="ask">Ask {{dailyBidAsk.ask}}</div>
         </div>
       </div>
 
@@ -85,11 +84,11 @@
       <div class="summary">
         <div class="amount" fxLayout="row" fxLayoutAlign="space-between">
           <h6>Amount(est.)</h6>
-          <h6>$0.00</h6>
+          <h6>{{amount | currency}}</h6>
         </div>
         <div class="buying-power" fxLayout="row" fxLayoutAlign="space-between">
           <h6>Buying Power</h6>
-          <h6>$0.00</h6>
+          <h6>{{buyingPower | currency}}</h6>
         </div>
 
       </div>

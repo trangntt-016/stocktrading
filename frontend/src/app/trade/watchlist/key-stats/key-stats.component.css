@@ -17,7 +17,7 @@ h1{
 .change-container h5{
   margin: 0;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .key-wrapper{
@@ -48,6 +48,10 @@ h1{
 
 .stable{
   font-weight: 500
+}
+
+p{
+  font-size: 15px;
 }
 
 

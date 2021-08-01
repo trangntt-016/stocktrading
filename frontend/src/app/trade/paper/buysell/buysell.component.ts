@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Order } from '../../../model/Order';
 import { Symbol } from '../../../model/Symbol';
 import { SymbolService } from '../../../service/symbol.service';
@@ -16,13 +16,16 @@ import { DailyBidAsk } from '../../../model/DailyBidAsk';
   styleUrls: ['./buysell.component.css']
 })
 export class BuysellComponent implements OnInit {
+  @Input()buyingPower: number;
+  amount: number = 0;
   order: Order;
   symbols: Symbol[];
   autoSymbols: Symbol[];
   searchSymbol: string;
-  daily: DailyBidAsk;
+  dailyBidAsk: DailyBidAsk;
   matchedPrice: number;
   showMatched: boolean;
+  loading: boolean = true;
   private serverUrl = environment.stockWS;
   private stompClient;
   private stompClientSub;
@@ -48,13 +51,15 @@ export class BuysellComponent implements OnInit {
 
 
     this.symbolService.selectedSymbolEvt.subscribe(symbol => {
-      this.stompClient.subscribe(`/topic/trade/${symbol.symbolId}`, (daily) => {
-        this.daily = this.utils.convertToDailyBidAsk(daily.body);
-      });
-      this.stompClient.subscribe(`/topic/trade/${symbol.symbolId}/future`, (matched) => {
-        this.matchedPrice = matched.body;
-      });
-      this.stompClient.send(`/app/trade/${symbol.symbolId}`, {}, (""));
+      if(this.stompClient != undefined){
+        this.stompClient.subscribe(`/topic/trade/${symbol.symbolId}`, (daily) => {
+          this.dailyBidAsk = this.utils.convertToDailyBidAsk(daily.body);
+        });
+        this.stompClient.subscribe(`/topic/trade/${symbol.symbolId}/future`, (matched) => {
+          this.matchedPrice = matched.body;
+        });
+        this.stompClient.send(`/app/trade/${symbol.symbolId}`, {}, (""));
+      }
     });
   }
 
@@ -73,14 +78,19 @@ export class BuysellComponent implements OnInit {
 
     this.order.userId = "U_004";
 
-    this.orderService.buysell(this.order).subscribe(order => {
-      this.orderService.sendSelectedOrder(order);
-    })
+    if(this.order.symbol != null && this.order.orderSide != null && this.order.filledQuantity != 0) {
+      this.orderService.buysell(this.order).subscribe(order => {
+        this.amount = order.filledQuantity * order.limitPrice;
+        this.orderService.sendSelectedOrder(order);
+      });
+    }
   }
 
   doFilter(): void{
     this.autoSymbols = this.filter(this.symbols);
+
     const symbol = this.symbols.filter(s => s.symbol === this.searchSymbol)[0];
+
     if (symbol !== undefined) {
       this.symbolService.sendSelectedSymbol(symbol);
 
@@ -89,7 +99,8 @@ export class BuysellComponent implements OnInit {
       this.showMatched =! this.showMatched;
 
       this.stompClient.subscribe(`/topic/trade/${symbol.symbolId}`, (daily) => {
-        this.daily = this.utils.convertToDailyBidAsk(daily.body);
+        this.dailyBidAsk = this.utils.convertToDailyBidAsk(daily.body);
+        console.log(this.dailyBidAsk);
       });
 
       this.stompClient.subscribe(`/topic/trade/${symbol.symbolId}/future`, (matched) => {
@@ -111,7 +122,7 @@ export class BuysellComponent implements OnInit {
   }
 
   initializeWebSocketConnection(symbolId: number): any {
-    console.log('connected to ws ...');
+    console.log('connected to ws Buy Sell component...');
 
     const ws = new SockJS(this.serverUrl);
 
@@ -124,8 +135,8 @@ export class BuysellComponent implements OnInit {
     const that = this;
 
     this.stompClient.connect({}, function(frame) {
-      copyStompClient.subscribe(`/user/U_004/topic/trade/${symbolId}`, (daily) => {
-        that.daily = that.utils.convertToDailyBidAsk(daily.body);
+      copyStompClient.subscribe(`/topic/trade/${symbolId}`, (daily) => {
+        that.dailyBidAsk = that.utils.convertToDailyBidAsk(daily.body);
       });
       copyStompClient.subscribe(`/topic/trade/${symbolId}/future`, (matched) => {
         that.matchedPrice = matched.body;

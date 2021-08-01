@@ -10,30 +10,32 @@ import {Symbol} from '../../../model/Symbol';
 })
 export class NewsComponent implements OnInit {
   news: any[] = new Array();
+  loading: boolean = true;
   symbols: Symbol[];
   constructor(
     private watchlistService: WatchlistService
   ) { }
 
   ngOnInit(): void {
-    // this.watchlistService.watchlistEvt.subscribe(watchlists => {
-    //   this.symbols = new Array();
-    //   this.news = new Array();
-    //   watchlists.forEach(wl => {
-    //     wl.symbols.forEach(symbol => {
-    //       this.symbols.push(symbol);
-    //     })
-    //   })
-    //
-    //   this.symbols.forEach(symbol => {
-    //     this.watchlistService.getNewsBySymbol(symbol).subscribe(news => {
-    //       for(let i = 0; i < 10; i++){
-    //         news[i].symbol = symbol.symbol;
-    //         this.news.push(news[i]);
-    //       }
-    //     })
-    //   })
-    // })
+    this.watchlistService.watchlistEvt.subscribe(watchlists => {
+      this.symbols = new Array();
+      this.news = new Array();
+      watchlists.forEach(wl => {
+        wl.symbols.forEach(symbol => {
+          this.symbols.push(symbol);
+        })
+      })
+
+      this.symbols.forEach(symbol => {
+        this.watchlistService.getNewsBySymbol(symbol).subscribe(news => {
+          this.loading = false;
+          for(let i = 0; i < 10; i++){
+            news[i].symbol = symbol.symbol;
+            this.news.push(news[i]);
+          }
+        })
+      })
+    })
   }
 
 }

@@ -98,7 +98,7 @@
     <ng-container matColumnDef="change">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let element"
-                [ngClass]="(element.change >0)?'increasing':'decreasing'"> {{element.change}}</mat-cell>
+                [ngClass]="(element.change >0)?'increasing':'decreasing'"> {{element.change | number : '1.2-2'}}</mat-cell>
     </ng-container>
 
     <!-- Change In Percent Column -->

@@ -1,24 +1,24 @@
 .papertrade-wrapper{
   height:100%;
-  background-color: #5AA454;
+  background-color: lightgray;
 }
 
 .account-watchlist-wrapper{
   width: 20%;
   height: 100%;
-  background-color: pink;
+  background-color: lightgray;
   overflow: hidden;
 }
 
 .buysell-order-chart-wrapper{
   width: 80%;
   height: 100%;
-  background-color: blue;
+  background-color: lightgray;
 }
 
 .buysell-chart-wrapper{
   width: 100%;
-  background-color: gold;
+  background-color: lightgray;
   height: 65%;
 }
 

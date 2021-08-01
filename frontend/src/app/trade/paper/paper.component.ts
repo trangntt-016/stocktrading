@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./paper.component.css']
 })
 export class PaperComponent implements OnInit {
+  buyingPower: number;
   shouldShowOrder: boolean;
   constructor() { }
 
@@ -20,6 +21,10 @@ export class PaperComponent implements OnInit {
     else {
       this.shouldShowOrder = false;
     }
+  }
+
+  handleBuyingPower(event): void{
+    this.buyingPower = event;
   }
 
 }

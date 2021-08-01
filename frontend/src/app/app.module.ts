@@ -81,16 +81,17 @@ import { PositionComponent } from './trade/paper/position/position.component';
     OrderComponent,
     PositionComponent
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        HttpClientModule,
-        NgxChartsModule,
-        MaterialModule,
-        PackagesModule,
-        SocialLoginModule
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    HttpClientModule,
+    NgxChartsModule,
+    MaterialModule,
+    PackagesModule,
+    SocialLoginModule
+
+  ],
   providers: [
     {
       provide: 'SocialAuthServiceConfig',
@@ -113,4 +114,5 @@ import { PositionComponent } from './trade/paper/position/position.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

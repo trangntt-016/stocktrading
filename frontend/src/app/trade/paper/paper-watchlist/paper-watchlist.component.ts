@@ -15,6 +15,7 @@ import { DailyPriceChange } from '../../../model/DailyPriceChange';
   styleUrls: ['./paper-watchlist.component.css']
 })
 export class PaperWatchlistComponent implements OnInit {
+  loading: boolean = true;
   watchlists: Watchlist[];
   selectedWatchlist: Watchlist;
   dailies: DailyPriceChange[];
@@ -49,6 +50,7 @@ export class PaperWatchlistComponent implements OnInit {
     this.stompClient.connect({}, function(frame) {
       copyStompClient.subscribe(`/user/U_004/queue/watchlist/${watchlistId}`, (dailies) => {
         that.dailies = that.utils.convertToDailyPriceChange(dailies.body);
+        that.loading = false;
       });
       copyStompClient.send(`/app/watchlist/${watchlistId}`, {}, (""));
     }, (err) => {
@@ -58,9 +60,13 @@ export class PaperWatchlistComponent implements OnInit {
 
   updateWatchlistWS(event):any {
     const watchlistId = this.watchlists.filter(w => w.name === event.value)[0].watchlistId;
+
     this.stompClient.subscribe(`/user/U_004/queue/watchlist/${watchlistId}`, (dailies) => {
+      if(dailies.body == "null"){
+        this.dailies = null;
+      }
       this.dailies = this.utils.convertToDailyPriceChange(dailies.body);
-      console.log(this.dailies);
+
     });
     this.stompClient.send(`/app/watchlist/${watchlistId}`, {}, (""));
   }

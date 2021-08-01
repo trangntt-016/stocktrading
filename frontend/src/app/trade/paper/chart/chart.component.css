@@ -1,5 +1,4 @@
 .wrapper{
-  background-color: blueviolet;
   height: 100%;
   width: 100%;
 }
@@ -9,11 +8,11 @@ p{
   margin-bottom: 0;
 }
 .title-wrapper{
-  background-color: pink;
+  background-color: #f3f1f1;
   height: 18%;
   width: 100%;
   padding: 50px 10px 5px 10px;
-  border-bottom: 1px solid red;
+  border-bottom: 1px solid lightgray;
 }
 .title{
   width: 100%;

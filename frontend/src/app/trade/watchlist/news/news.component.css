@@ -4,6 +4,7 @@
   background-color: #fff;
   width: 55.5vw;
   overflow:hidden;
+  position: relative;
 }
 
 .news-container{
@@ -62,4 +63,10 @@ a h5:hover{
 ::-webkit-scrollbar {
   width: 0px;
   background: transparent; /* make scrollbar transparent */
+}
+
+mat-spinner{
+  position: absolute;
+  top: 25%;
+  left: 50%;
 }

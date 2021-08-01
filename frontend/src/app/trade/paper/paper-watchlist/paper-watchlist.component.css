@@ -1,16 +1,16 @@
 .wrapper{
   height: 60%;
-  background-color: violet;
+  background-color: lightgray;
   width: 100%;
   margin-top: 5px;
-  padding-bottom:40px;
+  padding-bottom:35px;
 }
 
 .title-wrapper{
   width: 100%;
   height: 7%;
   background-color: #f3f1f1;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid lightgray;
   padding: 5px 5px 5px 70px;
 }
 p{
@@ -18,24 +18,26 @@ p{
   font-weight: 500;
 }
 .body{
-  background-color: red;
+  background-color: #f3f1f1;
   width: 100%;
   height:100%;
-  padding: 10px 10px 10px 70px
+  padding: 0px 0px 5px 65px
 }
 .body-wrapper{
-  background-color: yellow;
+  background-color: #fff;
   width: 100%;
   height: 100%;
 }
 
 mat-select{
-  background-color: lightgray;
-  width:100%;
-  height: 10%;
+  background-color: #ececec;
+  width:95%;
+  height: 9%;
   text-align: center;
   padding-top:7px;
-  color: #1A237E
+  color: #1A237E;
+  margin: 10px 5px;
+  border-radius: 3px;
 }
 :host ::ng-deep .mat-select-placeholder
 {
@@ -46,19 +48,21 @@ mat-select{
   width: 100%;
   height: 90%;
   background-color: #fff;
-  padding-top: 25px;
+  padding-top: 10px;
+  overflow: scroll;
 }
 
 .title-symbols{
   width: 100%;
   height:10%;
+  padding: 0 10px 0 10px;
 }
 .title-symbols p{
   font-weight: 400;
 }
 
 .symbols{
-  padding:10px 0 10px 0;
+  padding:7px 10px 7px 10px;
   border-top: 1px solid lightgray;
 }
 .symbols p{
@@ -70,3 +74,18 @@ h6{
   font-weight: 500;
   font-size:12px;
 }
+
+.increasing {
+  color: #25b625;
+}
+
+.decreasing {
+  color: #E91E63;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 2px;
+  background: transparent; /* make scrollbar transparent */
+}
+
