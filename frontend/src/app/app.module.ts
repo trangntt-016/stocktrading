@@ -24,11 +24,7 @@ import { SidebarComponent } from './trade/sidebar/sidebar.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { AuthComponent } from './auth/auth.component';
 import { LoginComponent } from './auth/login/login.component';
-import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
-import {
-  GoogleLoginProvider,
-  FacebookLoginProvider
-} from 'angularx-social-login';
+import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
 import { TradeComponent } from './trade/trade.component';
 import { WatchlistComponent } from './trade/watchlist/watchlist.component';
 import { MyWatchlistComponent } from './trade/watchlist/my-watchlist/my-watchlist.component';
@@ -44,7 +40,6 @@ import { BuysellComponent } from './trade/paper/buysell/buysell.component';
 import { ChartComponent } from './trade/paper/chart/chart.component';
 import { OrderComponent } from './trade/paper/order/order.component';
 import { PositionComponent } from './trade/paper/position/position.component';
-
 
 
 @NgModule({

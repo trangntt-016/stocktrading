@@ -1,10 +1,10 @@
 <div class="wrapper" fxLayout="column">
   <div class="title-wrapper" fxLayout="row" fxLayoutAlign="space-between">
-    <div class="title" fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="left center">
-      <input matInput placeholder="Symbol"
+    <div class="title" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="5px">
+      <input (ngModelChange)="doFilter()" [(ngModel)]="searchSymbol"
              [matAutocomplete]="auto"
-             [(ngModel)]="searchSymbol"
-             (ngModelChange)="doFilter()"
+             matInput
+             placeholder="Symbol"
       >
       <mat-autocomplete #auto="matAutocomplete" [panelWidth]="300" class="autocomplete">
         <mat-option *ngFor="let symbol of autoSymbols" [value]="symbol.symbol">
@@ -15,17 +15,17 @@
         </mat-option>
       </mat-autocomplete>
     </div>
-    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="showMatched">
+    <div *ngIf="showMatched" fxLayout="row" fxLayoutAlign="center center">
       <p style="width: max-content; margin: 0 20px 0 0">Price in the next 15s: </p>
-      <p  style="width: max-content; margin: 0">{{matchedPrice | currency}}</p>
+      <p style="width: max-content; margin: 0">{{matchedPrice | currency}}</p>
     </div>
-    <div fxLayout="row" fxLayoutAlign="center center" *ngIf = "!showMatched">
-      <button mat-button (click) = "showMatchedPrice()">Show matched price</button>
+    <div *ngIf="!showMatched" fxLayout="row" fxLayoutAlign="center center">
+      <button (click)="showMatchedPrice()" mat-button>Show matched price</button>
     </div>
   </div>
   <div class="body-wrapper">
     <div class="body">
-      <div class="bid-ask" *ngIf="dailyBidAsk != null">
+      <div *ngIf="dailyBidAsk != null" class="bid-ask">
         <div class="bid-ask-wrapper" fxLayout="row">
           <div class="bid">Bid {{dailyBidAsk.bid}}</div>
           <div class="diff" fxLayout="row">
@@ -40,10 +40,12 @@
       <div class="side">
         <h6>Side</h6>
         <div class="buy-sell-button" fxLayout="row" fxLayoutGap="3px">
-          <div class="buy" (click)="selectBuy()" [ngClass]="[order.orderSide==='BUY'?'selected-buy':'buy',order.orderSide==='SELL'?'buy-when-sell-selected':'buy']">
+          <div (click)="selectBuy()" [ngClass]="[order.orderSide==='BUY'?'selected-buy':'buy',order.orderSide==='SELL'?'buy-when-sell-selected':'buy']"
+               class="buy">
             BUY
           </div>
-          <div class="sell" (click)="selectSell()"  [ngClass]="[order.orderSide==='SELL'?'selected-sell':'sell',order.orderSide==='BUY'?'sell-when-buy-selected':'sell']">
+          <div (click)="selectSell()" [ngClass]="[order.orderSide==='SELL'?'selected-sell':'sell',order.orderSide==='BUY'?'sell-when-buy-selected':'sell']"
+               class="sell">
             SELL
           </div>
         </div>
@@ -59,13 +61,13 @@
         </div>
         <div class="quantity">
           <h6>Quantity</h6>
-          <input matInput placeholder="0" [(ngModel)]="order.filledQuantity">
+          <input [(ngModel)]="order.filledQuantity" matInput placeholder="0">
         </div>
       </div>
 
       <div class="limit-price">
         <h6>Limit price</h6>
-        <input matInput [(ngModel)]="order.limitPrice">
+        <input [(ngModel)]="order.limitPrice" matInput>
       </div>
 
       <div class="time-hour-wrapper" fxLayout="row">
@@ -78,8 +80,10 @@
           <div class="hours-input">No</div>
         </div>
       </div>
-      <div class="paper-trade" (click)="submit()">
-        <button mat-raised-button color="primary" [ngClass]="{sellBtn: order.orderSide==='SELL',buyBtn: order.orderSide==='BUY'}">Paper Trade</button>
+      <div (click)="submit()" class="paper-trade">
+        <button [ngClass]="{sellBtn: order.orderSide==='SELL',buyBtn: order.orderSide==='BUY'}" color="primary"
+                mat-raised-button>Paper Trade
+        </button>
       </div>
       <div class="summary">
         <div class="amount" fxLayout="row" fxLayoutAlign="space-between">

@@ -9,23 +9,25 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./add-wl.component.css']
 })
 export class AddWlComponent implements OnInit, OnDestroy {
-  newName: string = "";
+  newName = '';
   subscription: Subscription;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<AddWlComponent>,
     private watchlistService: WatchlistService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
   }
 
-  cancel(): void{
+  cancel(): void {
     this.dialogRef.close();
   }
 
-  save(): void{
-    this.subscription = this.watchlistService.createAWatchlist("U_004", this.newName).subscribe((wl) => {
+  save(): void {
+    this.subscription = this.watchlistService.createAWatchlist('U_004', this.newName).subscribe((wl) => {
       // send new array of watchlists to my-watchlist component
       this.data.watchlists.push(wl);
       this.watchlistService.sendWatchlists(this.data.watchlists);
@@ -42,7 +44,7 @@ export class AddWlComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void{
     this.subscription.unsubscribe();
   }
 

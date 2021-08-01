@@ -1,50 +1,53 @@
-.wrapper{
+.wrapper {
   height: 60%;
   background-color: lightgray;
   width: 100%;
   margin-top: 5px;
-  padding-bottom:35px;
+  padding-bottom: 35px;
 }
 
-.title-wrapper{
+.title-wrapper {
   width: 100%;
   height: 7%;
   background-color: #f3f1f1;
   border-bottom: 1px solid lightgray;
   padding: 5px 5px 5px 70px;
 }
-p{
+
+p {
   font-size: 13px;
   font-weight: 500;
 }
-.body{
+
+.body {
   background-color: #f3f1f1;
   width: 100%;
-  height:100%;
+  height: 100%;
   padding: 0px 0px 5px 65px
 }
-.body-wrapper{
+
+.body-wrapper {
   background-color: #fff;
   width: 100%;
   height: 100%;
 }
 
-mat-select{
+mat-select {
   background-color: #ececec;
-  width:95%;
+  width: 95%;
   height: 9%;
   text-align: center;
-  padding-top:7px;
+  padding-top: 7px;
   color: #1A237E;
   margin: 10px 5px;
   border-radius: 3px;
 }
-:host ::ng-deep .mat-select-placeholder
-{
+
+:host ::ng-deep .mat-select-placeholder {
   color: #1A237E
 }
 
-.symbols-wrapper{
+.symbols-wrapper {
   width: 100%;
   height: 90%;
   background-color: #fff;
@@ -52,27 +55,29 @@ mat-select{
   overflow: scroll;
 }
 
-.title-symbols{
+.title-symbols {
   width: 100%;
-  height:10%;
+  height: 10%;
   padding: 0 10px 0 10px;
 }
-.title-symbols p{
+
+.title-symbols p {
   font-weight: 400;
 }
 
-.symbols{
-  padding:7px 10px 7px 10px;
+.symbols {
+  padding: 7px 10px 7px 10px;
   border-top: 1px solid lightgray;
 }
-.symbols p{
-  margin-bottom:5px;
+
+.symbols p {
+  margin-bottom: 5px;
 }
 
-h6{
-  margin:0;
+h6 {
+  margin: 0;
   font-weight: 500;
-  font-size:12px;
+  font-size: 12px;
 }
 
 .increasing {

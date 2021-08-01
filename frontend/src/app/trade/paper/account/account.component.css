@@ -1,48 +1,49 @@
-.wrapper{
+.wrapper {
   height: 40%;
   background-color: #fff;
   width: 100%;
   overflow: hidden;
 }
 
-.title-wrapper{
+.title-wrapper {
   height: 29%;
   width: 100%;
   padding: 45px 0px 0px 0px;
   border-bottom: 1px solid lightgray;
 }
 
-.title{
+.title {
   background-color: #f3f1f1;
   width: 100%;
   height: 100%;
   padding: 10px 5px 5px 80px;
 }
 
-p{
+p {
   font-size: 13px;
   font-weight: 500;
 }
 
-.body-wrapper{
+.body-wrapper {
   height: 71%;
   width: 100%;
   padding: 10px 10px 10px 70px;
 }
-.body{
+
+.body {
   width: 100%;
   height: 100%;
   border-radius: 5px;
-  background: rgb(170,217,254);
-  background: linear-gradient(270deg, rgba(170,217,254,1) 0%, rgba(227,242,253,1) 50%, rgba(255,255,255,1) 100%);
+  background: rgb(170, 217, 254);
+  background: linear-gradient(270deg, rgba(170, 217, 254, 1) 0%, rgba(227, 242, 253, 1) 50%, rgba(255, 255, 255, 1) 100%);
   padding: 15px 10px 15px 10px;
 }
 
-.text-wrapper{
+.text-wrapper {
   width: 100%;
   height: 100%;
 }
 
-.title-p{
+.title-p {
   color: gray
 }

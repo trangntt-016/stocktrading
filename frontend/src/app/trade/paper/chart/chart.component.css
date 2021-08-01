@@ -1,27 +1,32 @@
-.wrapper{
+.wrapper {
   height: 100%;
   width: 100%;
 }
-p{
+
+p {
   font-size: 13px;
   font-weight: 500;
   margin-bottom: 0;
 }
-.title-wrapper{
+
+.title-wrapper {
   background-color: #f3f1f1;
   height: 18%;
   width: 100%;
   padding: 50px 10px 5px 10px;
   border-bottom: 1px solid lightgray;
 }
-.title{
+
+.title {
   width: 100%;
   height: 100%;
 }
-.title p{
+
+.title p {
   margin-bottom: 0px;
 }
-input{
+
+input {
   width: 120px;
   border-radius: 3px;
   border: 1px solid lightgray;
@@ -30,48 +35,54 @@ input{
   font-weight: 500;
   height: 80%;
 }
+
 input:focus {
   outline-color: transparent;
   padding-left: 10px;
 }
+
 ::ng-deep .mat-autocomplete-panel {
   max-height: 280px !important;
 }
 
-::ng-deep .mat-card-header-text{
+::ng-deep .mat-card-header-text {
   margin: 0px !important;
 }
-.symbols{
+
+.symbols {
   display: flex;
   flex-direction: column;
 }
 
-.symbols h4{
+.symbols h4 {
   margin-bottom: 0px;
 }
+
 mat-option {
   height: 60px !important;
-  margin-top:10px;
+  margin-top: 10px;
   border-botom: 1px solid lightgray;
 }
 
-mat-option:hover{
+mat-option:hover {
   background-color: #d5e7fc !important;
 }
 
 
-.body-wrapper{
+.body-wrapper {
   height: 82%;
   width: 100%;
   background-color: #fff;
-  padding:10px
+  padding: 10px
 }
-.title-chart{
+
+.title-chart {
   height: 6%;
   width: 100%;
   padding-top: 2px;
 }
-.body{
+
+.body {
   width: 100%;
   height: 90%;
 }
@@ -80,11 +91,13 @@ mat-option:hover{
 #chart {
   margin-top: 16px
 }
-.mat-flat-button{
+
+.mat-flat-button {
   line-height: 0;
-  color:#1A237E;
+  color: #1A237E;
   font-weight: 400;
 }
-.active{
+
+.active {
   color: #2196F3;
 }

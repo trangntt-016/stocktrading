@@ -1,12 +1,13 @@
-::ng-deep .mat-dialog-container{
+::ng-deep .mat-dialog-container {
   padding: 0 !important;
 }
-.dialog-wrapper{
+
+.dialog-wrapper {
   width: 400px;
   height: 500px;
 }
 
-h4{
+h4 {
   width: 100%;
   background-color: #f3f0f0;
   height: 25px;
@@ -15,58 +16,55 @@ h4{
   margin-bottom: 0px;
 }
 
-.watchlist-wrapper{
+.watchlist-wrapper {
   margin: 20px;
   height: 100%;
   border-radius: 5px;
   border: 1px solid lightgray;
 }
 
-p{
+p {
   padding-top: 2px;
   margin: 0;
 }
 
-.watchlist{
+.watchlist {
   padding: 5px 20px 10px 25px;
-  margin-top:5px;
+  margin-top: 5px;
   border-bottom: 1px solid lightgray;
 }
 
-.add-wrapper{
+.add-wrapper {
   padding: 10px 20px 10px 20px;
 }
 
-.add-wrapper:hover{
+.add-wrapper:hover {
   cursor: pointer;
   color: #1565C0;
 }
 
-.add-wrapper p:hover{
+.add-wrapper p:hover {
   color: #1565C0;
 }
 
 .edit-icon,
-.delete-icon{
+.delete-icon {
   font-size: 18px;
   color: gray;
   padding-top: 3px;
 }
+
 .edit-icon,
-.delete-icon:hover{
-  cursor:pointer
+.delete-icon:hover {
+  cursor: pointer
 }
 
-input:focus{
+input:focus {
   outline: none;
 }
 
 
-:host ::ng-deep .mat-raised-button{
+:host ::ng-deep .mat-raised-button {
   line-height: 25px;
   font-size: 13px;
-}
-
-:host ::ng-deep .mat-button-wrapper{
-
 }

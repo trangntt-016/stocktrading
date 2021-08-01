@@ -1,7 +1,6 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { WatchlistService } from '../../../../service/watchlist.service';
-import { Watchlist } from '../../../../model/Watchlist';
 import { AddWlComponent } from '../add-wl/add-wl.component';
 import { Subscription } from 'rxjs';
 
@@ -11,16 +10,17 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./edit-wl.component.css']
 })
 export class EditWlComponent implements OnInit, OnDestroy {
-  myWL: any[] = new Array();
+  myWL: any[] = [];
   subscription: Subscription;
 
   constructor(
     public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private watchlistService: WatchlistService
-  ) {}
+  ) {
+  }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.data.watchlists.forEach(wl => {
       const wlObj = Object.assign({
         watchlist: wl.name,
@@ -31,15 +31,15 @@ export class EditWlComponent implements OnInit, OnDestroy {
   }
 
 
-  edit(index): void{
+  edit(index): void {
     this.myWL[index].editable = true;
   }
 
-  cancel(index){
+  cancel(index): void {
     this.myWL[index].editable = false;
   }
 
-  update(index): void{
+  update(index): void {
     this.data.watchlists[index].name = this.myWL[index].watchlist;
     this.subscription = this.watchlistService.updateAWatchlist(this.data.watchlists[index]).subscribe(
       () => {
@@ -50,10 +50,10 @@ export class EditWlComponent implements OnInit, OnDestroy {
       (error) => {
         this.myWL[index].editable = false;
         console.log(error);
-    });
+      });
   }
 
-  delete(index): void{
+  delete(index): void {
     this.subscription = this.watchlistService.deleteAWatchlist(this.data.watchlists[index].watchlistId).subscribe(
       () => {
         // update in the edit dialog
@@ -68,7 +68,7 @@ export class EditWlComponent implements OnInit, OnDestroy {
       });
   }
 
-  addWatchlist(): void{
+  addWatchlist(): void {
     this.subscription = this.dialog.open(AddWlComponent, {
       data: {
         watchlists: this.data.watchlists
@@ -79,7 +79,7 @@ export class EditWlComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy():void{
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 

@@ -1,11 +1,10 @@
-import { Component, VERSION , ViewChild, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 
-import {ApexAxisChartSeries, ApexChart, ApexYAxis, ApexXAxis, ApexTitleSubtitle} from 'ng-apexcharts';
+import { ApexAxisChartSeries, ApexChart, ApexTitleSubtitle, ApexXAxis, ApexYAxis } from 'ng-apexcharts';
 import { YahooFinanceService } from '../../../service/yahoo-finance.service';
 import { Symbol } from '../../../model/Symbol';
-import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { SymbolService } from '../../../service/symbol.service';
-import { map } from 'rxjs/operators';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -20,18 +19,15 @@ export type ChartOptions = {
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.css']
 })
-export class ChartComponent implements OnInit {
+export class ChartComponent implements OnInit, OnDestroy {
   symbols: Symbol[];
-
   autoSymbols: Symbol[];
-
   interval: number;
-
   searchSymbol: string;
-
-  public chartOptions: Partial<ChartOptions>;
-
-  @ViewChild("chart") chart: ChartComponent;
+  chartOptions: Partial<ChartOptions>;
+  @ViewChild('chart') chart: ChartComponent;
+  private subscription: Subscription;
+  private yhSubscription: Subscription;
 
   constructor(
     private yahooService: YahooFinanceService,
@@ -39,22 +35,27 @@ export class ChartComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(){
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+    this.yhSubscription.unsubscribe();
+  }
+
+  ngOnInit(): void {
     this.interval = 90;
 
-    this.symbolService.selectedSymbolEvt.subscribe(symbol => {
+    this.subscription = this.symbolService.selectedSymbolEvt.subscribe(symbol => {
       this.searchSymbol = symbol.symbol;
-      this.yahooService.getHistoricalQuotes(symbol.symbol,this.interval).subscribe(res=>{
+      this.yhSubscription = this.yahooService.getHistoricalQuotes(symbol.symbol, this.interval).subscribe(res => {
         this.chartOptions = res;
-      })
-    })
+      });
+    });
 
     this.symbolService.getAllSymbols().subscribe(symbols => {
       this.symbols = symbols;
     });
   }
 
-  doFilter(): void{
+  doFilter(): void {
     this.autoSymbols = this.filter(this.symbols);
     const symbol = this.symbols.filter(s => s.symbol === this.searchSymbol)[0];
     if (symbol !== undefined) {
@@ -62,16 +63,16 @@ export class ChartComponent implements OnInit {
     }
   }
 
-  filter(values): any{
+  filter(values): any {
     return values.filter(symbol => {
       return symbol.symbol.toUpperCase().includes(this.searchSymbol.toUpperCase());
     });
   }
 
-  setInterval(interval: number): void{
+  setInterval(interval: number): void {
     this.interval = interval;
-    this.yahooService.getHistoricalQuotes("AMZN",this.interval).subscribe(res=>{
+    this.yahooService.getHistoricalQuotes('AMZN', this.interval).subscribe(res => {
       this.chartOptions = res;
-    })
+    });
   }
 }

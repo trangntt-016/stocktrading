@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import { environment } from '../../../../environments/environment';
 
 import { WatchlistService } from '../../../service/watchlist.service';
-import { Watchlist } from '../../../model/Watchlist';
 import { DailyDetails } from '../../../model/DailyDetails';
 import { StockUtils } from '../../../utils/StockUtils';
-
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -15,18 +14,20 @@ import { StockUtils } from '../../../utils/StockUtils';
   templateUrl: './key-stats.component.html',
   styleUrls: ['./key-stats.component.css']
 })
-export class KeyStatsComponent implements OnInit {
+export class KeyStatsComponent implements OnInit, OnDestroy {
   daily: DailyDetails;
   selectedSymbolId: number;
-  selectedWatchlist: Watchlist;
   private stompClient;
   private stompClientSub;
   private serverUrl = environment.stockWS;
   private utils: StockUtils;
+  private subscription: Subscription;
+  private wsSubscription: Subscription;
 
   constructor(
     private watchlistService: WatchlistService
-  ) { }
+  ) {
+  }
 
 
   ngOnInit(): void {
@@ -35,24 +36,28 @@ export class KeyStatsComponent implements OnInit {
     this.daily = new DailyDetails();
 
     // subscribe to any changes/initialization in the selected watchlist
-    this.watchlistService.selectedWatchlistEvt.subscribe(selected => {
-      if (selected.symbols.length > 0){
+    this.subscription = this.watchlistService.selectedWatchlistEvt.subscribe(selected => {
+      if (selected.symbols.length > 0) {
         this.selectedSymbolId = selected.symbols[0].symbolId;
         this.initializeWebSocketConnection(this.selectedSymbolId);
       }
     });
 
     // listen to any changes when there's new daily selected
-    this.watchlistService.selectedDailyEvt.subscribe(daily => {
+    this.subscription = this.watchlistService.selectedDailyEvt.subscribe(daily => {
       this.selectedSymbolId = daily.symbol.symbolId;
       // subscribe to the selected symbol
-      this.stompClient.subscribe(`/topic/${this.selectedSymbolId}`, (daily) => {
+      this.wsSubscription = this.stompClient.subscribe(`/topic/${this.selectedSymbolId}`, (daily) => {
         this.daily = this.utils.convertToDaily(daily.body);
       });
       // get updated from new selected symbol id;
-      this.stompClient.send(`/app/${this.selectedSymbolId}`, {}, (""));
+      this.stompClient.send(`/app/${this.selectedSymbolId}`, {}, (''));
     });
+  }
 
+  ngOnDestroy(): void {
+    this.wsSubscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
 
@@ -68,10 +73,10 @@ export class KeyStatsComponent implements OnInit {
     const that = this;
 
     this.stompClient.connect({}, function(frame) {
-        copyStompClient.subscribe(`/topic/${symbolId}`, (daily) => {
-          that.daily = that.utils.convertToDaily(daily.body);
-        });
-      copyStompClient.send(`/app/${symbolId}`, {}, (""));
+      that.wsSubscription = copyStompClient.subscribe(`/topic/${symbolId}`, (daily) => {
+        that.daily = that.utils.convertToDaily(daily.body);
+      });
+      copyStompClient.send(`/app/${symbolId}`, {}, (''));
     }, (err) => {
       console.log(err);
     });

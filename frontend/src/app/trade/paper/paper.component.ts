@@ -8,22 +8,23 @@ import { Component, OnInit } from '@angular/core';
 export class PaperComponent implements OnInit {
   buyingPower: number;
   shouldShowOrder: boolean;
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit(): void {
     this.shouldShowOrder = true;
   }
 
-  showOrders(type: string): void{
+  showOrders(type: string): void {
     if (type === 'order') {
       this.shouldShowOrder = true;
-    }
-    else {
+    } else {
       this.shouldShowOrder = false;
     }
   }
 
-  handleBuyingPower(event): void{
+  handleBuyingPower(event): void {
     this.buyingPower = event;
   }
 

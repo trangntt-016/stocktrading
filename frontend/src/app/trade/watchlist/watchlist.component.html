@@ -1,29 +1,29 @@
 <div class="wrapper-watchlist" fxLayout="column">
   <div class="wrapper-my-watchlist">
     <app-my-watchlist (myWatchlistEvt)="handleMyWatchlist($event)"></app-my-watchlist>
-    <div fxLayout="row"
+    <div *ngIf="isDisplaySymbols"
+         class="searchbar-wrapper mat-elevation-z8"
+         fxLayout="row"
          fxLayoutAlign="space-between"
-         fxLayoutGap="5px"
-         *ngIf="isDisplaySymbols"
-         class="searchbar-wrapper mat-elevation-z8">
-      <input matInput type="text"
-             [value]="searchSymbol"
+         fxLayoutGap="5px">
+      <input (ngModelChange)="doFilter()" [(ngModel)]="searchSymbol"
              [matAutocomplete]="auto"
-             [(ngModel)]="searchSymbol"
-             (ngModelChange)="doFilter()"
+             [value]="searchSymbol"
+             matInput
+             type="text"
       >
       <mat-icon (click)="displaySearchSymbol()">close</mat-icon>
     </div>
 
     <mat-autocomplete #auto="matAutocomplete" [panelWidth]="350" class="autocomplete">
       <mat-option *ngFor="let symbol of (symbols$ | async)" [value]="symbol.symbol">
-        <div class="symbols" (click)="add(symbol)">
+        <div (click)="add(symbol)" class="symbols">
           <h4>{{symbol.symbol}}</h4>
           <h5>{{symbol.name | uppercase}}</h5>
         </div>
       </mat-option>
     </mat-autocomplete>
-    <div class="add-symbol-wrapper" (click)="displaySearchSymbol()">
+    <div (click)="displaySearchSymbol()" class="add-symbol-wrapper">
       <div fxLayout="row">
         <mat-icon>add</mat-icon>
         <p>Add Symbol</p>

@@ -1,17 +1,19 @@
-import { Component, OnInit, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import { environment } from '../../../../environments/environment';
 import { StockUtils } from '../../../utils/StockUtils';
 import { Account } from '../../../model/Account';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css']
 })
-export class AccountComponent implements OnInit {
+export class AccountComponent implements OnInit, OnDestroy {
   @Output() buyingPower = new EventEmitter();
+  private subscription: Subscription;
   private serverUrl = environment.stockWS;
   private stompClient;
   private stompClientSub;
@@ -19,6 +21,10 @@ export class AccountComponent implements OnInit {
   account: Account = new Account();
 
   constructor() { }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.utils = new StockUtils();
@@ -40,7 +46,7 @@ export class AccountComponent implements OnInit {
     const that = this;
 
     this.stompClient.connect({}, function(frame) {
-      copyStompClient.subscribe(`/user/U_004/queue/account`, (account) => {
+      that.subscription = copyStompClient.subscribe(`/user/U_004/queue/account`, (account) => {
         that.account = that.utils.convertToAccount(account.body);
         that.buyingPower.emit(that.account.buyingPower);
       });

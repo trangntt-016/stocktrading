@@ -1,12 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { Watchlist } from '../../model/Watchlist';
 import { WatchlistService } from '../../service/watchlist.service';
 import { Observable, Subscription } from 'rxjs';
 import { SymbolService } from '../../service/symbol.service';
 import { Symbol } from '../../model/Symbol';
 import { map } from 'rxjs/operators';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-watchlist',
@@ -14,12 +12,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./watchlist.component.css']
 })
 export class WatchlistComponent implements OnInit, OnDestroy {
-  private subscription: Subscription;
-  isDisplaySymbols: boolean = false;
+  isDisplaySymbols = false;
   watchlists: Watchlist[] = [];
   selectedWatchlist: Watchlist;
   searchSymbol: string;
   symbols$: Observable<Symbol[]>;
+  private subscription: Subscription;
 
   constructor(
     private watchlistService: WatchlistService,
@@ -34,15 +32,14 @@ export class WatchlistComponent implements OnInit, OnDestroy {
       this.watchlistService.sendSelectedWatchlist(this.watchlists[0]);
       this.selectedWatchlist = this.watchlists[0];
     });
-    this.watchlistService.selectedWatchlistEvt.subscribe(selectedWatchList => {
+    this.subscription = this.watchlistService.selectedWatchlistEvt.subscribe(selectedWatchList => {
       this.selectedWatchlist = selectedWatchList;
     });
 
     this.symbols$ = this.symbolService.getAllSymbols();
-
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
@@ -72,7 +69,7 @@ export class WatchlistComponent implements OnInit, OnDestroy {
   add(symbol: Symbol): void {
     // add new symbol to a watchlist
     if (this.selectedWatchlist.symbols == null) {
-      this.selectedWatchlist.symbols = new Array();
+      this.selectedWatchlist.symbols = [];
     }
     this.selectedWatchlist.symbols.push(symbol);
     // find index of selectedWatchlist in watchlists
@@ -80,15 +77,12 @@ export class WatchlistComponent implements OnInit, OnDestroy {
     // replace old selected watchlist with new one
     this.watchlists[idx] = this.selectedWatchlist;
     // update selected watchlist with new symbol in the database
-    this.watchlistService.updateAWatchlist(this.selectedWatchlist).subscribe(wl => {
+    this.subscription = this.watchlistService.updateAWatchlist(this.selectedWatchlist).subscribe(wl => {
       // update successfully will return null
       this.watchlistService.sendWatchlists(this.watchlists);
       this.watchlistService.sendSelectedWatchlist(this.selectedWatchlist);
     }, (error => {
       console.log(error);
     }));
-
-
   }
-
 }

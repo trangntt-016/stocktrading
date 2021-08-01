@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import { StockUtils } from '../../../utils/StockUtils';
@@ -12,17 +12,23 @@ import { Position } from '../../../model/Position';
   templateUrl: './position.component.html',
   styleUrls: ['./position.component.css']
 })
-export class PositionComponent implements OnInit {
+export class PositionComponent implements OnInit, OnDestroy {
   positions: Position[];
   private utils = new StockUtils();
   private stompClient;
   private stompClientSub: Subscription;
   private serverUrl = environment.stockWS;
+  private sub: Subscription;
 
-  constructor(  ) { }
+  constructor() {
+  }
 
   ngOnInit(): void {
-    this.initializeWebSocketConnection("U_004");
+    this.initializeWebSocketConnection('U_004');
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
   initializeWebSocketConnection(userId: string): any {
@@ -36,11 +42,11 @@ export class PositionComponent implements OnInit {
     // it helps to render data on html
     const that = this;
 
-    this.stompClient.connect({userId:"U_004"}, function(frame) {
-      copyStompClient.subscribe(`/user/U_004/queue/position`, (positions) => {
+    this.stompClient.connect({userId: 'U_004'}, (frame) => {
+      that.sub = copyStompClient.subscribe(`/user/U_004/queue/position`, (positions) => {
         that.positions = that.utils.convertToPositions(positions.body);
       });
-      copyStompClient.send(`/app/position`, {}, ("U_004"));
+      copyStompClient.send(`/app/position`, {}, ('U_004'));
     }, (err) => {
       console.log(err);
     });

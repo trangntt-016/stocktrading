@@ -1,36 +1,36 @@
 <div class="wrapper">
   <div class="title-wrapper">
-      <div class="title" fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="left center">
-        <input matInput placeholder="Symbol"
-               [matAutocomplete]="auto"
-               [(ngModel)]="searchSymbol"
-               (ngModelChange)="doFilter()"
-        >
-        <mat-autocomplete #auto="matAutocomplete" [panelWidth]="300" class="autocomplete">
-          <mat-option *ngFor="let symbol of symbols" [value]="symbol.symbol">
-            <div class="symbols">
-              <h4>{{symbol.symbol}}</h4>
-              <h5>{{symbol.name | uppercase}}</h5>
-            </div>
-          </mat-option>
-        </mat-autocomplete>
+    <div class="title" fxLayout="row" fxLayoutAlign="left center" fxLayoutGap="5px">
+      <input (ngModelChange)="doFilter()" [(ngModel)]="searchSymbol"
+             [matAutocomplete]="auto"
+             matInput
+             placeholder="Symbol"
+      >
+      <mat-autocomplete #auto="matAutocomplete" [panelWidth]="300" class="autocomplete">
+        <mat-option *ngFor="let symbol of symbols" [value]="symbol.symbol">
+          <div class="symbols">
+            <h4>{{symbol.symbol}}</h4>
+            <h5>{{symbol.name | uppercase}}</h5>
+          </div>
+        </mat-option>
+      </mat-autocomplete>
     </div>
   </div>
   <div class="body-wrapper">
     <div class="title-chart" fxLayout="row" fxLayoutGap="20px">
-      <button mat-flat-button (click)="setInterval(90)" [ngClass]="interval===90?'active':''">03 Months</button>
-      <button mat-flat-button (click)="setInterval(180)" [ngClass]="interval===180?'active':''">06 Months</button>
-      <button mat-flat-button (click)="setInterval(365)" [ngClass]="interval===365?'active':''">01 Year</button>
-      <button mat-flat-button (click)="setInterval(1)" [ngClass]="interval===1?'active':''">Today</button>
+      <button (click)="setInterval(90)" [ngClass]="interval===90?'active':''" mat-flat-button>03 Months</button>
+      <button (click)="setInterval(180)" [ngClass]="interval===180?'active':''" mat-flat-button>06 Months</button>
+      <button (click)="setInterval(365)" [ngClass]="interval===365?'active':''" mat-flat-button>01 Year</button>
+      <button (click)="setInterval(1)" [ngClass]="interval===1?'active':''" mat-flat-button>Today</button>
     </div>
     <div class="body">
-      <div id="chart" *ngIf="chartOptions!=null">
+      <div *ngIf="chartOptions!=null" id="chart">
         <apx-chart
-          [series]="chartOptions.series"
           [chart]="chartOptions.chart"
+          [series]="chartOptions.series"
+          [title]="chartOptions.title"
           [xaxis]="chartOptions.xaxis"
           [yaxis]="chartOptions.yaxis"
-          [title]="chartOptions.title"
         ></apx-chart>
       </div>
     </div>

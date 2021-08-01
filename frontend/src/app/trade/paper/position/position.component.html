@@ -19,12 +19,15 @@
       <th>{{pos.symbol}}</th>
       <td><p class="name">{{pos.name}}</p></td>
       <td><p class="buy">{{pos.filledQuantity}}</p></td>
-      <td><p>{{pos.marketValue}}</p></td>
-      <td><p>{{pos.lastPrice}}</p></td>
-      <td><p>{{pos.avgPrice}}</p></td>
-      <td><p>{{pos.totalCost}}</p></td>
-      <td><p>{{pos.unrealizedPL}}</p></td>
-      <td><p>{{pos.unrealizedPLPercent}}</p></td>
+      <td><p>{{pos.marketValue | number : '1.2-2'}}</p></td>
+      <td><p>{{pos.lastPrice | number : '1.2-2'}}</p></td>
+      <td><p>{{pos.avgPrice | number : '1.2-2'}}</p></td>
+      <td><p>{{pos.totalCost | number : '1.2-2'}}</p></td>
+      <td><p [ngClass]="(pos.unrealizedPL >=0)?'increasing':'decreasing'">{{pos.unrealizedPL | number : '1.2-2'}}</p>
+      </td>
+      <td><p
+        [ngClass]="(pos.unrealizedPLPercent >=0)?'increasing':'decreasing'">{{pos.unrealizedPLPercent | number : '1.2-2'}}
+        %</p></td>
       <td><p>{{pos.type}}</p></td>
     </tr>
     </tbody>

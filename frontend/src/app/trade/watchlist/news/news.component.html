@@ -6,8 +6,8 @@
       <h4>News</h4>
     </div>
     <div class="new-container">
-      <div class="news"  *ngFor="let n of news">
-        <a href={{n.link}} fxLayout="row" fxLayoutGap="30px">
+      <div *ngFor="let n of news" class="news">
+        <a fxLayout="row" fxLayoutGap="30px" href={{n.link}}>
           <div class="time-symbol" fxLayout="row">
             <h5 class="date-h5">{{n.pubDate | formatDate}}</h5>
             <h5 class="symbol-h5">{{n.symbol}}</h5>

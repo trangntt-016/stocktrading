@@ -1,9 +1,10 @@
-.wrapper{
+.wrapper {
   width: 100%;
   height: 225px;
   background-color: #fff;
   overflow: scroll;
 }
+
 div {
   max-width: 100em;
   max-height: 100em;
@@ -25,19 +26,21 @@ th {
   width: max-content;
 }
 
-p{
+p {
   width: calc(7em);
   margin: 5px;
   font-size: 13px;
   font-weight: 500;
 }
 
-.PL{
+.PL {
   width: calc(8.5em);
 }
-.name{
+
+.name {
   width: max-content;
 }
+
 thead th {
   position: -webkit-sticky; /* for Safari */
   position: sticky;
@@ -45,7 +48,8 @@ thead th {
   background-color: #f3f1f1;
   font-size: 12px;
 }
-thead th p{
+
+thead th p {
   font-weight: 400;
 }
 
@@ -68,16 +72,25 @@ tbody th {
 
 }
 
-tr:hover{
+tr:hover {
   background-color: #e1effc;
   cursor: pointer;
 }
 
-.buy{
+.buy {
   color: #25b625;
 }
+
 ::-webkit-scrollbar {
   width: 0px;
   height: 2px;
   background: transparent; /* make scrollbar transparent */
+}
+
+.increasing {
+  color: #25b625;
+}
+
+.decreasing {
+  color: #E91E63;
 }

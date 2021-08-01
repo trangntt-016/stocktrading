@@ -1,44 +1,45 @@
-.wrapper-watchlist{
+.wrapper-watchlist {
   height: 100%;
 }
-.wrapper-my-watchlist{
+
+.wrapper-my-watchlist {
   height: 63%;
-  padding-top:50px;
+  padding-top: 50px;
   padding-left: 4vw;
   background-color: #fff;
 }
 
-.add-symbol-wrapper{
+.add-symbol-wrapper {
   margin: 22px 0 0 25px;
   position: relative;
 }
 
-.add-symbol-wrapper:hover{
+.add-symbol-wrapper:hover {
   cursor: pointer;
   color: #1565C0;
 }
 
-.add-symbol-wrapper p:hover{
+.add-symbol-wrapper p:hover {
   color: #1565C0;
 }
 
-p{
+p {
   font-size: 13px;
   margin: 0px;
 }
 
-mat-icon{
+mat-icon {
   font-size: 18px;
   color: gray;
   padding-top: 3px;
 }
 
-input{
+input {
   width: 250px;
-  border:none
+  border: none
 }
 
-input:focus{
+input:focus {
   outline-color: #1565C0;
 }
 
@@ -46,29 +47,31 @@ input:focus{
   max-height: 280px !important;
   margin-top: 5px;
 }
-::ng-deep .mat-card-header-text{
+
+::ng-deep .mat-card-header-text {
   margin: 0px !important;
 }
-.symbols{
+
+.symbols {
   display: flex;
   flex-direction: column;
 }
 
-.symbols h4{
+.symbols h4 {
   margin-bottom: 0px;
 }
 
 mat-option {
   height: 60px !important;
-  margin-top:10px;
+  margin-top: 10px;
   border-botom: 1px solid lightgray;
 }
 
-mat-option:hover{
+mat-option:hover {
   background-color: #d5e7fc !important;
 }
 
-.searchbar-wrapper{
+.searchbar-wrapper {
   position: absolute;
   margin-top: -20px;
   margin-left: 25px;
@@ -76,21 +79,21 @@ mat-option:hover{
   padding: 5px 0px 5px 5px;
 }
 
-.mat-icon:hover{
+.mat-icon:hover {
   cursor: pointer;
   color: #d0cccc;
 }
 
-::ng-deep input.mat-input-element{
-  margin-top: 0!important;
+::ng-deep input.mat-input-element {
+  margin-top: 0 !important;
 }
 
-.bottom-wrapper{
+.bottom-wrapper {
   height: 62%;
   margin-top: 10px;
 }
 
-.wrapper-footer{
-  height:35vh;
+.wrapper-footer {
+  height: 35vh;
   background-color: lightgray;
 }

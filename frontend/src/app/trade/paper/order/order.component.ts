@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Order } from '../../../model/Order';
 import { OrderService } from '../../../service/order.service';
 
@@ -6,6 +6,7 @@ import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import { environment } from '../../../../environments/environment';
 import { StockUtils } from '../../../utils/StockUtils';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -13,34 +14,42 @@ import { StockUtils } from '../../../utils/StockUtils';
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.css']
 })
-export class OrderComponent implements OnInit {
+export class OrderComponent implements OnInit, OnDestroy {
   order: Order;
   orders: Order[];
   private utils: StockUtils;
   private stompClient;
   private serverUrl = environment.stockWS;
+  private serviceSub: Subscription;
+  private stompSub: Subscription;
 
   constructor(
     private orderService: OrderService
   ) {
   }
 
+  ngOnDestroy(): void {
+    this.stompSub.unsubscribe();
+    this.serviceSub.unsubscribe();
+  }
+
   ngOnInit(): void {
     this.utils = new StockUtils();
 
-    this.orderService.selectedOrderEvt.subscribe(order => {
+    this.serviceSub = this.orderService.selectedOrderEvt.subscribe(order => {
       this.orders.unshift(order);
       this.stompClient.subscribe(`/topic/trade/`, (orders) => {
-        console.log(orders.data);
       });
     });
 
-    this.orderService.getAllOrdersByUserId("U_004").subscribe(orders => {
+    this.orderService.getAllOrdersByUserId('U_004').subscribe(orders => {
       this.orders = orders;
-      this.stompClient.subscribe(`/user/U_004/queue/order`, (orders) => {
-        this.orders = this.utils.convertToOrders(orders.body);
-        console.log(this.orders);
-      });
+      if (this.stompClient != null) {
+        this.stompSub = this.stompClient.subscribe(`/user/U_004/queue/order`, (orders) => {
+          this.orders = this.utils.convertToOrders(orders.body);
+        });
+      }
+
     });
 
     this.initializeWebSocketConnection();
@@ -56,10 +65,9 @@ export class OrderComponent implements OnInit {
 
     const that = this;
 
-    this.stompClient.connect({userId:"U_004"}, function(frame) {
-      copyStompClient.subscribe(`/user/U_004/queue/order`, (orders) => {
+    this.stompClient.connect({userId: 'U_004'}, (frame) => {
+      that.stompSub = copyStompClient.subscribe(`/user/U_004/queue/order`, (orders) => {
         that.orders = that.utils.convertToOrders(orders.body);
-        console.log(that.orders);
       });
 
     }, (err) => {

@@ -1,38 +1,38 @@
 <div class="wrapper">
-      <table>
-        <thead>
-        <tr>
-          <th><p>Symbol</p></th>
-          <th><p>Name</p></th>
-          <th><p>Side</p></th>
-          <th><p>Filled Orders/Total</p></th>
-          <th><p>Limit Price</p></th>
-          <th><p>Filled Qty</p></th>
-          <th><p>Filled Time</p></th>
-          <th><p>Average Price</p></th>
-          <th><p>Order Type</p></th>
-          <th><p>TIF</p></th>
-          <th><p>Extended Hours</p></th>
-          <th><p>Order Placed</p></th>
-          <th><p>Order Status</p></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor = "let order of orders">
-          <th>{{order.symbol.symbol}}</th>
-          <td><p>{{order.symbol.name}}</p></td>
-          <td><p  [ngClass]="[order.orderSide==='BUY'?'buy':'sell']">{{order.orderSide}}</p></td>
-          <td><p>{{(order.orderStatus=='WORKING'?0:order.filledQuantity)}}/{{order.filledQuantity}}</p></td>
-          <td><p>{{order.limitPrice}}</p></td>
-          <td><p>{{order.filledQuantity}}</p></td>
-          <td><p>{{(order.filledTime == null)?'-': (order.filledTime | date:'yyyy-MM-dd hh:mm:ss')}}</p></td>
-          <td><p>{{order.avgPrice}}</p></td>
-          <td><p>{{order.orderType}}</p></td>
-          <td><p>Day</p></td>
-          <td><p>No</p></td>
-          <td><p>{{order.orderPlaced | date:'yyyy-MM-dd hh:mm:ss'}}</p></td>
-          <td><p>{{order.orderStatus}}</p></td>
-        </tr>
-        </tbody>
-      </table>
+  <table>
+    <thead>
+    <tr>
+      <th><p>Symbol</p></th>
+      <th><p>Name</p></th>
+      <th><p>Side</p></th>
+      <th><p>Filled Orders/Total</p></th>
+      <th><p>Limit Price</p></th>
+      <th><p>Filled Qty</p></th>
+      <th><p>Filled Time</p></th>
+      <th><p>Average Price</p></th>
+      <th><p>Order Type</p></th>
+      <th><p>TIF</p></th>
+      <th><p>Extended Hours</p></th>
+      <th><p>Order Placed</p></th>
+      <th><p>Order Status</p></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let order of orders">
+      <th>{{order.symbol.symbol}}</th>
+      <td><p>{{order.symbol.name}}</p></td>
+      <td><p [ngClass]="[order.orderSide==='BUY'?'buy':'sell']">{{order.orderSide}}</p></td>
+      <td><p>{{(order.orderStatus == 'WORKING' ? 0 : order.filledQuantity)}}/{{order.filledQuantity}}</p></td>
+      <td><p>{{order.limitPrice}}</p></td>
+      <td><p>{{order.filledQuantity}}</p></td>
+      <td><p>{{(order.filledTime == null) ? '-' : (order.filledTime | date:'yyyy-MM-dd hh:mm:ss')}}</p></td>
+      <td><p>{{order.avgPrice}}</p></td>
+      <td><p>{{order.orderType}}</p></td>
+      <td><p>Day</p></td>
+      <td><p>No</p></td>
+      <td><p>{{order.orderPlaced | date:'yyyy-MM-dd hh:mm:ss'}}</p></td>
+      <td><p>{{order.orderStatus}}</p></td>
+    </tr>
+    </tbody>
+  </table>
 </div>

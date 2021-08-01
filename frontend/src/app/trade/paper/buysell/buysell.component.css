@@ -1,29 +1,32 @@
-.wrapper{
+.wrapper {
   background-color: #fff;
   height: 100%;
   width: 100%;
 }
 
-p{
+p {
   font-size: 13px;
   font-weight: 500;
 }
 
 
-.title-wrapper{
+.title-wrapper {
   background-color: #f3f1f1;
   height: 18%;
   padding: 50px 10px 5px 10px;
   border-bottom: 1px solid lightgray;
 }
-.title{
+
+.title {
   width: 100%;
   height: 100%;
 }
-.title p{
+
+.title p {
   margin-bottom: 0px;
 }
-input{
+
+input {
   width: 120px;
   border-radius: 3px;
   border: 1px solid lightgray;
@@ -32,65 +35,75 @@ input{
   font-weight: 500;
   height: 80%;
 }
+
 input:focus {
   outline-color: transparent;
   padding-left: 10px;
 }
-.body-wrapper{
+
+.body-wrapper {
   background-color: #fff;
   height: 92%;
   width: 100%;
   padding: 10px;
 }
 
-.body{
+.body {
   width: 100%;
   height: 100%;
 }
-.bid-ask{
+
+.bid-ask {
   height: 6%;
   width: 100%;
   background-color: palevioletred;
   margin-bottom: 15px;
 }
-.bid-ask-wrapper{
+
+.bid-ask-wrapper {
   height: 100%;
   background-color: green;
   font-size: 13px;
   font-weight: 500;
 }
-.bid{
+
+.bid {
   background-color: #B9F6CA;
   width: 43%;
   padding: 2px 10px 2px 10px;
   color: #388E3C;
 }
-.ask{
+
+.ask {
   background-color: #ffb5ce;
   width: 43%;
   padding: 2px 10px 2px 10px;
   text-align: right;
   color: #C51162
 }
-.diff{
+
+.diff {
   background-color: purple;
   width: 14%;
   text-align: center;
   position: relative;
 }
-.half-bid{
+
+.half-bid {
   background-color: #B9F6CA;
   width: 50%;
   height: 100%;
 }
-.half-ask{
+
+.half-ask {
   background-color: #ffb5ce;
   width: 50%;
   height: 100%;
 }
-.diff-price{
+
+.diff-price {
   position: absolute;
-  width:50px;
+  width: 50px;
   height: 100%;
   background-color: #fff;
   left: 0;
@@ -101,19 +114,20 @@ input:focus {
   border-radius: 30px;
   padding-top: 3px;
 }
-.side{
+
+.side {
   height: 16%;
   width: 100%;
   background-color: #fff;
 }
 
-.buy-sell-button{
+.buy-sell-button {
   height: 35px;
   background-color: #fff;
   border: none;
 }
 
-h6{
+h6 {
   margin-bottom: 5px;
   font-weight: 500;
   color: gray;
@@ -121,7 +135,7 @@ h6{
 }
 
 .buy,
-.sell{
+.sell {
   height: 100%;
   padding: 5px 10px 5px 10px;
   background-color: #e8e8e8;
@@ -129,58 +143,59 @@ h6{
 }
 
 .buy:hover,
-.sell:hover{
+.sell:hover {
   background-color: #f5f5f5;
   cursor: pointer
 }
 
-.buy{
+.buy {
   color: #43A047;
   width: 49%;
 }
 
-.sell{
+.sell {
   text-align: right;
   color: #E91E63;
   width: 51%
 }
 
 .selected-buy,
-.selected-buy:hover{
+.selected-buy:hover {
   background-color: #43A047;
   color: white;
 }
 
-.buy-when-sell-selected{
+.buy-when-sell-selected {
   color: gray;
 }
-.sell-when-buy-selected{
+
+.sell-when-buy-selected {
   color: gray;
 }
 
 .selected-sell,
-.selected-sell:hover{
+.selected-sell:hover {
   color: white;
   background-color: #E91E63;
 }
 
-.type-quantity-wrapper{
+.type-quantity-wrapper {
   height: 16%;
   width: 100%;
 }
 
-.type{
+.type {
   background-color: #fff;
   width: 50%;
   height: 100%;
 }
 
-.quantity{
+.quantity {
   width: 50%;
   height: 100%;
 }
 
-.quantity input{
+.quantity input {
   width: 95%;
   height: 32px;
   border: 1px solid lightgray;
@@ -189,16 +204,16 @@ h6{
   border-radius: 3px;
 }
 
-.quantity input{
+.quantity input {
   width: 100%;
 }
 
-.quantity input:hover{
+.quantity input:hover {
   /*box-shadow:0px 5px 5px -3px rgb(0 0 0 /20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);*/
   outline-color: transparent;
 }
 
-:host ::ng-deep .mat-select-trigger{
+:host ::ng-deep .mat-select-trigger {
   background-color: white;
   color: #1A237E;
   padding: 5px;
@@ -208,12 +223,12 @@ h6{
   height: 30px;
 }
 
-.limit-price{
+.limit-price {
   height: 16%;
   width: 100%;
 }
 
-.limit-price input{
+.limit-price input {
   width: 100%;
   height: 32px;
   border: 1px solid lightgray;
@@ -222,58 +237,67 @@ h6{
   border-radius: 3px;
 }
 
-.time-hour-wrapper{
+.time-hour-wrapper {
   height: 16%;
   width: 100%;
 }
 
-.paper-trade{
+.paper-trade {
   height: 16%;
   width: 100%;
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
 }
+
 .day-input,
-.hours-input{
+.hours-input {
   width: 95%;
   height: 32px;
   border: 1px solid lightgray;
   padding-left: 10px;
   padding-top: 5px;
 }
-.hours-input{
+
+.hours-input {
   width: 100%;
 }
-.time{
+
+.time {
   width: 50%;
   border-radius: 3px;
 }
-.time:hover{
-  cursor: not-allowed;
-}
-.hours{
-  width: 50%;
-}
-.hours:hover{
+
+.time:hover {
   cursor: not-allowed;
 }
 
-.mat-raised-button{
+.hours {
+  width: 50%;
+}
+
+.hours:hover {
+  cursor: not-allowed;
+}
+
+.mat-raised-button {
   width: 30%;
 }
-.sellBtn{
+
+.sellBtn {
   background-color: #E91E63;
 }
 
-.buyBtn{
+.buyBtn {
   background-color: #43A047;
 }
-.summary{
+
+.summary {
   height: 10%;
   width: 100%;
 }
-.summary h6{
+
+.summary h6 {
   margin: 0;
 }
 
@@ -281,61 +305,60 @@ h6{
   max-height: 280px !important;
 }
 
-::ng-deep .mat-card-header-text{
+::ng-deep .mat-card-header-text {
   margin: 0px !important;
 }
-.symbols{
+
+.symbols {
   display: flex;
   flex-direction: column;
 }
 
-.symbols h4{
+.symbols h4 {
   margin-bottom: 0px;
 }
+
 mat-option {
   height: 60px !important;
-  margin-top:10px;
+  margin-top: 10px;
   border-botom: 1px solid lightgray;
 }
 
-mat-option:hover{
+mat-option:hover {
   background-color: #d5e7fc !important;
 }
 
-:host ::ng-deep .active{
+:host ::ng-deep .active {
   color: #2196F3 !important;
 }
 
 
 ::-webkit-scrollbar {
-   width: 8px;
- }
+  width: 8px;
+}
 
 ::-webkit-scrollbar-track {
-   border-radius: 4px;
-   background-color: green;
- }
+  border-radius: 4px;
+  background-color: green;
+}
 
 
-::ng-deep.autocomplete::-webkit-scrollbar-track
-{
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+::ng-deep.autocomplete::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #F5F5F5;
 }
 
-::ng-deep.autocomplete::-webkit-scrollbar
-{
+::ng-deep.autocomplete::-webkit-scrollbar {
   width: 10px;
   background-color: #fff;
 }
 
-::ng-deep.autocomplete::-webkit-scrollbar-thumb
-{
+::ng-deep.autocomplete::-webkit-scrollbar-thumb {
   background-color: #c6c3c3;
   border: 2px solid #c6c3c3;
 }
 
-.mat-button{
+.mat-button {
   color: #1A237E;
   font-size: 13px;
 }

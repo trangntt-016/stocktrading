@@ -14,11 +14,11 @@ export class StockUtils {
   }
 
   public convertToDaily(newMes): DailyDetails {
-    let daily = new DailyDetails();
+    const daily = new DailyDetails();
 
     newMes = newMes.replace('[', '').replace(']', '');
 
-    let processed = newMes.split(',');
+    const processed = newMes.split(',');
 
     processed.forEach(val => {
       const array = val.split(':');
@@ -119,7 +119,9 @@ export class StockUtils {
     processed.forEach(o => {
       const orderArr = o.split(',');
 
-      if (orderArr[orderArr.length - 1] == ' ') orderArr.pop();
+      if (orderArr[orderArr.length - 1] == ' ') {
+        orderArr.pop();
+      }
 
       if (!orderArr[3].includes('=')) {
         orderArr[2] = orderArr[2] + ',' + orderArr[3];
@@ -199,7 +201,9 @@ export class StockUtils {
 
       const dailiesArr = d.split(',');
 
-      if (dailiesArr[dailiesArr.length - 1] == ' ') dailiesArr.pop();
+      if (dailiesArr[dailiesArr.length - 1] == ' ') {
+        dailiesArr.pop();
+      }
 
       dailiesArr[dailiesArr.length - 1] = dailiesArr[dailiesArr.length - 1].replace(')', '');
 
@@ -245,14 +249,16 @@ export class StockUtils {
 
     const processed = positions.split('PositionDto(');
 
-      processed.shift();
+    processed.shift();
 
     processed.forEach(p => {
       const position = new Position();
 
       const posArr = p.split(',');
 
-      if(posArr[posArr.length - 1] == ' ') posArr.pop();
+      if (posArr[posArr.length - 1] == ' ') {
+        posArr.pop();
+      }
 
       if (!posArr[3].includes('=')) {
         posArr[2] = posArr[2] + ',' + posArr[3];
@@ -343,19 +349,19 @@ export class StockUtils {
           account.initialValue = +value;
           break;
         case 'netAccountValue':
-          account.netAccountValue =+value;
+          account.netAccountValue = +value;
           break;
         case 'overallPL':
-          account.overallPL =+value;
+          account.overallPL = +value;
           break;
         case 'PLChange':
-          account.PLChange =+value;
+          account.PLChange = +value;
           break;
         case 'marketValue':
-          account.marketValue =+value;
+          account.marketValue = +value;
           break;
         case 'buyingPower':
-          account.buyingPower =+value;
+          account.buyingPower = +value;
           break;
         default:
           null;

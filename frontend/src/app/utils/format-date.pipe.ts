@@ -9,7 +9,7 @@ export class FormatDatePipe implements PipeTransform {
 
     let result = '';
 
-    switch (this.typeOfDate(dateOn)){
+    switch (this.typeOfDate(dateOn)) {
       case -1: {
         result = 'Yesterday, ' + this.convertedHourMinsAmPm(dateOn);
         break;
@@ -25,7 +25,7 @@ export class FormatDatePipe implements PipeTransform {
     return result;
   }
 
-  public typeOfDate(date: Date): number{
+  public typeOfDate(date: Date): number {
     const convertedDate = new Date(date);
     const today = new Date();
     const yesterday = new Date(Date.now() - 864e5);
@@ -46,25 +46,24 @@ export class FormatDatePipe implements PipeTransform {
       year: convertedDate.getFullYear()
     };
 
-    if (CheckedDate.date == Yesterday.date && CheckedDate.month == Yesterday.month && CheckedDate.year == Yesterday.year){
+    if (CheckedDate.date == Yesterday.date && CheckedDate.month == Yesterday.month && CheckedDate.year == Yesterday.year) {
       return -1;
-    }
-    else if (CheckedDate.date == Today.date && CheckedDate.month == Today.month && CheckedDate.year == Today.year){
+    } else if (CheckedDate.date == Today.date && CheckedDate.month == Today.month && CheckedDate.year == Today.year) {
       return 0;
     }
     return 1;
   }
 
-  public convertedDay(day: number): string{
+  public convertedDay(day: number): string {
     return day < 10 ? ('0' + day.toString()) : day.toString();
   }
 
-  public convertedHourMinsAmPm(convertedDate: Date): string{
+  public convertedHourMinsAmPm(convertedDate: Date): string {
     let hour = '';
     let minutes = '';
     let pmAm = '';
     hour = (convertedDate.getHours() > 12) ? (convertedDate.getHours() - 12).toString() : convertedDate.getHours().toString();
-    if (parseInt(hour) < 10){
+    if (parseInt(hour) < 10) {
       hour = '0' + hour;
     }
     minutes = (convertedDate.getMinutes() < 10) ? ('0' + convertedDate.getMinutes().toString()) : convertedDate.getMinutes().toString();
@@ -73,7 +72,7 @@ export class FormatDatePipe implements PipeTransform {
     return hour + ':' + minutes + pmAm;
   }
 
-  public convertedMonth(monthIdx: number): string{
+  public convertedMonth(monthIdx: number): string {
     const month = [
       'January',
       'February',

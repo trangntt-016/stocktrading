@@ -1,9 +1,10 @@
-.wrapper{
+.wrapper {
   width: 100%;
   height: 225px;
   background-color: #fff;
   overflow: scroll;
 }
+
 div {
   max-width: 100em;
   max-height: 100em;
@@ -24,12 +25,13 @@ th {
   border-right: 1px solid lightgray;
 }
 
-p{
+p {
   width: max-content;
   margin: 5px;
   font-size: 13px;
   font-weight: 500;
 }
+
 thead th {
   position: -webkit-sticky; /* for Safari */
   position: sticky;
@@ -37,7 +39,8 @@ thead th {
   background-color: #f3f1f1;
   font-size: 12px;
 }
-thead th p{
+
+thead th p {
   font-weight: 400;
 }
 
@@ -59,18 +62,19 @@ tbody th {
   font-size: 13px;
 }
 
-tr:hover{
+tr:hover {
   background-color: #e1effc;
   cursor: pointer;
 }
 
-.buy{
+.buy {
   color: #25b625;
 }
 
-.sell{
+.sell {
   color: #E91E63;
 }
+
 ::-webkit-scrollbar {
   width: 0px;
   height: 2px;

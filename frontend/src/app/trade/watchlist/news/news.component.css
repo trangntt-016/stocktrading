@@ -1,60 +1,64 @@
-.wrapper{
+.wrapper {
   height: 100%;
   padding: 5px;
   background-color: #fff;
   width: 55.5vw;
-  overflow:hidden;
+  overflow: hidden;
   position: relative;
 }
 
-.news-container{
+.news-container {
   padding: 0 30px 0 30px;
 }
-.news{
+
+.news {
   margin-top: 6px;
 }
-a{
+
+a {
   text-decoration: none;
 }
-a h5:hover{
+
+a h5:hover {
   cursor: pointer;
   color: #6ba3e3;
 }
 
-.news:hover{
+.news:hover {
   color: #1565C0;
   cursor: pointer;
 }
-.h4-container{
+
+.h4-container {
   border-bottom: 1px solid lightgray;
 }
 
-.h4-container h4{
+.h4-container h4 {
   margin: 10px 0 0 0;
   padding: 0;
 }
 
-.new-container{
+.new-container {
   overflow-y: scroll;
   height: 230px;
   margin-top: 10px;
 }
 
-.time-symbol .date-h5{
+.time-symbol .date-h5 {
   width: 150px;
   margin: 0;
 }
 
-.time-symbol .symbol-h5{
+.time-symbol .symbol-h5 {
   width: 70px;
   margin: 0px;
 }
 
-.time-symbol h5{
+.time-symbol h5 {
   padding-left: 15px
 }
 
-.title{
+.title {
   margin: 0;
   font-weight: 500;
 }
@@ -65,7 +69,7 @@ a h5:hover{
   background: transparent; /* make scrollbar transparent */
 }
 
-mat-spinner{
+mat-spinner {
   position: absolute;
   top: 25%;
   left: 50%;

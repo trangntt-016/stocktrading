@@ -1,41 +1,39 @@
-.papertrade-wrapper{
-  height:100%;
+.papertrade-wrapper {
+  height: 100%;
   background-color: lightgray;
 }
 
-.account-watchlist-wrapper{
+.account-watchlist-wrapper {
   width: 20%;
   height: 100%;
   background-color: lightgray;
   overflow: hidden;
 }
 
-.buysell-order-chart-wrapper{
+.buysell-order-chart-wrapper {
   width: 80%;
   height: 100%;
   background-color: lightgray;
 }
 
-.buysell-chart-wrapper{
+.buysell-chart-wrapper {
   width: 100%;
   background-color: lightgray;
   height: 65%;
 }
 
 
-.buysell-wrapper{
+.buysell-wrapper {
   width: 35%;
   height: 100%;
-  background-color: deeppink;
 }
 
-.chart-wrapper{
+.chart-wrapper {
   width: 65%;
   height: 100%;
-  background-color: aqua;
 }
 
-.order-position-wrapper{
+.order-position-wrapper {
   width: 100%;
   height: 40%;
   margin-top: 5px;
@@ -43,30 +41,31 @@
   background-color: #fff;
 }
 
-.inner-wrapper{
+.inner-wrapper {
   width: 100%;
   height: 100%;
 }
 
-.position-orders-title{
+.position-orders-title {
   height: 10%;
   width: 100%;
   padding: 5px;
 }
 
-.position-orders-title p{
+.position-orders-title p {
   line-height: 1;
 }
 
-.position-orders-title p:hover{
+.position-orders-title p:hover {
   cursor: pointer;
 }
 
-.op-wrapper{
+.op-wrapper {
   height: 100%;
   width: 100%;
 }
-.active{
+
+.active {
   color: #2196F3;
   font-weight: 500;
 }
