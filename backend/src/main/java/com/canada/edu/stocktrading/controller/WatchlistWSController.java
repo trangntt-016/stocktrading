@@ -42,7 +42,12 @@ public class WatchlistWSController {
         try{
             if(this.selectedWatchlistId != null && this.selectedWatchlistId !=null){
                 List<DailyDtoPriceChange> dailies = watchListService.getAllDailyDtoPriceChangeByWatchListId(this.selectedWatchlistId);
-                this.simpMessagingTemplate.convertAndSendToUser(this.watchlistUserId,"/queue/watchlist/"+this.selectedWatchlistId,dailies.toString());
+                if(dailies != null){
+                    this.simpMessagingTemplate.convertAndSendToUser(this.watchlistUserId,"/queue/watchlist/"+this.selectedWatchlistId,dailies.toString());
+                }
+                else{
+                    this.simpMessagingTemplate.convertAndSendToUser(this.watchlistUserId,"/queue/watchlist/"+this.selectedWatchlistId,"null");
+                }
             }
         }
         catch(IllegalArgumentException ex){

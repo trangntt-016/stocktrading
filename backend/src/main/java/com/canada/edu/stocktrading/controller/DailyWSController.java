@@ -56,7 +56,7 @@ public class DailyWSController {
 
     @Scheduled(fixedDelay = 3000)
     public void sendScheduledDailyBidAsk() {
-        if(this.selectedSymbolId!=null) {
+        if(this.selectedSymbolId != null) {
             DailyDtoBidAsk dailyBidAskDto = dailyService.getDailyBidAskBySymbolId(this.selectedSymbolId);
             if(dailyBidAskDto!=null){
                 this.simpMessagingTemplate.convertAndSend("/topic/trade/"+this.selectedSymbolId,dailyBidAskDto.toString());

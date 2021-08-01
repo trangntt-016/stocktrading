@@ -71,13 +71,13 @@ public class PositionServiceImpl {
 
     public BigDecimal getAvgPrice(BigDecimal totalCost, Integer totalFilledQuantity) {
 
-        return totalCost.divide(new BigDecimal(totalFilledQuantity));
+        return totalCost.divide(new BigDecimal(totalFilledQuantity),RoundingMode.HALF_UP);
     }
 
     public Daily getDaily (Symbol symbol) {
         Timestamp ts = ConvertTimeUtils.convertCurrentTimeTo14July();
 
-        return dailyRepository.findCurrentDailyBySymbolId(ts, symbol.getSymbolId());
+        return dailyRepository.findCurrentDailyBySymbolId(ts.toLocalDateTime().getHour(), ts.toLocalDateTime().getMinute(), ts.toLocalDateTime().getSecond(), symbol.getSymbolId());
     }
 
     public PositionDto getAPosition(Integer symbolId, String userId) {
