@@ -2,14 +2,13 @@ form{
   margin-top: 10px;
   margin-bottom: 20px;
 }
-.social-icon {
-  width: 25px;
-  height: 25px;
+mat-form-field{
+  margin-bottom: 25px!important;
 }
 
-.gg{
-  width: 35px;
-  height: 35px;
+.mat-raised-button{
+  border-radius: 50px;
+  margin-bottom: 40px;
 }
 
 .h3-wrapper{
@@ -18,4 +17,10 @@ form{
   margin: 0;
   padding: 0;
   justify-content: center;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 2px;
+  background: transparent; /* make scrollbar transparent */
 }

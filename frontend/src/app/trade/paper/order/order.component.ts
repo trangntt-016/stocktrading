@@ -21,7 +21,6 @@ export class OrderComponent implements OnInit, OnDestroy {
   private stompClient;
   private serverUrl = environment.stockWS;
   private serviceSub: Subscription;
-  private stompSub: Subscription;
 
   constructor(
     private orderService: OrderService
@@ -29,7 +28,6 @@ export class OrderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.stompSub.unsubscribe();
     this.serviceSub.unsubscribe();
   }
 
@@ -45,7 +43,7 @@ export class OrderComponent implements OnInit, OnDestroy {
     this.orderService.getAllOrdersByUserId('U_004').subscribe(orders => {
       this.orders = orders;
       if (this.stompClient != null) {
-        this.stompSub = this.stompClient.subscribe(`/user/U_004/queue/order`, (orders) => {
+        this.stompClient.subscribe(`/user/U_004/queue/order`, (orders) => {
           this.orders = this.utils.convertToOrders(orders.body);
         });
       }
@@ -66,8 +64,8 @@ export class OrderComponent implements OnInit, OnDestroy {
     const that = this;
 
     this.stompClient.connect({userId: 'U_004'}, (frame) => {
-      that.stompSub = copyStompClient.subscribe(`/user/U_004/queue/order`, (orders) => {
-        that.orders = that.utils.convertToOrders(orders.body);
+      copyStompClient.subscribe(`/user/U_004/queue/order`, (orders) => {
+       that.utils.convertToOrders(orders.body);
       });
 
     }, (err) => {

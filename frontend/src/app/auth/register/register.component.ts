@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { RegisterUser } from '../../model/RegisterUser';
+import { UserAuthRequestDto } from '../../model/UserAuthRequestDto';
 import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
@@ -12,7 +12,7 @@ import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService } from 'a
 })
 export class RegisterComponent implements OnInit {
   @Output()errorEvt: EventEmitter<string> = new EventEmitter<string>();
-  registerUser: RegisterUser = {
+  authUser: UserAuthRequestDto = {
     email: '',
     password: '',
     authenticationType: ''
@@ -26,11 +26,11 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.OAuthService.authState.subscribe((user) => {
-      this.registerUser.email = user.email;
-      this.registerUser.authenticationType = user.provider;
-      this.authService.register(this.registerUser).subscribe(
+      this.authUser.email = user.email;
+      this.authUser.authenticationType = user.provider;
+      this.authService.register(this.authUser).subscribe(
         (newUsr) => {
-          localStorage.setItem("userId",newUsr.userId);
+          localStorage.setItem('access_token', newUsr.jwt);
           this.router.navigate(['/trade']);
         }
         ,(err) => {
@@ -43,13 +43,13 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(f: NgForm): void{
     if(f.value.email.length >= 5 && f.value.email.length <= 30 && f.value.password.length >= 8 && f.value.password.length <= 30){
-      this.registerUser.email = f.value.email;
-      this.registerUser.password = f.value.password;
-      this.registerUser.authenticationType = "DATABASE";
+      this.authUser.email = f.value.email;
+      this.authUser.password = f.value.password;
+      this.authUser.authenticationType = "DATABASE";
 
-      this.authService.register(this.registerUser).subscribe(
+      this.authService.register(this.authUser).subscribe(
         (newUsr) => {
-          localStorage.setItem("userId",newUsr.userId);
+          localStorage.setItem("access_token", newUsr.jwt);
           this.router.navigate(['/trade']);
         }
         ,(err) => {
@@ -58,11 +58,11 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  signUpWithFb(): void {
+  signInWithFb(): void {
     this.OAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
   }
 
-  signUpWithGoogle(): void {
+  signInWithGoogle(): void {
     this.OAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 

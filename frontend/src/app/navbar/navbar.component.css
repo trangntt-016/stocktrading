@@ -33,13 +33,15 @@
 
 .search{
   display:flex;
-  margin: 7px;
+  margin: 0 7px 7px 7px;
 }
 input{
   border:none;
   background-color: #e3e0e0;
   font-size:12px;
-  color: gray
+  color: gray;
+  height: 25px;
+  margin-top:5px;
 }
 
 input:focus{
@@ -51,6 +53,7 @@ input::placeholder{
 
 .search-icon{
   color: gray;
+  margin-top: 5px;
 }
 
 .wrap-avatar{

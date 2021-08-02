@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RegisterUser } from '../model/RegisterUser';
+import { UserAuthRequestDto } from '../model/UserAuthRequestDto';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';

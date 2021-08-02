@@ -39,3 +39,7 @@ h2{
   background-color: #fff;
   width: 50%;
 }
+
+:host ::ng-deep .mat-tab-body-content{
+  overflow: hidden !important;
+}

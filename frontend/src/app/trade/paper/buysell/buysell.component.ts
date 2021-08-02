@@ -19,6 +19,11 @@ import { Subscription } from 'rxjs';
 export class BuysellComponent implements OnInit, OnDestroy {
   @Input() buyingPower: number;
   private subscription: Subscription;
+  private serverUrl = environment.stockWS;
+  private stompClient;
+  private stompClientSub;
+  private utils: StockUtils;
+
   amount = 0;
   order: Order;
   symbols: Symbol[];
@@ -28,10 +33,6 @@ export class BuysellComponent implements OnInit, OnDestroy {
   matchedPrice: number;
   showMatched: boolean;
   loading = true;
-  private serverUrl = environment.stockWS;
-  private stompClient;
-  private stompClientSub;
-  private utils: StockUtils;
 
 
   constructor(
@@ -52,12 +53,13 @@ export class BuysellComponent implements OnInit, OnDestroy {
       this.initializeWebSocketConnection(s[0].symbolId);
     });
 
-    this.subscription = this.symbolService.selectedSymbolEvt.subscribe(symbol => {
-      if (this.stompClient != undefined) {
-        this.stompClient.subscribe(`/topic/trade/${symbol.symbolId}`, (daily) => {
+    this.symbolService.selectedSymbolEvt.subscribe(symbol => {
+      if (this.stompClient !== undefined) {
+        this.searchSymbol = symbol.symbol;
+        this.subscription = this.stompClient.subscribe(`/topic/trade/${symbol.symbolId}`, (daily) => {
           this.dailyBidAsk = this.utils.convertToDailyBidAsk(daily.body);
         });
-        this.stompClient.subscribe(`/topic/trade/${symbol.symbolId}/future`, (matched) => {
+        this.subscription = this.stompClient.subscribe(`/topic/trade/${symbol.symbolId}/future`, (matched) => {
           this.matchedPrice = matched.body;
         });
         this.stompClient.send(`/app/trade/${symbol.symbolId}`, {}, (''));
@@ -95,7 +97,7 @@ export class BuysellComponent implements OnInit, OnDestroy {
   doFilter(): void {
     this.autoSymbols = this.filter(this.symbols);
 
-    const symbol = this.symbols.filter(s => s.symbol === this.searchSymbol)[0];
+    const symbol = this.symbols.filter(s => s.symbol.toUpperCase().includes(this.searchSymbol))[0];
 
     if (symbol !== undefined) {
       this.symbolService.sendSelectedSymbol(symbol);
@@ -106,7 +108,6 @@ export class BuysellComponent implements OnInit, OnDestroy {
 
       this.subscription = this.stompClient.subscribe(`/topic/trade/${symbol.symbolId}`, (daily) => {
         this.dailyBidAsk = this.utils.convertToDailyBidAsk(daily.body);
-        console.log(this.dailyBidAsk);
       });
 
       this.subscription = this.stompClient.subscribe(`/topic/trade/${symbol.symbolId}/future`, (matched) => {

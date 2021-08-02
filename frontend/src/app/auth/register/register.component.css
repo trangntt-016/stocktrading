@@ -1,6 +1,7 @@
 form{
   margin-top: 10px;
   margin-bottom: 20px;
+  overflow: hidden;
 }
 input {
   width: 230px;
@@ -31,3 +32,10 @@ i:hover {
   width: 35px;
   height: 35px;
 }
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 2px;
+  background: transparent; /* make scrollbar transparent */
+}
+

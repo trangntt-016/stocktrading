@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RegisterUser } from '../model/RegisterUser';
+import { UserAuthRequestDto } from '../model/UserAuthRequestDto';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
@@ -12,7 +12,13 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  register(registerUser: RegisterUser): Observable<any>{
-    return this.http.post<any>(`${environment.userAPI}`, registerUser).pipe(map(res => res.data));
+  register(registerUser: UserAuthRequestDto): Observable<any>{
+    console.log("register")
+    return this.http.post<any>(`${environment.userAPI}/register`, registerUser).pipe(map(res => res.data));
+  }
+
+  login(registerUser: UserAuthRequestDto): Observable<any> {
+    console.log("login")
+    return this.http.post<any>(`${environment.userAPI}/login`, registerUser);
   }
 }

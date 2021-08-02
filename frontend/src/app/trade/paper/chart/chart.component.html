@@ -7,7 +7,7 @@
              placeholder="Symbol"
       >
       <mat-autocomplete #auto="matAutocomplete" [panelWidth]="300" class="autocomplete">
-        <mat-option *ngFor="let symbol of symbols" [value]="symbol.symbol">
+        <mat-option *ngFor="let symbol of autoSymbols" [value]="symbol.symbol">
           <div class="symbols">
             <h4>{{symbol.symbol}}</h4>
             <h5>{{symbol.name | uppercase}}</h5>

@@ -11,9 +11,8 @@ import { Subscription } from 'rxjs';
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css']
 })
-export class AccountComponent implements OnInit, OnDestroy {
+export class AccountComponent implements OnInit {
   @Output() buyingPower = new EventEmitter();
-  private subscription: Subscription;
   private serverUrl = environment.stockWS;
   private stompClient;
   private stompClientSub;
@@ -21,10 +20,6 @@ export class AccountComponent implements OnInit, OnDestroy {
   account: Account = new Account();
 
   constructor() { }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
 
   ngOnInit(): void {
     this.utils = new StockUtils();
@@ -46,7 +41,7 @@ export class AccountComponent implements OnInit, OnDestroy {
     const that = this;
 
     this.stompClient.connect({}, function(frame) {
-      that.subscription = copyStompClient.subscribe(`/user/U_004/queue/account`, (account) => {
+      copyStompClient.subscribe(`/user/U_004/queue/account`, (account) => {
         that.account = that.utils.convertToAccount(account.body);
         that.buyingPower.emit(that.account.buyingPower);
       });

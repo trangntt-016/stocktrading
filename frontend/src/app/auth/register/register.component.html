@@ -2,7 +2,7 @@
   <mat-form-field>
     <input matInput
            placeholder="Email Address"
-           [(ngModel)]="registerUser.email"
+           [(ngModel)]="authUser.email"
            name="email"
            minlength="5"
            maxlength="30"
@@ -12,7 +12,7 @@
   <mat-form-field>
     <input matInput id="mysecretpassword"
            name="password"
-           [(ngModel)]="registerUser.password"
+           [(ngModel)]="authUser.password"
            type="password"
            placeholder="Password"
            showHideInput
@@ -31,10 +31,10 @@
     <h3 style="margin:0; padding: 0">or</h3>
   </div>
   <div fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="center center" style="width: 100%">
-    <div (click)="signUpWithFb()">
+    <div (click)="signInWithFb()">
       <img src="../../../assets/facebooklogo.png" class="social-icon">
     </div>
-    <div  (click)="signUpWithGoogle()">
+    <div  (click)="signInWithGoogle()">
       <img src="../../../assets/gmaillogo.png" class="social-icon gg">
     </div>
   </div>

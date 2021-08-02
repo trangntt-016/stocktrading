@@ -13,7 +13,7 @@ export class AuthComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  handleError(event:any){
+  handleError(event): void{
     this.error = event;
   }
 

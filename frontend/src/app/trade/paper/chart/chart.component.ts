@@ -19,15 +19,13 @@ export type ChartOptions = {
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.css']
 })
-export class ChartComponent implements OnInit, OnDestroy {
+export class ChartComponent implements OnInit {
   symbols: Symbol[];
   autoSymbols: Symbol[];
   interval: number;
   searchSymbol: string;
   chartOptions: Partial<ChartOptions>;
   @ViewChild('chart') chart: ChartComponent;
-  private subscription: Subscription;
-  private yhSubscription: Subscription;
 
   constructor(
     private yahooService: YahooFinanceService,
@@ -35,17 +33,13 @@ export class ChartComponent implements OnInit, OnDestroy {
   ) {
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-    this.yhSubscription.unsubscribe();
-  }
 
   ngOnInit(): void {
     this.interval = 90;
 
-    this.subscription = this.symbolService.selectedSymbolEvt.subscribe(symbol => {
+    this.symbolService.selectedSymbolEvt.subscribe(symbol => {
       this.searchSymbol = symbol.symbol;
-      this.yhSubscription = this.yahooService.getHistoricalQuotes(symbol.symbol, this.interval).subscribe(res => {
+      this.yahooService.getHistoricalQuotes(symbol.symbol, this.interval).subscribe(res => {
         this.chartOptions = res;
       });
     });
@@ -57,7 +51,7 @@ export class ChartComponent implements OnInit, OnDestroy {
 
   doFilter(): void {
     this.autoSymbols = this.filter(this.symbols);
-    const symbol = this.symbols.filter(s => s.symbol === this.searchSymbol)[0];
+    const symbol = this.symbols.filter(s => s.symbol.toUpperCase().includes(this.searchSymbol))[0];
     if (symbol !== undefined) {
       this.symbolService.sendSelectedSymbol(symbol);
     }

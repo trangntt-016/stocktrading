@@ -18,8 +18,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { BannerComponent } from './home/banner/banner.component';
 import { FeaturesComponent } from './home/features/features.component';
-import { MarketComponent } from './market/market.component';
-import { TrendingTickersComponent } from './market/trending-tickers/trending-tickers.component';
 import { SidebarComponent } from './trade/sidebar/sidebar.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { AuthComponent } from './auth/auth.component';
@@ -52,8 +50,6 @@ import { PositionComponent } from './trade/paper/position/position.component';
     HomeComponent,
     BannerComponent,
     FeaturesComponent,
-    MarketComponent,
-    TrendingTickersComponent,
     SidebarComponent,
     RegisterComponent,
     AuthComponent,

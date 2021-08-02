@@ -14,12 +14,11 @@ import { DailyPriceChange } from '../../../model/DailyPriceChange';
   templateUrl: './paper-watchlist.component.html',
   styleUrls: ['./paper-watchlist.component.css']
 })
-export class PaperWatchlistComponent implements OnInit, OnDestroy {
+export class PaperWatchlistComponent implements OnInit {
   private utils = new StockUtils();
   private stompClient;
   private stompClientSub: Subscription;
   private serverUrl = environment.stockWS;
-  private sub: Subscription;
   loading = true;
   watchlists: Watchlist[];
   selectedWatchlist: Watchlist;
@@ -29,12 +28,9 @@ export class PaperWatchlistComponent implements OnInit, OnDestroy {
     private watchlistService: WatchlistService
   ) { }
 
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
-  }
 
   ngOnInit(): void {
-    this.sub = this.watchlistService.getAllWatchlistsByUserId('U_004').subscribe(wl => {
+    this.watchlistService.getAllWatchlistsByUserId('U_004').subscribe(wl => {
       this.watchlists = wl;
       this.selectedWatchlist = wl[0];
       this.initializeWebSocketConnection(this.selectedWatchlist.watchlistId);
@@ -53,7 +49,7 @@ export class PaperWatchlistComponent implements OnInit, OnDestroy {
     const that = this;
 
     this.stompClient.connect({}, (frame) => {
-      that.sub = copyStompClient.subscribe(`/user/U_004/queue/watchlist/${watchlistId}`, (dailies) => {
+      copyStompClient.subscribe(`/user/U_004/queue/watchlist/${watchlistId}`, (dailies) => {
         that.dailies = that.utils.convertToDailyPriceChange(dailies.body);
         that.loading = false;
       });
@@ -66,7 +62,7 @@ export class PaperWatchlistComponent implements OnInit, OnDestroy {
   updateWatchlistWS(event): any {
     const watchlistId = this.watchlists.filter(w => w.name === event.value)[0].watchlistId;
 
-    this.sub = this.stompClient.subscribe(`/user/U_004/queue/watchlist/${watchlistId}`, (dailies) => {
+    this.stompClient.subscribe(`/user/U_004/queue/watchlist/${watchlistId}`, (dailies) => {
       if (dailies.body == 'null'){
         this.dailies = null;
       }
