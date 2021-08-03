@@ -1,15 +1,17 @@
-package com.canada.edu.stocktrading.controller.impl;
+package com.canada.edu.stocktrading.api.impl;
 
-import com.canada.edu.stocktrading.controller.UserController;
-import com.canada.edu.stocktrading.controller.exception.DuplicateEmailException;
-import com.canada.edu.stocktrading.controller.exception.InternalServerException;
+import com.canada.edu.stocktrading.api.UserController;
+import com.canada.edu.stocktrading.api.exception.BadRequestException;
+import com.canada.edu.stocktrading.api.exception.DuplicateEmailException;
+import com.canada.edu.stocktrading.api.exception.InternalServerException;
+import com.canada.edu.stocktrading.dto.UserAuthRequestDto;
+import com.canada.edu.stocktrading.dto.UserAuthResponseDto;
 import com.canada.edu.stocktrading.factory.ResponseFactory;
-import com.canada.edu.stocktrading.service.impl.PositionServiceImpl;
-import com.canada.edu.stocktrading.service.impl.UserServiceImpl;
-import com.canada.edu.stocktrading.dto.UserRegisteredDto;
+import com.canada.edu.stocktrading.service.impl.UserEntityServiceImpl;
 import com.canada.edu.stocktrading.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -20,23 +22,34 @@ public class UserControllerImpl implements UserController {
     private ResponseFactory responseFactory;
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserEntityServiceImpl userService;
 
-    @Autowired
-    private PositionServiceImpl positionService;
 
-    @PostMapping
-    public ResponseEntity<?>register(UserRegisteredDto userEntity) {
+
+    @PostMapping("/register")
+    public ResponseEntity<?>register(UserAuthRequestDto user) {
         try{
-            UserDto newUsr  = userService.save(userEntity);
+            UserAuthResponseDto newUsr  = userService.save(user);
             return this.responseFactory.created(newUsr);
         }
         catch(DuplicateEmailException ex){
-            return ResponseEntity.badRequest().body("user not found");
-            //throw new BadRequestException(ex.getMessage());
+            return ResponseEntity.badRequest().body(ex.getMessage());
         }
         catch(Exception ex){
             throw new InternalServerException("Cannot save user to the database!");
+        }
+    }
+
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody UserAuthRequestDto auth) {
+        try {
+            UserAuthResponseDto userDto = userService.login(auth);
+            return this.responseFactory.success(userDto);
+        } catch (BadRequestException e) {
+            throw new BadCredentialsException("Email and Password do not matched!");
+        } catch (Exception e) {
+            throw new InternalServerException("Unable to login with email " + auth.getEmail());
         }
     }
 

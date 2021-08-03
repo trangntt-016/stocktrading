@@ -1,20 +1,28 @@
-package com.canada.edu.stocktrading.ws.controller;
+package com.canada.edu.stocktrading.ws;
 
 import com.canada.edu.stocktrading.dto.DailyDtoBidAsk;
+import com.canada.edu.stocktrading.dto.WsSelectedDto;
 import com.canada.edu.stocktrading.service.DailyService;
 import com.canada.edu.stocktrading.dto.DailyDto03MSummary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 @Controller
 public class DailyWSController {
     private Integer selectedSymbolId;
+
+    private Map<String, Integer> selectedUserIdSymbolIdBidAskMap;
 
     private final SimpMessagingTemplate simpMessagingTemplate;
 
@@ -46,29 +54,42 @@ public class DailyWSController {
         }
     }
 
-    @MessageMapping("/trade/{symbolId}")
-    public String getDailyWithBidAsk(@DestinationVariable Integer symbolId) {
+    @MessageMapping("/bid-ask")
+    public void getDailyWithBidAsk(@Payload String selectedUserSymbolDto) {
+        String userId = selectedUserSymbolDto.split(",")[0].split(":")[1];
+        Integer symbolId = Integer.valueOf(selectedUserSymbolDto.split(",")[1].split(":")[1]);
+
         //update selected symbolId to send schedule
-        this.selectedSymbolId = symbolId;
-        DailyDtoBidAsk dailyBidAskDto = dailyService.getDailyBidAskBySymbolId(symbolId);
-        return dailyBidAskDto.toString();
+        if(this.selectedUserIdSymbolIdBidAskMap == null) this.selectedUserIdSymbolIdBidAskMap = new HashMap<>();
+
+        this.selectedUserIdSymbolIdBidAskMap.put(userId, symbolId);
+
     }
 
     @Scheduled(fixedDelay = 3000)
     public void sendScheduledDailyBidAsk() {
-        if(this.selectedSymbolId != null) {
-            DailyDtoBidAsk dailyBidAskDto = dailyService.getDailyBidAskBySymbolId(this.selectedSymbolId);
-            if(dailyBidAskDto!=null){
-                this.simpMessagingTemplate.convertAndSend("/topic/trade/"+this.selectedSymbolId,dailyBidAskDto.toString());
+        if(this.selectedUserIdSymbolIdBidAskMap!=null){
+            for (String key : this.selectedUserIdSymbolIdBidAskMap.keySet()) {
+                Integer symbolId = this.selectedUserIdSymbolIdBidAskMap.get(key);
+                DailyDtoBidAsk dailyBidAskDto = dailyService.getDailyBidAskBySymbolId(symbolId);
+                if(dailyBidAskDto!=null){
+                    this.simpMessagingTemplate.convertAndSendToUser(key,"/topic/bid-ask",dailyBidAskDto.toString());
+                }
             }
         }
     }
 
     @Scheduled(fixedDelay = 15000)
     public void sendScheduledFuturePrice() {
-        if(this.selectedSymbolId!=null) {
-            BigDecimal matchedPrice = dailyService.getMatchedPriceInNext15sBySymbolId(this.selectedSymbolId);
-            this.simpMessagingTemplate.convertAndSend("/topic/trade/"+this.selectedSymbolId+"/future",matchedPrice);
+        if(this.selectedUserIdSymbolIdBidAskMap!=null){
+            for (String userId : this.selectedUserIdSymbolIdBidAskMap.keySet()) {
+                Integer symbolId = this.selectedUserIdSymbolIdBidAskMap.get(userId);
+                DailyDtoBidAsk dailyBidAskDto = dailyService.getDailyBidAskBySymbolId(symbolId);
+                if(dailyBidAskDto!=null){
+                    BigDecimal matchedPrice = dailyService.getMatchedPriceInNext15sBySymbolId(symbolId);
+                    this.simpMessagingTemplate.convertAndSendToUser(userId, "/topic/matched-price", matchedPrice);
+                }
+            }
         }
     }
 }

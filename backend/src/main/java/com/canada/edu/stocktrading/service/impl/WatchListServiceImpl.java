@@ -3,12 +3,13 @@ package com.canada.edu.stocktrading.service.impl;
 import com.canada.edu.stocktrading.dto.DailyDtoPriceChange;
 import com.canada.edu.stocktrading.model.Daily;
 import com.canada.edu.stocktrading.model.Symbol;
-import com.canada.edu.stocktrading.model.User;
+import com.canada.edu.stocktrading.model.UserEntity;
 import com.canada.edu.stocktrading.model.WatchList;
 import com.canada.edu.stocktrading.repository.DailyRepository;
 import com.canada.edu.stocktrading.repository.WatchlistRepository;
 import com.canada.edu.stocktrading.service.DailyService;
 import com.canada.edu.stocktrading.service.SymbolService;
+import com.canada.edu.stocktrading.service.UserEntityService;
 import com.canada.edu.stocktrading.service.WatchListService;
 import com.canada.edu.stocktrading.dto.DailyDtoDetails;
 import com.canada.edu.stocktrading.dto.WatchListDto;
@@ -34,7 +35,7 @@ public class WatchListServiceImpl implements WatchListService {
     private DailyRepository dailyRepository;
 
     @Autowired
-    private UserServiceImpl userEntityService;
+    private UserEntityServiceImpl userEntityService;
 
     @Autowired
     private DailyService dailyService;
@@ -85,7 +86,7 @@ public class WatchListServiceImpl implements WatchListService {
     @Override
     public WatchListDto create(String userId, String watchListName){
         try{
-            User user = userEntityService.findByUserId(userId);
+            UserEntity user = userEntityService.getUserByUserId(userId);
 
             WatchList wl = WatchList.builder()
                     .name(watchListName)

@@ -1,4 +1,4 @@
-package com.canada.edu.stocktrading.ws.controller;
+package com.canada.edu.stocktrading.ws;
 
 import com.canada.edu.stocktrading.dto.OrderFilledDto;
 import com.canada.edu.stocktrading.model.Order;
@@ -31,9 +31,9 @@ public class OrderWSController {
         List<Order> orders = orderService.getAllOrdersByStatus(OrderStatus.WORKING);
 
         orders.forEach(o -> {
-            List<OrderFilledDto>dto = orderService.getAllOrdersAfterFilled(o);
-            if(dto != null){
-                this.simpMessagingTemplate.convertAndSendToUser(o.getUser().getUserId(),"/queue/order",dto.toString());
+            List<OrderFilledDto>dtos = orderService.getAllOrdersAfterFilled(o);
+            if(dtos != null){
+                this.simpMessagingTemplate.convertAndSendToUser(o.getUser().getUserId(),"/queue/order",dtos.toString());
             }
         });
      }

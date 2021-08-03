@@ -31,7 +31,7 @@ public class PositionServiceImpl {
     SymbolRepository symbolRepository;
 
     @Autowired
-    UserServiceImpl userService;
+    UserEntityServiceImpl userService;
 
     public Integer calcQuantity(Integer symbolId, String userId){
             Integer noOfBuyOrders = orderRepository.calcNumberOfOrders(OrderStatus.FILLED, OrderSide.BUY, symbolId, userId);

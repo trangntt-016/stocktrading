@@ -1,4 +1,4 @@
-package com.canada.edu.stocktrading.ws.controller;
+package com.canada.edu.stocktrading.ws;
 
 import com.canada.edu.stocktrading.model.Account;
 import com.canada.edu.stocktrading.service.impl.AccountServiceImpl;
@@ -30,8 +30,8 @@ public class AccountWSController {
     @Scheduled(fixedDelay = 3000)
     public void sendScheduledAccount() {
         if(this.userId!=null) {
-            Account account = this.accountService.getAccountByUserId(userId);
-            this.simpMessagingTemplate.convertAndSendToUser(userId,"/queue/account",account.toString());
+            Account account = this.accountService.getAccountByUserId(this.userId);
+            this.simpMessagingTemplate.convertAndSendToUser(this.userId,"/queue/account",account.toString());
         }
     }
 }

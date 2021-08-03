@@ -1,7 +1,6 @@
-package com.canada.edu.stocktrading.ws.controller;
+package com.canada.edu.stocktrading.ws;
 
 import com.canada.edu.stocktrading.dto.DailyDtoPriceChange;
-import com.canada.edu.stocktrading.model.Daily;
 import com.canada.edu.stocktrading.service.WatchListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
@@ -38,7 +37,7 @@ public class WatchlistWSController {
     }
 
     @Scheduled(fixedDelay = 1000)
-    public void sendScheduledDailiestoAWatchlist() {
+    public void sendScheduledDailiesToAWatchlist() {
         try{
             if(this.selectedWatchlistId != null && this.selectedWatchlistId !=null){
                 List<DailyDtoPriceChange> dailies = watchListService.getAllDailyDtoPriceChangeByWatchListId(this.selectedWatchlistId);

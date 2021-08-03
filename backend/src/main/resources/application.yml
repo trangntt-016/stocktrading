@@ -21,4 +21,5 @@ spring:
     jackson:
         serialization:
             fail-on-empty-beans: false
+secretKey: fPJZz!YkEmUhdmvvhw7y*6K*0$7vco!pfiOtq6N&cgnLNT$I4u
 

@@ -1,7 +1,7 @@
-package com.canada.edu.stocktrading.controller.impl;
+package com.canada.edu.stocktrading.api.impl;
 
-import com.canada.edu.stocktrading.controller.exception.BadRequestException;
-import com.canada.edu.stocktrading.controller.exception.InternalServerException;
+import com.canada.edu.stocktrading.api.exception.BadRequestException;
+import com.canada.edu.stocktrading.api.exception.InternalServerException;
 import com.canada.edu.stocktrading.factory.ResponseFactory;
 import com.canada.edu.stocktrading.model.Order;
 import com.canada.edu.stocktrading.service.OrderService;

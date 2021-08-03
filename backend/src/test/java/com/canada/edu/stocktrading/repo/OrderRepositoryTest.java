@@ -3,7 +3,7 @@ package com.canada.edu.stocktrading.repo;
 import com.canada.edu.stocktrading.model.*;
 import com.canada.edu.stocktrading.repository.OrderRepository;
 import com.canada.edu.stocktrading.repository.SymbolRepository;
-import com.canada.edu.stocktrading.repository.UserRepository;
+import com.canada.edu.stocktrading.repository.UserEntityRepository;
 import com.canada.edu.stocktrading.service.utils.ConvertTimeUtils;
 import com.canada.edu.stocktrading.utils.EntityUtils;
 import org.junit.jupiter.api.Test;
@@ -27,7 +27,7 @@ public class OrderRepositoryTest {
     private SymbolRepository symbolRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserEntityRepository userEntityRepository;
 
     @Autowired
     EntityUtils entityUtils;
@@ -36,7 +36,7 @@ public class OrderRepositoryTest {
     public void testSaveOrder(){
         Symbol randomSymbol = entityUtils.generateRandomEntity(symbolRepository,symbolRepository.findAll().get(0).getSymbolId());
 
-        User randomUser = entityUtils.generateRandomUser();
+        UserEntity randomUser = entityUtils.generateRandomUser();
 
         Order order = Order.builder()
                 .limitPrice(new BigDecimal(55.5))
@@ -73,7 +73,7 @@ public class OrderRepositoryTest {
 
     @Test
     public void testGetAllOrdersByUserId(){
-        User randomUsr = this.entityUtils.generateRandomUser();
+        UserEntity randomUsr = this.entityUtils.generateRandomUser();
 
         List<Order> orders = orderRepository.getAllOrdersByUserId(randomUsr.getUserId());
 
@@ -124,12 +124,10 @@ public class OrderRepositoryTest {
 
     @Test
     public void testGetAllOrderedSymbolsByUserId(){
-        User randomUser = entityUtils.generateRandomUser();
+        UserEntity randomUser = entityUtils.generateRandomUser();
 
         List<Symbol> symbols = orderRepository.getAllOrderedSymbolsByUserId(randomUser.getUserId());
 
         assertThat(symbols.size()).isGreaterThanOrEqualTo(0);
     }
-
-
 }

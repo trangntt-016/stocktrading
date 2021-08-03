@@ -3,12 +3,12 @@ package com.canada.edu.stocktrading.service;
 
 import com.canada.edu.stocktrading.model.AuthenticationType;
 import com.canada.edu.stocktrading.model.Symbol;
-import com.canada.edu.stocktrading.model.User;
+import com.canada.edu.stocktrading.model.UserEntity;
 import com.canada.edu.stocktrading.model.WatchList;
-import com.canada.edu.stocktrading.repository.UserRepository;
+import com.canada.edu.stocktrading.repository.UserEntityRepository;
 import com.canada.edu.stocktrading.repository.WatchlistRepository;
 import com.canada.edu.stocktrading.dto.WatchListDto;
-import com.canada.edu.stocktrading.service.impl.UserServiceImpl;
+import com.canada.edu.stocktrading.service.impl.UserEntityServiceImpl;
 import com.canada.edu.stocktrading.service.impl.WatchListServiceImpl;
 
 import org.junit.Test;
@@ -16,15 +16,9 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import yahoofinance.Stock;
-import yahoofinance.YahooFinance;
-import yahoofinance.histquotes.Interval;
 
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -43,19 +37,19 @@ public class WatchListServiceImplTest {
     private WatchListServiceImpl watchlistService;
 
     @Mock
-    private UserServiceImpl userService;
+    private UserEntityServiceImpl userService;
 
     @Mock
     private WatchlistRepository watchlistRepository;
 
     @Mock
-    private UserRepository userRepository;
+    private UserEntityRepository userEntityRepository;
 
     @Test
     public void whenCreateWatchList_byValidUserId_thenReturnData() throws IOException {
-        User user = buildUser();
-        Optional<User> optUser = Optional.of(user);
-        when(userRepository.findById(USER_ID)).thenReturn(optUser);
+        UserEntity user = buildUser();
+        Optional<UserEntity> optUser = Optional.of(user);
+        when(userEntityRepository.findById(USER_ID)).thenReturn(optUser);
 
         WatchList watchList = buildWatchList();
         when(watchlistRepository.save(any(WatchList.class))).thenReturn(watchList);
@@ -67,7 +61,7 @@ public class WatchListServiceImplTest {
 
     @Test
     public void whenCreateWatchList_byInValidUserId_thenThrowException() {
-        when(userRepository.findById(USER_ID)).thenReturn(Optional.empty());
+        when(userEntityRepository.findById(USER_ID)).thenReturn(Optional.empty());
         try {
             WatchListDto executedWatchListDto = watchlistService.create(USER_ID, WATCH_LIST_NAME);
         } catch (Exception e) {
@@ -77,9 +71,9 @@ public class WatchListServiceImplTest {
 
     @Test
     public void whenCreateWatchList_byUserId_thenThrowException() {
-        User user = buildUser();
+        UserEntity user = buildUser();
         try {
-            when(userRepository.findById(user.getUserId())).thenThrow(new Exception("Error during connect to database"));
+            when(userEntityRepository.findById(user.getUserId())).thenThrow(new Exception("Error during connect to database"));
             WatchListDto executedWatchListDto = watchlistService.create(USER_ID, WATCH_LIST_NAME);
         } catch (Exception e) {
             System.out.println("===> Error: " + e.getMessage());
@@ -90,8 +84,8 @@ public class WatchListServiceImplTest {
      * PRIVATE METHODs block
      */
 
-    private User buildUser() {
-        return User.builder()
+    private UserEntity buildUser() {
+        return UserEntity.builder()
                 .email("user@gmail.com")
                 .authenticationType(AuthenticationType.DATABASE)
                 .userId("1001")

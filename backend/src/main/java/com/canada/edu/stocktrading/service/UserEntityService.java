@@ -1,15 +1,17 @@
 package com.canada.edu.stocktrading.service;
 
-import com.canada.edu.stocktrading.model.User;
-import com.canada.edu.stocktrading.dto.UserRegisteredDto;
-import com.canada.edu.stocktrading.dto.UserDto;
+import com.canada.edu.stocktrading.dto.UserAuthRequestDto;
+import com.canada.edu.stocktrading.dto.UserAuthResponseDto;
+import com.canada.edu.stocktrading.model.UserEntity;
 
-public interface UserService {
-    UserDto save (UserRegisteredDto user);
+public interface UserEntityService {
+    UserAuthResponseDto save (UserAuthRequestDto user);
 
     boolean isUserIdValid (String userId);
 
-    User getUserByUserId (String userId);
+    UserEntity getUserByUserId (String userId);
 
-    User getUserByUserEmail (String email);
+    UserEntity getUserByUserEmail (String email);
+
+    UserAuthResponseDto login (UserAuthRequestDto user);
 }

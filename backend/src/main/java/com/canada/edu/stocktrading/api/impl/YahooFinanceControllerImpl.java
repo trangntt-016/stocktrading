@@ -1,7 +1,7 @@
-package com.canada.edu.stocktrading.controller.impl;
+package com.canada.edu.stocktrading.api.impl;
 
-import com.canada.edu.stocktrading.controller.YahooFinanceController;
-import com.canada.edu.stocktrading.controller.exception.InternalServerException;
+import com.canada.edu.stocktrading.api.YahooFinanceController;
+import com.canada.edu.stocktrading.api.exception.InternalServerException;
 import com.canada.edu.stocktrading.dto.HistoricalQuoteDto;
 import com.canada.edu.stocktrading.factory.ResponseFactory;
 import com.canada.edu.stocktrading.service.impl.YahooFinanceServiceImpl;

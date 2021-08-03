@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 
 @Entity
@@ -27,7 +25,7 @@ public class Order {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id",
             foreignKey=@ForeignKey(name = "FK_USER_ORDER"))
-    private User user;
+    private UserEntity user;
 
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "symbol_id",

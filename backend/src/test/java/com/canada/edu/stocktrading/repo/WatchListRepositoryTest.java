@@ -1,7 +1,7 @@
 package com.canada.edu.stocktrading.repo;
 
 import com.canada.edu.stocktrading.model.Symbol;
-import com.canada.edu.stocktrading.model.User;
+import com.canada.edu.stocktrading.model.UserEntity;
 import com.canada.edu.stocktrading.model.WatchList;
 import com.canada.edu.stocktrading.repository.SymbolRepository;
 import com.canada.edu.stocktrading.repository.WatchlistRepository;
@@ -29,7 +29,7 @@ public class WatchListRepositoryTest {
 
     @Test
     public void testCreateNewWatchList() {
-        User randomUsr = entityUtils.generateRandomUser();
+        UserEntity randomUsr = entityUtils.generateRandomUser();
 
         int before = watchlistRepository.findAll().size();
 
@@ -86,7 +86,7 @@ public class WatchListRepositoryTest {
 
     @Test
     public void testFindAllWatchListsFromUserId() {
-        User randomUsr = entityUtils.generateRandomUser();
+        UserEntity randomUsr = entityUtils.generateRandomUser();
 
         watchlistRepository.findAllByUserId(randomUsr.getUserId());
     }

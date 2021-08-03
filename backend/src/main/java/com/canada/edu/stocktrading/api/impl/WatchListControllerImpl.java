@@ -1,12 +1,12 @@
-package com.canada.edu.stocktrading.controller.impl;
+package com.canada.edu.stocktrading.api.impl;
 
-import com.canada.edu.stocktrading.controller.WatchListController;
-import com.canada.edu.stocktrading.controller.exception.BadRequestException;
-import com.canada.edu.stocktrading.controller.exception.InternalServerException;
+import com.canada.edu.stocktrading.api.WatchListController;
+import com.canada.edu.stocktrading.api.exception.BadRequestException;
+import com.canada.edu.stocktrading.api.exception.InternalServerException;
 import com.canada.edu.stocktrading.factory.ResponseFactory;
 import com.canada.edu.stocktrading.service.DailyService;
 import com.canada.edu.stocktrading.service.SymbolService;
-import com.canada.edu.stocktrading.service.impl.UserServiceImpl;
+import com.canada.edu.stocktrading.service.impl.UserEntityServiceImpl;
 import com.canada.edu.stocktrading.service.WatchListService;
 import com.canada.edu.stocktrading.dto.DailyDtoDetails;
 import com.canada.edu.stocktrading.dto.WatchListDto;
@@ -23,7 +23,7 @@ public class WatchListControllerImpl implements WatchListController {
     private final ResponseFactory responseFactory;
 
     @Autowired
-    UserServiceImpl userEntityService;
+    UserEntityServiceImpl userEntityService;
 
     @Autowired
     WatchListService watchlistService;

@@ -1,12 +1,10 @@
-package com.canada.edu.stocktrading.ws.controller;
+package com.canada.edu.stocktrading.ws;
 
-import com.canada.edu.stocktrading.controller.exception.BadRequestException;
-import com.canada.edu.stocktrading.controller.exception.InternalServerException;
+import com.canada.edu.stocktrading.api.exception.BadRequestException;
+import com.canada.edu.stocktrading.api.exception.InternalServerException;
 import com.canada.edu.stocktrading.dto.PositionDto;
 import com.canada.edu.stocktrading.service.impl.PositionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;

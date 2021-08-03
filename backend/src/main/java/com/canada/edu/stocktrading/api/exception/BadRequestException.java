@@ -1,4 +1,4 @@
-package com.canada.edu.stocktrading.controller.exception;
+package com.canada.edu.stocktrading.api.exception;
 
 
 public class BadRequestException extends RuntimeException{

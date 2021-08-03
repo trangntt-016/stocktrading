@@ -4,11 +4,11 @@ import com.canada.edu.stocktrading.dto.OrderFilledDto;
 import com.canada.edu.stocktrading.model.*;
 import com.canada.edu.stocktrading.repository.DailyRepository;
 import com.canada.edu.stocktrading.repository.OrderRepository;
-import com.canada.edu.stocktrading.repository.UserRepository;
+import com.canada.edu.stocktrading.repository.UserEntityRepository;
 import com.canada.edu.stocktrading.service.OrderService;
 import com.canada.edu.stocktrading.service.SymbolService;
 import com.canada.edu.stocktrading.dto.OrderDto;
-import com.canada.edu.stocktrading.service.UserService;
+import com.canada.edu.stocktrading.service.UserEntityService;
 import com.canada.edu.stocktrading.service.utils.ConvertTimeUtils;
 import com.canada.edu.stocktrading.service.utils.MapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -33,13 +32,13 @@ public class OrderServiceImpl implements OrderService {
     DailyRepository dailyRepository;
 
     @Autowired
-    UserRepository userRepository;
+    UserEntityRepository userEntityRepository;
 
     @Autowired
-    UserService userService;
+    UserEntityService userService;
 
     public Order save(OrderDto order) {
-        Optional<User> user = userRepository.findById(order.getUserId());
+        Optional<UserEntity> user = userEntityRepository.findById(order.getUserId());
 
         if(user.isEmpty()) {
             throw new IllegalArgumentException("Unable to find user with id " + order.getUserId());
@@ -101,6 +100,8 @@ public class OrderServiceImpl implements OrderService {
             List<Order>updatedOrders = orderRepository.getAllOrdersByUserId(o.getUser().getUserId());
 
             List<OrderFilledDto> dtos = MapperUtils.mapperList(updatedOrders, OrderFilledDto.class);
+
+            dtos.stream().filter(d -> d.getOrderId().equals(o.getOrderId())).collect(Collectors.toList()).stream().map(order ->{order.setNewlyFilled("true"); return order;}).collect(Collectors.toList());
 
             return dtos;
         }

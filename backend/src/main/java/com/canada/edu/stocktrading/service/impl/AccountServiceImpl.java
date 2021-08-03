@@ -16,7 +16,7 @@ public class AccountServiceImpl implements AccountService {
     private PositionServiceImpl positionService;
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserEntityServiceImpl userService;
 
     @Override
     public Account getAccountByUserId(String userId) {

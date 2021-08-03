@@ -1,4 +1,4 @@
-package com.canada.edu.stocktrading.controller;
+package com.canada.edu.stocktrading.api;
 
 import com.canada.edu.stocktrading.dto.WatchListDto;
 import org.springframework.http.ResponseEntity;

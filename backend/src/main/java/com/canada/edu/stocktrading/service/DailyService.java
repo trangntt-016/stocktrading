@@ -3,7 +3,6 @@ package com.canada.edu.stocktrading.service;
 import com.canada.edu.stocktrading.dto.DailyDtoBidAsk;
 import com.canada.edu.stocktrading.dto.DailyDto03MSummary;
 import com.canada.edu.stocktrading.dto.DailyDtoDetails;
-import com.canada.edu.stocktrading.model.Daily;
 
 import java.math.BigDecimal;
 import java.util.List;

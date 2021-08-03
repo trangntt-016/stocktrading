@@ -34,6 +34,8 @@ public class OrderFilledDto {
 
     private OrderStatus orderStatus;
 
+    private String newlyFilled = "false";
+
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
@@ -48,7 +50,8 @@ public class OrderFilledDto {
                 .append(",avgPrice=").append(this.avgPrice)
                 .append(",orderType=").append(this.orderType.name())
                 .append(",orderPlaced=").append(this.orderPlaced)
-                .append(",orderStatus=").append(this.orderStatus.name());
+                .append(",orderStatus=").append(this.orderStatus.name())
+                .append(",newlyFilled=").append(this.newlyFilled);
 
         return sb.toString();
     }

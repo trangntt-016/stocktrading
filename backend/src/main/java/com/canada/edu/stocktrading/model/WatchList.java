@@ -26,7 +26,7 @@ public class WatchList {
     @JoinColumn(
             name="user_id",
             foreignKey=@ForeignKey(name = "FK_USER_WATCHLIST"))
-    private User user;
+    private UserEntity user;
 
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(name="watchlist_symbol",

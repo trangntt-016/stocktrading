@@ -1,4 +1,4 @@
-package com.canada.edu.stocktrading.controller;
+package com.canada.edu.stocktrading.api;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
