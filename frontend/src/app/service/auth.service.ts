@@ -4,21 +4,52 @@ import { UserAuthRequestDto } from '../model/UserAuthRequestDto';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
+import {Payload} from '../model/Payload'
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) { }
+
+  private helper = new JwtHelperService();
 
   register(registerUser: UserAuthRequestDto): Observable<any>{
-    console.log("register")
     return this.http.post<any>(`${environment.userAPI}/register`, registerUser).pipe(map(res => res.data));
   }
 
   login(registerUser: UserAuthRequestDto): Observable<any> {
-    console.log("login")
-    return this.http.post<any>(`${environment.userAPI}/login`, registerUser);
+    return this.http.post<any>(`${environment.userAPI}/login`, registerUser).pipe(map(res => res.data));
+  }
+
+  getToken(): string{
+    if (localStorage.getItem('access_token')){
+      return localStorage.getItem('access_token');
+    }
+  }
+
+  readToken(): Payload{
+    const rawToken = this.getToken();
+    return this.helper.decodeToken(rawToken);
+  }
+
+  isAuthenticated(): boolean{
+    if (this.getToken()){
+      return true;
+    }
+    return false;
+  }
+
+  public logout(): void{
+    localStorage.removeItem('access_token');
+    localStorage.clear();
+    this.router.navigate(['/']);
   }
 }

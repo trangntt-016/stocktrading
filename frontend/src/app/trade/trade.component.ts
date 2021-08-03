@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-trade',
@@ -7,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TradeComponent implements OnInit {
   user: string;
-  constructor() { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
-    this.user = localStorage.getItem("userId");
+    this.user = this.authService.readToken().userId;
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 
 }

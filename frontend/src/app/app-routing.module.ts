@@ -6,13 +6,14 @@ import { AuthComponent } from './auth/auth.component';
 import { TradeComponent } from './trade/trade.component';
 import { WatchlistComponent } from './trade/watchlist/watchlist.component';
 import { PaperComponent } from './trade/paper/paper.component';
+import { GuardAuthService } from './service/guard-auth.service';
 
 const routes: Routes = [
   {path: 'test', component: TestComponent},
   {path: 'home', component: HomeComponent},
   {path: 'auth', component: AuthComponent},
   {
-    path: 'trade', component: TradeComponent, children: [
+    path: 'trade', component: TradeComponent, canActivate: [GuardAuthService], children: [
       {path: 'watchlist', component: WatchlistComponent},
       {path: 'paper', component: PaperComponent},
       {path: '', redirectTo: 'paper', pathMatch: 'full'}

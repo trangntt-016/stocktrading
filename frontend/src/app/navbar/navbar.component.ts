@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DataManagerService } from '../service/data-manager.service';
 import { Symbol } from '../model/Symbol';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';

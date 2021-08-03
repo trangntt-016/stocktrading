@@ -2,6 +2,7 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { WatchlistService } from '../../../../service/watchlist.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../../../../service/auth.service';
 
 @Component({
   selector: 'app-add-wl',
@@ -11,15 +12,18 @@ import { Subscription } from 'rxjs';
 export class AddWlComponent implements OnInit, OnDestroy {
   newName = '';
   subscription: Subscription;
+  private userId: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<AddWlComponent>,
-    private watchlistService: WatchlistService
+    private watchlistService: WatchlistService,
+    private authService: AuthService
   ) {
   }
 
   ngOnInit(): void {
+    this.userId = this.authService.readToken().userId;
   }
 
   cancel(): void {
@@ -27,7 +31,7 @@ export class AddWlComponent implements OnInit, OnDestroy {
   }
 
   save(): void {
-    this.subscription = this.watchlistService.createAWatchlist('U_004', this.newName).subscribe((wl) => {
+    this.subscription = this.watchlistService.createAWatchlist(this.userId, this.newName).subscribe((wl) => {
       // send new array of watchlists to my-watchlist component
       this.data.watchlists.push(wl);
       this.watchlistService.sendWatchlists(this.data.watchlists);

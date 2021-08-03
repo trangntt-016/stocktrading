@@ -10,11 +10,11 @@
       <div style="width: 180px;">
         <p mat-menu-item class="p-matmenu-item">Hi, U_klxF6</p>
         <hr>
-        <a mat-menu-item>
-          <mat-icon>person_outline</mat-icon>
-          <span>My account</span>
+        <a mat-menu-item [routerLink]="['/home']">
+          <mat-icon>home</mat-icon>
+          <span>Home</span>
         </a>
-        <a mat-menu-item>
+        <a mat-menu-item (click) = "logout()">
           <mat-icon>exit_to_app</mat-icon>
           <span>Log out</span>
         </a>

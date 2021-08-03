@@ -32,13 +32,10 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {};
 
   onSubmit(f: NgForm): void{
-    this.authService.login(f.value).subscribe((success) => {
+    this.authService.login(f.value).subscribe((success) =>
+    {
       localStorage.setItem('access_token', success.jwt);
       this.router.navigate(['/trade']);
     })
-  }
-
-  signOut(): void {
-    this.OAuthService.signOut();
   }
 }

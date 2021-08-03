@@ -5,6 +5,7 @@ import { environment } from '../../../../environments/environment';
 import { StockUtils } from '../../../utils/StockUtils';
 import { Account } from '../../../model/Account';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../../../service/auth.service';
 
 @Component({
   selector: 'app-account',
@@ -17,14 +18,19 @@ export class AccountComponent implements OnInit {
   private stompClient;
   private stompClientSub;
   private utils: StockUtils;
+  private userId: string;
   account: Account = new Account();
 
-  constructor() { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
     this.utils = new StockUtils();
 
-    this.initializeWebSocketConnection("U_004");
+    this.userId = this.authService.readToken().userId;
+
+    //this.initializeWebSocketConnection(this.userId);
   }
 
   initializeWebSocketConnection(userId: string): any {
@@ -41,11 +47,11 @@ export class AccountComponent implements OnInit {
     const that = this;
 
     this.stompClient.connect({}, function(frame) {
-      copyStompClient.subscribe(`/user/U_004/queue/account`, (account) => {
+      copyStompClient.subscribe(`/user/${userId}/queue/account`, (account) => {
         that.account = that.utils.convertToAccount(account.body);
         that.buyingPower.emit(that.account.buyingPower);
       });
-      copyStompClient.send(`/app/account`, {}, ("U_004"));
+      copyStompClient.send(`/app/account`, {}, (userId));
     }, (err) => {
       console.log(err);
     });

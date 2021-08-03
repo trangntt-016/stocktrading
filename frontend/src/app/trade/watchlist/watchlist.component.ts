@@ -5,6 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { SymbolService } from '../../service/symbol.service';
 import { Symbol } from '../../model/Symbol';
 import { map } from 'rxjs/operators';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-watchlist',
@@ -18,15 +19,19 @@ export class WatchlistComponent implements OnInit, OnDestroy {
   searchSymbol: string;
   symbols$: Observable<Symbol[]>;
   private subscription: Subscription;
+  private userId: string;
 
   constructor(
     private watchlistService: WatchlistService,
-    private symbolService: SymbolService
+    private symbolService: SymbolService,
+    private authService: AuthService
   ) {
   }
 
   ngOnInit(): void {
-    this.subscription = this.watchlistService.getAllWatchlistsByUserId('U_004').subscribe(wl => {
+    this.userId = this.authService.readToken().userId;
+
+    this.subscription = this.watchlistService.getAllWatchlistsByUserId(`${this.userId}`).subscribe(wl => {
       this.watchlists = wl;
       this.watchlistService.sendWatchlists(this.watchlists);
       this.watchlistService.sendSelectedWatchlist(this.watchlists[0]);

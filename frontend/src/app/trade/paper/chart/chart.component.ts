@@ -52,9 +52,6 @@ export class ChartComponent implements OnInit {
   doFilter(): void {
     this.autoSymbols = this.filter(this.symbols);
     const symbol = this.symbols.filter(s => s.symbol.toUpperCase().includes(this.searchSymbol))[0];
-    if (symbol !== undefined) {
-      this.symbolService.sendSelectedSymbol(symbol);
-    }
   }
 
   filter(values): any {
@@ -68,5 +65,11 @@ export class ChartComponent implements OnInit {
     this.yahooService.getHistoricalQuotes('AMZN', this.interval).subscribe(res => {
       this.chartOptions = res;
     });
+  }
+
+  selectSymbol(symbol): void{
+    if (symbol !== undefined) {
+      this.symbolService.sendSelectedSymbol(symbol);
+    }
   }
 }

@@ -12,18 +12,7 @@ export class OrderFilled{
   orderType: string;
   orderPlaced: string;
   orderStatus: string;
-  constructor(){
-    this.orderId = null;
-    this.symbol = '';
-    this.name = '';
-    this.orderSide = '';
-    this.filledQuantity = 0;
-    this.filledTime = null;
-    this.limitPrice = 0;
-    this.avgPrice = 0;
-    this.orderType = '';
-    this.orderPlaced = null;
-    this.orderStatus = '';
-  }
+  newlyFilled: boolean;
+  constructor(){  }
 
 }

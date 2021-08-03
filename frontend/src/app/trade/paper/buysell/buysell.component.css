@@ -22,6 +22,10 @@ p {
   height: 100%;
 }
 
+.title input:focus{
+  outline-color:transparent;
+}
+
 .title p {
   margin-bottom: 0px;
 }
@@ -34,11 +38,6 @@ input {
   font-size: 13px;
   font-weight: 500;
   height: 80%;
-}
-
-input:focus {
-  outline-color: transparent;
-  padding-left: 10px;
 }
 
 .body-wrapper {
@@ -112,7 +111,6 @@ input:focus {
   margin-right: auto;
   text-align: center;
   border-radius: 30px;
-  padding-top: 3px;
 }
 
 .side {
@@ -136,7 +134,7 @@ h6 {
 
 .buy,
 .sell {
-  height: 100%;
+  height: 90%;
   padding: 5px 10px 5px 10px;
   background-color: #e8e8e8;
   font-weight: 500;
@@ -196,7 +194,7 @@ h6 {
 }
 
 .quantity input {
-  width: 95%;
+  width: 100%;
   height: 32px;
   border: 1px solid lightgray;
   color: #1A237E;
@@ -204,13 +202,10 @@ h6 {
   border-radius: 3px;
 }
 
-.quantity input {
-  width: 100%;
-}
 
-.quantity input:hover {
+.quantity input:focus {
   /*box-shadow:0px 5px 5px -3px rgb(0 0 0 /20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);*/
-  outline-color: transparent;
+  outline-color: lightgray;
 }
 
 :host ::ng-deep .mat-select-trigger {
@@ -235,6 +230,10 @@ h6 {
   color: #1A237E;
   font: 400 14px/20px Roboto, "Helvetica Neue", sans-serif;
   border-radius: 3px;
+}
+
+.limit-price input:focus{
+  outline-color: lightgray;
 }
 
 .time-hour-wrapper {

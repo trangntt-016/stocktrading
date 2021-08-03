@@ -13,6 +13,7 @@ export class Order{
   orderType: string;
   orderPlaced: string;
   orderStatus: string;
+  newlyFilled: boolean;
   constructor(){
     this.orderId = null;
     this.symbol = null;
@@ -24,6 +25,7 @@ export class Order{
     this.orderType = 'LIMIT';
     this.orderPlaced = null;
     this.orderStatus = null;
+    this.newlyFilled = false;
   }
 
   convertToOrder(o: OrderFilled):Order{
@@ -43,6 +45,7 @@ export class Order{
     this.orderType = o.orderType;
     this.orderPlaced = (o.orderPlaced=="null")?null:o.orderPlaced;
     this.orderStatus = o.orderStatus;
+    this.newlyFilled = o.newlyFilled;
     return this;
   }
 }

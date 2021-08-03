@@ -177,6 +177,9 @@ export class StockUtils {
           case 'orderStatus':
             orderFilled.orderStatus = value;
             break;
+          case 'newlyFilled':
+            orderFilled.newlyFilled = (value === 'true');
+            break;
           default:
             null;
         }

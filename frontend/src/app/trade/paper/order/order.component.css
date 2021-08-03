@@ -42,6 +42,7 @@ thead th {
 
 thead th p {
   font-weight: 400;
+  min-width: 10em;
 }
 
 thead th:first-child {
@@ -80,3 +81,12 @@ tr:hover {
   height: 2px;
   background: transparent; /* make scrollbar transparent */
 }
+
+.filled-buy {
+  background-color: #B9F6CA;
+}
+
+.filled-sell {
+  background-color: #ffb5ce;
+}
+

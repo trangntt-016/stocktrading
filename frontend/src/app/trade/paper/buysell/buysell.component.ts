@@ -9,6 +9,8 @@ import * as SockJS from 'sockjs-client';
 import { StockUtils } from '../../../utils/StockUtils';
 import { DailyBidAsk } from '../../../model/DailyBidAsk';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../../../service/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -23,12 +25,13 @@ export class BuysellComponent implements OnInit, OnDestroy {
   private stompClient;
   private stompClientSub;
   private utils: StockUtils;
+  private userId: string;
 
   amount = 0;
   order: Order;
   symbols: Symbol[];
   autoSymbols: Symbol[];
-  searchSymbol: string;
+  searchSymbol = " ";
   dailyBidAsk: DailyBidAsk;
   matchedPrice: number;
   showMatched: boolean;
@@ -37,13 +40,16 @@ export class BuysellComponent implements OnInit, OnDestroy {
 
   constructor(
     private symbolService: SymbolService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private authService: AuthService,
+    private snackBar: MatSnackBar
   ) {
   }
 
   ngOnInit(): void {
     this.utils = new StockUtils();
     this.order = new Order();
+    this.userId = this.authService.readToken().userId;
 
     this.subscription = this.symbolService.getAllSymbols().subscribe(s => {
       this.symbols = s;
@@ -56,13 +62,13 @@ export class BuysellComponent implements OnInit, OnDestroy {
     this.symbolService.selectedSymbolEvt.subscribe(symbol => {
       if (this.stompClient !== undefined) {
         this.searchSymbol = symbol.symbol;
-        this.subscription = this.stompClient.subscribe(`/topic/trade/${symbol.symbolId}`, (daily) => {
+        this.subscription = this.stompClient.subscribe(`/user/${this.userId}/topic/bid-ask`, (daily) => {
           this.dailyBidAsk = this.utils.convertToDailyBidAsk(daily.body);
         });
-        this.subscription = this.stompClient.subscribe(`/topic/trade/${symbol.symbolId}/future`, (matched) => {
+        this.stompClient.subscribe(`/user/${this.userId}/topic/matched-price`, (matched) => {
           this.matchedPrice = matched.body;
         });
-        this.stompClient.send(`/app/trade/${symbol.symbolId}`, {}, (''));
+        this.stompClient.send(`/app/bid-ask`, {}, ('userId:' + this.userId + ',symbolId:' + symbol.symbolId));
       }
     });
   }
@@ -84,9 +90,15 @@ export class BuysellComponent implements OnInit, OnDestroy {
 
     this.order.symbol = symbol;
 
-    this.order.userId = 'U_004';
+    this.order.userId = this.userId;
 
-    if (this.order.symbol != null && this.order.orderSide != null && this.order.filledQuantity != 0) {
+    if(this.order.orderSide == null) {
+      this.showError("Please Select A Side.");
+    }
+    if(this.order.filledQuantity == 0){
+      this.showError("Filled Quantity Should Not Be 0.")
+    }
+    else {
       this.subscription = this.orderService.buysell(this.order).subscribe(order => {
         this.amount = order.filledQuantity * order.limitPrice;
         this.orderService.sendSelectedOrder(order);
@@ -96,32 +108,11 @@ export class BuysellComponent implements OnInit, OnDestroy {
 
   doFilter(): void {
     this.autoSymbols = this.filter(this.symbols);
-
-    const symbol = this.symbols.filter(s => s.symbol.toUpperCase().includes(this.searchSymbol))[0];
-
-    if (symbol !== undefined) {
-      this.symbolService.sendSelectedSymbol(symbol);
-
-      this.matchedPrice = null;
-
-      this.showMatched = !this.showMatched;
-
-      this.subscription = this.stompClient.subscribe(`/topic/trade/${symbol.symbolId}`, (daily) => {
-        this.dailyBidAsk = this.utils.convertToDailyBidAsk(daily.body);
-      });
-
-      this.subscription = this.stompClient.subscribe(`/topic/trade/${symbol.symbolId}/future`, (matched) => {
-        this.matchedPrice = matched.body;
-      });
-
-      this.stompClient.send(`/app/trade/${symbol.symbolId}`, {}, (''));
-    }
   }
 
   filter(values): any {
-    return values.filter(symbol => {
-      return symbol.symbol.toUpperCase().includes(this.searchSymbol.toUpperCase());
-    });
+    return values.filter(symbol =>
+      symbol.symbol.toUpperCase().includes(this.searchSymbol.toUpperCase()))
   }
 
   showMatchedPrice(): void {
@@ -141,18 +132,37 @@ export class BuysellComponent implements OnInit, OnDestroy {
 
     const that = this;
 
-    this.stompClient.connect({}, function(frame) {
-      that.subscription = copyStompClient.subscribe(`/topic/trade/${symbolId}`, (daily) => {
+    this.stompClient.connect({}, (frame) => {
+      that.subscription = copyStompClient.subscribe(`/user/${this.userId}/topic/bid-ask`, (daily) => {
         that.dailyBidAsk = that.utils.convertToDailyBidAsk(daily.body);
       });
-      that.subscription = copyStompClient.subscribe(`/topic/trade/${symbolId}/future`, (matched) => {
+      that.subscription = copyStompClient.subscribe(`/user/${this.userId}/topic/matched-price`, (matched) => {
         that.matchedPrice = matched.body;
       });
-      copyStompClient.send(`/app/trade/${symbolId}`, {}, (''));
+      copyStompClient.send(`/app/bid-ask`, {}, ("userId:"+this.userId+",symbolId:"+symbolId));
     }, (err) => {
       console.log(err);
     });
   }
 
+  selectSymbol(symbol): void{
+    if (symbol !== undefined) {
+      this.stompClient.send(`/app/bid-ask`, {}, ("userId:"+this.userId+",symbolId:"+symbol.symbolId));
 
+      this.symbolService.sendSelectedSymbol(symbol);
+
+      this.matchedPrice = null;
+
+      this.showMatched = false;
+
+    }
+  }
+
+  showError(content:string) :void{
+    this.snackBar.open(content, "Got it!", {
+      duration: 2000,
+      verticalPosition: "top",
+      horizontalPosition: "center"
+    });
+  }
 }

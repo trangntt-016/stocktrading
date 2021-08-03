@@ -7,6 +7,7 @@ import { environment } from '../../../../environments/environment';
 import { Subscription } from 'rxjs';
 import { StockUtils } from '../../../utils/StockUtils';
 import { DailyPriceChange } from '../../../model/DailyPriceChange';
+import { AuthService } from '../../../service/auth.service';
 
 
 @Component({
@@ -19,21 +20,25 @@ export class PaperWatchlistComponent implements OnInit {
   private stompClient;
   private stompClientSub: Subscription;
   private serverUrl = environment.stockWS;
+  private userId: string;
   loading = true;
   watchlists: Watchlist[];
   selectedWatchlist: Watchlist;
   dailies: DailyPriceChange[];
 
   constructor(
-    private watchlistService: WatchlistService
+    private watchlistService: WatchlistService,
+    private authService: AuthService
   ) { }
 
 
   ngOnInit(): void {
-    this.watchlistService.getAllWatchlistsByUserId('U_004').subscribe(wl => {
+    this.userId = this.authService.readToken().userId;
+
+    this.watchlistService.getAllWatchlistsByUserId(this.userId).subscribe(wl => {
       this.watchlists = wl;
       this.selectedWatchlist = wl[0];
-      this.initializeWebSocketConnection(this.selectedWatchlist.watchlistId);
+      //this.initializeWebSocketConnection(this.selectedWatchlist.watchlistId);
     });
   }
 
@@ -49,7 +54,7 @@ export class PaperWatchlistComponent implements OnInit {
     const that = this;
 
     this.stompClient.connect({}, (frame) => {
-      copyStompClient.subscribe(`/user/U_004/queue/watchlist/${watchlistId}`, (dailies) => {
+      copyStompClient.subscribe(`/user/${this.userId}/queue/watchlist/${watchlistId}`, (dailies) => {
         that.dailies = that.utils.convertToDailyPriceChange(dailies.body);
         that.loading = false;
       });
@@ -62,8 +67,8 @@ export class PaperWatchlistComponent implements OnInit {
   updateWatchlistWS(event): any {
     const watchlistId = this.watchlists.filter(w => w.name === event.value)[0].watchlistId;
 
-    this.stompClient.subscribe(`/user/U_004/queue/watchlist/${watchlistId}`, (dailies) => {
-      if (dailies.body == 'null'){
+    this.stompClient.subscribe(`/user/${this.userId}/queue/watchlist/${watchlistId}`, (dailies) => {
+      if (dailies.body === 'null'){
         this.dailies = null;
       }
       this.dailies = this.utils.convertToDailyPriceChange(dailies.body);

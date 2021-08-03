@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RegisterComponent } from './register/register.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -16,6 +17,5 @@ export class AuthComponent implements OnInit {
   handleError(event): void{
     this.error = event;
   }
-
 
 }
