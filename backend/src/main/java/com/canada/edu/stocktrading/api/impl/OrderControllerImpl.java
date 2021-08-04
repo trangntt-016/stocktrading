@@ -1,20 +1,23 @@
 package com.canada.edu.stocktrading.api.impl;
 
+import com.canada.edu.stocktrading.api.OrderController;
 import com.canada.edu.stocktrading.api.exception.BadRequestException;
 import com.canada.edu.stocktrading.api.exception.InternalServerException;
 import com.canada.edu.stocktrading.factory.ResponseFactory;
 import com.canada.edu.stocktrading.model.Order;
 import com.canada.edu.stocktrading.service.OrderService;
 import com.canada.edu.stocktrading.dto.OrderDto;
+import com.canada.edu.stocktrading.utilsGen.observe.Observable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/order")
-public class OrderControllerImpl {
+public class OrderControllerImpl extends Observable<OrderControllerImpl> implements OrderController {
     @Autowired
     private OrderService orderService;
 
@@ -25,6 +28,7 @@ public class OrderControllerImpl {
     public ResponseEntity<?> createNewOrder(@RequestBody OrderDto order) {
         try{
             Order saved = orderService.save(order);
+            notifyObservers(this, saved.getUser().getUserId(), saved.getSymbol().getSymbol());
             return responseFactory.success(saved);
         }
         catch(IllegalArgumentException ex){
@@ -50,3 +54,5 @@ public class OrderControllerImpl {
 
     }
 }
+
+

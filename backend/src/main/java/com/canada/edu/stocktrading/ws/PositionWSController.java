@@ -10,13 +10,15 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class PositionWSController {
-    private final SimpMessagingTemplate simpMessagingTemplate;
+    private Set<String> selectedUserSet;
 
-    private String selectedUserId;
+    private final SimpMessagingTemplate simpMessagingTemplate;
 
     @Autowired
     private PositionServiceImpl positionService;
@@ -28,32 +30,26 @@ public class PositionWSController {
 
     @MessageMapping("/position")
     public void getPositionByUserIdAndSymbolId(String userId){
-        try{
-            this.selectedUserId = userId;
-            List<PositionDto> positionDtos = positionService.getOrderedPositions(this.selectedUserId);
-            this.simpMessagingTemplate.convertAndSendToUser(this.selectedUserId,"/queue/position",positionDtos.toString());
-        }
-        catch (IllegalArgumentException ex){
-            throw new BadRequestException(ex.getMessage());
-        }
-        catch (RuntimeException ex) {
-            throw new InternalServerException(ex.getMessage());
-        }
+        if(this.selectedUserSet == null) this.selectedUserSet = new HashSet<>();
+
+        this.selectedUserSet.add(userId);
     };
 
     @Scheduled(fixedDelay = 1000)
     public void sendScheduledPositionByUserIdAndSymbolId(){
-        if(this.selectedUserId != null) {
-            try{
-                List<PositionDto> positionDtos = positionService.getOrderedPositions(this.selectedUserId);
-                this.simpMessagingTemplate.convertAndSendToUser(this.selectedUserId,"/queue/position",positionDtos.toString());
-            }
-            catch (IllegalArgumentException ex){
-                throw new BadRequestException(ex.getMessage());
-            }
-            catch (RuntimeException ex) {
-                throw new InternalServerException(ex.getMessage());
-            }
+        if(this.selectedUserSet != null) {
+            this.selectedUserSet.forEach(userId ->{
+                try{
+                    List<PositionDto> positionDtos = positionService.getOrderedPositions(userId);
+                    this.simpMessagingTemplate.convertAndSendToUser(userId,"/queue/position",positionDtos.toString());
+                }
+                catch (IllegalArgumentException ex){
+                    throw new BadRequestException(ex.getMessage());
+                }
+                catch (RuntimeException ex) {
+                    throw new InternalServerException(ex.getMessage());
+                }
+            });
         }
     };
 }

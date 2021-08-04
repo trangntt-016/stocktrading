@@ -1,10 +1,15 @@
 package com.canada.edu.stocktrading.ws;
 
+import com.canada.edu.stocktrading.api.impl.OrderControllerImpl;
 import com.canada.edu.stocktrading.dto.OrderFilledDto;
 import com.canada.edu.stocktrading.model.Order;
 import com.canada.edu.stocktrading.model.OrderStatus;
 import com.canada.edu.stocktrading.service.DailyService;
 import com.canada.edu.stocktrading.service.OrderService;
+import com.canada.edu.stocktrading.utilsGen.observe.Observer;
+import com.canada.edu.stocktrading.utilsGen.observe.PropertyChangedEventArgs;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -13,7 +18,7 @@ import org.springframework.stereotype.Controller;
 import java.util.List;
 
 @Controller
-public class OrderWSController {
+public class OrderWSController implements Observer<OrderControllerImpl> {
     private final SimpMessagingTemplate simpMessagingTemplate;
 
     @Autowired
@@ -22,9 +27,14 @@ public class OrderWSController {
     @Autowired
     OrderService orderService;
 
-    public OrderWSController(SimpMessagingTemplate simpMessagingTemplate) {
+    OrderControllerImpl orderController;
+
+
+    public OrderWSController(SimpMessagingTemplate simpMessagingTemplate, OrderControllerImpl orderController){
         this.simpMessagingTemplate = simpMessagingTemplate;
-    }
+        this.orderController = orderController;
+        this.orderController.subscribe(this);
+    };
 
     @Scheduled(fixedDelay = 3000)
     public void updateOrderStatus() {
@@ -37,4 +47,9 @@ public class OrderWSController {
             }
         });
      }
+
+    @Override
+    public void handle(PropertyChangedEventArgs<OrderControllerImpl> args) {
+        System.out.println(args.symbol + "userId "+args.userId);
+    }
 }

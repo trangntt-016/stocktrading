@@ -8,10 +8,15 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 
 @Controller
 public class AccountWSController {
-    private String userId;
+    Set<String> userIdsSet;
 
     private final SimpMessagingTemplate simpMessagingTemplate;
 
@@ -24,14 +29,19 @@ public class AccountWSController {
 
     @MessageMapping("/account")
     public void getPositionByUserIdAndSymbolId(String userId){
-        this.userId = userId;
+        if(this.userIdsSet == null ) this.userIdsSet = new HashSet<>();
+
+        this.userIdsSet.add(userId);
+
     };
 
     @Scheduled(fixedDelay = 3000)
     public void sendScheduledAccount() {
-        if(this.userId!=null) {
-            Account account = this.accountService.getAccountByUserId(this.userId);
-            this.simpMessagingTemplate.convertAndSendToUser(this.userId,"/queue/account",account.toString());
+        if(this.userIdsSet != null) {
+            this.userIdsSet.forEach(id ->{
+                Account account = this.accountService.getAccountByUserId(id);
+                this.simpMessagingTemplate.convertAndSendToUser(id,"/queue/account",account.toString());
+            });
         }
     }
 }
