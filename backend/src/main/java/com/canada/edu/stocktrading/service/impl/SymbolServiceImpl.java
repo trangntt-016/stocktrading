@@ -10,7 +10,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class SymbolServiceIml implements SymbolService {
+public class SymbolServiceImpl implements SymbolService {
     @Autowired
     SymbolRepository symbolRepository;
 
@@ -45,9 +45,9 @@ public class SymbolServiceIml implements SymbolService {
 
         int max = getAll().size();
 
-        int min = 0;
+        int min = 1;
 
-        while(getAll().size() <= 5) {
+        while(randomSymbols.size() < 5) {
             int random = (int) (Math.random()*(max-min)+min);
             Symbol randomSymbol = symbolRepository.findById(random).get();
             randomSymbols.add(randomSymbol);

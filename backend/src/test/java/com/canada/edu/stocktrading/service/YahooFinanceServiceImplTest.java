@@ -2,8 +2,8 @@ package com.canada.edu.stocktrading.service;
 
 import com.canada.edu.stocktrading.dto.HistoricalQuoteDto;
 import com.canada.edu.stocktrading.service.impl.YahooFinanceServiceImpl;
-import com.canada.edu.stocktrading.service.utils.ConvertTimeUtils;
-import com.canada.edu.stocktrading.service.utils.MapperUtils;
+import com.canada.edu.stocktrading.utils.ConvertTimeUtils;
+import com.canada.edu.stocktrading.utils.MapperUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

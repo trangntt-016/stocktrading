@@ -7,8 +7,8 @@ import com.canada.edu.stocktrading.service.DailyService;
 import com.canada.edu.stocktrading.dto.DailyDtoDetails;
 import com.canada.edu.stocktrading.dto.DailyDto03MSummary;
 import com.canada.edu.stocktrading.service.SymbolService;
-import com.canada.edu.stocktrading.service.utils.ConvertTimeUtils;
-import com.canada.edu.stocktrading.service.utils.MapperUtils;
+import com.canada.edu.stocktrading.utils.ConvertTimeUtils;
+import com.canada.edu.stocktrading.utils.MapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

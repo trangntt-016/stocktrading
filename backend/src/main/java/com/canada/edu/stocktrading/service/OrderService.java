@@ -16,4 +16,6 @@ public interface OrderService {
     List<OrderFilledDto> getAllOrdersAfterFilled(Order o);
 
     List<Order> getAllOrdersByStatus (OrderStatus status);
+
+    List<Order> resetOrderData();
 }

@@ -8,7 +8,8 @@ import com.canada.edu.stocktrading.model.Symbol;
 import com.canada.edu.stocktrading.repository.DailyRepository;
 import com.canada.edu.stocktrading.repository.OrderRepository;
 import com.canada.edu.stocktrading.repository.SymbolRepository;
-import com.canada.edu.stocktrading.service.utils.ConvertTimeUtils;
+import com.canada.edu.stocktrading.service.PositionService;
+import com.canada.edu.stocktrading.utils.ConvertTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PositionServiceImpl {
+public class PositionServiceImpl implements PositionService {
     @Autowired
     OrderRepository orderRepository;
 

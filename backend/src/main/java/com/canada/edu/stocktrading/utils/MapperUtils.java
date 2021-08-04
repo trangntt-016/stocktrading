@@ -1,4 +1,4 @@
-package com.canada.edu.stocktrading.service.utils;
+package com.canada.edu.stocktrading.utils;
 
 import org.modelmapper.ModelMapper;
 

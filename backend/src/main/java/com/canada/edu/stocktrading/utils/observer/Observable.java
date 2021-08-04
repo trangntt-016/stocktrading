@@ -1,6 +1,4 @@
-package com.canada.edu.stocktrading.utilsGen.observe;
-
-import com.canada.edu.stocktrading.ws.OrderWSController;
+package com.canada.edu.stocktrading.utils.observer;
 
 import java.util.ArrayList;
 import java.util.List;

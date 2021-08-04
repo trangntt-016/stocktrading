@@ -3,7 +3,7 @@ server:
 spring:
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/stocktrading
+        url: jdbc:mysql://senecaforum.cvklzmyema33.us-east-2.rds.amazonaws.com/senecaforum?allowPublicKeyRetrieval=true&useSSL=false
         username: root
         password: abc123456
     jpa:

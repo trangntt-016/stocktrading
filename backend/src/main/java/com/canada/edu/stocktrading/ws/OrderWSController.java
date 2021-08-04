@@ -6,10 +6,8 @@ import com.canada.edu.stocktrading.model.Order;
 import com.canada.edu.stocktrading.model.OrderStatus;
 import com.canada.edu.stocktrading.service.DailyService;
 import com.canada.edu.stocktrading.service.OrderService;
-import com.canada.edu.stocktrading.utilsGen.observe.Observer;
-import com.canada.edu.stocktrading.utilsGen.observe.PropertyChangedEventArgs;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import com.canada.edu.stocktrading.utils.observer.Observer;
+import com.canada.edu.stocktrading.utils.observer.PropertyChangedEventArgs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -50,6 +48,7 @@ public class OrderWSController implements Observer<OrderControllerImpl> {
 
     @Override
     public void handle(PropertyChangedEventArgs<OrderControllerImpl> args) {
-        System.out.println(args.symbol + "userId "+args.userId);
+        String message = args.userId + " has just purchased " + args.symbol;
+        this.simpMessagingTemplate.convertAndSend("/queue/new-order", message);
     }
 }

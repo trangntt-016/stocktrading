@@ -4,7 +4,7 @@ import com.canada.edu.stocktrading.model.*;
 import com.canada.edu.stocktrading.repository.OrderRepository;
 import com.canada.edu.stocktrading.repository.SymbolRepository;
 import com.canada.edu.stocktrading.repository.UserEntityRepository;
-import com.canada.edu.stocktrading.service.utils.ConvertTimeUtils;
+import com.canada.edu.stocktrading.utils.ConvertTimeUtils;
 import com.canada.edu.stocktrading.utils.EntityUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,5 +129,12 @@ public class OrderRepositoryTest {
         List<Symbol> symbols = orderRepository.getAllOrderedSymbolsByUserId(randomUser.getUserId());
 
         assertThat(symbols.size()).isGreaterThanOrEqualTo(0);
+    }
+
+    @Test
+    public void testDeleteAllOrders() {
+        orderRepository.deleteAll();
+
+        assertThat(orderRepository.findAll().isEmpty());
     }
 }

@@ -8,7 +8,7 @@ import com.canada.edu.stocktrading.repository.DailyRepository;
 import com.canada.edu.stocktrading.repository.OrderRepository;
 import com.canada.edu.stocktrading.repository.SymbolRepository;
 import com.canada.edu.stocktrading.repository.WatchlistRepository;
-import com.canada.edu.stocktrading.service.utils.ConvertTimeUtils;
+import com.canada.edu.stocktrading.utils.ConvertTimeUtils;
 import com.canada.edu.stocktrading.utils.EntityUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

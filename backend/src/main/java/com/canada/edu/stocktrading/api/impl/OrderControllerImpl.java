@@ -7,7 +7,7 @@ import com.canada.edu.stocktrading.factory.ResponseFactory;
 import com.canada.edu.stocktrading.model.Order;
 import com.canada.edu.stocktrading.service.OrderService;
 import com.canada.edu.stocktrading.dto.OrderDto;
-import com.canada.edu.stocktrading.utilsGen.observe.Observable;
+import com.canada.edu.stocktrading.utils.observer.Observable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

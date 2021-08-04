@@ -9,8 +9,8 @@ import com.canada.edu.stocktrading.service.OrderService;
 import com.canada.edu.stocktrading.service.SymbolService;
 import com.canada.edu.stocktrading.dto.OrderDto;
 import com.canada.edu.stocktrading.service.UserEntityService;
-import com.canada.edu.stocktrading.service.utils.ConvertTimeUtils;
-import com.canada.edu.stocktrading.service.utils.MapperUtils;
+import com.canada.edu.stocktrading.utils.ConvertTimeUtils;
+import com.canada.edu.stocktrading.utils.MapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,9 +67,10 @@ public class OrderServiceImpl implements OrderService {
                 .user(user.get())
                 .build();
 
-        if(newOrder.getOrderStatus().equals("FILLED")){
+        if(newOrder.getOrderStatus().name().equals("FILLED")){
             // supposing that commission = 0
             newOrder.setAvgPrice(limitPrice);
+            newOrder.setFilledTime(ConvertTimeUtils.convertCurrentTimeTo14July());
         }
         else{
             newOrder.setAvgPrice(new BigDecimal(0));
@@ -110,6 +111,12 @@ public class OrderServiceImpl implements OrderService {
 
     public List<Order> getAllOrdersByStatus (OrderStatus status) {
         return orderRepository.findAllByStatus(status);
+    }
+
+    @Override
+    public List<Order> resetOrderData() {
+        orderRepository.deleteAll();
+        return null;
     }
 
 }

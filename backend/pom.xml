@@ -17,9 +17,6 @@
         <java.version>11</java.version>
     </properties>
     <dependencies>
-
-
-
         <dependency>
             <groupId>com.yahoofinance-api</groupId>
             <artifactId>YahooFinanceAPI</artifactId>

@@ -3,7 +3,7 @@ package com.canada.edu.stocktrading.service;
 import com.canada.edu.stocktrading.dto.DailyDtoDetails;
 import com.canada.edu.stocktrading.dto.DailyDtoPriceChange;
 import com.canada.edu.stocktrading.dto.WatchListDto;
-import com.canada.edu.stocktrading.model.Daily;
+import com.canada.edu.stocktrading.model.UserEntity;
 
 import java.util.List;
 
@@ -11,11 +11,11 @@ public interface WatchListService {
 
     List<WatchListDto> getAllByUserId(String userId);
 
-    void update(WatchListDto watchlistDto);
+    void updateAWatchlist(WatchListDto watchlistDto);
 
-    void delete(Integer watchlistId);
+    void deleteByWatchlistId(Integer watchlistId);
 
-    WatchListDto create(String userId, String watchListName);
+    WatchListDto createAWatchlist(String userId, String watchListName);
 
     List<DailyDtoDetails> getAllDailiesByWatchListId(Integer watchlistId);
 
@@ -25,6 +25,6 @@ public interface WatchListService {
 
     Boolean isWatchlistValid(Integer watchlistId);
 
-    String getUserIdByWatchlistId(Integer watchlistId);
+    void createDefaultWatchlist(UserEntity userId);
 
 }

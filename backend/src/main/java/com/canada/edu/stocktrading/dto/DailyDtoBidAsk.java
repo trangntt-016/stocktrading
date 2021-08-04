@@ -1,6 +1,5 @@
 package com.canada.edu.stocktrading.dto;
 
-import com.canada.edu.stocktrading.model.Symbol;
 import lombok.Data;
 
 import java.math.BigDecimal;

@@ -8,7 +8,6 @@ import com.canada.edu.stocktrading.dto.UserAuthRequestDto;
 import com.canada.edu.stocktrading.dto.UserAuthResponseDto;
 import com.canada.edu.stocktrading.factory.ResponseFactory;
 import com.canada.edu.stocktrading.service.impl.UserEntityServiceImpl;
-import com.canada.edu.stocktrading.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -29,7 +28,7 @@ public class UserControllerImpl implements UserController {
     @PostMapping("/register")
     public ResponseEntity<?>register(UserAuthRequestDto user) {
         try{
-            UserAuthResponseDto newUsr  = userService.save(user);
+            UserAuthResponseDto newUsr  = userService.saveAUser(user);
             return this.responseFactory.created(newUsr);
         }
         catch(DuplicateEmailException ex){

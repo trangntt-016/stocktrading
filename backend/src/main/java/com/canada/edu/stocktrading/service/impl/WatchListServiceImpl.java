@@ -9,12 +9,11 @@ import com.canada.edu.stocktrading.repository.DailyRepository;
 import com.canada.edu.stocktrading.repository.WatchlistRepository;
 import com.canada.edu.stocktrading.service.DailyService;
 import com.canada.edu.stocktrading.service.SymbolService;
-import com.canada.edu.stocktrading.service.UserEntityService;
 import com.canada.edu.stocktrading.service.WatchListService;
 import com.canada.edu.stocktrading.dto.DailyDtoDetails;
 import com.canada.edu.stocktrading.dto.WatchListDto;
-import com.canada.edu.stocktrading.service.utils.ConvertTimeUtils;
-import com.canada.edu.stocktrading.service.utils.MapperUtils;
+import com.canada.edu.stocktrading.utils.ConvertTimeUtils;
+import com.canada.edu.stocktrading.utils.MapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +22,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -58,7 +58,7 @@ public class WatchListServiceImpl implements WatchListService {
     }
 
     @Override
-    public void update(WatchListDto watchlistDto) {
+    public void updateAWatchlist(WatchListDto watchlistDto) {
         Optional<WatchList> watchList = watchlistRepository.findById(watchlistDto.getWatchlistId());
 
         if (watchList.isEmpty()){
@@ -73,7 +73,7 @@ public class WatchListServiceImpl implements WatchListService {
     }
 
     @Override
-    public void delete(Integer watchlistId) {
+    public void deleteByWatchlistId(Integer watchlistId) {
         Optional<WatchList> watchList = watchlistRepository.findById(watchlistId);
 
         if (watchList.isEmpty()){
@@ -84,7 +84,7 @@ public class WatchListServiceImpl implements WatchListService {
     }
 
     @Override
-    public WatchListDto create(String userId, String watchListName){
+    public WatchListDto createAWatchlist(String userId, String watchListName){
         try{
             UserEntity user = userEntityService.getUserByUserId(userId);
 
@@ -176,11 +176,18 @@ public class WatchListServiceImpl implements WatchListService {
         return true;
     }
 
+
     @Override
-    public String getUserIdByWatchlistId(Integer watchlistId) {
-        if(!isWatchlistValid(watchlistId)){
-            throw new IllegalArgumentException("Unable to find a watchlist with id " + watchlistId);
-        }
-        return watchlistRepository.findById(watchlistId).get().getUser().getUserId();
+    public void createDefaultWatchlist(UserEntity user) {
+        Set<Symbol> randomSymbols = symbolService.getRandom05Symbols();
+
+
+        WatchList defaulWatchlist = WatchList.builder()
+                .name("default")
+                .user(user)
+                .symbols(randomSymbols)
+                .build();
+
+        watchlistRepository.save(defaulWatchlist);
     }
 }

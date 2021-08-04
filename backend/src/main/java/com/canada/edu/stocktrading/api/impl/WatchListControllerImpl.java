@@ -55,9 +55,9 @@ public class WatchListControllerImpl implements WatchListController {
     }
 
     @Override
-    public ResponseEntity<?> update(WatchListDto watchListDto) {
+    public ResponseEntity<?> updateByWatchlist(WatchListDto watchListDto) {
         try{
-            watchlistService.update(watchListDto);
+            watchlistService.updateAWatchlist(watchListDto);
             return responseFactory.updated();
         }
         catch(IllegalArgumentException ex){
@@ -69,9 +69,9 @@ public class WatchListControllerImpl implements WatchListController {
     }
 
     @Override
-    public ResponseEntity<?> delete(int watchlistId) {
+    public ResponseEntity<?> deleteByWatchlistId(int watchlistId) {
         try{
-            watchlistService.delete(watchlistId);
+            watchlistService.deleteByWatchlistId(watchlistId);
 
             return responseFactory.deleted();
         }
@@ -84,9 +84,9 @@ public class WatchListControllerImpl implements WatchListController {
     }
 
     @Override
-    public ResponseEntity<?> create(String userId, String watchlistName) {
+    public ResponseEntity<?> createAWatchlist(String userId, String watchlistName) {
         try{
-            WatchListDto watchlistDto = watchlistService.create (userId, watchlistName);
+            WatchListDto watchlistDto = watchlistService.createAWatchlist (userId, watchlistName);
 
             return responseFactory.created(watchlistDto);
         }

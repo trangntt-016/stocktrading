@@ -1,6 +1,6 @@
 package com.canada.edu.stocktrading.model;
 
-import com.canada.edu.stocktrading.service.utils.UserIdPrefixed;
+import com.canada.edu.stocktrading.utils.UserIdPrefixed;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,7 +22,7 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "user_gen")
     @GenericGenerator(
             name = "user_gen",
-            strategy = "com.canada.edu.stocktrading.service.utils.UserIdPrefixed",
+            strategy = "com.canada.edu.stocktrading.utils.UserIdPrefixed",
             parameters = {
                     @Parameter(name = UserIdPrefixed.INCREMENT_PARAM,value = "1"),
                     @Parameter(name = UserIdPrefixed.CODE_NUMBER_SEPARATOR_PARAMETER,value = "_"),

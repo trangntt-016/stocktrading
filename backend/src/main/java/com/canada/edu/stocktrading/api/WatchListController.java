@@ -11,13 +11,13 @@ public interface WatchListController {
     ResponseEntity<?> getAllWatchLists(@RequestParam(required = true) String userId);
 
     @PutMapping
-    ResponseEntity<?> update(@RequestBody WatchListDto watchListDto);
+    ResponseEntity<?> updateByWatchlist(@RequestBody WatchListDto watchListDto);
 
     @DeleteMapping("/{watchlistId}")
-    ResponseEntity<?> delete(@PathVariable("watchlistId") int watchlistId);
+    ResponseEntity<?> deleteByWatchlistId(@PathVariable("watchlistId") int watchlistId);
 
     @PostMapping
-    ResponseEntity<?> create(@RequestParam String userId, @RequestBody String watchlistName);
+    ResponseEntity<?> createAWatchlist(@RequestParam String userId, @RequestBody String watchlistName);
 
     @GetMapping("/{watchlistId}/dailies")
     ResponseEntity<?> getAllDailiesByWatchListId(@PathVariable Integer watchlistId);

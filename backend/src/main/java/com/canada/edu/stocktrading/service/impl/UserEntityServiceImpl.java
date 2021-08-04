@@ -7,9 +7,9 @@ import com.canada.edu.stocktrading.dto.UserAuthResponseDto;
 import com.canada.edu.stocktrading.model.AuthenticationType;
 import com.canada.edu.stocktrading.model.UserEntity;
 import com.canada.edu.stocktrading.repository.UserEntityRepository;
-import com.canada.edu.stocktrading.security.jwt.TokenProvider;
+import com.canada.edu.stocktrading.security.TokenProvider;
 import com.canada.edu.stocktrading.service.UserEntityService;
-import com.canada.edu.stocktrading.service.utils.MapperUtils;
+import com.canada.edu.stocktrading.utils.MapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,12 +23,15 @@ public class UserEntityServiceImpl implements UserEntityService {
     private UserEntityRepository userEntityRepository;
 
     @Autowired
+    private WatchListServiceImpl watchListService;
+
+    @Autowired
     private TokenProvider tokenProvider;
 
 
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public UserAuthResponseDto save(UserAuthRequestDto user) {
+    public UserAuthResponseDto saveAUser(UserAuthRequestDto user) {
         // log in by Google, Facebook and already has email in the database
         if(!user.getAuthenticationType().equals("DATABASE") && !isEmailUnique(user.getEmail())) {
             Optional<UserEntity> userEntity = userEntityRepository.findByEmail(user.getEmail());
@@ -56,10 +59,11 @@ public class UserEntityServiceImpl implements UserEntityService {
 
         userEntityRepository.save(savedUsr);
 
+        watchListService.createDefaultWatchlist(savedUsr);
+
         UserAuthResponseDto userLoggedIn = getUserAuthResponse(savedUsr);
 
         return userLoggedIn;
-
     }
 
     public boolean isUserIdValid(String userId){
@@ -71,14 +75,6 @@ public class UserEntityServiceImpl implements UserEntityService {
         Optional<UserEntity> user = userEntityRepository.findById(userId);
         if(user.isEmpty()){
             throw new IllegalArgumentException("Unable to find user with id "+ userId);
-        }
-        return user.get();
-    }
-
-    public UserEntity getUserByUserEmail(String email){
-        Optional<UserEntity> user = userEntityRepository.findByEmail(email);
-        if(user.isEmpty()){
-            throw new IllegalArgumentException("Unable to find user with id "+ email);
         }
         return user.get();
     }
@@ -122,5 +118,4 @@ public class UserEntityServiceImpl implements UserEntityService {
 
         return userDto;
     }
-
 }

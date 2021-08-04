@@ -1,4 +1,4 @@
-package com.canada.edu.stocktrading.service.utils;
+package com.canada.edu.stocktrading.utils;
 
 import org.hibernate.HibernateException;
 import org.hibernate.MappingException;

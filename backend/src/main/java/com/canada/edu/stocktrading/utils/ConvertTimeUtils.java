@@ -1,4 +1,4 @@
-package com.canada.edu.stocktrading.service.utils;
+package com.canada.edu.stocktrading.utils;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -27,7 +27,7 @@ public class ConvertTimeUtils {
         int hours = now.getHour();
         int minutes = now.getMinute();
         int seconds = now.getSecond();
-        LocalDateTime converted = LocalDateTime.of(2021, Month.JULY,14,11,minutes,seconds);
+        LocalDateTime converted = LocalDateTime.of(2021, Month.JULY,14,hours,minutes,seconds);
         Timestamp ts = Timestamp.valueOf(converted);
         return ts;
     }

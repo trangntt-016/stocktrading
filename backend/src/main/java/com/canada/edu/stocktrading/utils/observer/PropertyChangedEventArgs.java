@@ -1,4 +1,4 @@
-package com.canada.edu.stocktrading.utilsGen.observe;
+package com.canada.edu.stocktrading.utils.observer;
 
 public class PropertyChangedEventArgs<T>{
     public T source;

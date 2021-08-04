@@ -55,7 +55,7 @@ public class WatchListServiceImplTest {
         when(watchlistRepository.save(any(WatchList.class))).thenReturn(watchList);
 
         WatchListDto expectedWatchListDto = buildWatchListDto();
-        WatchListDto executedWatchListDto = watchlistService.create(USER_ID, WATCH_LIST_NAME);
+        WatchListDto executedWatchListDto = watchlistService.createAWatchlist(USER_ID, WATCH_LIST_NAME);
         assertEquals(executedWatchListDto.getName(), expectedWatchListDto.getName());
     }
 
@@ -63,7 +63,7 @@ public class WatchListServiceImplTest {
     public void whenCreateWatchList_byInValidUserId_thenThrowException() {
         when(userEntityRepository.findById(USER_ID)).thenReturn(Optional.empty());
         try {
-            WatchListDto executedWatchListDto = watchlistService.create(USER_ID, WATCH_LIST_NAME);
+            WatchListDto executedWatchListDto = watchlistService.createAWatchlist(USER_ID, WATCH_LIST_NAME);
         } catch (Exception e) {
             System.out.println("==> Error: " + e.getMessage());
         }
@@ -74,7 +74,7 @@ public class WatchListServiceImplTest {
         UserEntity user = buildUser();
         try {
             when(userEntityRepository.findById(user.getUserId())).thenThrow(new Exception("Error during connect to database"));
-            WatchListDto executedWatchListDto = watchlistService.create(USER_ID, WATCH_LIST_NAME);
+            WatchListDto executedWatchListDto = watchlistService.createAWatchlist(USER_ID, WATCH_LIST_NAME);
         } catch (Exception e) {
             System.out.println("===> Error: " + e.getMessage());
         }
