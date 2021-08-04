@@ -12,8 +12,6 @@ import { FormatDatePipe } from './utils/format-date.pipe';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
 import { PackagesModule } from './packages.module';
-import { TestComponent } from './test/test.component';
-import { SummaryComponent } from './test/summary/summary.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { BannerComponent } from './home/banner/banner.component';
@@ -43,8 +41,6 @@ import { PositionComponent } from './trade/paper/position/position.component';
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent,
-    SummaryComponent,
     ConvertStocksToChartPipe,
     NavbarComponent,
     HomeComponent,

@@ -236,6 +236,14 @@ h6 {
   outline-color: lightgray;
 }
 
+.market-price:hover{
+  cursor:not-allowed;
+}
+
+.market-price:focus{
+  cursor:not-allowed;
+}
+
 .time-hour-wrapper {
   height: 16%;
   width: 100%;

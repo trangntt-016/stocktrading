@@ -14,18 +14,18 @@
 
     </div>
     <div class="order-position-wrapper">
-      <div class="inner-wrapper" fxLayout="column">
-        <div class="position-orders-title" fxLayout="row" fxLayoutGap="10px">
-          <p (click)="showOrders('order')" [ngClass]="shouldShowOrder==true?'active':''">Orders</p>
-          <p (click)="showOrders('position')" [ngClass]="shouldShowOrder==false?'active':''">Positions</p>
+        <div class="inner-wrapper" fxLayout="column">
+          <div class="position-orders-title" fxLayout="row" fxLayoutGap="10px">
+            <p (click)="showOrders('order')" [ngClass]="shouldShowOrder==true?'active':''">Orders</p>
+            <p (click)="showOrders('position')" [ngClass]="shouldShowOrder==false?'active':''">Positions</p>
+          </div>
+          <div *ngIf="shouldShowOrder===true" class="op-wrapper">
+            <app-order></app-order>
+          </div>
+          <div *ngIf="shouldShowOrder===false" class="op-wrapper">
+            <app-position></app-position>
+          </div>
         </div>
-        <div *ngIf="shouldShowOrder===true" class="op-wrapper">
-          <app-order></app-order>
-        </div>
-        <div *ngIf="shouldShowOrder===false" class="op-wrapper">
-          <app-position></app-position>
-        </div>
-      </div>
     </div>
 
   </div>

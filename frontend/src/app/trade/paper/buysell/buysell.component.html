@@ -34,7 +34,7 @@
           <div class="diff" fxLayout="row">
             <div class="half-bid"></div>
             <div class="half-ask"></div>
-            <div class="diff-price">{{dailyBidAsk.spread}}</div>
+            <div class="diff-price">{{dailyBidAsk.spread | number: '1.2-2'}}</div>
           </div>
           <div class="ask">Ask {{dailyBidAsk.ask | number : '1.2-2'}}</div>
         </div>
@@ -70,7 +70,8 @@
 
       <div class="limit-price">
         <h6>Limit price</h6>
-        <input [(ngModel)]="order.limitPrice" matInput>
+        <input [(ngModel)]="order.limitPrice" matInput *ngIf="order.orderType!='MARKET'">
+        <input *ngIf="order.orderType==='MARKET'" value="0" placeholder="0" class="market-price" readonly>
       </div>
 
       <div class="time-hour-wrapper" fxLayout="row">

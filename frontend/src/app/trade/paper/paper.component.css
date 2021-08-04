@@ -37,19 +37,25 @@
   width: 100%;
   height: 40%;
   margin-top: 5px;
-  padding: 5px 10px 50px 10px;
+  padding: 0px 10px 0px 0px;
   background-color: #fff;
 }
 
 .inner-wrapper {
   width: 100%;
   height: 100%;
+  background-color: lightgray;
+}
+
+.gray-wrapper{
+  background-color: pink;
 }
 
 .position-orders-title {
   height: 10%;
   width: 100%;
   padding: 5px;
+  background-color: #fff;
 }
 
 .position-orders-title p {
@@ -69,4 +75,3 @@
   color: #2196F3;
   font-weight: 500;
 }
-

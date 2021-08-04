@@ -1,5 +1,5 @@
 <div class="navbar-trade">
-  <div>
+  <div style="display: flex; flex-direction: row; justify-content: space-between" >
     <div class="wrap-avatar">
       <div class="avatar"[matMenuTriggerFor]="userMenu" >
         <mat-icon class="person-icon">person</mat-icon>
@@ -20,6 +20,14 @@
         </a>
       </div>
     </mat-menu>
+    <div class="wrapper-time" fxLayout="row">
+      <div>
+        <div [ngClass] ="(isOpen())?'openBtn':'closeBtn'"></div>
+      </div>
+      <h5 *ngIf = "isOpen()">Open</h5>
+      <h5 *ngIf = "!isOpen()">Close</h5>
+      <h5>{{simulationTime()}}</h5>
+    </div>
   </div>
 </div>
 

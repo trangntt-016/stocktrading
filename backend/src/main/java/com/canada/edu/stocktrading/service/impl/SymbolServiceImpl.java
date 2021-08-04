@@ -6,8 +6,8 @@ import com.canada.edu.stocktrading.service.SymbolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class SymbolServiceIml implements SymbolService {
@@ -37,5 +37,22 @@ public class SymbolServiceIml implements SymbolService {
         catch(IllegalArgumentException ex){
             return false;
         }
+    }
+
+    @Override
+    public Set<Symbol> getRandom05Symbols() {
+        Set<Symbol> randomSymbols = new HashSet<>();
+
+        int max = getAll().size();
+
+        int min = 0;
+
+        while(getAll().size() <= 5) {
+            int random = (int) (Math.random()*(max-min)+min);
+            Symbol randomSymbol = symbolRepository.findById(random).get();
+            randomSymbols.add(randomSymbol);
+        }
+
+        return randomSymbols;
     }
 }

@@ -77,7 +77,6 @@ export class OrderComponent implements OnInit, OnDestroy {
        const idx = that.orders.findIndex(o => o.newlyFilled === true);
        setTimeout(() => {that.orders[idx].newlyFilled = false;}, 2000);
       });
-
     }, (err) => {
       console.log(err);
     });

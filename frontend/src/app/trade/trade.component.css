@@ -12,9 +12,30 @@
   flex-direction: row;
   margin-left: 15px;
   margin-top: 7px;
+  width: fit-content;
 }
 
-.wrap-avatar h4{
+.wrapper-time {
+  margin: 7px 15px 0 15px;
+}
+.wrapper-time h5 {
+  margin: 5px 20px 0 10px;
+}
+
+.openBtn {
+  border: 5px solid #64DD17;
+  background-color: #64DD17;
+  border-radius: 50%;
+  margin-top: 8px;
+}
+
+.closeBtn {
+  border: 5px solid #DD2C00;
+  background-color: #DD2C00;
+  border-radius: 50%;
+  margin-top: 8px;
+}
+h4{
   font-size: 16px;
   font-weight: normal;
   margin-left: 10px;

@@ -72,6 +72,25 @@ export class FormatDatePipe implements PipeTransform {
     return hour + ':' + minutes + pmAm;
   }
 
+  public convertedHourMinsSecondsAmPm(): string {
+    const date = new Date();
+    let hour = '';
+    let minutes = '';
+    let seconds = '';
+    let pmAm = '';
+    hour = (date.getHours() > 12) ? (date.getHours() - 12).toString() : date.getHours().toString();
+    // tslint:disable-next-line:radix
+    if (parseInt(hour) < 10) {
+      hour = '0' + hour;
+    }
+    minutes = (date.getMinutes() < 10) ? ('0' + date.getMinutes().toString()) : date.getMinutes().toString();
+
+    seconds = (date.getSeconds() < 10) ? ('0' + date.getSeconds().toString()) : date.getSeconds().toString();
+
+    pmAm = (date.getHours() > 12) ? 'pm' : 'am';
+    return 'Wed, 14/07/2021 at ' + hour + ':' + minutes +':' + seconds + pmAm;
+  }
+
   public convertedMonth(monthIdx: number): string {
     const month = [
       'January',

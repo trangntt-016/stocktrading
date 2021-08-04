@@ -38,7 +38,7 @@ export class PaperWatchlistComponent implements OnInit {
     this.watchlistService.getAllWatchlistsByUserId(this.userId).subscribe(wl => {
       this.watchlists = wl;
       this.selectedWatchlist = wl[0];
-      //this.initializeWebSocketConnection(this.selectedWatchlist.watchlistId);
+      this.initializeWebSocketConnection(this.selectedWatchlist.watchlistId);
     });
   }
 
@@ -58,7 +58,7 @@ export class PaperWatchlistComponent implements OnInit {
         that.dailies = that.utils.convertToDailyPriceChange(dailies.body);
         that.loading = false;
       });
-      copyStompClient.send(`/app/watchlist/${watchlistId}`, {}, (""));
+      copyStompClient.send(`/app/watchlist`, {}, ('userId:' + this.userId + ',watchlistId:' + watchlistId));
     }, (err) => {
       console.log(err);
     });
@@ -74,7 +74,7 @@ export class PaperWatchlistComponent implements OnInit {
       this.dailies = this.utils.convertToDailyPriceChange(dailies.body);
 
     });
-    this.stompClient.send(`/app/watchlist/${watchlistId}`, {}, (""));
+    this.stompClient.send(`/app/watchlist`, {}, ('userId:' + this.userId + ',watchlistId:' + watchlistId));
   }
 
 }

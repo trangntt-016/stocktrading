@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TestComponent } from './test/test.component';
 import { HomeComponent } from './home/home.component';
 import { AuthComponent } from './auth/auth.component';
 import { TradeComponent } from './trade/trade.component';
@@ -9,7 +8,6 @@ import { PaperComponent } from './trade/paper/paper.component';
 import { GuardAuthService } from './service/guard-auth.service';
 
 const routes: Routes = [
-  {path: 'test', component: TestComponent},
   {path: 'home', component: HomeComponent},
   {path: 'auth', component: AuthComponent},
   {

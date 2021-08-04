@@ -30,7 +30,7 @@ export class AccountComponent implements OnInit {
 
     this.userId = this.authService.readToken().userId;
 
-    //this.initializeWebSocketConnection(this.userId);
+    this.initializeWebSocketConnection(this.userId);
   }
 
   initializeWebSocketConnection(userId: string): any {
