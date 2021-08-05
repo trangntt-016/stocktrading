@@ -28,7 +28,11 @@ public class OrderControllerImpl extends Observable<OrderControllerImpl> impleme
     public ResponseEntity<?> createNewOrder(@RequestBody OrderDto order) {
         try{
             Order saved = orderService.save(order);
-            notifyObservers(this, saved.getUser().getUserId(), saved.getSymbol().getSymbol());
+
+            if(saved.getOrderSide().name() =="BUY"){
+                notifyObservers(this, saved.getUser().getUserId(), saved.getSymbol().getSymbol());
+            }
+
             return responseFactory.success(saved);
         }
         catch(IllegalArgumentException ex){

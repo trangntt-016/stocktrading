@@ -31,7 +31,6 @@ public class SymbolControllerImpl implements SymbolController {
         catch(Exception ex) {
             return responseFactory.internalServerError("Unable to get all symbols");
         }
-
     }
 }
 
