@@ -1,7 +1,4 @@
-<div style="display: flex; flex-direction: row; justify-content: center;">
-<h3>Fidcoin Stock Trading</h3> 
-<h3 style="margin: 15px 10px 0 10px"> · </h3>
-<h3><a href="http://fidcoin-stocktrading.s3-website.us-east-2.amazonaws.com">Live Demo</a></h3>
+<h3>Fidcoin Stock Trading · <a href="http://fidcoin-stocktrading.s3-website.us-east-2.amazonaws.com">Live Demo</a></h3>
 </div>
 
 <!-- TABLE OF CONTENTS -->
