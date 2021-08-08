@@ -93,7 +93,7 @@ import { PositionComponent } from './trade/paper/position/position.component';
           },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('493350595061491')
+            provider: new FacebookLoginProvider('367021911452824')
           }
         ]
       } as SocialAuthServiceConfig,

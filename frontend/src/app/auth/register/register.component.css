@@ -2,6 +2,7 @@ form{
   margin-top: 10px;
   margin-bottom: 20px;
   overflow: hidden;
+  padding-bottom:20px;
 }
 input {
   width: 230px;
@@ -26,6 +27,10 @@ i:hover {
 .social-icon {
   width: 25px;
   height: 25px;
+}
+
+.social-icon:hover{
+  cursor: pointer;
 }
 
 .gg{

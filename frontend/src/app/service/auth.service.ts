@@ -6,8 +6,11 @@ import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
+
 import {Payload} from '../model/Payload'
 import { Router } from '@angular/router';
+import { SocialAuthService } from 'angularx-social-login';
+import { GoogleLoginProvider } from 'angularx-social-login';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +19,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private OAuthService: SocialAuthService
   ) { }
 
   private helper = new JwtHelperService();
@@ -50,6 +54,8 @@ export class AuthService {
   public logout(): void{
     localStorage.removeItem('access_token');
     localStorage.clear();
+    this.OAuthService.signOut();
+
     this.router.navigate(['/']);
   }
 }

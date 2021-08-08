@@ -86,17 +86,23 @@ export class BuysellComponent implements OnInit, OnDestroy {
   }
 
   submit(): void {
+    const date = new Date();
+
     const symbol = this.symbols.filter(s => s.symbol === this.searchSymbol)[0];
 
     this.order.symbol = symbol;
 
     this.order.userId = this.userId;
 
+    if (date.getHours() < 9 || date.getHours() > 16 || date.getHours() === 9 && date.getMinutes() <= 30 || date.getHours() === 16 && date.getMinutes() > 0) {
+      this.showError("Market is closing. Please revisit during 9:30am - 4:00pm.");
+      return;
+    }
     if(this.order.orderSide == null) {
-      this.showError("Please Select A Side.");
+      this.showError('Please Select A Side.');
     }
     if(this.order.filledQuantity == 0){
-      this.showError("Filled Quantity Should Not Be 0.")
+      this.showError('Filled Quantity Should Not Be 0.')
     }
     else {
       this.subscription = this.orderService.buysell(this.order).subscribe(order => {
@@ -139,7 +145,7 @@ export class BuysellComponent implements OnInit, OnDestroy {
       that.subscription = copyStompClient.subscribe(`/user/${this.userId}/topic/matched-price`, (matched) => {
         that.matchedPrice = matched.body;
       });
-      copyStompClient.send(`/app/bid-ask`, {}, ("userId:"+this.userId+",symbolId:"+symbolId));
+      copyStompClient.send(`/app/bid-ask`, {}, ('userId:' + this.userId + ',symbolId:' + symbolId));
     }, (err) => {
       console.log(err);
     });

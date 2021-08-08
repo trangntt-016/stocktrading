@@ -30,7 +30,7 @@ export class TradeComponent implements OnInit {
 
   isOpen(): boolean {
     const date = new Date();
-    if (date.getHours() < 9 || date.getHours() > 16 || date.getHours() === 16 && date.getMinutes() > 0) {
+    if (date.getHours() < 9 || date.getHours() > 16 || date.getHours() === 9 && date.getMinutes() <= 30 || date.getHours() === 16 && date.getMinutes() > 0) {
       return false;
     }
     return true;
