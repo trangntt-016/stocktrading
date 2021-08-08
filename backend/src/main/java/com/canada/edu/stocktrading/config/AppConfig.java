@@ -13,11 +13,11 @@ public class AppConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOriginPatterns("http://localhost:4200")
+                        .allowedOriginPatterns("http://fidcoin-stocktrading.s3-website.us-east-2.amazonaws.com")
                         .exposedHeaders("Authorization")
                         .allowedMethods("GET","POST","PUT","DELETE");
                 registry.addMapping("/ws/**")
-                        .allowedOriginPatterns("http://localhost:4200")
+                        .allowedOriginPatterns("http://fidcoin-stocktrading.s3-website.us-east-2.amazonaws.com")
                         .allowCredentials(true);
             }
         };
