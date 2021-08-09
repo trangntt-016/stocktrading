@@ -43,6 +43,7 @@ Due to the scope of this project, I couldn't purchase a paid account to get real
 * ApexChart.js
 * YahooFinance
 * Amazon Web Services (S3, EC2, NGINX)
+* Testing with JUnit, Mockito
 
 ### Features
 * Execute market and limit orders. For limit orders, if the price reaches the pre-defined, the order will be filled and converted its status from "working" to "filled".
