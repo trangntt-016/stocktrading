@@ -39,7 +39,8 @@ Due to the scope of this project, I couldn't purchase a paid account to get real
 * Hibernate
 * MySQL
 * Angular 11
-* StompJS
+* WebSocket, StompJS
+* Scheduler, Cron
 * ApexChart.js
 * YahooFinance
 * Amazon Web Services (S3, EC2, NGINX)
