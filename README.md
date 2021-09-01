@@ -1,7 +1,4 @@
-<div style="display: flex; flex-direction: row; justify-content: center;">
-<h3>Fidcoin Stock Trading</h3> 
-<h3 style="margin: 15px 10px 0 10px"> · </h3>
-<h3><a href="http://fidcoin-stocktrading.s3-website.us-east-2.amazonaws.com">Live Demo</a></h3>
+<h3>Fidcoin Stock Trading · <a href="http://fidcoin-stocktrading.s3-website.us-east-2.amazonaws.com">Live Demo</a></h3>
 </div>
 
 <!-- TABLE OF CONTENTS -->
@@ -42,9 +39,12 @@ Due to the scope of this project, I couldn't purchase a paid account to get real
 * Hibernate
 * MySQL
 * Angular 11
-* StompJS
+* WebSocket, StompJS
+* Scheduler, Cron
 * ApexChart.js
 * YahooFinance
+* Amazon Web Services (S3, EC2, NGINX)
+* Testing with JUnit, Mockito
 
 ### Features
 * Execute market and limit orders. For limit orders, if the price reaches the pre-defined, the order will be filled and converted its status from "working" to "filled".
