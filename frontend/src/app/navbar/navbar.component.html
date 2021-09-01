@@ -1,44 +1,68 @@
-<mat-toolbar>
-  <div style="display: flex;flex-direction: row">
-    <a href="#" id="logo">
-      <img src="assets/logo.jpg" class="image">
-    </a>
-    <button mat-flat-button [routerLink]="['/home']"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true}"
-    >
-      Home
-    </button>
-    <button mat-flat-button [routerLink]="['/trade']"
-            routerLinkActive="mat-accent"
-            [routerLinkActiveOptions]="{ exact: true}"
-    >
-      Trade
-    </button>
-  </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <a href="#" id="logo">
+    <img src="assets/logo.jpg" class="image">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-<div style="display: flex;flex-direction: row">
-  <div class="wrap-search">
-    <div class="search">
-      <mat-icon class="search-icon">search</mat-icon>
-      <input matInput type="text" placeholder="Symbol/Name"
-             [matAutocomplete]="auto"
-             [(ngModel)]="searchSymbol"
-             (ngModelChange)="doFilter()"
-      >
-      <mat-autocomplete #auto="matAutocomplete" [panelWidth]="300" class="autocomplete">
-        <mat-option *ngFor="let symbol of (symbols$ | async)" [value]="symbol.symbol">
-          <div class="symbols">
-            <h4>{{symbol.symbol}}</h4>
-            <h5>{{symbol.name | uppercase}}</h5>
-          </div>
-        </mat-option>
-      </mat-autocomplete>
-    </div>
-  </div>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+            <button mat-flat-button [routerLink]="['/home']"
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]="{ exact: true}"
+            >
+              Home
+            </button>
 
-    <button mat-flat-button [routerLink]="['/auth']">Register</button>
-    <button mat-raised-button color="primary" [routerLink]="['/auth']">Log In</button>
-  </div>
+      </li>
+      <li class="nav-item">
+            <button mat-flat-button [routerLink]="['/trade']"
+                    routerLinkActive="mat-accent"
+                    [routerLinkActiveOptions]="{ exact: true}"
+            >
+              Trade
+            </button>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <button mat-flat-button [routerLink]="['/auth']">Register</button>
+      </li>
+      <li class="nav-item">
+        <button mat-raised-button color="primary" [routerLink]="['/auth']">Log In</button>
+      </li>
+    </ul>
 
-</mat-toolbar>
+
+
+  </div>
+</nav>
+
+<!--<mat-toolbar>-->
+<!--  <div style="display: flex;flex-direction: row">-->
+<!--    <a href="#" id="logo">-->
+<!--      <img src="assets/logo.jpg" class="image">-->
+<!--    </a>-->
+<!--    <button mat-flat-button [routerLink]="['/home']"-->
+<!--            routerLinkActive="active"-->
+<!--            [routerLinkActiveOptions]="{ exact: true}"-->
+<!--    >-->
+<!--      Home-->
+<!--    </button>-->
+<!--    <button mat-flat-button [routerLink]="['/trade']"-->
+<!--            routerLinkActive="mat-accent"-->
+<!--            [routerLinkActiveOptions]="{ exact: true}"-->
+<!--    >-->
+<!--      Trade-->
+<!--    </button>-->
+<!--  </div>-->
+
+<!--<div style="display: flex;flex-direction: row">-->
+
+<!--    <button mat-flat-button [routerLink]="['/auth']">Register</button>-->
+<!--    <button mat-raised-button color="primary" [routerLink]="['/auth']">Log In</button>-->
+<!--  </div>-->
+
+<!--</mat-toolbar>-->

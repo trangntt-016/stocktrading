@@ -1,13 +1,14 @@
-:host ::ng-deep mat-toolbar{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  position: fixed;
-  top:0;
+.mynavbar{
+
   z-index: 1;
-  min-height:70px;
-  box-shadow: 0 3px 2px -2px lightgray;
+  background-color: white;
+  min-height: 70px;
 }
+.navbar{
+  box-shadow: 0 3px 2px -2px lightgray;
+  background-color: white!important;
+}
+
 #logo{
   padding-top: 10px;
 }
@@ -143,3 +144,10 @@ mat-option:hover{
   background-color: #2196F3;
   font-size: 17px;
 }
+
+@media (min-width: 992px){
+  .navbar{
+    padding: 0 150px 0 150px;
+  }
+}
+

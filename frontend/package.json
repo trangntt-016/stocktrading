@@ -32,7 +32,7 @@
     "@types/gsap": "^3.0.0",
     "angularx-social-login": "^3.5.4",
     "apexcharts": "^3.27.3",
-    "bootstrap": "^5.0.2",
+    "bootstrap": "^5.1.0",
     "gsap": "^3.7.0",
     "i": "^0.3.6",
     "net": "^1.0.2",

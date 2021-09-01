@@ -40,7 +40,7 @@ export class FeaturesComponent implements OnInit {
         toggleClass: 'active',
         start: '-60% bottom',
       } as gsap.plugins.ScrollTriggerInstanceVars,
-      duration: 1.5,
+      duration: 1.0,
       height: 0,
       opacity: 0,
     });

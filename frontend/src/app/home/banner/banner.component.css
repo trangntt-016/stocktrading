@@ -1,17 +1,3 @@
-
-.banner{
-  height: 90vh;
-  background-color: #2b2bb0;
-  position: relative;
-  overflow-y: hidden;
-}
-
-.row{
-  display: flex;
-  flex-direction: row;
-  margin-left: 150px;
-  margin-right: 150px;
-}
 .col-md-6{
   width: 50%;
 }
@@ -108,5 +94,34 @@
   width: 100%;
   height: 57px;
   opacity: .2;
+}
+
+@media (min-width: 0px){
+  .banner{
+    height: 90vh;
+    background-color: #2b2bb0;
+    position: relative;
+    overflow-y: hidden;
+    width: 100%;
+  }
+  .row{
+    display: flex;
+    flex-direction: row;
+    /*margin-left: 150px;*/
+    /*margin-right: 150px;*/
+  }
+
+  .content-text{
+    padding-top: 120px;
+  }
+  .content h1{
+    line-height: 45px;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 2px;
+  background: transparent; /* make scrollbar transparent */
 }
 
