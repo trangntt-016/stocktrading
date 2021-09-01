@@ -14,10 +14,12 @@ public class AppConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedOriginPatterns("http://fidcoin-stocktrading.s3-website.us-east-2.amazonaws.com")
+                        .allowedOriginPatterns("http://localhost:4200")
                         .exposedHeaders("Authorization")
                         .allowedMethods("GET","POST","PUT","DELETE");
                 registry.addMapping("/ws/**")
                         .allowedOriginPatterns("http://fidcoin-stocktrading.s3-website.us-east-2.amazonaws.com")
+                        .allowedOriginPatterns("http://localhost:4200")
                         .allowCredentials(true);
             }
         };
