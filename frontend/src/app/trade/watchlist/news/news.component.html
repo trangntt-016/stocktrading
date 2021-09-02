@@ -1,4 +1,4 @@
-<div class="wrapper" *ngIf="symbols.length >0">
+<div class="wrapper" *ngIf="news.length >5">
 <!--  <mat-spinner *ngIf="loading"></mat-spinner>-->
   <div class="news-container">
 
@@ -7,6 +7,29 @@
     </div>
     <div class="new-container">
       <div *ngFor="let n of news" class="news">
+        <a fxLayout="row" fxLayoutGap="30px" href={{n.link}}>
+          <div class="time-symbol" fxLayout="row">
+            <h5 class="date-h5">{{n.pubDate | formatDate}}</h5>
+            <h5 class="symbol-h5">{{n.symbol}}</h5>
+          </div>
+          <div class="title-news">
+            <h5 class="title">{{n.title}}</h5>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper"  *ngIf="news.length <=5">
+  <!--  <mat-spinner *ngIf="loading"></mat-spinner>-->
+  <div class="news-container">
+
+    <div class="h4-container">
+      <h4>News</h4>
+    </div>
+    <div class="new-container">
+      <div *ngFor="let n of tempNews" class="news">
         <a fxLayout="row" fxLayoutGap="30px" href={{n.link}}>
           <div class="time-symbol" fxLayout="row">
             <h5 class="date-h5">{{n.pubDate | formatDate}}</h5>

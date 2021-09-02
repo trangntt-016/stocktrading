@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { WatchlistService } from '../../../service/watchlist.service';
 import { Symbol } from '../../../model/Symbol';
 import { Subscription } from 'rxjs';
+// @ts-ignore
+import * as newsJson from '../../../../assets/news.json';
 
 @Component({
   selector: 'app-news',
@@ -10,6 +12,7 @@ import { Subscription } from 'rxjs';
 })
 export class NewsComponent implements OnInit, OnDestroy {
   news: any[] = [];
+  tempNews: any[] = [];
   loading = true;
   symbols: Symbol[];
   private subscription: Subscription;
@@ -24,6 +27,7 @@ export class NewsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.tempNews = newsJson.item;
     this.subscription = this.watchlistService.watchlistEvt.subscribe(watchlists => {
       this.symbols = [];
       this.news = [];
@@ -42,7 +46,7 @@ export class NewsComponent implements OnInit, OnDestroy {
           }
         });
       });
-    });
+    })
   }
 
 }
