@@ -1,149 +1,149 @@
-<!--<div class="wrapper-dailies mat-elevation-z8">-->
-<!--  <mat-table #table [dataSource]="bogusDataSource">-->
+<div class="wrapper-dailies mat-elevation-z8">
+  <mat-table #table [dataSource]="bogusDataSource">
 
-<!--    &lt;!&ndash; Delete Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="delete">-->
-<!--      <mat-header-cell *matHeaderCellDef></mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element">-->
-<!--        <button mat-icon-button>-->
-<!--          <mat-icon>delete</mat-icon>-->
-<!--        </button>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>-->
+    <!-- Delete Column -->
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-icon-button>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
 
-<!--    &lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="symbol">-->
-<!--      <mat-header-cell *matHeaderCellDef> Symbol</mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element"> {{element.symbol.symbol}} </mat-cell>-->
-<!--    </ng-container>-->
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="symbol">
+      <mat-header-cell *matHeaderCellDef> Symbol</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.symbol.symbol}} </mat-cell>
+    </ng-container>
 
-<!--    &lt;!&ndash; Name Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="name">-->
-<!--      <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element">{{element.symbol.name}}  </mat-cell>-->
-<!--    </ng-container>-->
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.symbol.name}}  </mat-cell>
+    </ng-container>
 
-<!--    &lt;!&ndash; Change Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="change">-->
-<!--      <mat-header-cell *matHeaderCellDef> Change</mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element"> {{element.change}}</mat-cell>-->
-<!--    </ng-container>-->
+    <!-- Change Column -->
+    <ng-container matColumnDef="change">
+      <mat-header-cell *matHeaderCellDef> Change</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.change}}</mat-cell>
+    </ng-container>
 
-<!--    &lt;!&ndash; Change In Percent Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="changeInPercent">-->
-<!--      <mat-header-cell *matHeaderCellDef> Change In Percent</mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element"> {{element.changeInPercent}}</mat-cell>-->
-<!--    </ng-container>-->
+    <!-- Change In Percent Column -->
+    <ng-container matColumnDef="changeInPercent">
+      <mat-header-cell *matHeaderCellDef> Change In Percent</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.changeInPercent}}</mat-cell>
+    </ng-container>
 
-<!--    &lt;!&ndash; Open Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="open">-->
-<!--      <mat-header-cell *matHeaderCellDef> Open</mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element"> {{element.open}}</mat-cell>-->
-<!--    </ng-container>-->
+    <!-- Open Column -->
+    <ng-container matColumnDef="open">
+      <mat-header-cell *matHeaderCellDef> Open</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.open}}</mat-cell>
+    </ng-container>
 
-<!--    &lt;!&ndash; Prev Close Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="prevClose">-->
-<!--      <mat-header-cell *matHeaderCellDef>Previous Close</mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element"> {{element.prevClose}}</mat-cell>-->
-<!--    </ng-container>-->
+    <!-- Prev Close Column -->
+    <ng-container matColumnDef="prevClose">
+      <mat-header-cell *matHeaderCellDef>Previous Close</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.prevClose}}</mat-cell>
+    </ng-container>
 
-<!--    &lt;!&ndash; High Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="high">-->
-<!--      <mat-header-cell *matHeaderCellDef>High</mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element"> {{element.high}}</mat-cell>-->
-<!--    </ng-container>-->
+    <!-- High Column -->
+    <ng-container matColumnDef="high">
+      <mat-header-cell *matHeaderCellDef>High</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.high}}</mat-cell>
+    </ng-container>
 
-<!--    &lt;!&ndash; Volume Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="volume">-->
-<!--      <mat-header-cell *matHeaderCellDef>Volume</mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element"> {{element.volume}}</mat-cell>-->
-<!--    </ng-container>-->
+    <!-- Volume Column -->
+    <ng-container matColumnDef="volume">
+      <mat-header-cell *matHeaderCellDef>Volume</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.volume}}</mat-cell>
+    </ng-container>
 
-<!--    &lt;!&ndash; Low Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="low">-->
-<!--      <mat-header-cell *matHeaderCellDef>Low</mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element"> {{element.high}}</mat-cell>-->
-<!--    </ng-container>-->
+    <!-- Low Column -->
+    <ng-container matColumnDef="low">
+      <mat-header-cell *matHeaderCellDef>Low</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.high}}</mat-cell>
+    </ng-container>
 
-<!--    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>-->
-<!--    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>-->
-<!--  </mat-table>-->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
 
-<!--  &lt;!&ndash;  layered table&ndash;&gt;-->
-<!--  <mat-table #table [dataSource]="dataSource$">-->
-<!--    &lt;!&ndash; Delete Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="delete">-->
-<!--      <mat-header-cell *matHeaderCellDef></mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element">-->
-<!--        <button (click)="deleteSymbol(element)" mat-icon-button>-->
-<!--          <mat-icon>delete</mat-icon>-->
-<!--        </button>-->
-<!--      </mat-cell>-->
-<!--    </ng-container>-->
+  <!--  layered table-->
+  <mat-table #table [dataSource]="dataSource$">
+    <!-- Delete Column -->
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button (click)="deleteSymbol(element)" mat-icon-button>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
 
-<!--    &lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="symbol">-->
-<!--      <mat-header-cell *matHeaderCellDef></mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element"> {{element.symbol.symbol}} </mat-cell>-->
-<!--    </ng-container>-->
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="symbol">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.symbol.symbol}} </mat-cell>
+    </ng-container>
 
 
-<!--    &lt;!&ndash; Name Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="name">-->
-<!--      <mat-header-cell *matHeaderCellDef></mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element">{{element.symbol.name}}  </mat-cell>-->
-<!--    </ng-container>-->
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.symbol.name}}  </mat-cell>
+    </ng-container>
 
-<!--    &lt;!&ndash; Change Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="change">-->
-<!--      <mat-header-cell *matHeaderCellDef></mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element"-->
-<!--                [ngClass]="(element.change >0)?'increasing':'decreasing'"> {{element.change | number : '1.2-2'}}</mat-cell>-->
-<!--    </ng-container>-->
+    <!-- Change Column -->
+    <ng-container matColumnDef="change">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element"
+                [ngClass]="(element.change >0)?'increasing':'decreasing'"> {{element.change | number : '1.2-2'}}</mat-cell>
+    </ng-container>
 
-<!--    &lt;!&ndash; Change In Percent Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="changeInPercent">-->
-<!--      <mat-header-cell *matHeaderCellDef></mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element"-->
-<!--                [ngClass]="(element.change >0)?'increasing':'decreasing'"> {{element.changeInPercent}}%-->
-<!--      </mat-cell>-->
-<!--    </ng-container>-->
+    <!-- Change In Percent Column -->
+    <ng-container matColumnDef="changeInPercent">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element"
+                [ngClass]="(element.change >0)?'increasing':'decreasing'"> {{element.changeInPercent}}%
+      </mat-cell>
+    </ng-container>
 
-<!--    &lt;!&ndash; Open Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="open">-->
-<!--      <mat-header-cell *matHeaderCellDef></mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element"-->
-<!--                [ngClass]="(element.open >element.prevClose)?'increasing':'decreasing'"> {{element.open | currency}}</mat-cell>-->
-<!--    </ng-container>-->
+    <!-- Open Column -->
+    <ng-container matColumnDef="open">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element"
+                [ngClass]="(element.open >element.prevClose)?'increasing':'decreasing'"> {{element.open | currency}}</mat-cell>
+    </ng-container>
 
-<!--    &lt;!&ndash; Prev Close Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="prevClose">-->
-<!--      <mat-header-cell *matHeaderCellDef></mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element" [ngClass]="'stable'"> {{element.prevClose | currency}}</mat-cell>-->
-<!--    </ng-container>-->
+    <!-- Prev Close Column -->
+    <ng-container matColumnDef="prevClose">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element" [ngClass]="'stable'"> {{element.prevClose | currency}}</mat-cell>
+    </ng-container>
 
-<!--    &lt;!&ndash; High Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="high">-->
-<!--      <mat-header-cell *matHeaderCellDef></mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element"-->
-<!--                [ngClass]="(element.open >element.prevClose)?'increasing':'decreasing'"> {{element.high | currency}}</mat-cell>-->
-<!--    </ng-container>-->
+    <!-- High Column -->
+    <ng-container matColumnDef="high">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element"
+                [ngClass]="(element.open >element.prevClose)?'increasing':'decreasing'"> {{element.high | currency}}</mat-cell>
+    </ng-container>
 
-<!--    &lt;!&ndash; Volume Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="volume">-->
-<!--      <mat-header-cell *matHeaderCellDef></mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element" [ngClass]="'stable'"> {{element.volume | formatVolume}}</mat-cell>-->
-<!--    </ng-container>-->
+    <!-- Volume Column -->
+    <ng-container matColumnDef="volume">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element" [ngClass]="'stable'"> {{element.volume | formatVolume}}</mat-cell>
+    </ng-container>
 
-<!--    &lt;!&ndash; Low Column &ndash;&gt;-->
-<!--    <ng-container matColumnDef="low">-->
-<!--      <mat-header-cell *matHeaderCellDef></mat-header-cell>-->
-<!--      <mat-cell *matCellDef="let element"-->
-<!--                [ngClass]="(element.open >element.prevClose)?'increasing':'decreasing'"> {{element.high | currency}}</mat-cell>-->
-<!--    </ng-container>-->
+    <!-- Low Column -->
+    <ng-container matColumnDef="low">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element"
+                [ngClass]="(element.open >element.prevClose)?'increasing':'decreasing'"> {{element.high | currency}}</mat-cell>
+    </ng-container>
 
-<!--    <mat-header-row *matHeaderRowDef="displayedColumns" [style.min-height]="0" class="row-header"></mat-header-row>-->
-<!--    <mat-row (click)="sendADaily(row)" *matRowDef="let row; columns: displayedColumns;"></mat-row>-->
-<!--  </mat-table>-->
+    <mat-header-row *matHeaderRowDef="displayedColumns" [style.min-height]="0" class="row-header"></mat-header-row>
+    <mat-row (click)="sendADaily(row)" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
 
-<!--</div>-->
+</div>

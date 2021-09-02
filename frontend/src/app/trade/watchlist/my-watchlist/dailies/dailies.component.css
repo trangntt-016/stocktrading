@@ -2,12 +2,14 @@
   margin-right: 15px;
   margin-left: 15px;
   height: 290px;
+  overflow: scroll;
 }
 
 .mat-table {
   overflow-y: overlay;
-  width: 100%;
+  /*width: 100%;*/
   max-height: 250px;
+  width:1430px;
 }
 
 .mat-column-delete {
@@ -86,4 +88,8 @@
 .mat-table::-webkit-scrollbar-thumb {
   background-color: #c6c3c3;
   border: 2px solid #c6c3c3;
+}
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
 }
