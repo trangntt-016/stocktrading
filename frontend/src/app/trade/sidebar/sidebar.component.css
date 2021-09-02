@@ -1,12 +1,3 @@
-.wrapper {
-  width: 4vw;
-  height: 100vh;
-  background-color: #1A237E;
-  position: fixed;
-  padding-top: 60px;
-}
-
-
 :host ::ng-deep .mat-icon {
   color: #c4c3c3;
 }
@@ -15,8 +6,6 @@
   cursor: pointer;
   color: white;
 }
-
-
 
 @media (min-width: 0px){
   .active {
@@ -29,8 +18,19 @@
     border-radius: 5px;
     opacity: 1;
   }
+  .wrapper{
+    width: 7vw;
+    height: 100vh;
+    background-color: #1A237E;
+    position: fixed;
+    padding-top: 60px;
+  }
+}
 
-
+@media (min-width: 481px){
+  .wrapper{
+    width: 4vw;
+  }
 }
 @media (min-width: 992px){
   .active {
