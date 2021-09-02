@@ -1,9 +1,3 @@
-.wrapper {
-  height: 100%;
-  width: 40vw;
-  overflow: scroll;
-  background-color: #fff;
-}
 
 .container-key-stats {
   background-color: #fff;
@@ -64,4 +58,18 @@ p {
   background: transparent; /* make scrollbar transparent */
 }
 
+@media (min-width: 0px){
+  .wrapper {
+    height: 100%;
+    overflow: scroll;
+    background-color: #fff;
+  }
+
+}
+
+@media (min-width: 768px){
+  .wrapper{
+    width: 40vw;
+  }
+}
 

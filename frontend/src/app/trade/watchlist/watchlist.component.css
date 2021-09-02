@@ -88,12 +88,23 @@ mat-option:hover {
   margin-top: 0 !important;
 }
 
-.bottom-wrapper {
-  height: 62%;
-  margin-top: 10px;
-}
 
 .wrapper-footer {
   height: 35vh;
   background-color: lightgray;
+}
+
+@media (min-width: 0px){
+  .bottom-wrapper {
+    margin-top: 10px;
+    display:flex;
+    justify-content: center;
+    row-gap:10px;
+    flex-wrap: wrap;
+    background-color: lightgray;
+  }
+
+}
+@media (min-width: 0px){
+
 }
