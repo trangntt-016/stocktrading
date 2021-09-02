@@ -1,6 +1,8 @@
 .wrapper {
   height: 100%;
   width: 40vw;
+  overflow: scroll;
+  background-color: #fff;
 }
 
 .container-key-stats {
@@ -56,5 +58,10 @@ p {
   font-size: 15px;
 }
 
+::-webkit-scrollbar {
+  width: 0px;
+  height: 2px;
+  background: transparent; /* make scrollbar transparent */
+}
 
 

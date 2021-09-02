@@ -1,38 +1,78 @@
-<div class="navbar-trade">
-  <div style="display: flex; flex-direction: row; justify-content: space-between" >
-    <div class="wrap-avatar">
-      <div class="avatar"[matMenuTriggerFor]="userMenu" >
-        <mat-icon class="person-icon">person</mat-icon>
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top mynavbar">
+      <div class="wrap-avatar">
+        <div class="avatar"[matMenuTriggerFor]="userMenu" >
+          <mat-icon class="person-icon">person</mat-icon>
+        </div>
+        <h4>{{user}}</h4>
       </div>
-      <h4>{{user}}</h4>
-    </div>
-    <mat-menu #userMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">
-      <div style="width: 180px;">
-        <p mat-menu-item class="p-matmenu-item">Hi, U_klxF6</p>
-        <hr>
-        <a mat-menu-item [routerLink]="['/home']">
-          <mat-icon>home</mat-icon>
-          <span>Home</span>
-        </a>
-        <a mat-menu-item (click) = "logout()">
-          <mat-icon>exit_to_app</mat-icon>
-          <span>Log out</span>
-        </a>
-      </div>
-    </mat-menu>
-    <div class="wrapper-time" fxLayout="row">
+      <mat-menu #userMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">
+        <div style="width: 180px;">
+          <p mat-menu-item class="p-matmenu-item">Hi, U_klxF6</p>
+          <hr>
+          <a mat-menu-item [routerLink]="['/home']">
+            <mat-icon>home</mat-icon>
+            <span>Home</span>
+          </a>
+          <a mat-menu-item (click) = "logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Log out</span>
+          </a>
+        </div>
+      </mat-menu>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto"></ul>
+    <div class="wrapper-time" >
       <div>
         <div [ngClass] ="(isOpen())?'openBtn':'closeBtn'"></div>
       </div>
       <h5 *ngIf = "isOpen()">Open</h5>
       <h5 *ngIf = "!isOpen()">Close. Market reopens at 9:30am - 4:00pm.</h5>
+    </div>
+    <div class="wrapper-time">
       <h5>{{simulationTime()}}</h5>
     </div>
+
   </div>
-</div>
+</nav>
+<!--<div class="navbar-trade">-->
+<!--  <div class="navbar-trade-wrapper">-->
+<!--    <div class="wrap-avatar">-->
+<!--      <div class="avatar"[matMenuTriggerFor]="userMenu" >-->
+<!--        <mat-icon class="person-icon">person</mat-icon>-->
+<!--      </div>-->
+<!--      <h4>{{user}}</h4>-->
+<!--    </div>-->
+<!--    <mat-menu #userMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">-->
+<!--      <div style="width: 180px;">-->
+<!--        <p mat-menu-item class="p-matmenu-item">Hi, U_klxF6</p>-->
+<!--        <hr>-->
+<!--        <a mat-menu-item [routerLink]="['/home']">-->
+<!--          <mat-icon>home</mat-icon>-->
+<!--          <span>Home</span>-->
+<!--        </a>-->
+<!--        <a mat-menu-item (click) = "logout()">-->
+<!--          <mat-icon>exit_to_app</mat-icon>-->
+<!--          <span>Log out</span>-->
+<!--        </a>-->
+<!--      </div>-->
+<!--    </mat-menu>-->
+<!--    <div class="wrapper-time" fxLayout="row">-->
+<!--      <div>-->
+<!--        <div [ngClass] ="(isOpen())?'openBtn':'closeBtn'"></div>-->
+<!--      </div>-->
+<!--      <h5 *ngIf = "isOpen()">Open</h5>-->
+<!--      <h5 *ngIf = "!isOpen()">Close. Market reopens at 9:30am - 4:00pm.</h5>-->
+<!--      <h5>{{simulationTime()}}</h5>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 
 <div class="wrapper">
-  <app-sidebar></app-sidebar>
-  <router-outlet></router-outlet>
+<!--  <app-sidebar></app-sidebar>-->
+<!--  <router-outlet></router-outlet>-->
 </div>
 

@@ -16,13 +16,31 @@
   color: white;
 }
 
-.active .mat-icon {
-  color: #fff !important;
+
+
+@media (min-width: 0px){
+  .active {
+    opacity: 1;
+  }
+  .active .mat-icon {
+    color: #fff !important;
+    background-color: #2196F3;
+    width: 100%;
+    border-radius: 5px;
+    opacity: 1;
+  }
+
+
 }
+@media (min-width: 992px){
+  .active {
+    background-color: #2196F3;
+    opacity: 1;
+  }
+  .active .mat-icon {
+    color: #fff !important;
+    width: fit-content;
+  }
 
-.active {
-  background-color: #2196F3;
-  opacity: 1;
+
 }
-
-
