@@ -1,9 +1,4 @@
-.wrapper {
-  height: 40%;
-  background-color: #fff;
-  width: 100%;
-  overflow: hidden;
-}
+
 
 .title-wrapper {
   height: 29%;
@@ -12,23 +7,12 @@
   border-bottom: 1px solid lightgray;
 }
 
-.title {
-  background-color: #f3f1f1;
-  width: 100%;
-  height: 100%;
-  padding: 10px 5px 5px 80px;
-}
 
 p {
   font-size: 13px;
   font-weight: 500;
 }
 
-.body-wrapper {
-  height: 71%;
-  width: 100%;
-  padding: 10px 10px 10px 70px;
-}
 
 .body {
   width: 100%;
@@ -46,4 +30,37 @@ p {
 
 .title-p {
   color: gray
+}
+@media (min-width: 0px){
+  .wrapper {
+    height: 40%;
+    background-color: #fff;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .body-wrapper {
+    height: 71%;
+    width: 100%;
+    padding: 10px 10px 10px 35px;
+  }
+
+  .title {
+    background-color: #f3f1f1;
+    width: 100%;
+    height: 100%;
+    padding: 10px 5px 5px 42px;
+  }
+
+}
+@media (min-width: 992px){
+  .body-wrapper {
+    padding: 10px 10px 10px 50px;
+  }
+
+
+  .title {
+    padding: 10px 5px 5px 80px;
+  }
+
 }

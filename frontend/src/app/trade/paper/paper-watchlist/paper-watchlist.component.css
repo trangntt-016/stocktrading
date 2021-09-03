@@ -3,28 +3,14 @@
   background-color: lightgray;
   width: 100%;
   margin-top: 5px;
-  padding-bottom: 35px;
 }
 
-.title-wrapper {
-  width: 100%;
-  height: 7%;
-  background-color: #f3f1f1;
-  border-bottom: 1px solid lightgray;
-  padding: 5px 5px 5px 70px;
-}
 
 p {
   font-size: 13px;
   font-weight: 500;
 }
 
-.body {
-  background-color: lightgray;
-  width: 100%;
-  height: 100%;
-  padding: 0px 0px 5px 65px
-}
 
 .body-wrapper {
   background-color: #fff;
@@ -94,3 +80,35 @@ h6 {
   background: transparent; /* make scrollbar transparent */
 }
 
+@media (min-width: 0px){
+  .title-wrapper {
+    width: 100%;
+    height: 7%;
+    background-color: #f3f1f1;
+    border-bottom: 1px solid lightgray;
+    padding: 5px 5px 5px 45px;
+  }
+  .body {
+    background-color: lightgray;
+    width: 250px;
+    height: 100%;
+    padding: 0px 0px 5px 30px
+  }
+
+
+}
+
+@media (min-width: 992px){
+  .title-wrapper {
+    padding: 5px 5px 5px 70px;
+  }
+
+  .body {
+    background-color: lightgray;
+    width: 100%;
+    height: 100%;
+    padding: 0px 0px 5px 65px
+  }
+
+
+}

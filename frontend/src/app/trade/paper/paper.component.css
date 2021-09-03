@@ -1,20 +1,5 @@
-.papertrade-wrapper {
-  height: 100%;
-  background-color: lightgray;
-}
 
-.account-watchlist-wrapper {
-  width: 20%;
-  height: 100%;
-  background-color: lightgray;
-  overflow: hidden;
-}
 
-.buysell-order-chart-wrapper {
-  width: 80%;
-  height: 100%;
-  background-color: lightgray;
-}
 
 .buysell-chart-wrapper {
   width: 100%;
@@ -74,4 +59,24 @@
 .active {
   color: #2196F3;
   font-weight: 500;
+}
+
+@media (min-width: 0px){
+  .papertrade-wrapper {
+    height: 100%;
+    background-color: lightgray;
+  }
+
+  .account-watchlist-wrapper {
+    width: 300px;
+    height: 100%;
+    background-color: lightgray;
+  }
+
+  .buysell-order-chart-wrapper {
+    width: 1220px;
+    height: 100%;
+    background-color: lightgray;
+  }
+
 }
