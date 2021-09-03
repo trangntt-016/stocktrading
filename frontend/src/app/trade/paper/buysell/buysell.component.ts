@@ -94,10 +94,10 @@ export class BuysellComponent implements OnInit, OnDestroy {
 
     this.order.userId = this.userId;
 
-    if (date.getHours() < 9 || date.getHours() > 16 || date.getHours() === 9 && date.getMinutes() <= 30 || date.getHours() === 16 && date.getMinutes() > 0) {
-      this.showError("Market is closing. Please revisit during 9:30am - 4:00pm.");
-      return;
-    }
+    // if (date.getHours() < 9 || date.getHours() > 16 || date.getHours() === 9 && date.getMinutes() <= 30 || date.getHours() === 16 && date.getMinutes() > 0) {
+    //   this.showError("Market is closing. Please revisit during 9:30am - 4:00pm.");
+    //   return;
+    // }
     if(this.order.orderSide == null) {
       this.showError('Please Select A Side.');
     }
@@ -166,7 +166,7 @@ export class BuysellComponent implements OnInit, OnDestroy {
 
   showError(content:string) :void{
     this.snackBar.open(content, "Got it!", {
-      duration: 2000,
+      duration: 3000,
       verticalPosition: "top",
       horizontalPosition: "center"
     });

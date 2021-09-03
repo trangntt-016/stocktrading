@@ -44,6 +44,7 @@ export class OrderComponent implements OnInit, OnDestroy {
     this.serviceSub = this.orderService.selectedOrderEvt.subscribe(order => {
       this.orders.unshift(order);
       this.stompClient.subscribe(`/topic/trade/`, (orders) => {
+        console.log(orders);
       });
     });
 

@@ -25,9 +25,9 @@
       <td><p [ngClass]="[order.orderSide==='BUY'?'buy':'sell']">{{order.orderSide}}</p></td>
       <td [ngClass] = "[order.newlyFilled === true&&order.orderSide==='BUY'?'filled-buy':'',order.newlyFilled === true&&order.orderSide==='SELL'?'filled-sell':'']"><p>{{(order.orderStatus == 'WORKING' ? 0 : order.filledQuantity)}}/{{order.filledQuantity}}</p></td>
       <td [ngClass] = "[order.newlyFilled === true&&order.orderSide==='BUY'?'filled-buy':'',order.newlyFilled === true&&order.orderSide==='SELL'?'filled-sell':'']"><p>{{order.orderStatus}}</p></td>
-      <td><p>{{order.limitPrice}}</p></td>
-      <td [ngClass] = "[order.newlyFilled === true&&order.orderSide==='BUY'?'filled-buy':'',order.newlyFilled === true&&order.orderSide==='SELL'?'filled-sell':'']"><p>{{(order.filledTime == null) ? '-' : (order.filledTime | date:'yyyy-MM-dd hh:mm:ss')}}</p></td>
       <td><p>{{order.filledQuantity}}</p></td>
+      <td [ngClass] = "[order.newlyFilled === true&&order.orderSide==='BUY'?'filled-buy':'',order.newlyFilled === true&&order.orderSide==='SELL'?'filled-sell':'']"><p>{{(order.filledTime == null) ? '-' : (order.filledTime | date:'yyyy-MM-dd hh:mm:ss')}}</p></td>
+      <td><p>{{order.limitPrice}}</p></td>
       <td [ngClass] = "[order.newlyFilled === true?'filled':'']"><p>{{order.avgPrice}}</p></td>
       <td><p>{{order.orderType}}</p></td>
       <td><p>Day</p></td>

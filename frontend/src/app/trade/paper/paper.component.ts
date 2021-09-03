@@ -48,7 +48,6 @@ export class PaperComponent implements OnInit {
 
     this.stompClient = Stomp.over(ws);
 
-    const copyStompClient = this.stompClient;
 
     const that = this;
 
