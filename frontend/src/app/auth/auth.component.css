@@ -43,3 +43,59 @@ h2{
 :host ::ng-deep .mat-tab-body-content{
   overflow: hidden !important;
 }
+
+@media (min-width: 0px){
+  .form-container{
+    width: 100%;
+    margin: 0 15vw 0 15vw;
+  }
+
+  .form-text{
+    border-radius: 5px;
+    background-color: #fff;
+    width: 100%;
+  }
+}
+
+@media (min-width: 478px){
+  .form-container{
+    margin: 0 20vw 0 20vw;
+  }
+}
+
+@media (min-width: 578px){
+  .form-container{
+    margin: 0 25vw 0 25vw;
+  }
+}
+
+@media (min-width: 823px){
+  .form-container{
+    margin: 0 30vw 0 30vw;
+  }
+}
+@media (min-width: 823px){
+  .form-container{
+    margin: 0 30vw 0 30vw;
+  }
+}
+@media (min-width: 1200px){
+  .form-container{
+    width: 60%;
+    margin:0;
+  }
+
+  .form-text{
+    width: 50%;
+  }
+}
+@media (min-width: 1400px){
+  .form-container{
+    width: 50%;
+    margin:0;
+  }
+
+  .form-text{
+    width: 50%;
+  }
+}
