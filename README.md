@@ -1,4 +1,4 @@
-<h3>Fidcoin Stock Trading · <a href="http://fidcoin-stocktrading.s3-website.us-east-2.amazonaws.com">Live Demo</a></h3>
+<h3>Fidcoin Stock Trading · <a href="http://fidcoin-stocktrading.s3-website.us-east-2.amazonaws.com">Live Demo</a>  · <a href="https://medium.com/geekculture/push-notification-for-order-placed-using-observable-design-pattern-with-spring-boot-websocket-9203874f3ebb">Technical Article</a></h3>
 </div>
 
 <!-- TABLE OF CONTENTS -->
