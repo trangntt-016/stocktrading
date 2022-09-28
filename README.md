@@ -31,7 +31,7 @@ Fidcoin stock trading is a web app that allows multiple users to practice trade 
 
 Due to the scope of this project, I couldn't purchase a paid account to get realtime data from broker platforms. My solution is to get historical data of 14/07/21 and let users only trade on that day. Data from backend is sent to frontend via websocket instead of http requests.
 
-![Product Name Screen Shot](images/fidcoin_screenshot.png)
+![Product Name Screen Shot](images/1_kqj7J5JJXXWAswwRYFdJHw.gif)
 
 ### Built With
 * Java 11
